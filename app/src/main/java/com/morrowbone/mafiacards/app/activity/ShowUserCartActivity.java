@@ -1,14 +1,18 @@
-package com.morrowbone.mafiacarts.app.activity;
+package com.morrowbone.mafiacards.app.activity;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.morrowbone.mafiacarts.app.R;
-import com.morrowbone.mafiacarts.app.adapter.SectionsPagerAdapter;
+import com.morrowbone.mafiacards.app.R;
+import com.morrowbone.mafiacards.app.adapter.SectionsPagerAdapter;
+import com.morrowbone.mafiacards.app.database.DatabaseHelper;
+import com.morrowbone.mafiacards.app.model.Deck;
+import com.morrowbone.mafiacards.app.utils.Constants;
 
 
 public class ShowUserCartActivity extends ActionBarActivity {
@@ -33,16 +37,18 @@ public class ShowUserCartActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_user_cart);
 
-
-
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), this);
+        try {
+            DatabaseHelper.Initialize(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+        Deck deck = databaseHelper.getDeck(8);
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), this, deck);
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
     }
 
 

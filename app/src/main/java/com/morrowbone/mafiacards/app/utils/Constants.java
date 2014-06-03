@@ -1,4 +1,4 @@
-package com.morrowbone.mafiacarts.app.utils;
+package com.morrowbone.mafiacards.app.utils;
 
 public class Constants
 {

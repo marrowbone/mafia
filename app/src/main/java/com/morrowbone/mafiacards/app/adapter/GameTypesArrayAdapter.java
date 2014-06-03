@@ -1,4 +1,4 @@
-package com.morrowbone.mafiacarts.app.adapter;
+package com.morrowbone.mafiacards.app.adapter;
 
 /**
  * Created by morrow on 03.06.2014.
@@ -13,8 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.morrowbone.mafiacarts.app.R;
-import com.morrowbone.mafiacarts.app.model.GameType;
+import com.morrowbone.mafiacards.app.R;
+import com.morrowbone.mafiacards.app.model.GameType;
 
 import java.util.List;
 

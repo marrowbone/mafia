@@ -1,4 +1,4 @@
-package com.morrowbone.mafiacarts.app.activity;
+package com.morrowbone.mafiacards.app.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,10 +8,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.morrowbone.mafiacarts.app.R;
-import com.morrowbone.mafiacarts.app.adapter.GameTypesArrayAdapter;
-import com.morrowbone.mafiacarts.app.model.GameType;
-import com.morrowbone.mafiacarts.app.utils.Constants;
+import com.morrowbone.mafiacards.app.R;
+import com.morrowbone.mafiacards.app.adapter.GameTypesArrayAdapter;
+import com.morrowbone.mafiacards.app.model.GameType;
+import com.morrowbone.mafiacards.app.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;

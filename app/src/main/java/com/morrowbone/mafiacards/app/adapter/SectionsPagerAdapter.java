@@ -1,4 +1,4 @@
-package com.morrowbone.mafiacarts.app.adapter;
+package com.morrowbone.mafiacards.app.adapter;
 
 /**
  * Created by morrow on 03.06.2014.
@@ -14,7 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.morrowbone.mafiacarts.app.R;
+import com.morrowbone.mafiacards.app.R;
+import com.morrowbone.mafiacards.app.model.Deck;
 
 import java.util.Locale;
 
@@ -23,39 +24,32 @@ import java.util.Locale;
  * one of the sections/tabs/pages.
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    private static Deck mDeck;
+    private Context mContext;
 
-    private final Context mContext;
-
-    public SectionsPagerAdapter(FragmentManager fm, Context context) {
+    public SectionsPagerAdapter(FragmentManager fm, Context context, Deck deck) {
         super(fm);
         mContext = context;
+        mDeck = deck;
     }
 
     @Override
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
-        return PlaceholderFragment.newInstance(position + 1);
+        return PlaceholderFragment.newInstance(position);
     }
 
     @Override
     public int getCount() {
-        // Show 3 total pages.
-        return 3;
+        return mDeck.size();
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        Locale l = Locale.getDefault();
-        switch (position) {
-            case 0:
-                return mContext.getString(R.string.title_section1).toUpperCase(l);
-            case 1:
-                return mContext.getString(R.string.title_section2).toUpperCase(l);
-            case 2:
-                return mContext.getString(R.string.title_section3).toUpperCase(l);
-        }
-        return null;
+        int cartNameStringId = mDeck.getCard(position).getRoleNameStringId();
+        String title = mContext.getResources().getString(cartNameStringId);
+        return title;
     }
 
     /**
@@ -91,7 +85,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
             Integer sectionNum = getArguments().getInt(ARG_SECTION_NUMBER);
             mTitleTextView = (TextView) rootView.findViewById(R.id.section_label);
-            mTitleTextView.setText(sectionNum.toString());
+            int cartNameStringId = mDeck.getCard(sectionNum).getRoleNameStringId();
+            String title = getActivity().getResources().getString(cartNameStringId);
+            mTitleTextView.setText(title);
             return rootView;
         }
     }

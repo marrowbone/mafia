@@ -1,4 +1,4 @@
-package com.morrowbone.mafiacarts.app.model;
+package com.morrowbone.mafiacards.app.model;
 
 /**
  * Created by morrow on 03.06.2014.
