@@ -1,4 +1,4 @@
-package com.morrowbone.mafiacarts.app.adapters;
+package com.morrowbone.mafiacarts.app.adapter;
 
 /**
  * Created by morrow on 03.06.2014.
