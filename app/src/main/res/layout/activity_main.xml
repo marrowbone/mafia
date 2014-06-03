@@ -1,0 +1,25 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.morrowbone.mafiacards.app.activity.MainActivity">
+
+    <ImageView
+        android:scaleType="centerCrop"
+        android:src="@drawable/main_page_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <Button
+        android:id="@+id/play_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:textStyle="italic"
+        android:textSize="@dimen/big_text"
+        android:text="@string/play"
+        android:textColor="@color/red"
+        android:layout_marginBottom="70dp"
+        android:layout_width="150dp"
+        android:layout_height="70dp" />
+
+</RelativeLayout>
