@@ -17,8 +17,6 @@ import android.widget.TextView;
 import com.morrowbone.mafiacards.app.R;
 import com.morrowbone.mafiacards.app.model.Deck;
 
-import java.util.Locale;
-
 /**
  * A {@link android.support.v4.app.FragmentPagerAdapter} that returns a fragment corresponding to
  * one of the sections/tabs/pages.
@@ -55,13 +53,16 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
+    public static class PlaceholderFragment extends Fragment implements View.OnClickListener {
         /**
          * The fragment argument representing the section number for this
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
         private TextView mTitleTextView;
+
+        public PlaceholderFragment() {
+        }
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -75,20 +76,36 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             return fragment;
         }
 
-        public PlaceholderFragment() {
-        }
-
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_show_user_cart, container, false);
 
             Integer sectionNum = getArguments().getInt(ARG_SECTION_NUMBER);
-            mTitleTextView = (TextView) rootView.findViewById(R.id.section_label);
+
             int cartNameStringId = mDeck.getCard(sectionNum).getRoleNameStringId();
             String title = getActivity().getResources().getString(cartNameStringId);
+
+            mTitleTextView = (TextView) rootView.findViewById(R.id.section_label);
             mTitleTextView.setText(title);
+            mTitleTextView.setVisibility(View.GONE);
+
+            rootView.setOnClickListener(this);
             return rootView;
+        }
+
+        @Override
+        public void onClick(View view) {
+            int id = view.getId();
+            switch (id) {
+                case R.id.root:
+                    if (mTitleTextView.getVisibility() == View.VISIBLE) {
+                        mTitleTextView.setVisibility(View.GONE);
+                    } else {
+                        mTitleTextView.setVisibility(View.VISIBLE);
+                    }
+                    break;
+            }
         }
     }
 }
