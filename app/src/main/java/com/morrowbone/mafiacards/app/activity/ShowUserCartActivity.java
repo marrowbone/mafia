@@ -45,6 +45,7 @@ public class ShowUserCartActivity extends ActionBarActivity {
             DatabaseHelper databaseHelper = new DatabaseHelper(this);
             Integer cardCount = getIntent().getIntExtra(Constants.EXTRA_CART_COUNT, 6);
             Deck deck = databaseHelper.getDeck(cardCount);
+            deck.shuffle();
             mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), this, deck);
 
             // Set up the ViewPager with the sections adapter.

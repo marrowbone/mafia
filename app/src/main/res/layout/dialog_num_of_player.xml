@@ -10,14 +10,16 @@
    <SeekBar
        android:id="@+id/search_bar"
        android:layout_width="0dip"
-       android:layout_weight="90"
+       android:layout_weight="80"
        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/input_field"
         android:maxLength="2"
         android:inputType="number"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
         android:layout_width="0dip"
-        android:layout_weight="10"
+        android:layout_weight="20"
         android:layout_height="wrap_content" />
 </LinearLayout>
