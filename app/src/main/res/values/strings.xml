@@ -21,5 +21,7 @@
     <string name="play">Play</string>
     <string name="dialog_number_of_player">Enter the number of players</string>
     <string name="dialog_number_of_player_positive_btn">GO!</string>
+    <string name="message_tap_to_see_card">Tap to see your card</string>
+    <string name="message_tap_to_hide_card">Tap to hide your card</string>
 
 </resources>

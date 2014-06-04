@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.morrowbone.mafiacards.app.R;
 import com.morrowbone.mafiacards.app.model.Deck;
+import com.morrowbone.mafiacards.app.utils.Constants;
 
 /**
  * A {@link android.support.v4.app.FragmentPagerAdapter} that returns a fragment corresponding to
@@ -60,6 +61,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
         private TextView mTitleTextView;
+        private TextView mHelpText;
 
         public PlaceholderFragment() {
         }
@@ -90,6 +92,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             mTitleTextView.setText(title);
             mTitleTextView.setVisibility(View.GONE);
 
+            mHelpText = (TextView) rootView.findViewById(R.id.help_text);
+            if(Constants.HIDE_TIPS){
+                  mHelpText.setVisibility(View.GONE);
+            }
+
             rootView.setOnClickListener(this);
             return rootView;
         }
@@ -101,8 +108,10 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 case R.id.root:
                     if (mTitleTextView.getVisibility() == View.VISIBLE) {
                         mTitleTextView.setVisibility(View.GONE);
+                        mHelpText.setText(R.string.message_tap_to_see_card);
                     } else {
                         mTitleTextView.setVisibility(View.VISIBLE);
+                        mHelpText.setText(R.string.message_tap_to_hide_card);
                     }
                     break;
             }

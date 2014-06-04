@@ -1,3 +1,4 @@
 <resources>
     <color name="red">#c50301</color>
+    <color name="gray_alfa">#66aeaeae</color>
 </resources>

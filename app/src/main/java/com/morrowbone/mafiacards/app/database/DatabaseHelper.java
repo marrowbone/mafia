@@ -193,7 +193,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
             // Wervoolf
             int wervoolf = c.getInt(c.getColumnIndex(TABLE_ROLES_COMBINATION_WERVOOLF));
-            if (immortal > 0) {
+            if (wervoolf > 0) {
                 card = new Wervoolf();
                 deck.addCard(card);
             }

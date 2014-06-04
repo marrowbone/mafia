@@ -42,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
                 final SeekBar seekBar = (SeekBar) dialogContent.findViewById(R.id.search_bar);
 
                 seekBar.setMax(max - min);
-                seekBar.setProgress(startValue);
+                seekBar.setProgress(startValue - min);
 
                 seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                     @Override

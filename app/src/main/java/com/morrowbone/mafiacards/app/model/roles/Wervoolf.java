@@ -9,7 +9,7 @@ import com.morrowbone.mafiacards.app.model.Card;
 public class Wervoolf extends Card {
     @Override
     public int getRoleNameStringId() {
-        return R.string.role_sherif;
+        return R.string.role_wervoolf;
     }
 }
 
