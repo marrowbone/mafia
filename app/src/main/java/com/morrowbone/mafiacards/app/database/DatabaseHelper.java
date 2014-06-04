@@ -215,4 +215,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return deck;
 
     }
+
+    public Integer getMaxNumberOfPlayer(){
+//        SELECT MAX(playerCount) FROM Combinations
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery("SELECT MAX( " + TABLE_ROLES_COMBINATION_PLAYER_COUNT + " ) FROM "
+                + TABLE_ROLES_COMBINATION + ";", null);
+        try {
+            c.moveToFirst();
+            int maxPlayerCount = c.getInt(0);
+            return maxPlayerCount;
+        } catch (Exception e) {
+            Log.e(this.toString(), e.getMessage());
+        } finally {
+            c.close();
+            db.close();
+        }
+        return 0;
+    }
+
+    public Integer getMinNumberOfPlayer(){
+        return 3;
+    }
 }

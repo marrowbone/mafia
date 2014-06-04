@@ -50,7 +50,7 @@ public class GameTypeActivity extends ActionBarActivity implements AdapterView.O
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Integer selectedGameId = i;
         Intent intent = new Intent(this, ShowUserCartActivity.class);
-        intent.putExtra(Constants.EXTRA_GAME_ID, selectedGameId);
+        intent.putExtra(Constants.EXTRA_CART_COUNT, selectedGameId);
         startActivity(intent);
     }
 

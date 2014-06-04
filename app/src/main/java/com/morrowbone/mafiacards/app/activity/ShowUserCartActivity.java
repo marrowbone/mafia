@@ -4,7 +4,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -42,13 +41,16 @@ public class ShowUserCartActivity extends ActionBarActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        DatabaseHelper databaseHelper = new DatabaseHelper(this);
-        Deck deck = databaseHelper.getDeck(8);
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), this, deck);
+        if (getIntent().hasExtra(Constants.EXTRA_CART_COUNT)) {
+            DatabaseHelper databaseHelper = new DatabaseHelper(this);
+            Integer cardCount = getIntent().getIntExtra(Constants.EXTRA_CART_COUNT, 6);
+            Deck deck = databaseHelper.getDeck(cardCount);
+            mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), this, deck);
 
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+            // Set up the ViewPager with the sections adapter.
+            mViewPager = (ViewPager) findViewById(R.id.pager);
+            mViewPager.setAdapter(mSectionsPagerAdapter);
+        }
     }
 
 

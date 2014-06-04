@@ -19,5 +19,7 @@
     <string name="role_wervoolf">Wervoolf</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="play">Play</string>
+    <string name="dialog_number_of_player">Enter the number of players</string>
+    <string name="dialog_number_of_player_positive_btn">GO!</string>
 
 </resources>

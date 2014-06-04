@@ -4,6 +4,6 @@ public class Constants
 {
 	public static final String DEBUG_TAG = "mafia_debug";
 
-	public static final String EXTRA_GAME_ID = "game_id";
+	public static final String EXTRA_CART_COUNT = "game_id";
 
 }
