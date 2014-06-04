@@ -2,7 +2,7 @@ package com.morrowbone.mafiacards.app.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,7 +16,7 @@ import com.morrowbone.mafiacards.app.utils.Constants;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameTypeActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
+public class GameTypeActivity extends FragmentActivity implements AdapterView.OnItemClickListener {
     private ArrayAdapter mAdapter;
     private List<GameType> mGameTypes;
 

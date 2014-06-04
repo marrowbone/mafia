@@ -5,33 +5,65 @@
     android:layout_height="match_parent"
     tools:context="com.morrowbone.mafiacards.app.activity.ShowUserCartActivity$PlaceholderFragment">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:src="@drawable/card_back_side_ver1" />
-
     <TextView
         android:id="@+id/info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+    <RelativeLayout
+        android:id="@+id/card_view_backside"
+        android:layout_width="225dp"
+        android:layout_height="400dp"
         android:layout_centerInParent="true"
-        android:textSize="30sp" />
+        android:background="@color/gray_alfa">
+
+        <ImageView
+            android:id="@+id/cart_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/player_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/very_big_text" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/card_view_front"
+        android:layout_width="@dimen/card_field_width"
+        android:layout_height="@dimen/card_field_height"
+        android:layout_centerInParent="true"
+        android:background="@color/gray_alfa">
+
+        <ImageView
+            android:id="@+id/role_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/test_sherif" />
+
+        <TextView
+            android:id="@+id/role"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/very_big_text" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/help_text"
-        android:gravity="center_horizontal"
-        android:background="@color/gray_alfa"
-        android:textColor="@android:color/black"
-        android:textStyle="italic"
-        android:text="@string/message_tap_to_see_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/big_text" />
+        android:background="@color/gray_alfa"
+        android:gravity="center_horizontal"
+        android:text="@string/message_tap_to_see_card"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/big_text"
+        android:textStyle="italic" />
 
 </RelativeLayout>

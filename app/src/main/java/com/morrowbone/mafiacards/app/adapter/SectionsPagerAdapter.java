@@ -4,7 +4,12 @@ package com.morrowbone.mafiacards.app.adapter;
  * Created by morrow on 03.06.2014.
  */
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +17,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.Interpolator;
 import android.widget.TextView;
 
 import com.morrowbone.mafiacards.app.R;
@@ -60,8 +68,12 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
-        private TextView mTitleTextView;
+        State mState;
         private TextView mHelpText;
+        private View mCartFrontView;
+        private View mCartBackSideView;
+        private Interpolator accelerator = new AccelerateInterpolator();
+        private Interpolator decelerator = new DecelerateInterpolator();
 
         public PlaceholderFragment() {
         }
@@ -82,20 +94,24 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_show_user_cart, container, false);
+            mCartFrontView = rootView.findViewById(R.id.card_view_front);
+            mCartBackSideView = rootView.findViewById(R.id.card_view_backside);
+            mCartFrontView.setVisibility(View.GONE);
+            mState = State.BACKSIDE;
 
             Integer sectionNum = getArguments().getInt(ARG_SECTION_NUMBER);
 
             int cartNameStringId = mDeck.getCard(sectionNum).getRoleNameStringId();
             String title = getActivity().getResources().getString(cartNameStringId);
 
-            mTitleTextView = (TextView) rootView.findViewById(R.id.section_label);
+            TextView mTitleTextView = (TextView) rootView.findViewById(R.id.role);
             mTitleTextView.setText(title);
-            mTitleTextView.setVisibility(View.GONE);
+
+            TextView mPlayerNumber = (TextView) rootView.findViewById(R.id.player_number);
+            mPlayerNumber.setText(sectionNum.toString());
 
             mHelpText = (TextView) rootView.findViewById(R.id.help_text);
-            if(Constants.HIDE_TIPS){
-                  mHelpText.setVisibility(View.GONE);
-            }
+            showHelpField();
 
             rootView.setOnClickListener(this);
             return rootView;
@@ -106,15 +122,65 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             int id = view.getId();
             switch (id) {
                 case R.id.root:
-                    if (mTitleTextView.getVisibility() == View.VISIBLE) {
-                        mTitleTextView.setVisibility(View.GONE);
-                        mHelpText.setText(R.string.message_tap_to_see_card);
-                    } else {
-                        mTitleTextView.setVisibility(View.VISIBLE);
-                        mHelpText.setText(R.string.message_tap_to_hide_card);
-                    }
+                    hideHelpField();
+                    flipit();
                     break;
             }
         }
+
+        @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+        private void flipit() {
+            final View visibleView;
+            final View invisibleView;
+            if (mState == State.BACKSIDE) {
+                visibleView = mCartBackSideView;
+                invisibleView = mCartFrontView;
+                mState = State.FRONT;
+            } else {
+                invisibleView = mCartBackSideView;
+                visibleView = mCartFrontView;
+                mState = State.BACKSIDE;
+            }
+            ObjectAnimator visToInvis = ObjectAnimator.ofFloat(visibleView, "rotationY", 0f, 90f);
+            visToInvis.setDuration(500);
+            visToInvis.setInterpolator(accelerator);
+            final ObjectAnimator invisToVis = ObjectAnimator.ofFloat(invisibleView, "rotationY",
+                    -90f, 0f);
+            invisToVis.setDuration(500);
+            invisToVis.setInterpolator(decelerator);
+            visToInvis.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator anim) {
+                    visibleView.setVisibility(View.GONE);
+                    invisToVis.start();
+                    invisibleView.setVisibility(View.VISIBLE);
+                    if (mState == State.BACKSIDE) {
+                        mHelpText.setText(R.string.message_tap_to_see_card);
+                    } else {
+                        mHelpText.setText(R.string.message_tap_to_hide_card);
+                    }
+                    showHelpField();
+                }
+            });
+            visToInvis.start();
+        }
+
+        private void showHelpField() {
+            if (Constants.SHOW_TIPS) {
+                mHelpText.setVisibility(View.VISIBLE);
+            } else {
+                mHelpText.setVisibility(View.GONE);
+            }
+        }
+
+        private void hideHelpField() {
+            mHelpText.setVisibility(View.GONE);
+        }
+
+        private enum State {
+            BACKSIDE, FRONT;
+        }
+
+
     }
 }

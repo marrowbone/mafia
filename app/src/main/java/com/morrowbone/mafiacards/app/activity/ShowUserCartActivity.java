@@ -1,5 +1,6 @@
 package com.morrowbone.mafiacards.app.activity;
 
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
@@ -14,7 +15,7 @@ import com.morrowbone.mafiacards.app.model.Deck;
 import com.morrowbone.mafiacards.app.utils.Constants;
 
 
-public class ShowUserCartActivity extends ActionBarActivity {
+public class ShowUserCartActivity extends FragmentActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide

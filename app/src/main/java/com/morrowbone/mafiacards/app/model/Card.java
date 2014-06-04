@@ -9,9 +9,8 @@ public abstract class Card {
     private Integer imageId;
     private Integer cartBackSideId;
 
-    protected Card(){
+    protected Card() {
         cartBackSideId = R.drawable.card_back_side_ver1;
-
     }
 
     public Integer getImageId() {
@@ -28,6 +27,10 @@ public abstract class Card {
 
     public void setCartBackSideId(Integer cartBackSideId) {
         this.cartBackSideId = cartBackSideId;
+    }
+
+    public Integer getCartFrontSideId(Integer cartBackSideId) {
+        return R.drawable.test_sherif;
     }
 
     public abstract int getRoleNameStringId();
