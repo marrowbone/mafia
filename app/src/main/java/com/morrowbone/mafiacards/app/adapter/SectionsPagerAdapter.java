@@ -62,7 +62,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment implements View.OnClickListener {
+    public static class PlaceholderFragment extends Fragment implements View.OnClickListener, View.OnLongClickListener {
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -74,6 +74,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         private View mCartBackSideView;
         private Interpolator accelerator = new AccelerateInterpolator();
         private Interpolator decelerator = new DecelerateInterpolator();
+        private View mRootView;
 
         public PlaceholderFragment() {
         }
@@ -93,9 +94,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_show_user_cart, container, false);
-            mCartFrontView = rootView.findViewById(R.id.card_view_front);
-            mCartBackSideView = rootView.findViewById(R.id.card_view_backside);
+            mRootView = inflater.inflate(R.layout.fragment_show_user_cart, container, false);
+            mCartFrontView = mRootView.findViewById(R.id.card_view_front);
+            mCartBackSideView = mRootView.findViewById(R.id.card_view_backside);
             mCartFrontView.setVisibility(View.GONE);
             mState = State.BACKSIDE;
 
@@ -104,17 +105,18 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             int cartNameStringId = mDeck.getCard(sectionNum).getRoleNameStringId();
             String title = getActivity().getResources().getString(cartNameStringId);
 
-            TextView mTitleTextView = (TextView) rootView.findViewById(R.id.role);
+            TextView mTitleTextView = (TextView) mRootView.findViewById(R.id.role);
             mTitleTextView.setText(title);
 
-            TextView mPlayerNumber = (TextView) rootView.findViewById(R.id.player_number);
+            TextView mPlayerNumber = (TextView) mRootView.findViewById(R.id.player_number);
             mPlayerNumber.setText(sectionNum.toString());
 
-            mHelpText = (TextView) rootView.findViewById(R.id.help_text);
+            mHelpText = (TextView) mRootView.findViewById(R.id.help_text);
             showHelpField();
 
-            rootView.setOnClickListener(this);
-            return rootView;
+            mRootView.setOnClickListener(this);
+            mRootView.setOnLongClickListener(this);
+            return mRootView;
         }
 
         @Override
@@ -122,10 +124,21 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             int id = view.getId();
             switch (id) {
                 case R.id.root:
-                    hideHelpField();
-                    flipit();
+                    if (mState == State.FRONT) {
+                        hideHelpField();
+                        flipit();
+                    }
                     break;
             }
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            if (mState == State.BACKSIDE) {
+                hideHelpField();
+                flipit();
+            }
+            return true;
         }
 
         @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -176,6 +189,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         private void hideHelpField() {
             mHelpText.setVisibility(View.GONE);
         }
+
 
         private enum State {
             BACKSIDE, FRONT;
