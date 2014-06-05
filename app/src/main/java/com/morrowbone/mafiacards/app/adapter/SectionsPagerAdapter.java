@@ -23,6 +23,7 @@ import android.view.animation.Interpolator;
 import android.widget.TextView;
 
 import com.morrowbone.mafiacards.app.R;
+import com.morrowbone.mafiacards.app.activity.ShowUserCartActivity;
 import com.morrowbone.mafiacards.app.model.Deck;
 import com.morrowbone.mafiacards.app.utils.Constants;
 
@@ -38,6 +39,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         super(fm);
         mContext = context;
         mDeck = deck;
+
     }
 
     @Override
@@ -58,6 +60,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         String title = mContext.getResources().getString(cartNameStringId);
         return title;
     }
+
 
     /**
      * A placeholder fragment containing a simple view.
@@ -101,6 +104,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             mState = State.BACKSIDE;
 
             Integer sectionNum = getArguments().getInt(ARG_SECTION_NUMBER);
+            Integer playerNum = sectionNum + 1;
 
             int cartNameStringId = mDeck.getCard(sectionNum).getRoleNameStringId();
             String title = getActivity().getResources().getString(cartNameStringId);
@@ -109,7 +113,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             mTitleTextView.setText(title);
 
             TextView mPlayerNumber = (TextView) mRootView.findViewById(R.id.player_number);
-            mPlayerNumber.setText(sectionNum.toString());
+            mPlayerNumber.setText(playerNum.toString());
 
             mHelpText = (TextView) mRootView.findViewById(R.id.help_text);
             showHelpField();
@@ -127,6 +131,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                     if (mState == State.FRONT) {
                         hideHelpField();
                         flipit();
+                        showNextPage();
                     }
                     break;
             }
@@ -137,6 +142,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             if (mState == State.BACKSIDE) {
                 hideHelpField();
                 flipit();
+            } else {
+                return false;
             }
             return true;
         }
@@ -161,18 +168,23 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                     -90f, 0f);
             invisToVis.setDuration(500);
             invisToVis.setInterpolator(decelerator);
-            visToInvis.addListener(new AnimatorListenerAdapter() {
+            invisToVis.addListener(new AnimatorListenerAdapter() {
                 @Override
-                public void onAnimationEnd(Animator anim) {
-                    visibleView.setVisibility(View.GONE);
-                    invisToVis.start();
-                    invisibleView.setVisibility(View.VISIBLE);
+                public void onAnimationEnd(Animator animation) {
                     if (mState == State.BACKSIDE) {
                         mHelpText.setText(R.string.message_tap_to_see_card);
                     } else {
                         mHelpText.setText(R.string.message_tap_to_hide_card);
                     }
                     showHelpField();
+                }
+            });
+            visToInvis.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator anim) {
+                    visibleView.setVisibility(View.GONE);
+                    invisToVis.start();
+                    invisibleView.setVisibility(View.VISIBLE);
                 }
             });
             visToInvis.start();
@@ -190,6 +202,10 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             mHelpText.setVisibility(View.GONE);
         }
 
+        public void showNextPage() {
+            ShowUserCartActivity parent = (ShowUserCartActivity) getActivity();
+            parent.showNextPage();
+        }
 
         private enum State {
             BACKSIDE, FRONT;

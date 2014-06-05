@@ -1,18 +1,23 @@
 package com.morrowbone.mafiacards.app.activity;
 
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.annotation.TargetApi;
+import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.Interpolator;
+import android.widget.Scroller;
 
 import com.morrowbone.mafiacards.app.R;
 import com.morrowbone.mafiacards.app.adapter.SectionsPagerAdapter;
 import com.morrowbone.mafiacards.app.database.DatabaseHelper;
 import com.morrowbone.mafiacards.app.model.Deck;
 import com.morrowbone.mafiacards.app.utils.Constants;
+
+import java.lang.reflect.Field;
 
 
 public class ShowUserCartActivity extends FragmentActivity {
@@ -30,7 +35,8 @@ public class ShowUserCartActivity extends FragmentActivity {
     /**
      * The {@link ViewPager} that will host the section contents.
      */
-    ViewPager mViewPager;
+    private ViewPager mViewPager;
+    private FixedSpeedScroller scroller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +58,75 @@ public class ShowUserCartActivity extends FragmentActivity {
             // Set up the ViewPager with the sections adapter.
             mViewPager = (ViewPager) findViewById(R.id.pager);
             mViewPager.setAdapter(mSectionsPagerAdapter);
+
+            try {
+                Field mScroller;
+                mScroller = ViewPager.class.getDeclaredField("mScroller");
+                mScroller.setAccessible(true);
+                Interpolator sInterpolator = new DecelerateInterpolator();
+                scroller = new FixedSpeedScroller(mViewPager.getContext(), sInterpolator);
+                mScroller.set(mViewPager, scroller);
+            } catch (NoSuchFieldException e) {
+            } catch (IllegalArgumentException e) {
+            } catch (IllegalAccessException e) {
+            }
+        }
+    }
+
+    public void showNextPage() {
+        int childCount = mSectionsPagerAdapter.getCount();
+        int currItem = mViewPager.getCurrentItem();
+        if (currItem == childCount) {
+//            TODO: show massage
+        } else {
+            scroller.setFixedDuration(1000);
+            mViewPager.setCurrentItem(currItem + 1, true);
+            scroller.setFixedDuration(null);
+        }
+
+    }
+
+    public class FixedSpeedScroller extends Scroller {
+
+        private Integer mDuration = null;
+
+        public FixedSpeedScroller(Context context) {
+            super(context);
+        }
+
+        public FixedSpeedScroller(Context context, Interpolator interpolator) {
+            super(context, interpolator);
+        }
+
+        @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+        public FixedSpeedScroller(Context context, Interpolator interpolator, boolean flywheel) {
+            super(context, interpolator, flywheel);
         }
 
 
+        @Override
+        public void startScroll(int startX, int startY, int dx, int dy, int duration) {
+            // Ignore received duration, use fixed one instead
+            if (mDuration == null) {
+                super.startScroll(startX, startY, dx, dy, duration);
+            } else {
+                super.startScroll(startX, startY, dx, dy, mDuration);
+            }
+        }
 
+        @Override
+        public void startScroll(int startX, int startY, int dx, int dy) {
+            // Ignore received duration, use fixed one instead
+            if (mDuration == null) {
+                super.startScroll(startX, startY, dx, dy);
+            } else {
+                super.startScroll(startX, startY, dx, dy, mDuration);
+            }
+        }
+
+        public void setFixedDuration(Integer duration) {
+            mDuration = duration;
+        }
     }
 
 
