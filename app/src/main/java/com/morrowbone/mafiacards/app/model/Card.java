@@ -6,19 +6,10 @@ import com.morrowbone.mafiacards.app.R;
  * Created by morrow on 03.06.2014.
  */
 public abstract class Card {
-    private Integer imageId;
     private Integer cartBackSideId;
 
     protected Card() {
         cartBackSideId = R.drawable.card_back_side_ver1;
-    }
-
-    public Integer getImageId() {
-        return imageId;
-    }
-
-    public void setImageId(Integer imageId) {
-        this.imageId = imageId;
     }
 
     public Integer getCartBackSideId() {
@@ -29,7 +20,7 @@ public abstract class Card {
         this.cartBackSideId = cartBackSideId;
     }
 
-    public Integer getCartFrontSideId(Integer cartBackSideId) {
+    public Integer getCartFrontSideImageId() {
         return R.drawable.test_sherif;
     }
 

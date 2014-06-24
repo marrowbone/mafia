@@ -11,4 +11,9 @@ public class Sherif extends Card {
     public int getRoleNameStringId() {
         return R.string.role_sherif;
     }
+
+    @Override
+    public Integer getCartFrontSideImageId() {
+        return R.drawable.test_sherif_7na5_mdpi;
+    }
 }

@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.morrowbone.mafiacards.app.R;
@@ -101,6 +102,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             mCartFrontView = mRootView.findViewById(R.id.card_view_front);
             mCartBackSideView = mRootView.findViewById(R.id.card_view_backside);
             mCartFrontView.setVisibility(View.GONE);
+            mCartBackSideView.setVisibility(View.VISIBLE);
             mState = State.BACKSIDE;
 
             Integer sectionNum = getArguments().getInt(ARG_SECTION_NUMBER);
@@ -108,6 +110,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
             int cartNameStringId = mDeck.getCard(sectionNum).getRoleNameStringId();
             String title = getActivity().getResources().getString(cartNameStringId);
+
+            ImageView frontsideImage = (ImageView) mRootView.findViewById(R.id.card_frontside_image);
+            frontsideImage.setImageResource(mDeck.getCard(sectionNum).getCartFrontSideImageId());
 
             TextView mTitleTextView = (TextView) mRootView.findViewById(R.id.role);
             mTitleTextView.setText(title);
@@ -120,6 +125,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
             mRootView.setOnClickListener(this);
             mRootView.setOnLongClickListener(this);
+
             return mRootView;
         }
 
