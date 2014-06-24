@@ -11,4 +11,9 @@ public class DonMafia extends Card {
     public int getRoleNameStringId() {
         return R.string.role_don;
     }
+
+    @Override
+    public Integer getCartFrontSideImageId() {
+        return R.drawable.don_cr;
+    }
 }

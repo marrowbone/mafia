@@ -14,6 +14,6 @@ public class Mafia extends Card {
 
     @Override
     public Integer getCartFrontSideImageId() {
-        return R.drawable.test_mafia_7na5_pochti_xhdpi;
+        return R.drawable.mafia_cr;
     }
 }

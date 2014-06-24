@@ -11,4 +11,9 @@ public class Civilian extends Card {
     public int getRoleNameStringId() {
         return R.string.role_civilian;
     }
+
+    @Override
+    public Integer getCartFrontSideImageId() {
+        return R.drawable.civilian_cr;
+    }
 }

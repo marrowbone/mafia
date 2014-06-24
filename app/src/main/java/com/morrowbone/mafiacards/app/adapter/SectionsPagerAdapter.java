@@ -9,6 +9,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -33,14 +34,16 @@ import com.morrowbone.mafiacards.app.utils.Constants;
  * one of the sections/tabs/pages.
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    private final static String frontPathInAssets = "fonts/CorleoneDue.ttf";
     private static Deck mDeck;
+    protected static Typeface mTypeFace;
     private Context mContext;
 
     public SectionsPagerAdapter(FragmentManager fm, Context context, Deck deck) {
         super(fm);
         mContext = context;
         mDeck = deck;
-
+        mTypeFace = Typeface.createFromAsset(mContext.getAssets(), frontPathInAssets);
     }
 
     @Override
@@ -59,6 +62,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         int cartNameStringId = mDeck.getCard(position).getRoleNameStringId();
         String title = mContext.getResources().getString(cartNameStringId);
+
         return title;
     }
 
@@ -116,6 +120,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
             TextView mTitleTextView = (TextView) mRootView.findViewById(R.id.role);
             mTitleTextView.setText(title);
+            mTitleTextView.setTypeface(mTypeFace);
 
             TextView mPlayerNumber = (TextView) mRootView.findViewById(R.id.player_number);
             mPlayerNumber.setText(playerNum.toString());

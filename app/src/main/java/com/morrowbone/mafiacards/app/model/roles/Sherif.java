@@ -14,6 +14,6 @@ public class Sherif extends Card {
 
     @Override
     public Integer getCartFrontSideImageId() {
-        return R.drawable.test_sherif_7na5_mdpi;
+        return R.drawable.sherif_cr;
     }
 }

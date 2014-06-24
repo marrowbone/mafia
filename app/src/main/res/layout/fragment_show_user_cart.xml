@@ -13,8 +13,8 @@
 
     <RelativeLayout
         android:id="@+id/card_view_backside"
-        android:layout_width="225dp"
-        android:layout_height="400dp"
+        android:layout_width="@dimen/card_field_width"
+        android:layout_height="@dimen/card_field_height"
         android:layout_centerInParent="true"
         android:background="@color/gray_alfa">
 
@@ -40,8 +40,10 @@
         android:background="@color/gray_alfa">
 
         <ImageView
-            android:id="@+id/role_image"
+            android:id="@+id/card_frontside_image"
             android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="15dp"
             android:layout_height="wrap_content"
             android:src="@drawable/test_sherif" />
 

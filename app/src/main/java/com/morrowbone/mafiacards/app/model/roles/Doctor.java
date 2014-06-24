@@ -11,4 +11,9 @@ public class Doctor extends Card {
     public int getRoleNameStringId() {
         return R.string.role_doctor;
     }
+
+    @Override
+    public Integer getCartFrontSideImageId() {
+        return R.drawable.doctor_cr;
+    }
 }

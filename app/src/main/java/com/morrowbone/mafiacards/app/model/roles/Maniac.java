@@ -11,4 +11,9 @@ public class Maniac extends Card {
     public int getRoleNameStringId() {
         return R.string.role_maniac;
     }
+
+    @Override
+    public Integer getCartFrontSideImageId() {
+        return R.drawable.manic_cr;
+    }
 }
