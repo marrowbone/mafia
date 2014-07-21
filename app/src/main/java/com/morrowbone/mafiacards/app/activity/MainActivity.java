@@ -91,10 +91,10 @@ public class MainActivity extends FragmentActivity {
                         if (!value.equals("")) {
                             Integer progress = Integer.valueOf(editText.getText().toString()) - min;
                             seekBar.setProgress(progress);
-                        } else {
-                            // TODO: show massage
                         }
                     }
+
+
                 });
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle(R.string.dialog_number_of_player);
@@ -107,7 +107,7 @@ public class MainActivity extends FragmentActivity {
 
                             Integer cartCount = Integer.valueOf(editText.getText().toString());
                             if (cartCount < min) {
-                                // TODO: show massage
+                                showMessage(R.string.error, R.string.wrong_player_count);
                             } else {
                                 Intent intent = new Intent(MainActivity.this, ShowUserCartActivity.class);
                                 intent.putExtra(Constants.EXTRA_CART_COUNT, cartCount);
@@ -122,6 +122,21 @@ public class MainActivity extends FragmentActivity {
 
             }
         });
+
+
+    }
+
+    private void showMessage(int titleResId, int messageResId) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle(titleResId).setMessage(messageResId).setCancelable(false);
+        builder.setPositiveButton(R.string.positive_button_text, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+            }
+        });
+
+        builder.show();
     }
 
 

@@ -23,4 +23,7 @@
     <string name="final_dialog">All players have seen their cards</string>
     <string name="positive_button_text">Ok</string>
 
+    <string name="error">Error</string>
+    <string name="wrong_player_count">You entered an incorrect number of players</string>
+
 </resources>
