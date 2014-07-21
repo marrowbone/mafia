@@ -7,11 +7,13 @@ import java.util.Collections;
  * Created by morrow on 03.06.2014.
  */
 public class Deck {
-    Integer cardCount;
-    ArrayList<Card> cards;
+    private Integer cardCount;
+    private ArrayList<Card> cards;
+    private Boolean isShuffled;
 
     public Deck(Integer cartCount){
         this.cardCount = cartCount;
+        isShuffled = false;
         createCards();
     }
     public int size(){
@@ -32,5 +34,10 @@ public class Deck {
 
     public void shuffle(){
         Collections.shuffle(cards);
+        isShuffled = true;
+    }
+
+    public Boolean isShuffled() {
+        return isShuffled;
     }
 }

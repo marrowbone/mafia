@@ -40,6 +40,7 @@ public class ShowUserCartActivity extends FragmentActivity {
      */
     private NonSwipeableViewPager mViewPager;
     private FixedSpeedScroller scroller;
+    private static Deck mDeck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +53,16 @@ public class ShowUserCartActivity extends FragmentActivity {
             e.printStackTrace();
         }
         if (getIntent().hasExtra(Constants.EXTRA_CART_COUNT)) {
-            DatabaseHelper databaseHelper = new DatabaseHelper(this);
-            Integer cardCount = getIntent().getIntExtra(Constants.EXTRA_CART_COUNT, 6);
-            Deck deck = databaseHelper.getDeck(cardCount);
-            deck.shuffle();
-            mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), this, deck);
+            Integer cardCount = getIntent().getIntExtra(Constants.EXTRA_CART_COUNT, 0);
+            if (mDeck == null) {
+                mDeck = getDeck(cardCount);
+            }else if(cardCount != mDeck.size()){
+                mDeck = getDeck(cardCount);
+            }
+            if (!mDeck.isShuffled()) {
+                mDeck.shuffle();
+            }
+            mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), this, mDeck);
 
             // Set up the ViewPager with the sections adapter.
             mViewPager = (NonSwipeableViewPager) findViewById(R.id.pager);
@@ -74,6 +80,12 @@ public class ShowUserCartActivity extends FragmentActivity {
             } catch (IllegalAccessException e) {
             }
         }
+    }
+
+    private Deck getDeck(int cardCount){
+        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+        Deck deck = databaseHelper.getDeck(cardCount);
+        return deck;
     }
 
     public void showNextPage() {
