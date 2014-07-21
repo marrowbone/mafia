@@ -35,8 +35,8 @@ import com.morrowbone.mafiacards.app.utils.Constants;
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
     private final static String frontPathInAssets = "fonts/CorleoneDue.ttf";
-    private static Deck mDeck;
     protected static Typeface mTypeFace;
+    private static Deck mDeck;
     private Context mContext;
 
     public SectionsPagerAdapter(FragmentManager fm, Context context, Deck deck) {
@@ -45,6 +45,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         mDeck = deck;
         mTypeFace = Typeface.createFromAsset(mContext.getAssets(), frontPathInAssets);
     }
+
 
     @Override
     public Fragment getItem(int position) {

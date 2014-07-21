@@ -16,6 +16,7 @@ import com.morrowbone.mafiacards.app.adapter.SectionsPagerAdapter;
 import com.morrowbone.mafiacards.app.database.DatabaseHelper;
 import com.morrowbone.mafiacards.app.model.Deck;
 import com.morrowbone.mafiacards.app.utils.Constants;
+import com.morrowbone.mafiacards.app.views.NonSwipeableViewPager;
 
 import java.lang.reflect.Field;
 
@@ -35,7 +36,7 @@ public class ShowUserCartActivity extends FragmentActivity {
     /**
      * The {@link ViewPager} that will host the section contents.
      */
-    private ViewPager mViewPager;
+    private NonSwipeableViewPager mViewPager;
     private FixedSpeedScroller scroller;
 
     @Override
@@ -56,7 +57,7 @@ public class ShowUserCartActivity extends FragmentActivity {
             mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), this, deck);
 
             // Set up the ViewPager with the sections adapter.
-            mViewPager = (ViewPager) findViewById(R.id.pager);
+            mViewPager = (NonSwipeableViewPager) findViewById(R.id.pager);
             mViewPager.setAdapter(mSectionsPagerAdapter);
 
             try {
