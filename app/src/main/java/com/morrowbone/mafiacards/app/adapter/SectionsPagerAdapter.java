@@ -77,7 +77,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
-        State mState;
+        CardSide mState;
         private TextView mHelpText;
         private View mCartFrontView;
         private View mCartBackSideView;
@@ -106,9 +106,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             mRootView = inflater.inflate(R.layout.fragment_show_user_cart, container, false);
             mCartFrontView = mRootView.findViewById(R.id.card_view_front);
             mCartBackSideView = mRootView.findViewById(R.id.card_view_backside);
-            mCartFrontView.setVisibility(View.GONE);
-            mCartBackSideView.setVisibility(View.VISIBLE);
-            mState = State.BACKSIDE;
+            show(CardSide.BACKSIDE);
 
             Integer sectionNum = getArguments().getInt(ARG_SECTION_NUMBER);
             Integer playerNum = sectionNum + 1;
@@ -136,12 +134,25 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             return mRootView;
         }
 
+        private void show(CardSide state) {
+            if (state == CardSide.BACKSIDE) {
+                mCartFrontView.setVisibility(View.GONE);
+                mCartBackSideView.setVisibility(View.VISIBLE);
+                mState = CardSide.BACKSIDE;
+            }else{
+                mCartFrontView.setVisibility(View.VISIBLE);
+                mCartBackSideView.setVisibility(View.GONE);
+                mState = CardSide.FRONT;
+            }
+
+        }
+
         @Override
         public void onClick(View view) {
             int id = view.getId();
             switch (id) {
                 case R.id.root:
-                    if (mState == State.FRONT) {
+                    if (mState == CardSide.FRONT) {
                         hideHelpField();
                         flipit();
                         showNextPage();
@@ -152,7 +163,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         @Override
         public boolean onLongClick(View view) {
-            if (mState == State.BACKSIDE) {
+            if (mState == CardSide.BACKSIDE) {
                 hideHelpField();
                 flipit();
             } else {
@@ -165,14 +176,14 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         private void flipit() {
             final View visibleView;
             final View invisibleView;
-            if (mState == State.BACKSIDE) {
+            if (mState == CardSide.BACKSIDE) {
                 visibleView = mCartBackSideView;
                 invisibleView = mCartFrontView;
-                mState = State.FRONT;
+                mState = CardSide.FRONT;
             } else {
                 invisibleView = mCartBackSideView;
                 visibleView = mCartFrontView;
-                mState = State.BACKSIDE;
+                mState = CardSide.BACKSIDE;
             }
             ObjectAnimator visToInvis = ObjectAnimator.ofFloat(visibleView, "rotationY", 0f, 90f);
             visToInvis.setDuration(500);
@@ -184,7 +195,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             invisToVis.addListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    if (mState == State.BACKSIDE) {
+                    if (mState == CardSide.BACKSIDE) {
                         mHelpText.setText(R.string.message_tap_to_see_card);
                     } else {
                         mHelpText.setText(R.string.message_tap_to_hide_card);
@@ -220,7 +231,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             parent.showNextPage();
         }
 
-        private enum State {
+        private enum CardSide {
             BACKSIDE, FRONT;
         }
 
