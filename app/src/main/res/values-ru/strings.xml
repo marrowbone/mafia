@@ -19,4 +19,8 @@
     <string name="message_tap_to_see_card">Нажмите и держите, чтобы увидить карту</string>
     <string name="message_tap_to_hide_card">Нажмите, чтобы спрятать карту</string>
 
+    <string name="player">игрок</string>
+    <string name="final_dialog">Все игроки увидели свои карты</string>
+    <string name="positive_button_text">Хорошо</string>
+
 </resources>

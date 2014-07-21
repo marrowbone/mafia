@@ -1,7 +1,9 @@
 package com.morrowbone.mafiacards.app.activity;
 
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -77,14 +79,32 @@ public class ShowUserCartActivity extends FragmentActivity {
     public void showNextPage() {
         int childCount = mSectionsPagerAdapter.getCount();
         int currItem = mViewPager.getCurrentItem();
-        if (currItem == childCount) {
-//            TODO: show massage
+        if (currItem == childCount - 1) {
+            showLastCardDialog();
         } else {
             scroller.setFixedDuration(1000);
             mViewPager.setCurrentItem(currItem + 1, true);
             scroller.setFixedDuration(null);
         }
 
+    }
+
+    private void showLastCardDialog() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+
+        builder.setTitle(R.string.final_dialog);
+        builder.setCancelable(false);
+        builder.setPositiveButton(R.string.positive_button_text, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                finish();
+            }
+        });
+
+        builder.show();
     }
 
     public class FixedSpeedScroller extends Scroller {
@@ -130,23 +150,4 @@ public class ShowUserCartActivity extends FragmentActivity {
         }
     }
 
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.show_user_cart, menu);
-//        return true;
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 }

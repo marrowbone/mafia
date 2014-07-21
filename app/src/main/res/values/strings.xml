@@ -19,4 +19,8 @@
     <string name="message_tap_to_see_card">Long press to see your card</string>
     <string name="message_tap_to_hide_card">Tap to hide your card</string>
 
+    <string name="player">player</string>
+    <string name="final_dialog">All players have seen their cards</string>
+    <string name="positive_button_text">Ok</string>
+
 </resources>

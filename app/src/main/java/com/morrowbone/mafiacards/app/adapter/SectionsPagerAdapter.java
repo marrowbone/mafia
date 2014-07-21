@@ -34,7 +34,7 @@ import com.morrowbone.mafiacards.app.utils.Constants;
  * one of the sections/tabs/pages.
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
-    private final static String frontPathInAssets = "fonts/CorleoneDue.ttf";
+
     protected static Typeface mTypeFace;
     private static Deck mDeck;
     private Context mContext;
@@ -43,7 +43,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         super(fm);
         mContext = context;
         mDeck = deck;
-        mTypeFace = Typeface.createFromAsset(mContext.getAssets(), frontPathInAssets);
+        mTypeFace = Typeface.createFromAsset(mContext.getAssets(), Constants.frontPathInAssets);
     }
 
 
@@ -125,6 +125,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
             TextView mPlayerNumber = (TextView) mRootView.findViewById(R.id.player_number);
             mPlayerNumber.setText(playerNum.toString());
+            mPlayerNumber.setTypeface(mTypeFace);
 
             mHelpText = (TextView) mRootView.findViewById(R.id.help_text);
             showHelpField();

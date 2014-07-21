@@ -6,7 +6,7 @@
 
     <ImageView
         android:scaleType="centerCrop"
-        android:src="@drawable/main_page_background"
+        android:src="@drawable/city_ver2"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -17,9 +17,18 @@
         android:textStyle="italic"
         android:textSize="@dimen/big_text"
         android:text="@string/play"
-        android:textColor="@color/red"
+        android:textColor="@android:color/black"
         android:layout_marginBottom="70dp"
         android:layout_width="150dp"
         android:layout_height="70dp" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="@dimen/very_very_big_text"
+        android:textColor="@color/red"
+        android:layout_height="wrap_content"
+        android:text="@string/role_mafia"/>
 
 </RelativeLayout>

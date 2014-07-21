@@ -5,6 +5,7 @@
 
     <dimen name="big_text">36sp</dimen>
     <dimen name="very_big_text">48sp</dimen>
+    <dimen name="very_very_big_text">60sp</dimen>
     <dimen name="card_field_width">230dp</dimen>
     <dimen name="card_field_height">350dp</dimen>
 </resources>
