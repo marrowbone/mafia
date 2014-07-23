@@ -31,9 +31,9 @@ public class GameTypeActivity extends FragmentActivity implements AdapterView.On
     private void init() {
         mGameTypes = new ArrayList<GameType>();
 
-        GameType gameType = new GameType(R.drawable.mafia_image_main_ver1, R.string.test_mafia_title, R.string.mafia_short_rules);
-        GameType gameType2 = new GameType(R.drawable.mafia_image_main_ver1, R.string.test_mafia_title, R.string.mafia_short_rules);
-        GameType gameType3 = new GameType(R.drawable.mafia_image_main_ver1, R.string.test_mafia_title, R.string.mafia_short_rules);
+        GameType gameType = new GameType(R.drawable.don_launcher_xh, R.string.test_mafia_title, R.string.mafia_short_rules);
+        GameType gameType2 = new GameType(R.drawable.don_launcher_xh, R.string.test_mafia_title, R.string.mafia_short_rules);
+        GameType gameType3 = new GameType(R.drawable.don_launcher_xh, R.string.test_mafia_title, R.string.mafia_short_rules);
 
         mGameTypes.add(gameType);
         mGameTypes.add(gameType2);

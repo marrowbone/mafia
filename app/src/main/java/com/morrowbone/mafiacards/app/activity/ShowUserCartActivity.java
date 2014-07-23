@@ -9,10 +9,13 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.morrowbone.mafiacards.app.R;
 import com.morrowbone.mafiacards.app.adapter.SectionsPagerAdapter;
 import com.morrowbone.mafiacards.app.database.DatabaseHelper;
@@ -25,6 +28,7 @@ import java.lang.reflect.Field;
 
 public class ShowUserCartActivity extends FragmentActivity {
 
+    private static Deck mDeck;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -34,13 +38,12 @@ public class ShowUserCartActivity extends FragmentActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
-
     /**
      * The {@link ViewPager} that will host the section contents.
      */
     private NonSwipeableViewPager mViewPager;
     private FixedSpeedScroller scroller;
-    private static Deck mDeck;
+    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +59,7 @@ public class ShowUserCartActivity extends FragmentActivity {
             Integer cardCount = getIntent().getIntExtra(Constants.EXTRA_CART_COUNT, 0);
             if (mDeck == null) {
                 mDeck = getDeck(cardCount);
-            }else if(cardCount != mDeck.size()){
+            } else if (cardCount != mDeck.size()) {
                 mDeck = getDeck(cardCount);
             }
             if (!mDeck.isShuffled()) {
@@ -79,10 +82,30 @@ public class ShowUserCartActivity extends FragmentActivity {
             } catch (IllegalArgumentException e) {
             } catch (IllegalAccessException e) {
             }
+
+            adView = (AdView) this.findViewById(R.id.adView);
         }
     }
 
-    private Deck getDeck(int cardCount){
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adView.resume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        adView.pause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        adView.destroy();
+    }
+
+    private Deck getDeck(int cardCount) {
         DatabaseHelper databaseHelper = new DatabaseHelper(this);
         Deck deck = databaseHelper.getDeck(cardCount);
         return deck;
@@ -97,6 +120,10 @@ public class ShowUserCartActivity extends FragmentActivity {
             scroller.setFixedDuration(1000);
             mViewPager.setCurrentItem(currItem + 1, true);
             scroller.setFixedDuration(null);
+        }
+        if (currItem == 1) {
+            AdRequest adRequest = new AdRequest.Builder().build();
+            adView.loadAd(adRequest);
         }
 
     }
@@ -117,6 +144,14 @@ public class ShowUserCartActivity extends FragmentActivity {
         });
 
         builder.show();
+    }
+
+    public void showAdMob() {
+        adView.setVisibility(View.VISIBLE);
+    }
+
+    public void hideAdMob() {
+        adView.setVisibility(View.GONE);
     }
 
     public class FixedSpeedScroller extends Scroller {

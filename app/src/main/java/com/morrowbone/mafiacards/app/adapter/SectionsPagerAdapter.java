@@ -126,7 +126,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             mPlayerNumber.setTypeface(mTypeFace);
 
             mHelpText = (TextView) mRootView.findViewById(R.id.help_text);
-            showHelpField();
+            hideHelpField();
 
             mRootView.setOnClickListener(this);
             mRootView.setOnLongClickListener(this);
@@ -139,7 +139,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 mCartFrontView.setVisibility(View.GONE);
                 mCartBackSideView.setVisibility(View.VISIBLE);
                 mState = CardSide.BACKSIDE;
-            }else{
+            } else {
                 mCartFrontView.setVisibility(View.VISIBLE);
                 mCartBackSideView.setVisibility(View.GONE);
                 mState = CardSide.FRONT;
@@ -156,6 +156,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                         hideHelpField();
                         flipit();
                         showNextPage();
+                    } else {
+                        showHelpField();
                     }
                     break;
             }
@@ -200,7 +202,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                     } else {
                         mHelpText.setText(R.string.message_tap_to_hide_card);
                     }
-                    showHelpField();
                 }
             });
             visToInvis.addListener(new AnimatorListenerAdapter() {
@@ -215,15 +216,16 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         }
 
         private void showHelpField() {
-            if (Constants.SHOW_TIPS) {
-                mHelpText.setVisibility(View.VISIBLE);
-            } else {
-                mHelpText.setVisibility(View.GONE);
-            }
+            mHelpText.setVisibility(View.VISIBLE);
+            ShowUserCartActivity parent = (ShowUserCartActivity) getActivity();
+            parent.hideAdMob();
+
         }
 
         private void hideHelpField() {
             mHelpText.setVisibility(View.GONE);
+            ShowUserCartActivity parent = (ShowUserCartActivity) getActivity();
+            parent.showAdMob();
         }
 
         public void showNextPage() {
@@ -234,7 +236,5 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         private enum CardSide {
             BACKSIDE, FRONT;
         }
-
-
     }
 }

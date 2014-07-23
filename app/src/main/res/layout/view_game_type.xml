@@ -38,7 +38,7 @@
             android:id="@+id/game_type_image"
             android:layout_width="180dp"
             android:layout_height="150dp"
-            android:src="@drawable/mafia_image_main_ver1" />
+            android:src="@drawable/don_launcher_xh" />
 
         <TextView
             android:id="@+id/game_description"
