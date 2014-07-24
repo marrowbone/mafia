@@ -9,7 +9,7 @@ public abstract class Card {
     private Integer cartBackSideId;
 
     protected Card() {
-        cartBackSideId = R.drawable.card_back_side_ver1;
+        cartBackSideId = R.color.gray_alfa;
     }
 
     public Integer getCartBackSideId() {
