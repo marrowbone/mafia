@@ -11,16 +11,17 @@ public class Deck {
     private ArrayList<Card> cards;
     private Boolean isShuffled;
 
-    public Deck(Integer cartCount){
+    public Deck(Integer cartCount) {
         this.cardCount = cartCount;
         isShuffled = false;
         createCards();
     }
-    public int size(){
+
+    public int size() {
         return cards.size();
     }
 
-    public Card getCard(int index){
+    public Card getCard(int index) {
         return cards.get(index);
     }
 
@@ -28,11 +29,11 @@ public class Deck {
         cards = new ArrayList<Card>(cardCount);
     }
 
-    public void addCard(Card card){
+    public void addCard(Card card) {
         cards.add(card);
     }
 
-    public void shuffle(){
+    public void shuffle() {
         Collections.shuffle(cards);
         isShuffled = true;
     }

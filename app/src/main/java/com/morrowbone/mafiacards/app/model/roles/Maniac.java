@@ -13,6 +13,11 @@ public class Maniac extends Card {
     }
 
     @Override
+    public int getCardDescriptionStringId() {
+        return R.string.role_maniac_info;
+    }
+
+    @Override
     public Integer getCartFrontSideImageId() {
         return R.drawable.manic_cr;
     }

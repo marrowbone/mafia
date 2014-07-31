@@ -13,6 +13,11 @@ public class Wervoolf extends Card {
     }
 
     @Override
+    public int getCardDescriptionStringId() {
+        return R.string.role_wervoolf;
+    }
+
+    @Override
     public Integer getCartFrontSideImageId() {
         return R.drawable.wervoolf_cr;
     }

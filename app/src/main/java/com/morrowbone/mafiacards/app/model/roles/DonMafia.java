@@ -13,6 +13,11 @@ public class DonMafia extends Card {
     }
 
     @Override
+    public int getCardDescriptionStringId() {
+        return R.string.role_don_info;
+    }
+
+    @Override
     public Integer getCartFrontSideImageId() {
         return R.drawable.don_cr;
     }

@@ -13,19 +13,33 @@
     <Button
         android:id="@+id/play_btn"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
         android:textStyle="italic"
+        android:layout_above="@+id/rules_btn"
         android:textSize="@dimen/big_text"
         android:text="@string/play"
         android:textColor="@android:color/black"
+        android:layout_marginBottom="30dp"
+        android:layout_width="170dp"
+        android:layout_height="70dp" />
+
+    <Button
+        android:id="@+id/rules_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:textStyle="italic"
+        android:textSize="@dimen/big_text"
+        android:text="@string/rules"
+        android:textColor="@android:color/black"
         android:layout_marginBottom="70dp"
-        android:layout_width="150dp"
+        android:layout_width="170dp"
         android:layout_height="70dp" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
         android:textSize="@dimen/very_very_big_text"
         android:textColor="@color/red"
         android:layout_height="wrap_content"

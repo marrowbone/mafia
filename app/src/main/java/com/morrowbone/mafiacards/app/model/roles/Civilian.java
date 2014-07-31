@@ -13,6 +13,11 @@ public class Civilian extends Card {
     }
 
     @Override
+    public int getCardDescriptionStringId() {
+        return R.string.role_civilian_info;
+    }
+
+    @Override
     public Integer getCartFrontSideImageId() {
         return R.drawable.civilian_cr;
     }

@@ -13,6 +13,11 @@ public class Mafia extends Card {
     }
 
     @Override
+    public int getCardDescriptionStringId() {
+        return R.string.role_mafia_info;
+    }
+
+    @Override
     public Integer getCartFrontSideImageId() {
         return R.drawable.mafia_cr;
     }

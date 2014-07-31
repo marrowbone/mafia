@@ -13,6 +13,11 @@ public class Immortal extends Card {
     }
 
     @Override
+    public int getCardDescriptionStringId() {
+        return R.string.role_immortal_info;
+    }
+
+    @Override
     public Integer getCartFrontSideImageId() {
         return R.drawable.immortal_cr;
     }

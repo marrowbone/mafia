@@ -217,15 +217,10 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         private void showHelpField() {
             mHelpText.setVisibility(View.VISIBLE);
-            ShowUserCartActivity parent = (ShowUserCartActivity) getActivity();
-            parent.hideAdMob();
-
         }
 
         private void hideHelpField() {
             mHelpText.setVisibility(View.GONE);
-            ShowUserCartActivity parent = (ShowUserCartActivity) getActivity();
-            parent.showAdMob();
         }
 
         public void showNextPage() {

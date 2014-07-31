@@ -6,7 +6,7 @@
     <string name="test_mafia_title">Карточная игра "Мафия"</string>
     <string name="role_civilian">Мирный</string>
     <string name="role_mafia">Мафия</string>
-    <string name="role_sherif">Шериф</string>
+    <string name="role_detective">Комиссар</string>
     <string name="role_immortal">Бессмертный</string>
     <string name="role_doctor">Доктор</string>
     <string name="role_don">Дон</string>
@@ -14,9 +14,10 @@
     <string name="role_wervoolf">Оборотень</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="play">Играть</string>
+    <string name="rules">Правила</string>
     <string name="dialog_number_of_player">Введите количество игроков</string>
     <string name="dialog_number_of_player_positive_btn">Вперёд!</string>
-    <string name="message_tap_to_see_card">Нажмите и держите, чтобы увидить карту</string>
+    <string name="message_tap_to_see_card">Нажмите и держите, чтобы увидеть карту</string>
     <string name="message_tap_to_hide_card">Нажмите, чтобы спрятать карту</string>
 
     <string name="player">игрок</string>

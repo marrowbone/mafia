@@ -11,12 +11,12 @@ import com.morrowbone.mafiacards.app.application.MafiaApp;
 import com.morrowbone.mafiacards.app.model.Card;
 import com.morrowbone.mafiacards.app.model.Deck;
 import com.morrowbone.mafiacards.app.model.roles.Civilian;
+import com.morrowbone.mafiacards.app.model.roles.Detective;
 import com.morrowbone.mafiacards.app.model.roles.Doctor;
 import com.morrowbone.mafiacards.app.model.roles.DonMafia;
 import com.morrowbone.mafiacards.app.model.roles.Immortal;
 import com.morrowbone.mafiacards.app.model.roles.Mafia;
 import com.morrowbone.mafiacards.app.model.roles.Maniac;
-import com.morrowbone.mafiacards.app.model.roles.Sherif;
 import com.morrowbone.mafiacards.app.model.roles.Wervoolf;
 import com.morrowbone.mafiacards.app.utils.Constants;
 
@@ -35,7 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_FOLDER = "/data/data/"
             + MafiaApp.getInstance().getPackageName() + "/databases/";
     private static final String DB_PATH = DB_FOLDER + DB_NAME;
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 3;
     private static final int DB_FILES_COPY_BUFFER_SIZE = 8192;
 
     private final static String TABLE_ROLES_COMBINATION = "Combinations";
@@ -43,7 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private final static String TABLE_ROLES_COMBINATION_PLAYER_COUNT = "playerCount";
     private final static String TABLE_ROLES_COMBINATION_CIVILIAN_COUNT = "civilianCount";
     private final static String TABLE_ROLES_COMBINATION_MAFIA_COUNT = "mafiaCount";
-    private final static String TABLE_ROLES_COMBINATION_SHERIF = "sherif";
+    private final static String TABLE_ROLES_COMBINATION_DETECTIVE = "detective";
     private final static String TABLE_ROLES_COMBINATION_DOCTOR = "doctor";
     private final static String TABLE_ROLES_COMBINATION_MANIAC = "maniac";
     private final static String TABLE_ROLES_COMBINATION_IMMORTAL = "immortal";
@@ -167,10 +167,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 card = new Mafia();
                 deck.addCard(card);
             }
-            // Sherif
-            int sherif = c.getInt(c.getColumnIndex(TABLE_ROLES_COMBINATION_SHERIF));
-            if (sherif > 0) {
-                card = new Sherif();
+            // Detective
+            int detective = c.getInt(c.getColumnIndex(TABLE_ROLES_COMBINATION_DETECTIVE));
+            if (detective > 0) {
+                card = new Detective();
                 deck.addCard(card);
             }
             // Don

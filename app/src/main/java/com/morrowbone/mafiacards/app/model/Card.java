@@ -25,4 +25,6 @@ public abstract class Card {
     }
 
     public abstract int getRoleNameStringId();
+
+    public abstract int getCardDescriptionStringId();
 }

@@ -32,6 +32,26 @@ public class MainActivity extends FragmentActivity {
         title.setText("Mafia");
         title.setTypeface(mTypeFace);
 
+        initPlayBtn();
+
+        initRulesBtn();
+
+    }
+
+    private void initRulesBtn() {
+        Button rulesBtn = (Button) findViewById(R.id.rules_btn);
+        rulesBtn.setTypeface(mTypeFace);
+        rulesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RulesActivity.class);
+//                intent.putExtra(Constants.EXTRA_CART_COUNT, cartCount);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void initPlayBtn() {
         Button playBtn = (Button) findViewById(R.id.play_btn);
         playBtn.setTypeface(mTypeFace);
         playBtn.setOnClickListener(new View.OnClickListener() {
@@ -122,8 +142,6 @@ public class MainActivity extends FragmentActivity {
 
             }
         });
-
-
     }
 
     private void showMessage(int titleResId, int messageResId) {

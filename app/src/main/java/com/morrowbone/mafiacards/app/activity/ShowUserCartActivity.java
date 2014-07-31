@@ -14,8 +14,6 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.morrowbone.mafiacards.app.R;
 import com.morrowbone.mafiacards.app.adapter.SectionsPagerAdapter;
 import com.morrowbone.mafiacards.app.database.DatabaseHelper;
@@ -43,7 +41,6 @@ public class ShowUserCartActivity extends FragmentActivity {
      */
     private NonSwipeableViewPager mViewPager;
     private FixedSpeedScroller scroller;
-    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,27 +79,22 @@ public class ShowUserCartActivity extends FragmentActivity {
             } catch (IllegalArgumentException e) {
             } catch (IllegalAccessException e) {
             }
-
-            adView = (AdView) this.findViewById(R.id.adView);
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        adView.resume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        adView.pause();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        adView.destroy();
     }
 
     private Deck getDeck(int cardCount) {
@@ -121,11 +113,6 @@ public class ShowUserCartActivity extends FragmentActivity {
             mViewPager.setCurrentItem(currItem + 1, true);
             scroller.setFixedDuration(null);
         }
-        if (currItem == 1) {
-            AdRequest adRequest = new AdRequest.Builder().build();
-            adView.loadAd(adRequest);
-        }
-
     }
 
     private void showLastCardDialog() {
@@ -144,14 +131,6 @@ public class ShowUserCartActivity extends FragmentActivity {
         });
 
         builder.show();
-    }
-
-    public void showAdMob() {
-        adView.setVisibility(View.VISIBLE);
-    }
-
-    public void hideAdMob() {
-        adView.setVisibility(View.GONE);
     }
 
     public class FixedSpeedScroller extends Scroller {

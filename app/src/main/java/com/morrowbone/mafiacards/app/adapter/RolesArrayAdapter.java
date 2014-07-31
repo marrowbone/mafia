@@ -1,7 +1,7 @@
 package com.morrowbone.mafiacards.app.adapter;
 
 /**
- * Created by morrow on 03.06.2014.
+ * Created by morrow on 31.07.2014.
  */
 
 import android.content.Context;
@@ -14,23 +14,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.morrowbone.mafiacards.app.R;
-import com.morrowbone.mafiacards.app.model.GameType;
+import com.morrowbone.mafiacards.app.model.Card;
 
 import java.util.List;
 
-/**
- * An array adapter that knows how to render views when given Book classes
- */
-public class GameTypesArrayAdapter extends ArrayAdapter<GameType> {
+public class RolesArrayAdapter extends ArrayAdapter<Card> {
     private final static String frontPathInAssets = "fonts/CorleoneDue.ttf";
 
     private final Typeface mTypeFace;
     private LayoutInflater mInflater;
     private Context mContext;
 
-    private static final Integer layout_id = R.layout.view_game_type;
+    private static final Integer layout_id = R.layout.view_role;
 
-    public GameTypesArrayAdapter(Context context, List<GameType> values) {
+    public RolesArrayAdapter(Context context, List<Card> values) {
         super(context, layout_id, values);
         mInflater = (LayoutInflater) getContext().getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
@@ -40,7 +37,7 @@ public class GameTypesArrayAdapter extends ArrayAdapter<GameType> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final GameType item = getItem(position);
+        final Card item = getItem(position);
         final Holder holder;
 
         if (convertView == null) {
@@ -61,9 +58,9 @@ public class GameTypesArrayAdapter extends ArrayAdapter<GameType> {
             holder = (Holder) convertView.getTag();
         }
 
-//        holder.title.setText(item.getName());
-//        holder.description.setText(item.getDescription());
-
+        holder.title.setText(item.getRoleNameStringId());
+        holder.description.setText(item.getCardDescriptionStringId());
+        holder.image.setImageResource(item.getCartFrontSideImageId());
 
         return convertView;
     }
@@ -74,7 +71,6 @@ public class GameTypesArrayAdapter extends ArrayAdapter<GameType> {
     private static class Holder {
         private TextView title;
         private TextView description;
-        private View infoBtn;
         private ImageView image;
     }
 
