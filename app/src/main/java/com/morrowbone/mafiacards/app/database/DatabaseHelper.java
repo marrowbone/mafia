@@ -35,7 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_FOLDER = "/data/data/"
             + MafiaApp.getInstance().getPackageName() + "/databases/";
     private static final String DB_PATH = DB_FOLDER + DB_NAME;
-    private static final int DB_VERSION = 3;
+    private static final int DB_VERSION = 4;
     private static final int DB_FILES_COPY_BUFFER_SIZE = 8192;
 
     private final static String TABLE_ROLES_COMBINATION = "Combinations";

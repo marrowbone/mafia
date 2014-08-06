@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <item name="main_screen_btn_text_color" type="color">@android:color/black</item>
     <color name="red">#e90301</color>
     <color name="gray_alfa">#66aeaeae</color>
     <color name="light_gray_alfa">#44aeaeae</color>

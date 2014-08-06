@@ -5,7 +5,6 @@
     <application
         android:name="com.morrowbone.mafiacards.app.application.MafiaApp"
         android:allowBackup="true"
-        android:debuggable="false"
         android:icon="@drawable/don_launcher_xh"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">

@@ -14,7 +14,7 @@
     <string name="role_wervoolf">Оборотень</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="play">Играть</string>
-    <string name="rules">Правила</string>
+    <string name="rоles">Роли</string>
     <string name="dialog_number_of_player">Введите количество игроков</string>
     <string name="dialog_number_of_player_positive_btn">Вперёд!</string>
     <string name="message_tap_to_see_card">Нажмите и держите, чтобы увидеть карту</string>
