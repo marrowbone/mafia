@@ -24,4 +24,7 @@
     <string name="final_dialog">Все игроки увидели свои карты</string>
     <string name="positive_button_text">Хорошо</string>
 
+    <string name="error">Ошибка</string>
+    <string name="wrong_player_count">Вы ввели неверное количество игроков</string>
+
 </resources>
