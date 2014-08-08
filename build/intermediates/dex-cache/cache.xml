@@ -19,5 +19,11 @@
         jumboMode="false"
         revision="20.0.0"
         sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d"/>
+    <item
+        dex="D:\work\studio_workspace\MafiaCarts\app\build\intermediates\pre-dexed\debug\nineoldandroids-2.4.0-61d9bd5cb42a652510e89627185d825273f82e4c.jar"
+        jar="D:\work\studio_workspace\MafiaCarts\app\libs\nineoldandroids-2.4.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="59f19e43354d32de831379c23ce03bb259a4c2b7"/>
 
 </pre-dex-items>

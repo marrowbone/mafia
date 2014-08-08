@@ -4,10 +4,7 @@ package com.morrowbone.mafiacards.app.adapter;
  * Created by morrow on 03.06.2014.
  */
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ObjectAnimator;
-import android.annotation.TargetApi;
+import com.nineoldandroids.animation.*;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -174,7 +171,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             return true;
         }
 
-        @TargetApi(Build.VERSION_CODES.HONEYCOMB)
         private void flipit() {
             final View visibleView;
             final View invisibleView;
