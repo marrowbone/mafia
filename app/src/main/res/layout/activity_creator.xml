@@ -11,11 +11,14 @@
         android:src="@drawable/city_ver2_law_quality" />
 
     <RelativeLayout
+        android:layout_marginTop="5dp"
         android:id="@+id/name_layout"
+        android:background="@color/gray_alfa_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <EditText
+            android:id="@+id/deck_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/orange"
@@ -23,12 +26,12 @@
             android:textColorHint="@color/orange"
             android:padding="10dp"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/card_count"
+            android:layout_toLeftOf="@+id/card_count_layout"
             android:hint="@string/deck_name_hint"
             android:maxLines="2" />
 
         <LinearLayout
-            android:id="@+id/card_count"
+            android:id="@+id/card_count_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -37,6 +40,7 @@
             android:padding="5dp">
 
             <TextView
+                android:id="@+id/text_above_card_count"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -45,6 +49,7 @@
                 android:textSize="@dimen/small_text" />
 
             <TextView
+                android:id="@+id/card_count_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -53,9 +58,11 @@
                 android:textSize="@dimen/big_text" />
 
             <TextView
+                android:id="@+id/text_below_card_count"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textSize="@dimen/small_text"
                 android:text="@string/cards"
                 android:textColor="@color/red" />
         </LinearLayout>
@@ -68,10 +75,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/save_btn"
+        android:listSelector="@android:color/transparent"
         android:layout_below="@+id/name_layout"></ListView>
 
 
     <Button
+        android:paddingTop="10dp"
         android:id="@+id/save_btn"
         android:layout_width="match_parent"
         android:textSize="@dimen/big_text"

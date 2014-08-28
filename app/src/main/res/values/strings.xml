@@ -30,10 +30,10 @@
     <string name="action_settings">Settings</string>
 
     <string name="save">Save</string>
-    <string name="deck_name_hint">New Deck</string>
+    <string name="deck_name_hint">Name of you deck</string>
     <string name="in_you_deck">In you deck</string>
     <string name="cards">cards</string>
-    <string name="add_card">Tap to add card</string>
-    <string name="remove_card">Swipe to remove card</string>
+    <string name="error_enter_name_of_deck">Enter name of the deck</string>
+    <string name="error_add_some_cards">Add some cards</string>
 
 </resources>

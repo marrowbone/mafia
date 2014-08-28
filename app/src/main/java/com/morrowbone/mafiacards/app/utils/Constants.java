@@ -37,19 +37,19 @@ public class Constants {
         card = new Civilian();
         roles.add(card);
 
+        card = new Mafia();
+        roles.add(card);
+
         card = new Detective();
+        roles.add(card);
+
+        card = new DonMafia();
         roles.add(card);
 
         card = new Doctor();
         roles.add(card);
 
         card = new Immortal();
-        roles.add(card);
-
-        card = new Mafia();
-        roles.add(card);
-
-        card = new DonMafia();
         roles.add(card);
 
         card = new Maniac();

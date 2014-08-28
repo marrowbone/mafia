@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.morrowbone.mafiacards.app.R;
+import com.morrowbone.mafiacards.app.activity.CreatorActivity;
 import com.morrowbone.mafiacards.app.model.Card;
 import com.morrowbone.mafiacards.app.utils.Constants;
 
@@ -21,17 +22,17 @@ import java.util.List;
 
 public class CreateDeckArrayAdapter extends ArrayAdapter<Card> {
 
+    private static final Integer layout_id = R.layout.view_creator_cart;
     private final Typeface mTypeFace;
     private LayoutInflater mInflater;
-    private Context mContext;
-
-    private static final Integer layout_id = R.layout.view_creator_cart;
+    private CreatorActivity mContext;
+    private static Integer mCardCount = 0;
 
     public CreateDeckArrayAdapter(Context context, List<Card> values) {
         super(context, layout_id, values);
         mInflater = (LayoutInflater) getContext().getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
-        mContext = context;
+        mContext = (CreatorActivity) context;
         mTypeFace = Typeface.createFromAsset(mContext.getAssets(), Constants.getTypeFacePath());
     }
 
@@ -52,7 +53,8 @@ public class CreateDeckArrayAdapter extends ArrayAdapter<Card> {
 
             holder.decrement = convertView.findViewById(R.id.decrement);
             holder.increment = convertView.findViewById(R.id.increment);
-
+            holder.cardCount = (TextView) convertView.findViewById(R.id.card_count);
+            holder.cardCount.setTypeface(mTypeFace);
             convertView.setTag(holder);
         } else {
             holder = (Holder) convertView.getTag();
@@ -66,18 +68,34 @@ public class CreateDeckArrayAdapter extends ArrayAdapter<Card> {
 
             }
         });
+        final Integer[] curCount = {item.getCountInDeck()};
 
+        holder.cardCount.setText(String.valueOf(curCount[0]));
         holder.decrement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (curCount[0] > 0) {
+                    curCount[0]--;
+                    holder.cardCount.setText(String.valueOf(curCount[0]));
+                    item.setCountInDeck(curCount[0]);
 
+                    mCardCount--;
+                    mContext.setCardCount(mCardCount);
+                }
             }
         });
 
         holder.increment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (curCount[0] < 100) {
+                    curCount[0]++;
+                    item.setCountInDeck(curCount[0]);
+                    holder.cardCount.setText(String.valueOf(curCount[0]));
 
+                    mCardCount++;
+                    mContext.setCardCount(mCardCount);
+                }
             }
         });
 
@@ -92,6 +110,7 @@ public class CreateDeckArrayAdapter extends ArrayAdapter<Card> {
         private ImageView image;
         private View increment;
         private View decrement;
+        private TextView cardCount;
     }
 
 }

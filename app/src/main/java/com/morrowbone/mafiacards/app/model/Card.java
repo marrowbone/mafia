@@ -7,6 +7,7 @@ import com.morrowbone.mafiacards.app.R;
  */
 public abstract class Card {
 
+    private Integer countInDeck = 0;
     private Integer cartBackSideId;
 
     protected Card() {
@@ -28,4 +29,12 @@ public abstract class Card {
     public abstract int getRoleNameStringId();
 
     public abstract int getCardDescriptionStringId();
+
+    public Integer getCountInDeck(){
+        return countInDeck;
+    }
+
+    public void setCountInDeck(Integer countInDeck) {
+        this.countInDeck = countInDeck;
+    }
 }

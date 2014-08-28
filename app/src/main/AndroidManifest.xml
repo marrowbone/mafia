@@ -25,6 +25,7 @@
         </activity>
         <activity
             android:name=".activity.CreatorActivity"
+            android:windowSoftInputMode="stateHidden"
             android:label="@string/title_activity_creator" >
         </activity>
     </application>

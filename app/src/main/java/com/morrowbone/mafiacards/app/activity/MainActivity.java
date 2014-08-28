@@ -15,10 +15,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.morrowbone.mafiacards.app.R;
-import com.morrowbone.mafiacards.app.database.DatabaseHelper;
+import com.morrowbone.mafiacards.app.database.SystemDatabaseHelper;
 import com.morrowbone.mafiacards.app.utils.Constants;
-
-import java.util.Locale;
 
 public class MainActivity extends FragmentActivity {
 
@@ -74,11 +72,11 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    DatabaseHelper.Initialize(MainActivity.this);
+                    SystemDatabaseHelper.Initialize(MainActivity.this);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);
+                SystemDatabaseHelper databaseHelper = new SystemDatabaseHelper(MainActivity.this);
                 int max = databaseHelper.getMaxNumberOfPlayer();
                 final int min = databaseHelper.getMinNumberOfPlayer();
 

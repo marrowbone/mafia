@@ -9,14 +9,13 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
 
 import com.morrowbone.mafiacards.app.R;
 import com.morrowbone.mafiacards.app.adapter.SectionsPagerAdapter;
-import com.morrowbone.mafiacards.app.database.DatabaseHelper;
+import com.morrowbone.mafiacards.app.database.SystemDatabaseHelper;
 import com.morrowbone.mafiacards.app.model.Deck;
 import com.morrowbone.mafiacards.app.utils.Constants;
 import com.morrowbone.mafiacards.app.views.NonSwipeableViewPager;
@@ -48,7 +47,7 @@ public class ShowUserCartActivity extends FragmentActivity {
         setContentView(R.layout.activity_show_user_cart);
 
         try {
-            DatabaseHelper.Initialize(this);
+            SystemDatabaseHelper.Initialize(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -98,7 +97,7 @@ public class ShowUserCartActivity extends FragmentActivity {
     }
 
     private Deck getDeck(int cardCount) {
-        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+        SystemDatabaseHelper databaseHelper = new SystemDatabaseHelper(this);
         Deck deck = databaseHelper.getDeck(cardCount);
         return deck;
     }
