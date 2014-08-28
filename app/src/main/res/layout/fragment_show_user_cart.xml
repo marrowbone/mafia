@@ -40,6 +40,7 @@
                 android:textSize="@dimen/very_very_big_text" />
 
             <TextView
+                android:id="@+id/player_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"

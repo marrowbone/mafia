@@ -8,6 +8,12 @@
         revision="20.0.0"
         sha1="8694693636ab36910c8100ce527c258ff3ebece0"/>
     <item
+        dex="D:\work\studio_workspace\MafiaCarts\app\build\intermediates\pre-dexed\debug\classes-95520bcc4aad2c1c2b0ad369fb468072175708ed.jar"
+        jar="D:\work\studio_workspace\MafiaCarts\build\intermediates\exploded-aar\com.android.support\appcompat-v7\20.0.0\classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="f21927d22fe31889ecce94dd697a2e75b137e0ef"/>
+    <item
         dex="D:\work\studio_workspace\MafiaCarts\app\build\intermediates\pre-dexed\debug\support-annotations-20.0.0-f03996554bb0a2a94ce472b6c0f744e0773086b3.jar"
         jar="D:\work\AndroidStudio\sdk\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
         jumboMode="false"

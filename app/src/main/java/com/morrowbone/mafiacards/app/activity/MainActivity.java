@@ -18,6 +18,8 @@ import com.morrowbone.mafiacards.app.R;
 import com.morrowbone.mafiacards.app.database.DatabaseHelper;
 import com.morrowbone.mafiacards.app.utils.Constants;
 
+import java.util.Locale;
+
 public class MainActivity extends FragmentActivity {
 
     private Typeface mTypeFace;
@@ -26,13 +28,16 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mTypeFace = Typeface.createFromAsset(getAssets(), Constants.frontPathInAssets);
+
+        mTypeFace = Typeface.createFromAsset(getAssets(), Constants.getTypeFacePath());
 
         TextView title = (TextView) findViewById(R.id.title);
         title.setText("Mafia");
         title.setTypeface(mTypeFace);
 
         initPlayBtn();
+
+        initCreatorBtn();
 
         initRulesBtn();
 
@@ -45,7 +50,18 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, RulesActivity.class);
-//                intent.putExtra(Constants.EXTRA_CART_COUNT, cartCount);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void initCreatorBtn() {
+        Button creatorBtn = (Button) findViewById(R.id.creator_btn);
+        creatorBtn.setTypeface(mTypeFace);
+        creatorBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CreatorActivity.class);
                 startActivity(intent);
             }
         });

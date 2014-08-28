@@ -15,16 +15,25 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="play">Play</string>
     <string name="rоles">Roles</string>
+    <string name="create_deck">Create Deck</string>
     <string name="dialog_number_of_player">Enter the number of players</string>
     <string name="dialog_number_of_player_positive_btn">GO!</string>
     <string name="message_tap_to_see_card">Long press to see your card</string>
     <string name="message_tap_to_hide_card">Tap to hide your card</string>
-
     <string name="player">player</string>
     <string name="final_dialog">All players have seen their cards</string>
     <string name="positive_button_text">Ok</string>
-
     <string name="error">Error</string>
     <string name="wrong_player_count">You entered an incorrect number of players</string>
+    <string name="title_activity_creator">CreatorActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="save">Save</string>
+    <string name="deck_name_hint">New Deck</string>
+    <string name="in_you_deck">In you deck</string>
+    <string name="cards">cards</string>
+    <string name="add_card">Tap to add card</string>
+    <string name="remove_card">Swipe to remove card</string>
 
 </resources>

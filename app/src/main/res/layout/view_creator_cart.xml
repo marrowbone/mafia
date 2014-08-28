@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="7dp"
+    android:paddingRight="7dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_alfa_2">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_below="@+id/game_title"
+            android:layout_toRightOf="@+id/game_type_image">
+
+            <ImageView
+                android:id="@+id/decrement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="25dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:paddingLeft="15dp"
+                android:src="@drawable/arrow_decrement" />
+
+            <TextView
+                android:id="@+id/card_count"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/big_text"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/increment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="15dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:paddingLeft="25dp"
+                android:src="@drawable/arrow_increment" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/game_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/game_type_image"
+            android:text="@string/test_mafia_title"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/big_text"
+            android:textStyle="bold" />
+
+
+        <ImageView
+            android:id="@+id/game_type_image"
+            android:layout_width="75dp"
+            android:layout_height="100dp"
+            android:src="@drawable/don_launcher_xh" />
+    </RelativeLayout>
+
+</LinearLayout>

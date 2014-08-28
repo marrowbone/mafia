@@ -1,5 +1,7 @@
 package com.morrowbone.mafiacards.app.utils;
 
+import android.graphics.Typeface;
+
 import com.morrowbone.mafiacards.app.model.Card;
 import com.morrowbone.mafiacards.app.model.roles.Civilian;
 import com.morrowbone.mafiacards.app.model.roles.Detective;
@@ -11,13 +13,15 @@ import com.morrowbone.mafiacards.app.model.roles.Maniac;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Constants {
     public static final String DEBUG_TAG = "mafia_debug";
 
     public static final String EXTRA_CART_COUNT = "game_id";
 
-    public final static String frontPathInAssets = "fonts/CorleoneDue.ttf";
+    private final static String frontPathInAssetsRu = "fonts/Stylo.ttf";
+    private final static String frontPathInAssetsEn = "fonts/Timoteo.ttf";
 
     private static ArrayList<Card> roles;
 
@@ -50,6 +54,16 @@ public class Constants {
 
         card = new Maniac();
         roles.add(card);
+    }
+
+    public static String getTypeFacePath() {
+//        String language = Locale.getDefault().getDisplayLanguage();
+//        if (language.contains("русский")) {
+//            return frontPathInAssetsRu;
+//        } else {
+//           return frontPathInAssetsEn;
+//        }
+        return frontPathInAssetsRu;
     }
 
 }

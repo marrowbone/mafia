@@ -6,7 +6,7 @@
 
     <ImageView
         android:scaleType="centerCrop"
-        android:src="@drawable/city_ver2"
+        android:src="@drawable/city_ver2_law_quality"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -14,12 +14,24 @@
         android:id="@+id/play_btn"
         android:layout_centerHorizontal="true"
         android:textStyle="italic"
-        android:layout_above="@+id/rules_btn"
+        android:layout_above="@+id/creator_btn"
         android:textSize="@dimen/big_text"
         android:text="@string/play"
         android:textColor="@color/main_screen_btn_text_color"
-        android:layout_marginBottom="30dp"
-        android:layout_width="170dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp" />
+
+    <Button
+        android:id="@+id/creator_btn"
+        android:layout_centerHorizontal="true"
+        android:textStyle="italic"
+        android:textSize="@dimen/big_text"
+        android:text="@string/create_deck"
+        android:layout_above="@+id/rules_btn"
+        android:textColor="@color/main_screen_btn_text_color"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
         android:layout_height="70dp" />
 
     <Button
@@ -31,8 +43,10 @@
         android:text="@string/rоles"
         android:textColor="@color/main_screen_btn_text_color"
         android:layout_marginBottom="70dp"
-        android:layout_width="170dp"
+        android:layout_width="match_parent"
         android:layout_height="70dp" />
+
+
 
     <TextView
         android:id="@+id/title"

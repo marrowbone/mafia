@@ -6,6 +6,7 @@ import com.morrowbone.mafiacards.app.R;
  * Created by morrow on 03.06.2014.
  */
 public abstract class Card {
+
     private Integer cartBackSideId;
 
     protected Card() {

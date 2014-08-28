@@ -1,0 +1,82 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.morrowbone.mafiacards.app.activity.CreatorActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/city_ver2_law_quality" />
+
+    <RelativeLayout
+        android:id="@+id/name_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/orange"
+            android:textSize="@dimen/big_text"
+            android:textColorHint="@color/orange"
+            android:padding="10dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/card_count"
+            android:hint="@string/deck_name_hint"
+            android:maxLines="2" />
+
+        <LinearLayout
+            android:id="@+id/card_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/in_you_deck"
+                android:textColor="@color/red"
+                android:textSize="@dimen/small_text" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="10"
+                android:textColor="@color/red"
+                android:textSize="@dimen/big_text" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/cards"
+                android:textColor="@color/red" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/save_btn"
+        android:layout_below="@+id/name_layout"></ListView>
+
+
+    <Button
+        android:id="@+id/save_btn"
+        android:layout_width="match_parent"
+        android:textSize="@dimen/big_text"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/save" />
+
+</RelativeLayout>

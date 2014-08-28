@@ -126,6 +126,7 @@ public class ShowUserCartActivity extends FragmentActivity {
 
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
+                mDeck.shuffle();
                 finish();
             }
         });

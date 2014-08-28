@@ -7,7 +7,6 @@ package com.morrowbone.mafiacards.app.adapter;
 import com.nineoldandroids.animation.*;
 import android.content.Context;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -40,7 +39,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         super(fm);
         mContext = context;
         mDeck = deck;
-        mTypeFace = Typeface.createFromAsset(mContext.getAssets(), Constants.frontPathInAssets);
+        mTypeFace = Typeface.createFromAsset(mContext.getAssets(), Constants.getTypeFacePath());
     }
 
 
@@ -114,13 +113,16 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             ImageView frontsideImage = (ImageView) mRootView.findViewById(R.id.card_frontside_image);
             frontsideImage.setImageResource(mDeck.getCard(sectionNum).getCartFrontSideImageId());
 
-            TextView mTitleTextView = (TextView) mRootView.findViewById(R.id.role);
-            mTitleTextView.setText(title);
-            mTitleTextView.setTypeface(mTypeFace);
+            TextView titleTextView = (TextView) mRootView.findViewById(R.id.role);
+            titleTextView.setText(title);
+            titleTextView.setTypeface(mTypeFace);
 
-            TextView mPlayerNumber = (TextView) mRootView.findViewById(R.id.player_number);
-            mPlayerNumber.setText(playerNum.toString());
-            mPlayerNumber.setTypeface(mTypeFace);
+            TextView playerNumber = (TextView) mRootView.findViewById(R.id.player_number);
+            playerNumber.setText(playerNum.toString());
+            playerNumber.setTypeface(mTypeFace);
+
+            TextView playerText = (TextView) mRootView.findViewById(R.id.player_text);
+            playerText.setTypeface(mTypeFace);
 
             mHelpText = (TextView) mRootView.findViewById(R.id.help_text);
             hideHelpField();

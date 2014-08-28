@@ -43,7 +43,6 @@
             android:textColor="@color/orange"
             android:textSize="@dimen/small_text"
             android:textStyle="italic" />
-
     </RelativeLayout>
 
 </LinearLayout>

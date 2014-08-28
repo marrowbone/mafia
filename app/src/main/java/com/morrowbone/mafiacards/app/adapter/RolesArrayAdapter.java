@@ -15,24 +15,23 @@ import android.widget.TextView;
 
 import com.morrowbone.mafiacards.app.R;
 import com.morrowbone.mafiacards.app.model.Card;
+import com.morrowbone.mafiacards.app.utils.Constants;
 
 import java.util.List;
 
 public class RolesArrayAdapter extends ArrayAdapter<Card> {
-    private final static String frontPathInAssets = "fonts/CorleoneDue.ttf";
 
+    private static final Integer layout_id = R.layout.view_role;
     private final Typeface mTypeFace;
     private LayoutInflater mInflater;
     private Context mContext;
-
-    private static final Integer layout_id = R.layout.view_role;
 
     public RolesArrayAdapter(Context context, List<Card> values) {
         super(context, layout_id, values);
         mInflater = (LayoutInflater) getContext().getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
         mContext = context;
-        mTypeFace = Typeface.createFromAsset(mContext.getAssets(), frontPathInAssets);
+        mTypeFace = Typeface.createFromAsset(mContext.getAssets(), Constants.getTypeFacePath());
     }
 
     @Override
