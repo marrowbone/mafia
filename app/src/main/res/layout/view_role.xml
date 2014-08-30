@@ -41,7 +41,7 @@
             android:layout_toRightOf="@+id/game_type_image"
             android:text="@string/app_name"
             android:textColor="@color/orange"
-            android:textSize="@dimen/small_text"
+            android:textSize="@dimen/normal_text"
             android:textStyle="italic" />
     </RelativeLayout>
 

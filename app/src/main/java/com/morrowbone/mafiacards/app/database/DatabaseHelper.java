@@ -32,7 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private final static String TABLE_ROLES_COMBINATION = "Combinations";
     private final static String TABLE_ROLES_COMBINATION_ID = "_id";
-    private final static String TABLE_ROLES_COMBINATION_NAME = "name";
+    //    private final static String TABLE_ROLES_COMBINATION_NAME = "name";
     private final static String TABLE_ROLES_COMBINATION_PLAYER_COUNT = "playerCount";
     private final static String TABLE_ROLES_COMBINATION_CIVILIAN_COUNT = "civilianCount";
     private final static String TABLE_ROLES_COMBINATION_MAFIA_COUNT = "mafiaCount";
@@ -51,8 +51,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             " integer, " + TABLE_ROLES_COMBINATION_DOCTOR +
             " integer, " + TABLE_ROLES_COMBINATION_MANIAC +
             " integer, " + TABLE_ROLES_COMBINATION_DON +
-            " integer, " + TABLE_ROLES_COMBINATION_NAME +
-            " text NOT NULL);";
+            " integer);";
 
     private final static String TABLE_ROLES_COMBINATION_WERVOOLF = "wervoolf";
     private Context mContext;
@@ -77,8 +76,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void saveDeck(List<Card> deck, String name) {
-        // Rate
+    public void saveDeck(List<Card> deck) {
+        removeAll();
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -123,7 +122,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 }
             }
             cv.put(TABLE_ROLES_COMBINATION_PLAYER_COUNT, cardCount);
-            cv.put(TABLE_ROLES_COMBINATION_NAME, name);
+//            cv.put(TABLE_ROLES_COMBINATION_NAME, name);
             db.insert(TABLE_ROLES_COMBINATION, null, cv);
             db.setTransactionSuccessful();
         } catch (Exception exception) {
@@ -134,7 +133,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public List<Deck> getDeckList() {
+    public Deck getLastDeck() {
         SQLiteDatabase db = this.getWritableDatabase();
 
 //        Cursor c = db.rawQuery("SELECT * FROM " + TABLE_ROLES_COMBINATION + " WHERE "
@@ -142,64 +141,54 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Cursor c = db.rawQuery("SELECT * FROM " + TABLE_ROLES_COMBINATION, null);
 
-        List<Deck> deckList = new ArrayList<Deck>();
+        Deck deck = new Deck();
         try {
             int count = c.getCount();
             c.moveToFirst();
-            for (int j = 0; j < count; j++) {
-                Deck deck = new Deck();
-                Card card;
-                // Civilian
-                Integer civilianCount = c.getInt(c.getColumnIndex(TABLE_ROLES_COMBINATION_CIVILIAN_COUNT));
-                for (int i = 0; i < civilianCount; i++) {
-                    card = new Civilian();
-                    deck.addCard(card);
-                }
-                // Mafia
-                Integer mafiaCount = c.getInt(c.getColumnIndex(TABLE_ROLES_COMBINATION_MAFIA_COUNT));
-                for (int i = 0; i < mafiaCount; i++) {
-                    card = new Mafia();
-                    deck.addCard(card);
-                }
-                // Detective
-                int detective = c.getInt(c.getColumnIndex(TABLE_ROLES_COMBINATION_DETECTIVE));
-                if (detective > 0) {
-                    card = new Detective();
-                    deck.addCard(card);
-                }
-                // Don
-                int don = c.getInt(c.getColumnIndex(TABLE_ROLES_COMBINATION_DON));
-                if (don > 0) {
-                    card = new DonMafia();
-                    deck.addCard(card);
-                }
-                // Doctor
-                int doctor = c.getInt(c.getColumnIndex(TABLE_ROLES_COMBINATION_DOCTOR));
-                if (doctor > 0) {
-                    card = new Doctor();
-                    deck.addCard(card);
-                }
-                // Immortal
-                int immortal = c.getInt(c.getColumnIndex(TABLE_ROLES_COMBINATION_IMMORTAL));
-                if (immortal > 0) {
-                    card = new Immortal();
-                    deck.addCard(card);
-                }
-                // Maniac
-                int maniac = c.getInt(c.getColumnIndex(TABLE_ROLES_COMBINATION_MANIAC));
-                if (maniac > 0) {
-                    card = new Maniac();
-                    deck.addCard(card);
-                }
 
-                String name = c.getString(c.getColumnIndex(TABLE_ROLES_COMBINATION_NAME));
-                deck.setName(name);
-
-                deckList.add(deck);
-
-                c.moveToNext();
+            Card card;
+            // Civilian
+            Integer civilianCount = c.getInt(c.getColumnIndex(TABLE_ROLES_COMBINATION_CIVILIAN_COUNT));
+            for (int i = 0; i < civilianCount; i++) {
+                card = new Civilian();
+                deck.addCard(card);
             }
-
+            // Mafia
+            Integer mafiaCount = c.getInt(c.getColumnIndex(TABLE_ROLES_COMBINATION_MAFIA_COUNT));
+            for (int i = 0; i < mafiaCount; i++) {
+                card = new Mafia();
+                deck.addCard(card);
+            }
+            // Detective
+            int detective = c.getInt(c.getColumnIndex(TABLE_ROLES_COMBINATION_DETECTIVE));
+            if (detective > 0) {
+                card = new Detective();
+                deck.addCard(card);
+            }
+            // Don
+            int don = c.getInt(c.getColumnIndex(TABLE_ROLES_COMBINATION_DON));
+            if (don > 0) {
+                card = new DonMafia();
+                deck.addCard(card);
+            }
+            // Doctor
+            int doctor = c.getInt(c.getColumnIndex(TABLE_ROLES_COMBINATION_DOCTOR));
+            if (doctor > 0) {
+                card = new Doctor();
+                deck.addCard(card);
+            }
+            // Immortal
+            int immortal = c.getInt(c.getColumnIndex(TABLE_ROLES_COMBINATION_IMMORTAL));
+            if (immortal > 0) {
+                card = new Immortal();
+                deck.addCard(card);
+            }
+            // Maniac
+            int maniac = c.getInt(c.getColumnIndex(TABLE_ROLES_COMBINATION_MANIAC));
+            if (maniac > 0) {
+                card = new Maniac();
+                deck.addCard(card);
+            }
 
         } catch (Exception e) {
             Log.e(this.toString(), e.getMessage());
@@ -208,6 +197,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.close();
         }
 
-        return deckList;
+        return deck;
+    }
+
+    private void removeAll() {
+        // db.delete(String tableName, String whereClause, String[] whereArgs);
+        // If whereClause is null, it will delete all rows.
+        SQLiteDatabase db = getWritableDatabase(); // helper is object extends SQLiteOpenHelper
+        db.delete(DatabaseHelper.TABLE_ROLES_COMBINATION, null, null);
     }
 }

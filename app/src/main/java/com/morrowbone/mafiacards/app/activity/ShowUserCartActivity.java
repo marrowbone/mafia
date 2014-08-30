@@ -4,6 +4,8 @@ import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -12,6 +14,7 @@ import android.support.v4.view.ViewPager;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
+import android.widget.TextView;
 
 import com.morrowbone.mafiacards.app.R;
 import com.morrowbone.mafiacards.app.adapter.SectionsPagerAdapter;
@@ -40,18 +43,28 @@ public class ShowUserCartActivity extends FragmentActivity {
      */
     private NonSwipeableViewPager mViewPager;
     private FixedSpeedScroller scroller;
+    private TextView mCardCountTextView;
+    private Typeface mTypeFace;
+
+    public static Intent getIntent(Context context, Deck deck) {
+        mDeck = deck;
+        mDeck.shuffle();
+        Intent intent = new Intent(context, ShowUserCartActivity.class);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_user_cart);
 
-        try {
-            SystemDatabaseHelper.Initialize(this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
         if (getIntent().hasExtra(Constants.EXTRA_CART_COUNT)) {
+            try {
+                SystemDatabaseHelper.Initialize(this);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             Integer cardCount = getIntent().getIntExtra(Constants.EXTRA_CART_COUNT, 0);
             if (mDeck == null) {
                 mDeck = getDeck(cardCount);
@@ -61,24 +74,36 @@ public class ShowUserCartActivity extends FragmentActivity {
             if (!mDeck.isShuffled()) {
                 mDeck.shuffle();
             }
-            mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), this, mDeck);
-
-            // Set up the ViewPager with the sections adapter.
-            mViewPager = (NonSwipeableViewPager) findViewById(R.id.pager);
-            mViewPager.setAdapter(mSectionsPagerAdapter);
-
-            try {
-                Field mScroller;
-                mScroller = ViewPager.class.getDeclaredField("mScroller");
-                mScroller.setAccessible(true);
-                Interpolator sInterpolator = new DecelerateInterpolator();
-                scroller = new FixedSpeedScroller(mViewPager.getContext(), sInterpolator);
-                mScroller.set(mViewPager, scroller);
-            } catch (NoSuchFieldException e) {
-            } catch (IllegalArgumentException e) {
-            } catch (IllegalAccessException e) {
-            }
         }
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), this, mDeck);
+
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = (NonSwipeableViewPager) findViewById(R.id.pager);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        try {
+            Field mScroller;
+            mScroller = ViewPager.class.getDeclaredField("mScroller");
+            mScroller.setAccessible(true);
+            Interpolator sInterpolator = new DecelerateInterpolator();
+            scroller = new FixedSpeedScroller(mViewPager.getContext(), sInterpolator);
+            mScroller.set(mViewPager, scroller);
+        } catch (NoSuchFieldException e) {
+        } catch (IllegalArgumentException e) {
+        } catch (IllegalAccessException e) {
+        }
+
+        mTypeFace = Typeface.createFromAsset(getAssets(), Constants.getTypeFacePath());
+        mCardCountTextView = (TextView) findViewById(R.id.card_count_textview);
+        mCardCountTextView.setTypeface(mTypeFace);
+        mCardCountTextView.setText(String.valueOf(mDeck.size()));
+
+
+        TextView view = (TextView) findViewById(R.id.text_above_card_count);
+        view.setTypeface(mTypeFace);
+        view = (TextView) findViewById(R.id.text_below_card_count);
+        view.setTypeface(mTypeFace);
+
     }
 
     @Override

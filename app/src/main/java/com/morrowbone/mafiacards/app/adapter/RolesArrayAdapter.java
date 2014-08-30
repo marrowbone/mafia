@@ -49,6 +49,7 @@ public class RolesArrayAdapter extends ArrayAdapter<Card> {
 
             holder.description = (TextView) convertView
                     .findViewById(R.id.game_description);
+            holder.description.setTypeface(mTypeFace);
 
             holder.image = (ImageView) convertView.findViewById(R.id.game_type_image);
 

@@ -3,6 +3,7 @@ package com.morrowbone.mafiacards.app.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -17,19 +18,76 @@ import com.morrowbone.mafiacards.app.adapter.CreateDeckArrayAdapter;
 import com.morrowbone.mafiacards.app.database.DatabaseHelper;
 import com.morrowbone.mafiacards.app.model.Card;
 import com.morrowbone.mafiacards.app.model.Deck;
+import com.morrowbone.mafiacards.app.model.roles.Civilian;
+import com.morrowbone.mafiacards.app.model.roles.Detective;
+import com.morrowbone.mafiacards.app.model.roles.Doctor;
+import com.morrowbone.mafiacards.app.model.roles.DonMafia;
+import com.morrowbone.mafiacards.app.model.roles.Immortal;
+import com.morrowbone.mafiacards.app.model.roles.Mafia;
+import com.morrowbone.mafiacards.app.model.roles.Maniac;
 import com.morrowbone.mafiacards.app.utils.Constants;
 
 import java.util.List;
 
 public class CreatorActivity extends Activity implements View.OnClickListener {
     private static int mCardCount = 0;
+    private static List<Card> mRolesList;
     private Button mSaveButton;
     private TextView mCardCountTextView;
-    private EditText mEditText;
     private ListView mListView;
     private ArrayAdapter mArrayAdapter;
-    private List<Card> mRolesList;
     private Typeface mTypeFace;
+
+    private static Deck convertToDeck(List<Card> cards) {
+        Deck deck = new Deck();
+        for (Card card : cards) {
+            Integer cardCount;
+            if (card.getClass() == Civilian.class) {
+                cardCount = card.getCountInDeck();
+                for (int i = 0; i < cardCount; i++) {
+                    card = new Civilian();
+                    deck.addCard(card);
+                }
+            } else if (card.getClass() == Mafia.class) {
+                cardCount = card.getCountInDeck();
+                for (int i = 0; i < cardCount; i++) {
+                    card = new Mafia();
+                    deck.addCard(card);
+                }
+            } else if (card.getClass() == Detective.class) {
+                cardCount = card.getCountInDeck();
+                for (int i = 0; i < cardCount; i++) {
+                    card = new Detective();
+                    deck.addCard(card);
+                }
+            } else if (card.getClass() == Doctor.class) {
+                cardCount = card.getCountInDeck();
+                for (int i = 0; i < cardCount; i++) {
+                    card = new Doctor();
+                    deck.addCard(card);
+                }
+            } else if (card.getClass() == DonMafia.class) {
+                cardCount = card.getCountInDeck();
+                for (int i = 0; i < cardCount; i++) {
+                    card = new DonMafia();
+                    deck.addCard(card);
+                }
+            } else if (card.getClass() == Immortal.class) {
+                cardCount = card.getCountInDeck();
+                for (int i = 0; i < cardCount; i++) {
+                    card = new Immortal();
+                    deck.addCard(card);
+                }
+            } else if (card.getClass() == Maniac.class) {
+                cardCount = card.getCountInDeck();
+                for (int i = 0; i < cardCount; i++) {
+                    card = new Maniac();
+                    deck.addCard(card);
+                }
+            }
+        }
+        return deck;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +105,6 @@ public class CreatorActivity extends Activity implements View.OnClickListener {
         mCardCountTextView.setTypeface(mTypeFace);
         mCardCountTextView.setText(String.valueOf(mCardCount));
 
-        mEditText = (EditText) findViewById(R.id.deck_name);
-        mEditText.setTypeface(mTypeFace);
 
         TextView view = (TextView) findViewById(R.id.text_above_card_count);
         view.setTypeface(mTypeFace);
@@ -60,25 +116,6 @@ public class CreatorActivity extends Activity implements View.OnClickListener {
         mSaveButton.setOnClickListener(this);
     }
 
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.creator, menu);
-//        return true;
-//    }
-
-    //    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
     public void setCardCount(int cardCount) {
         mCardCount = cardCount;
         mCardCountTextView.setText(String.valueOf(cardCount));
@@ -86,32 +123,18 @@ public class CreatorActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        String nameOfDeck = mEditText.getEditableText().toString();
-        if (nameOfDeck.length() > 0) {
-            if (mCardCount > 0) {
-                DatabaseHelper databaseHelper = new DatabaseHelper(this);
-                databaseHelper.saveDeck(mRolesList, nameOfDeck);
-
-                finish();
-
-            } else {
-                showErrorDialog(R.string.error_add_some_cards);
-            }
+        if (mCardCount > 0) {
+            Deck deck = convertToDeck(mRolesList);
+            Intent intent = ShowUserCartActivity.getIntent(this, deck);
+            startActivity(intent);
         } else {
-            showErrorDialog(R.string.error_enter_name_of_deck);
+            showErrorDialog(R.string.error_add_some_cards);
         }
     }
 
     private void showErrorDialog(int title) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-//        TextView textView = new TextView(this);
-//        textView.setTypeface(mTypeFace);
-//        textView.setText(R.string.error_enter_name_of_deck);
-//        textView.setTextColor(android.R.color.white);
-//        textView.setTextSize(getResources().getDimension(R.dimen.big_text));
-//        builder.setCustomTitle(textView);
         builder.setTitle(R.string.error_enter_name_of_deck);
         builder.setCancelable(false);
         builder.setPositiveButton(R.string.positive_button_text, new DialogInterface.OnClickListener() {

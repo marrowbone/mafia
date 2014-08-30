@@ -14,6 +14,7 @@
     <string name="role_wervoolf">Оборотень</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="play">Играть</string>
+    <string name="create_deck">Изменить колоду</string>
     <string name="rоles">Роли</string>
     <string name="dialog_number_of_player">Введите количество игроков</string>
     <string name="dialog_number_of_player_positive_btn">Вперёд!</string>
@@ -24,6 +25,8 @@
     <string name="final_dialog">Все игроки увидели свои карты</string>
     <string name="positive_button_text">Хорошо</string>
 
+    <string name="in_you_deck">Карт в колоде:</string>
+    <string name="cards"></string>
     <string name="error">Ошибка</string>
     <string name="wrong_player_count">Вы ввели неверное количество игроков</string>
 
