@@ -25,13 +25,13 @@
     <string name="positive_button_text">Ok</string>
     <string name="error">Error</string>
     <string name="wrong_player_count">You entered an incorrect number of players</string>
-    <string name="title_activity_creator">CreatorActivity</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-
     <string name="in_you_deck">In you deck</string>
     <string name="cards">cards</string>
-    <string name="error_enter_name_of_deck">Enter name of the deck</string>
     <string name="error_add_some_cards">Add some cards</string>
+    <string name="are_you_like_app">Enjoying mafia?</string>
+    <string name="review_app">5-Star rating from you help us provide free updates</string>
+    <string name="review_now">Rate Now</string>
+    <string name="later_review">Ask me later</string>
+    <string name="never_review">Don\'t Rate</string>
 
 </resources>

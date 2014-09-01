@@ -23,10 +23,10 @@ import java.util.List;
 public class CreateDeckArrayAdapter extends ArrayAdapter<Card> {
 
     private static final Integer layout_id = R.layout.view_creator_cart;
+    private static Integer mCardCount = 0;
     private final Typeface mTypeFace;
     private LayoutInflater mInflater;
     private CreatorActivity mContext;
-    private static Integer mCardCount = 0;
 
     public CreateDeckArrayAdapter(Context context, List<Card> values) {
         super(context, layout_id, values);
@@ -62,12 +62,7 @@ public class CreateDeckArrayAdapter extends ArrayAdapter<Card> {
 
         holder.title.setText(item.getRoleNameStringId());
         holder.image.setImageResource(item.getCartFrontSideImageId());
-        holder.image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
         final Integer[] curCount = {item.getCountInDeck()};
 
         holder.cardCount.setText(String.valueOf(curCount[0]));

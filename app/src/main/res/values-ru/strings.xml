@@ -29,5 +29,11 @@
     <string name="cards"></string>
     <string name="error">Ошибка</string>
     <string name="wrong_player_count">Вы ввели неверное количество игроков</string>
+    <string name="error_add_some_cards">Добавьте карт в колоду</string>
+    <string name="are_you_like_app">Нравится Мафия?</string>
+    <string name="review_app">Ваш отзыв поможет нам улучшить приложение.</string>
+    <string name="review_now">Оценить сейчас</string>
+    <string name="later_review">Спросить позже</string>
+    <string name="never_review">Нет, спасибо</string>
 
 </resources>

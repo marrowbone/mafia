@@ -14,7 +14,10 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.morrowbone.mafiacards.app.R;
+import com.morrowbone.mafiacards.app.application.MafiaApp;
 import com.morrowbone.mafiacards.app.database.SystemDatabaseHelper;
 import com.morrowbone.mafiacards.app.utils.Constants;
 
@@ -39,7 +42,18 @@ public class MainActivity extends FragmentActivity {
 
         initRulesBtn();
 
+        // Get tracker.
+        Tracker t = ((MafiaApp) getApplication()).getTracker(
+                MafiaApp.TrackerName.APP_TRACKER);
+
+        // Set screen name.
+        // Where path is a String representing the screen name.
+        t.setScreenName("Main Screen");
+
+        // Send a screen view.
+        t.send(new HitBuilders.AppViewBuilder().build());
     }
+
 
     private void initRulesBtn() {
         Button rulesBtn = (Button) findViewById(R.id.rules_btn);
@@ -47,11 +61,14 @@ public class MainActivity extends FragmentActivity {
         rulesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sendView(R.string.category_button, R.string.action_roles);
                 Intent intent = new Intent(MainActivity.this, RulesActivity.class);
                 startActivity(intent);
+
             }
         });
     }
+
 
     private void initCreatorBtn() {
         Button creatorBtn = (Button) findViewById(R.id.creator_btn);
@@ -59,6 +76,7 @@ public class MainActivity extends FragmentActivity {
         creatorBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sendView(R.string.category_button, R.string.action_creator);
                 Intent intent = new Intent(MainActivity.this, CreatorActivity.class);
                 startActivity(intent);
             }
@@ -71,6 +89,7 @@ public class MainActivity extends FragmentActivity {
         playBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                sendView(R.string.category_button, R.string.action_play_main);
                 try {
                     SystemDatabaseHelper.Initialize(MainActivity.this);
                 } catch (Exception e) {
@@ -143,6 +162,7 @@ public class MainActivity extends FragmentActivity {
                             if (cartCount < min) {
                                 showMessage(R.string.error, R.string.wrong_player_count);
                             } else {
+                                sendView(R.string.category_button, R.string.action_play_dialog);
                                 Intent intent = new Intent(MainActivity.this, ShowUserCartActivity.class);
                                 intent.putExtra(Constants.EXTRA_CART_COUNT, cartCount);
                                 startActivity(intent);
@@ -171,23 +191,11 @@ public class MainActivity extends FragmentActivity {
         builder.show();
     }
 
+    private void sendView(int category, int action) {
+        Tracker t = ((MafiaApp) getApplication()).getTracker(
+                MafiaApp.TrackerName.APP_TRACKER);
+        t.send(new HitBuilders.EventBuilder().setAction(getString(action)).
+                setCategory(getString(category)).build());
+    }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 }

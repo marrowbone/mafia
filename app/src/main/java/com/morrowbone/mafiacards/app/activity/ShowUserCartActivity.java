@@ -6,21 +6,34 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
+
+import com.google.android.gms.ads.AdRequest;
+
 import android.widget.TextView;
 
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+import com.morrowbone.mafiacards.app.Fragments.AdsFragment;
 import com.morrowbone.mafiacards.app.R;
 import com.morrowbone.mafiacards.app.adapter.SectionsPagerAdapter;
+import com.morrowbone.mafiacards.app.application.MafiaApp;
 import com.morrowbone.mafiacards.app.database.SystemDatabaseHelper;
 import com.morrowbone.mafiacards.app.model.Deck;
 import com.morrowbone.mafiacards.app.utils.Constants;
+import com.morrowbone.mafiacards.app.utils.Utils;
 import com.morrowbone.mafiacards.app.views.NonSwipeableViewPager;
 
 import java.lang.reflect.Field;
@@ -45,12 +58,26 @@ public class ShowUserCartActivity extends FragmentActivity {
     private FixedSpeedScroller scroller;
     private TextView mCardCountTextView;
     private Typeface mTypeFace;
+    private InterstitialAd interstitial;
+    private View mAdsView;
 
     public static Intent getIntent(Context context, Deck deck) {
         mDeck = deck;
         mDeck.shuffle();
         Intent intent = new Intent(context, ShowUserCartActivity.class);
         return intent;
+    }
+
+    private boolean checkInternetConection() {
+        ConnectivityManager conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo i = conMgr.getActiveNetworkInfo();
+        if (i == null)
+            return false;
+        if (!i.isConnected())
+            return false;
+        if (!i.isAvailable())
+            return false;
+        return true;
     }
 
     @Override
@@ -104,11 +131,40 @@ public class ShowUserCartActivity extends FragmentActivity {
         view = (TextView) findViewById(R.id.text_below_card_count);
         view.setTypeface(mTypeFace);
 
+        mAdsView = findViewById(R.id.layout_for_fragment);
+
+        AdsFragment adsFragment = AdsFragment.newInstance();
+        getSupportFragmentManager().beginTransaction().add(R.id.layout_for_fragment, adsFragment).commit();
+
+
+        // Create the interstitial.
+        interstitial = new InterstitialAd(this);
+        interstitial.setAdUnitId("ca-app-pub-7668409826365482/6093438917");
+
+        // Create ad request.
+        AdRequest adRequest = new AdRequest.Builder().build();
+        if (isEnableShowingAds()) {
+            interstitial.loadAd(adRequest);
+        }
+
+    }
+
+    // Invoke displayInterstitial() when you are ready to display an interstitial.
+    public void displayInterstitial() {
+        if (interstitial.isLoaded()) {
+            interstitial.show();
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        // Begin loading your interstitial.
+
+
+        if (isEnableShowGooglePlayReviewIs() && checkInternetConection()) {
+            showGooglePlayReviewDialog();
+        }
     }
 
     @Override
@@ -139,6 +195,62 @@ public class ShowUserCartActivity extends FragmentActivity {
         }
     }
 
+    private Boolean isEnableShowGooglePlayReviewIs() {
+        Integer gamesFinished = Utils.getPlayedGameCount(this);
+        Integer period = Utils.getRateAfterCount(this);
+        if (gamesFinished % period == 0 && Utils.isEnableRataApp(this) && gamesFinished > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private Boolean isEnableShowingAds() {
+        Integer gamesFinished = Utils.getPlayedGameCount(this);
+        if (gamesFinished % 2 == 0 && gamesFinished != 2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void showGooglePlayReviewDialog() {
+        mAdsView.setVisibility(View.INVISIBLE);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.are_you_like_app);
+        builder.setMessage(R.string.review_app);
+        builder.setCancelable(false);
+        builder.setPositiveButton(R.string.review_now, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                } catch (android.content.ActivityNotFoundException anfe) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + appPackageName)));
+                }
+                Utils.setIsEnableRataAppToFalse(ShowUserCartActivity.this);
+            }
+        });
+        builder.setNeutralButton(R.string.later_review, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Utils.incrementRateAfter(ShowUserCartActivity.this);
+            }
+        });
+
+        builder.setNegativeButton(R.string.never_review, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Utils.setIsEnableRataAppToFalse(ShowUserCartActivity.this);
+                mAdsView.setVisibility(View.VISIBLE);
+            }
+        });
+
+        builder.show();
+    }
+
     private void showLastCardDialog() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -151,11 +263,23 @@ public class ShowUserCartActivity extends FragmentActivity {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 mDeck.shuffle();
+                sendView(R.string.category_button, R.string.action_finish_game, mDeck.size());
+                if (isEnableShowingAds()) {
+                    displayInterstitial();
+                }
+                Utils.incrementPlayedGameCount(ShowUserCartActivity.this);
                 finish();
             }
         });
 
         builder.show();
+    }
+
+    private void sendView(int category, int action, int size) {
+        Tracker t = ((MafiaApp) getApplication()).getTracker(
+                MafiaApp.TrackerName.APP_TRACKER);
+        t.send(new HitBuilders.EventBuilder().setAction(getString(action)).
+                setCategory(getString(category)).setValue(size).build());
     }
 
     public class FixedSpeedScroller extends Scroller {

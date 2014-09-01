@@ -13,8 +13,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.morrowbone.mafiacards.app.R;
 import com.morrowbone.mafiacards.app.adapter.CreateDeckArrayAdapter;
+import com.morrowbone.mafiacards.app.application.MafiaApp;
 import com.morrowbone.mafiacards.app.database.DatabaseHelper;
 import com.morrowbone.mafiacards.app.model.Card;
 import com.morrowbone.mafiacards.app.model.Deck;
@@ -125,6 +128,7 @@ public class CreatorActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         if (mCardCount > 0) {
             Deck deck = convertToDeck(mRolesList);
+            sendView(R.string.category_button, R.string.action_play_creator);
             Intent intent = ShowUserCartActivity.getIntent(this, deck);
             startActivity(intent);
         } else {
@@ -135,7 +139,7 @@ public class CreatorActivity extends Activity implements View.OnClickListener {
     private void showErrorDialog(int title) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.error_enter_name_of_deck);
+        builder.setTitle(title);
         builder.setCancelable(false);
         builder.setPositiveButton(R.string.positive_button_text, new DialogInterface.OnClickListener() {
 
@@ -146,5 +150,12 @@ public class CreatorActivity extends Activity implements View.OnClickListener {
         });
 
         builder.show();
+    }
+
+    private void sendView(int category, int action) {
+        Tracker t = ((MafiaApp) getApplication()).getTracker(
+                MafiaApp.TrackerName.APP_TRACKER);
+        t.send(new HitBuilders.EventBuilder().setAction(getString(action)).
+                setCategory(getString(category)).build());
     }
 }

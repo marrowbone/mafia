@@ -1,0 +1,13 @@
+<resources>
+
+    <!-- Actions -->
+    <string name="action_play_main">Play in main</string>
+    <string name="action_play_dialog">Play in dialog</string>
+    <string name="action_play_creator">Play in creator</string>
+    <string name="action_creator">Start creator</string>
+    <string name="action_roles">Start roles</string>
+    <string name="action_finish_game">Game over</string>
+
+    <!-- Category -->
+    <string name="category_button">Button</string>
+</resources>

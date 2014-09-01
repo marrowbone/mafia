@@ -22,6 +22,12 @@ public class Constants {
 
     private final static String frontPathInAssetsRu = "fonts/Stylo.ttf";
     private final static String frontPathInAssetsEn = "fonts/Timoteo.ttf";
+    public final static String sharedPreferencesName = "com.mafia.app";
+    public static class Pref{
+        public final static String games = "games";
+        public final static String rateAfter = "rate_after";
+        public final static String neverRate = "never_rate";
+    }
 
     private static ArrayList<Card> roles;
 

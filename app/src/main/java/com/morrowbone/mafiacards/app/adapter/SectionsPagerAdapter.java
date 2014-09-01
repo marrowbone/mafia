@@ -5,6 +5,7 @@ package com.morrowbone.mafiacards.app.adapter;
  */
 
 import com.nineoldandroids.animation.*;
+
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -77,8 +78,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         private TextView mHelpText;
         private View mCartFrontView;
         private View mCartBackSideView;
-        private Interpolator accelerator = new AccelerateInterpolator();
-        private Interpolator decelerator = new DecelerateInterpolator();
+        private volatile Interpolator accelerator = new AccelerateInterpolator();
+        private volatile Interpolator decelerator = new DecelerateInterpolator();
         private View mRootView;
 
         public PlaceholderFragment() {
