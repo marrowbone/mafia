@@ -4,3 +4,5 @@
 .DS_Store
 .idea/
 *.iml
+build/intermediates/dex-cache/cache.xml
+build/generated/mockable-android-20.jar
