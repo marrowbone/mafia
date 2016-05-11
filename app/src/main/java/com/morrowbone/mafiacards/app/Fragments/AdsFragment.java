@@ -1,7 +1,5 @@
 package com.morrowbone.mafiacards.app.Fragments;
 
-import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -40,18 +38,6 @@ public class AdsFragment extends Fragment {
         mAdView = (AdView) rootView.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-
-//        final Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                AdRequest adRequest = new AdRequest.Builder().build();
-//                mAdView.loadAd(adRequest);
-//                mAdView.bringToFront();
-//            }
-//        }, 5000);
-//
-
         return rootView;
     }
 }
