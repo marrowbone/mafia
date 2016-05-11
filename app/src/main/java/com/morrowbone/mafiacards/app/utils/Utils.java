@@ -51,7 +51,7 @@ public class Utils {
         prefs.edit().putInt(Constants.Pref.rateAfter, games).apply();
     }
 
-    public static Boolean isEnableRataApp(Context context) {
+    public static Boolean isEnableRateApp(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(
                 Constants.sharedPreferencesName, Context.MODE_PRIVATE);
 
@@ -60,7 +60,7 @@ public class Utils {
         return !neverRate;
     }
 
-    public static void setIsEnableRataAppToFalse(Context context) {
+    public static void setIsEnableRateAppToFalse(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(
                 Constants.sharedPreferencesName, Context.MODE_PRIVATE);
 

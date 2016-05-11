@@ -198,7 +198,7 @@ public class ShowUserCartActivity extends FragmentActivity {
     private Boolean isEnableShowGooglePlayReviewIs() {
         Integer gamesFinished = Utils.getPlayedGameCount(this);
         Integer period = Utils.getRateAfterCount(this);
-        if (gamesFinished % period == 0 && Utils.isEnableRataApp(this) && gamesFinished > 0) {
+        if (gamesFinished % period == 0 && Utils.isEnableRateApp(this) && gamesFinished > 0) {
             return true;
         } else {
             return false;
@@ -230,7 +230,7 @@ public class ShowUserCartActivity extends FragmentActivity {
                 } catch (android.content.ActivityNotFoundException anfe) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + appPackageName)));
                 }
-                Utils.setIsEnableRataAppToFalse(ShowUserCartActivity.this);
+                Utils.setIsEnableRateAppToFalse(ShowUserCartActivity.this);
             }
         });
         builder.setNeutralButton(R.string.later_review, new DialogInterface.OnClickListener() {
@@ -243,7 +243,7 @@ public class ShowUserCartActivity extends FragmentActivity {
         builder.setNegativeButton(R.string.never_review, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Utils.setIsEnableRataAppToFalse(ShowUserCartActivity.this);
+                Utils.setIsEnableRateAppToFalse(ShowUserCartActivity.this);
                 mAdsView.setVisibility(View.VISIBLE);
             }
         });
