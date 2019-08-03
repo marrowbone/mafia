@@ -6,7 +6,7 @@
 
     <ImageView
         android:scaleType="centerCrop"
-        android:src="@drawable/city_ver2_law_quality"
+        android:src="@drawable/main_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
