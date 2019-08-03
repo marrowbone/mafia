@@ -8,18 +8,8 @@ import com.morrowbone.mafiacards.app.R;
 public abstract class Card {
 
     private Integer countInDeck = 0;
-    private Integer cartBackSideId;
 
     protected Card() {
-        cartBackSideId = R.color.gray_alfa;
-    }
-
-    public Integer getCartBackSideId() {
-        return cartBackSideId;
-    }
-
-    public void setCartBackSideId(Integer cartBackSideId) {
-        this.cartBackSideId = cartBackSideId;
     }
 
     public Integer getCartFrontSideImageId() {
@@ -30,7 +20,7 @@ public abstract class Card {
 
     public abstract int getCardDescriptionStringId();
 
-    public Integer getCountInDeck(){
+    public Integer getCountInDeck() {
         return countInDeck;
     }
 
