@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/chevron20_back_a" android:state_pressed="true"></item>
-    <item android:drawable="@drawable/chevron20_back" android:state_pressed="false"></item>
+    <item android:drawable="@drawable/ic_keyboard_arrow_right_gray_24dp" android:state_pressed="true" />
+    <item android:drawable="@drawable/ic_keyboard_arrow_right_white_24dp" android:state_pressed="false" />
 </selector>
