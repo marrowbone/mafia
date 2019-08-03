@@ -2,11 +2,12 @@
 <resources>
     <color name="main_screen_btn_text_color">@android:color/white</color>
     <color name="red">#e90301</color>
-    <color name="gray_alfa">#66aeaeae</color>
+    <color name="gray_alfa">#80646464</color>
     <color name="light_gray_alfa">#44aeaeae</color>
     <color name="gray_alfa_2">#aa383838</color>
     <color name="yellow">#FFFF00</color>
     <color name="orange">#FFCC00</color>
     <color name="transpanent">#FFFFFFFF</color>
     <color name="card_count_color">@android:color/white</color>
+    <color name="card_text_color">@android:color/white</color>
 </resources>

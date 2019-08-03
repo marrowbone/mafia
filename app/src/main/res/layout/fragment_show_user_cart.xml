@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
-                android:textColor="@android:color/black"
+                android:textColor="@color/card_text_color"
                 android:textSize="@dimen/very_very_big_text" />
 
             <TextView
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:text="@string/player"
-                android:textColor="@android:color/black"
+                android:textColor="@color/card_text_color"
                 android:textSize="@dimen/very_big_text" />
         </LinearLayout>
 
@@ -75,7 +75,7 @@
             android:singleLine="true"
             android:ellipsize="end"
             android:layout_centerHorizontal="true"
-            android:textColor="@android:color/white"
+            android:textColor="@color/card_text_color"
             android:textSize="@dimen/very_big_text" />
     </RelativeLayout>
 
