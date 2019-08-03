@@ -77,10 +77,10 @@
         android:id="@+id/help_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray_alfa"
+        android:background="@color/hint_background_color"
         android:gravity="center_horizontal"
         android:text="@string/message_tap_to_see_card"
-        android:textColor="@android:color/black"
+        android:textColor="@color/hint_text_color"
         android:textSize="@dimen/big_text"
         android:textStyle="italic" />
 

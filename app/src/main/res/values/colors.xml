@@ -10,4 +10,6 @@
     <color name="transpanent">#FFFFFFFF</color>
     <color name="card_count_color">@android:color/white</color>
     <color name="card_text_color">@android:color/white</color>
+    <color name="hint_background_color">#DD000000</color>
+    <color name="hint_text_color">@android:color/white</color>
 </resources>
