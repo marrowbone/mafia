@@ -18,10 +18,13 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.morrowbone.mafiacards.app.R;
 import com.morrowbone.mafiacards.app.application.MafiaApp;
+import com.morrowbone.mafiacards.app.constants.StatisticConstants;
 import com.morrowbone.mafiacards.app.database.SystemDatabaseHelper;
 import com.morrowbone.mafiacards.app.utils.Constants;
+import com.morrowbone.mafiacards.app.utils.StatisticUtils;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements StatisticConstants {
+
 
     private Typeface mTypeFace;
 
@@ -61,7 +64,7 @@ public class MainActivity extends FragmentActivity {
         rulesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendView(R.string.category_button, R.string.action_roles);
+                StatisticUtils.sendActionInfo(BUTTON_CATEGORY, "Start roles");
                 Intent intent = new Intent(MainActivity.this, RulesActivity.class);
                 startActivity(intent);
 
@@ -76,7 +79,7 @@ public class MainActivity extends FragmentActivity {
         creatorBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendView(R.string.category_button, R.string.action_creator);
+                StatisticUtils.sendActionInfo(BUTTON_CATEGORY, "Start creator");
                 Intent intent = new Intent(MainActivity.this, CreatorActivity.class);
                 startActivity(intent);
             }
@@ -89,7 +92,7 @@ public class MainActivity extends FragmentActivity {
         playBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendView(R.string.category_button, R.string.action_play_main);
+                StatisticUtils.sendActionInfo(BUTTON_CATEGORY, "Play in main");
                 try {
                     SystemDatabaseHelper.Initialize(MainActivity.this);
                 } catch (Exception e) {
@@ -162,7 +165,7 @@ public class MainActivity extends FragmentActivity {
                             if (cartCount < min) {
                                 showMessage(R.string.error, R.string.wrong_player_count);
                             } else {
-                                sendView(R.string.category_button, R.string.action_play_dialog);
+                                StatisticUtils.sendActionInfo(BUTTON_CATEGORY, "Play in dialog");
                                 Intent intent = new Intent(MainActivity.this, ShowUserCartActivity.class);
                                 intent.putExtra(Constants.EXTRA_CART_COUNT, cartCount);
                                 startActivity(intent);
@@ -190,12 +193,4 @@ public class MainActivity extends FragmentActivity {
 
         builder.show();
     }
-
-    private void sendView(int category, int action) {
-        Tracker t = ((MafiaApp) getApplication()).getTracker(
-                MafiaApp.TrackerName.APP_TRACKER);
-        t.send(new HitBuilders.EventBuilder().setAction(getString(action)).
-                setCategory(getString(category)).build());
-    }
-
 }

@@ -35,14 +35,7 @@ public class MafiaApp extends Application {
         super();
     }
 
-    public static MafiaApp getInstance(){
-        if (mInstance == null) {
-            synchronized (MafiaApp.class) {
-                if (mInstance == null) {
-                    mInstance = new MafiaApp();
-                }
-            }
-        }
+    public static MafiaApp getInstance() {
         return mInstance;
     }
 

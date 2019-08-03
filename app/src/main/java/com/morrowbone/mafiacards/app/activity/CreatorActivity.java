@@ -18,6 +18,7 @@ import com.google.android.gms.analytics.Tracker;
 import com.morrowbone.mafiacards.app.R;
 import com.morrowbone.mafiacards.app.adapter.CreateDeckArrayAdapter;
 import com.morrowbone.mafiacards.app.application.MafiaApp;
+import com.morrowbone.mafiacards.app.constants.StatisticConstants;
 import com.morrowbone.mafiacards.app.database.DatabaseHelper;
 import com.morrowbone.mafiacards.app.model.Card;
 import com.morrowbone.mafiacards.app.model.Deck;
@@ -29,10 +30,11 @@ import com.morrowbone.mafiacards.app.model.roles.Immortal;
 import com.morrowbone.mafiacards.app.model.roles.Mafia;
 import com.morrowbone.mafiacards.app.model.roles.Maniac;
 import com.morrowbone.mafiacards.app.utils.Constants;
+import com.morrowbone.mafiacards.app.utils.StatisticUtils;
 
 import java.util.List;
 
-public class CreatorActivity extends Activity implements View.OnClickListener {
+public class CreatorActivity extends Activity implements View.OnClickListener, StatisticConstants {
     private static int mCardCount = 0;
     private static List<Card> mRolesList;
     private Button mSaveButton;
@@ -128,7 +130,7 @@ public class CreatorActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         if (mCardCount > 0) {
             Deck deck = convertToDeck(mRolesList);
-            sendView(R.string.category_button, R.string.action_play_creator);
+            StatisticUtils.sendActionInfo(BUTTON_CATEGORY, "Play in creator");
             Intent intent = ShowUserCartActivity.getIntent(this, deck);
             startActivity(intent);
         } else {
@@ -150,12 +152,5 @@ public class CreatorActivity extends Activity implements View.OnClickListener {
         });
 
         builder.show();
-    }
-
-    private void sendView(int category, int action) {
-        Tracker t = ((MafiaApp) getApplication()).getTracker(
-                MafiaApp.TrackerName.APP_TRACKER);
-        t.send(new HitBuilders.EventBuilder().setAction(getString(action)).
-                setCategory(getString(category)).build());
     }
 }

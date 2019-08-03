@@ -30,16 +30,18 @@ import com.morrowbone.mafiacards.app.Fragments.AdsFragment;
 import com.morrowbone.mafiacards.app.R;
 import com.morrowbone.mafiacards.app.adapter.SectionsPagerAdapter;
 import com.morrowbone.mafiacards.app.application.MafiaApp;
+import com.morrowbone.mafiacards.app.constants.StatisticConstants;
 import com.morrowbone.mafiacards.app.database.SystemDatabaseHelper;
 import com.morrowbone.mafiacards.app.model.Deck;
 import com.morrowbone.mafiacards.app.utils.Constants;
+import com.morrowbone.mafiacards.app.utils.StatisticUtils;
 import com.morrowbone.mafiacards.app.utils.Utils;
 import com.morrowbone.mafiacards.app.views.NonSwipeableViewPager;
 
 import java.lang.reflect.Field;
 
 
-public class ShowUserCartActivity extends FragmentActivity {
+public class ShowUserCartActivity extends FragmentActivity implements StatisticConstants {
 
     private static Deck mDeck;
     /**
@@ -263,7 +265,7 @@ public class ShowUserCartActivity extends FragmentActivity {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 mDeck.shuffle();
-                sendView(R.string.category_button, R.string.action_finish_game, mDeck.size());
+                StatisticUtils.sendActionInfo(BUTTON_CATEGORY, "Game over", mDeck.size());
                 if (isEnableShowingAds()) {
                     displayInterstitial();
                 }
@@ -273,13 +275,6 @@ public class ShowUserCartActivity extends FragmentActivity {
         });
 
         builder.show();
-    }
-
-    private void sendView(int category, int action, int size) {
-        Tracker t = ((MafiaApp) getApplication()).getTracker(
-                MafiaApp.TrackerName.APP_TRACKER);
-        t.send(new HitBuilders.EventBuilder().setAction(getString(action)).
-                setCategory(getString(category)).setValue(size).build());
     }
 
     public class FixedSpeedScroller extends Scroller {
