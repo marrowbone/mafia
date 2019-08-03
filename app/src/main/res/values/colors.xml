@@ -8,4 +8,5 @@
     <color name="yellow">#FFFF00</color>
     <color name="orange">#FFCC00</color>
     <color name="transpanent">#FFFFFFFF</color>
+    <color name="card_count_color">@android:color/white</color>
 </resources>
