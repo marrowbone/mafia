@@ -9,9 +9,9 @@ import com.nineoldandroids.animation.*;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +27,7 @@ import com.morrowbone.mafiacards.app.model.Deck;
 import com.morrowbone.mafiacards.app.utils.Constants;
 
 /**
- * A {@link android.support.v4.app.FragmentPagerAdapter} that returns a fragment corresponding to
+ * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
