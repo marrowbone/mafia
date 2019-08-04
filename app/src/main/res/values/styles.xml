@@ -1,9 +1,13 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Holo.NoActionBar">
-        <!-- Customize your theme here. -->
-        <!--  <style name="AppTheme" parent="android:Theme.Black.NoTitleBar">-->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:buttonStyle">@android:style/Widget.Holo.Button</item>
+        <item name="android:textAppearanceButton">@android:style/TextAppearance.Holo.Widget.Button
+        </item>
     </style>
 
 </resources>
