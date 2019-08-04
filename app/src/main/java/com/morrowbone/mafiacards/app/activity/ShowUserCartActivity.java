@@ -94,14 +94,8 @@ public class ShowUserCartActivity extends FragmentActivity implements StatisticC
                 e.printStackTrace();
             }
             Integer cardCount = getIntent().getIntExtra(Constants.EXTRA_CART_COUNT, 0);
-            if (mDeck == null) {
-                mDeck = getDeck(cardCount);
-            } else if (cardCount != mDeck.size()) {
-                mDeck = getDeck(cardCount);
-            }
-            if (!mDeck.isShuffled()) {
-                mDeck.shuffle();
-            }
+            mDeck = getDeck(cardCount);
+            mDeck.shuffle();
         }
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), this, mDeck);
 
