@@ -13,13 +13,16 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.RulesActivity"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ShowUserCartActivity"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MainActivity"
-            android:label="@string/role_mafia">
+            android:label="@string/role_mafia"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,6 +31,7 @@
         </activity>
         <activity
             android:name=".activity.CreatorActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
