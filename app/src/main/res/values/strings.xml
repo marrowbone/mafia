@@ -13,9 +13,9 @@
     <string name="role_maniac">Maniac</string>
     <string name="role_wervoolf">Wervoolf</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="play">Play</string>
-    <string name="rоles">Roles</string>
-    <string name="create_deck">Change the deck</string>
+    <string name="play">Take cards</string>
+    <string name="rоles">Cards info</string>
+    <string name="create_deck">Choose your deck</string>
     <string name="dialog_number_of_player">Enter the number of players</string>
     <string name="dialog_number_of_player_positive_btn">GO!</string>
     <string name="message_tap_to_see_card">Long press to see your card</string>
