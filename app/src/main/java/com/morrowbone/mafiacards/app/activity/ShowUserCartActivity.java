@@ -207,12 +207,7 @@ public class ShowUserCartActivity extends FragmentActivity implements StatisticC
     }
 
     private Boolean isEnableShowingAds() {
-        Integer gamesFinished = Utils.getPlayedGameCount(this);
-        if (gamesFinished % 2 == 0 && gamesFinished != 2) {
-            return true;
-        } else {
-            return false;
-        }
+        return true;
     }
 
     private void showGooglePlayReviewDialog() {
