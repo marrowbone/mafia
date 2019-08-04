@@ -14,9 +14,10 @@
         android:id="@+id/game_type_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:listSelector="@android:color/transparent"></ListView>
+        android:fadeScrollbars="false"
+        android:listSelector="@android:color/transparent"
+        android:padding="10dp"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="vertical" />
 
 </RelativeLayout>
