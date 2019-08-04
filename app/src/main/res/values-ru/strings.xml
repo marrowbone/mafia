@@ -16,7 +16,7 @@
     <string name="play">Раздать карты</string>
     <string name="create_deck">Выбрать колоду</string>
     <string name="rоles">Список карт</string>
-    <string name="dialog_number_of_player">Введите количество игроков</string>
+    <string name="dialog_number_of_player">Укажите количество игроков</string>
     <string name="dialog_number_of_player_positive_btn">Вперёд!</string>
     <string name="message_tap_to_see_card">Нажмите и держите, чтобы увидеть карту</string>
     <string name="message_tap_to_hide_card">Нажмите, чтобы спрятать карту</string>
