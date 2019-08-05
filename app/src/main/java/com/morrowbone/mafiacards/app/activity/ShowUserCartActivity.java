@@ -26,7 +26,7 @@ import com.google.android.gms.ads.AdRequest;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.InterstitialAd;
-import com.morrowbone.mafiacards.app.Fragments.AdsFragment;
+import com.morrowbone.mafiacards.app.fragments.AdsFragment;
 import com.morrowbone.mafiacards.app.R;
 import com.morrowbone.mafiacards.app.adapter.SectionsPagerAdapter;
 import com.morrowbone.mafiacards.app.constants.StatisticConstants;
