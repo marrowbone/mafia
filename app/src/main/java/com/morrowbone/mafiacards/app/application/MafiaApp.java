@@ -1,10 +1,11 @@
 package com.morrowbone.mafiacards.app.application;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+
+import androidx.multidex.MultiDexApplication;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Logger;
@@ -13,7 +14,7 @@ import com.morrowbone.mafiacards.app.R;
 
 import java.util.HashMap;
 
-public class MafiaApp extends Application {
+public class MafiaApp extends MultiDexApplication {
     private volatile static MafiaApp mInstance;
 
     private SharedPreferences userPrefs;
