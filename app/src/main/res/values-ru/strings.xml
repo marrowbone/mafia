@@ -22,7 +22,8 @@
     <string name="message_tap_to_hide_card">Нажмите, чтобы спрятать карту</string>
 
     <string name="player">игрок</string>
-    <string name="final_dialog">Все игроки получили свои карты. Приятной игры. \n\nP.S. Если кто-то забудет свою карту, в Главное Меню есть пункт "Предыдущая игра"</string>
+    <string name="final_dialog_title">Все игроки получили свои карты</string>
+    <string name="final_dialog_message">P.S. Если кто-то забудет свою карту, в Главное Меню есть пункт \"Предыдущая игра\". Приятной игры!</string>
     <string name="final_dialog_go_to_main_menu">В главное меню</string>
     <string name="positive_button_text">Хорошо</string>
 

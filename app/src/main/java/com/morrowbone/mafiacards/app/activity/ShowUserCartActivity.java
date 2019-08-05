@@ -243,13 +243,13 @@ public class ShowUserCartActivity extends FragmentActivity implements StatisticC
 
     private void showLastCardDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.final_dialog);
+        builder.setTitle(R.string.final_dialog_title);
+        builder.setMessage(R.string.final_dialog_message);
         builder.setCancelable(false);
         builder.setPositiveButton(R.string.final_dialog_go_to_main_menu, new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
-                mDeck.shuffle();
                 StatisticUtils.sendActionInfo(BUTTON_CATEGORY, "Game over", mDeck.size());
                 if (isEnableShowingAds()) {
                     displayInterstitial();
