@@ -21,8 +21,9 @@
     <string name="message_tap_to_see_card">Long press to see your card</string>
     <string name="message_tap_to_hide_card">Tap to hide your card</string>
     <string name="player">player</string>
-    <string name="final_dialog">All players have seen their cards</string>
-    <string name="positive_button_text">Ok</string>
+    <string name="final_dialog">All players have seen their cards. Have a nice game.\n\nIf someone forgets their card, in the Main Menu there is an item "Previous game"</string>
+    <string name="final_dialog_go_to_main_menu">To Main Menu</string>
+    <string name="positive_button_text">OK</string>
     <string name="error">Error</string>
     <string name="wrong_player_count">You entered an incorrect number of players</string>
     <string name="in_you_deck">In you deck</string>
