@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,10 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/play_btn"
         android:layout_centerHorizontal="true"
         android:textStyle="italic"
+        app:fontFamily="@font/stylo_family"
         android:layout_above="@+id/creator_btn"
         android:textSize="@dimen/big_text"
         android:text="@string/play"
@@ -22,11 +24,12 @@
         android:layout_width="match_parent"
         android:layout_height="70dp" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/creator_btn"
         android:layout_centerHorizontal="true"
         android:textStyle="italic"
         android:textSize="@dimen/big_text"
+        app:fontFamily="@font/stylo_family"
         android:text="@string/create_deck"
         android:layout_above="@+id/rules_btn"
         android:textColor="@color/main_screen_btn_text_color"
@@ -34,10 +37,11 @@
         android:layout_width="match_parent"
         android:layout_height="70dp" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/rules_btn"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        app:fontFamily="@font/stylo_family"
         android:textStyle="italic"
         android:textSize="@dimen/big_text"
         android:text="@string/rоles"
@@ -46,17 +50,15 @@
         android:layout_width="match_parent"
         android:layout_height="70dp" />
 
-
-
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        app:fontFamily="@font/stylo_family"
         android:layout_marginTop="30dp"
         android:textSize="@dimen/very_very_big_text"
         android:textColor="@color/red"
         android:layout_height="wrap_content"
         android:text="@string/role_mafia"/>
-
 </RelativeLayout>

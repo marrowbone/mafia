@@ -25,19 +25,13 @@ import com.morrowbone.mafiacards.app.utils.StatisticUtils;
 
 public class MainActivity extends FragmentActivity implements StatisticConstants {
 
-
-    private Typeface mTypeFace;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTypeFace = Typeface.createFromAsset(getAssets(), Constants.getTypeFacePath());
-
         TextView title = (TextView) findViewById(R.id.title);
         title.setText("Mafia");
-        title.setTypeface(mTypeFace);
 
         initPlayBtn();
 
@@ -60,7 +54,6 @@ public class MainActivity extends FragmentActivity implements StatisticConstants
 
     private void initRulesBtn() {
         Button rulesBtn = (Button) findViewById(R.id.rules_btn);
-        rulesBtn.setTypeface(mTypeFace);
         rulesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +68,6 @@ public class MainActivity extends FragmentActivity implements StatisticConstants
 
     private void initCreatorBtn() {
         Button creatorBtn = (Button) findViewById(R.id.creator_btn);
-        creatorBtn.setTypeface(mTypeFace);
         creatorBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +80,6 @@ public class MainActivity extends FragmentActivity implements StatisticConstants
 
     private void initPlayBtn() {
         Button playBtn = (Button) findViewById(R.id.play_btn);
-        playBtn.setTypeface(mTypeFace);
         playBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
