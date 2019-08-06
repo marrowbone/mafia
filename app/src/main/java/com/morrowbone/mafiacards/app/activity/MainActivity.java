@@ -98,6 +98,7 @@ public class MainActivity extends FragmentActivity implements StatisticConstants
             public void onClick(View v) {
                 StatisticUtils.sendActionInfo(BUTTON_CATEGORY, "Start creator");
                 Intent intent = new Intent(MainActivity.this, CreatorActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
             }
         });
