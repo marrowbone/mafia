@@ -20,8 +20,6 @@ public class Constants {
 
     public static final String EXTRA_CART_COUNT = "game_id";
 
-    private final static String frontPathInAssetsRu = "fonts/Stylo.ttf";
-    private final static String frontPathInAssetsEn = "fonts/Timoteo.ttf";
     public final static String sharedPreferencesName = "com.mafia.app";
     public static class Pref{
         public final static String games = "games";
@@ -61,15 +59,4 @@ public class Constants {
         card = new Maniac();
         roles.add(card);
     }
-
-    public static String getTypeFacePath() {
-//        String language = Locale.getDefault().getDisplayLanguage();
-//        if (language.contains("русский")) {
-//            return frontPathInAssetsRu;
-//        } else {
-//           return frontPathInAssetsEn;
-//        }
-        return frontPathInAssetsRu;
-    }
-
 }

@@ -24,7 +24,6 @@ public class CreateDeckArrayAdapter extends ArrayAdapter<Card> {
 
     private static final Integer layout_id = R.layout.view_creator_cart;
     private static Integer mCardCount = 0;
-    private final Typeface mTypeFace;
     private LayoutInflater mInflater;
     private CreatorActivity mContext;
 
@@ -33,7 +32,6 @@ public class CreateDeckArrayAdapter extends ArrayAdapter<Card> {
         mInflater = (LayoutInflater) getContext().getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
         mContext = (CreatorActivity) context;
-        mTypeFace = Typeface.createFromAsset(mContext.getAssets(), Constants.getTypeFacePath());
     }
 
     @Override
@@ -47,14 +45,12 @@ public class CreateDeckArrayAdapter extends ArrayAdapter<Card> {
             holder = new Holder();
             holder.title = (TextView) convertView
                     .findViewById(R.id.game_title);
-            holder.title.setTypeface(mTypeFace);
 
             holder.image = (ImageView) convertView.findViewById(R.id.game_type_image);
 
             holder.decrement = convertView.findViewById(R.id.decrement);
             holder.increment = convertView.findViewById(R.id.increment);
             holder.cardCount = (TextView) convertView.findViewById(R.id.card_count);
-            holder.cardCount.setTypeface(mTypeFace);
             convertView.setTag(holder);
         } else {
             holder = (Holder) convertView.getTag();

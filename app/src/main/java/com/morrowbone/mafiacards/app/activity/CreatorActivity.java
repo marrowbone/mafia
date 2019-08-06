@@ -41,7 +41,6 @@ public class CreatorActivity extends Activity implements View.OnClickListener, S
     private TextView mCardCountTextView;
     private ListView mListView;
     private ArrayAdapter mArrayAdapter;
-    private Typeface mTypeFace;
 
     private static Deck convertToDeck(List<Card> cards) {
         Deck deck = new Deck();
@@ -99,25 +98,15 @@ public class CreatorActivity extends Activity implements View.OnClickListener, S
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creator);
 
-        mTypeFace = Typeface.createFromAsset(getAssets(), Constants.getTypeFacePath());
-
         mRolesList = Constants.getRoles();
         mArrayAdapter = new CreateDeckArrayAdapter(this, mRolesList);
         mListView = (ListView) findViewById(R.id.listview);
         mListView.setAdapter(mArrayAdapter);
 
         mCardCountTextView = (TextView) findViewById(R.id.card_count_textview);
-        mCardCountTextView.setTypeface(mTypeFace);
         mCardCountTextView.setText(String.valueOf(mCardCount));
 
-
-        TextView view = (TextView) findViewById(R.id.text_above_card_count);
-        view.setTypeface(mTypeFace);
-        view = (TextView) findViewById(R.id.text_below_card_count);
-        view.setTypeface(mTypeFace);
-
         mSaveButton = (Button) findViewById(R.id.save_btn);
-        mSaveButton.setTypeface(mTypeFace);
         mSaveButton.setOnClickListener(this);
     }
 

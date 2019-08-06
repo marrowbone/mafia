@@ -22,7 +22,6 @@ import java.util.List;
 public class RolesArrayAdapter extends ArrayAdapter<Card> {
 
     private static final Integer layout_id = R.layout.view_role;
-    private final Typeface mTypeFace;
     private LayoutInflater mInflater;
     private Context mContext;
 
@@ -31,7 +30,6 @@ public class RolesArrayAdapter extends ArrayAdapter<Card> {
         mInflater = (LayoutInflater) getContext().getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
         mContext = context;
-        mTypeFace = Typeface.createFromAsset(mContext.getAssets(), Constants.getTypeFacePath());
     }
 
     @Override
@@ -45,11 +43,9 @@ public class RolesArrayAdapter extends ArrayAdapter<Card> {
             holder = new Holder();
             holder.title = (TextView) convertView
                     .findViewById(R.id.game_title);
-            holder.title.setTypeface(mTypeFace);
 
             holder.description = (TextView) convertView
                     .findViewById(R.id.game_description);
-            holder.description.setTypeface(mTypeFace);
 
             holder.image = (ImageView) convertView.findViewById(R.id.game_type_image);
 

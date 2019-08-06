@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,10 +23,11 @@
         android:listSelector="@android:color/transparent" />
 
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/save_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:fontFamily="@font/stylo_family"
         android:layout_alignParentBottom="true"
         android:paddingTop="10dp"
         android:text="@string/play"
@@ -38,19 +40,21 @@
         android:orientation="horizontal"
         android:padding="7dp">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_above_card_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:fontFamily="@font/stylo_family"
             android:gravity="center"
             android:text="@string/in_you_deck"
             android:textColor="@color/card_count_color"
             android:textSize="@dimen/normal_text" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/card_count_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:fontFamily="@font/stylo_family"
             android:gravity="center"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -58,10 +62,11 @@
             android:textColor="@color/card_count_color"
             android:textSize="@dimen/big_text" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_below_card_count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:fontFamily="@font/stylo_family"
             android:gravity="center"
             android:text="@string/cards"
             android:textColor="@color/card_count_color"

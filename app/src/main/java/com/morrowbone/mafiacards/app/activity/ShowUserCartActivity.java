@@ -58,7 +58,6 @@ public class ShowUserCartActivity extends FragmentActivity implements StatisticC
     private NonSwipeableViewPager mViewPager;
     private FixedSpeedScroller scroller;
     private TextView mCardCountTextView;
-    private Typeface mTypeFace;
     private InterstitialAd interstitial;
     private View mAdsView;
 
@@ -115,17 +114,8 @@ public class ShowUserCartActivity extends FragmentActivity implements StatisticC
         } catch (IllegalAccessException e) {
         }
 
-        mTypeFace = Typeface.createFromAsset(getAssets(), Constants.getTypeFacePath());
         mCardCountTextView = (TextView) findViewById(R.id.card_count_textview);
-        mCardCountTextView.setTypeface(mTypeFace);
         mCardCountTextView.setText(String.valueOf(mDeck.size()));
-
-
-        TextView view = (TextView) findViewById(R.id.text_above_card_count);
-        view.setTypeface(mTypeFace);
-        view = (TextView) findViewById(R.id.text_below_card_count);
-        view.setTypeface(mTypeFace);
-
         mAdsView = findViewById(R.id.layout_for_fragment);
 
         AdsFragment adsFragment = AdsFragment.newInstance();

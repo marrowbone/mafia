@@ -32,7 +32,6 @@ import com.morrowbone.mafiacards.app.utils.Constants;
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-    protected static Typeface mTypeFace;
     private static Deck mDeck;
     private Context mContext;
 
@@ -40,7 +39,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         super(fm);
         mContext = context;
         mDeck = deck;
-        mTypeFace = Typeface.createFromAsset(mContext.getAssets(), Constants.getTypeFacePath());
     }
 
 
@@ -116,14 +114,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
             TextView titleTextView = (TextView) mRootView.findViewById(R.id.role);
             titleTextView.setText(title);
-            titleTextView.setTypeface(mTypeFace);
 
             TextView playerNumber = (TextView) mRootView.findViewById(R.id.player_number);
             playerNumber.setText(playerNum.toString());
-            playerNumber.setTypeface(mTypeFace);
 
             TextView playerText = (TextView) mRootView.findViewById(R.id.player_text);
-            playerText.setTypeface(mTypeFace);
 
             mHelpText = (TextView) mRootView.findViewById(R.id.help_text);
             hideHelpField();

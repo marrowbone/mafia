@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="7dp"
     android:paddingRight="7dp">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></RelativeLayout>
-
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -31,11 +26,12 @@
                 android:layout_height="80sp"
                 android:src="@drawable/arrow_decrement" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/card_count"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                app:fontFamily="@font/stylo_family"
                 android:gravity="center"
                 android:text="0"
                 android:maxLines="1"
@@ -51,10 +47,11 @@
                 android:src="@drawable/arrow_increment" />
         </LinearLayout>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/game_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:fontFamily="@font/stylo_family"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/game_type_image"
             android:text="@string/test_mafia_title"

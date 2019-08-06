@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
     android:layout_width="match_parent"
@@ -24,19 +25,21 @@
             android:layout_centerInParent="true"
             android:orientation="vertical">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/player_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:fontFamily="@font/stylo_family"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
                 android:textColor="@color/card_text_color"
                 android:textSize="@dimen/very_very_big_text" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/player_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:fontFamily="@font/stylo_family"
                 android:gravity="center_horizontal"
                 android:text="@string/player"
                 android:textColor="@color/card_text_color"
@@ -61,10 +64,11 @@
             android:layout_margin="15dp"
             android:src="@drawable/test_sherif" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/role"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:fontFamily="@font/stylo_family"
             android:layout_alignParentBottom="true"
             android:singleLine="true"
             android:ellipsize="end"

@@ -1,5 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,28 +19,31 @@
         android:orientation="vertical"
         android:padding="7dp">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_above_card_count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:fontFamily="@font/stylo_family"
             android:gravity="center"
             android:text="@string/in_you_deck"
             android:textColor="@color/card_count_color"
             android:textSize="@dimen/normal_text" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/card_count_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:fontFamily="@font/stylo_family"
             android:gravity="center"
             android:text="10"
             android:textColor="@color/card_count_color"
             android:textSize="@dimen/big_text" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_below_card_count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:fontFamily="@font/stylo_family"
             android:gravity="center"
             android:text="@string/cards"
             android:textColor="@color/card_count_color"
