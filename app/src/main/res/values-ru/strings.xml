@@ -13,6 +13,7 @@
     <string name="role_maniac">Маньяк</string>
     <string name="role_wervoolf">Оборотень</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="prev_game">Прошлая раздача</string>
     <string name="play">Раздать карты</string>
     <string name="create_deck">Выбрать колоду</string>
     <string name="rоles">Список карт</string>

@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -172,6 +171,7 @@ public class ShowUserCartActivity extends FragmentActivity implements StatisticC
         int childCount = mSectionsPagerAdapter.getCount();
         int currItem = mViewPager.getCurrentItem();
         if (currItem == childCount - 1) {
+            PreviousGameInfoActivity.mDeck = mDeck;
             showLastCardDialog();
         } else {
             scroller.setFixedDuration(1000);

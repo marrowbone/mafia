@@ -3,7 +3,6 @@ package com.morrowbone.mafiacards.app.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentActivity;
 import android.text.Editable;
@@ -25,6 +24,8 @@ import com.morrowbone.mafiacards.app.utils.StatisticUtils;
 
 public class MainActivity extends FragmentActivity implements StatisticConstants {
 
+    private Button prevGameBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +33,8 @@ public class MainActivity extends FragmentActivity implements StatisticConstants
 
         TextView title = (TextView) findViewById(R.id.title);
         title.setText("Mafia");
+
+        initPrevGameBtn();
 
         initPlayBtn();
 
@@ -49,6 +52,28 @@ public class MainActivity extends FragmentActivity implements StatisticConstants
 
         // Send a screen view.
         t.send(new HitBuilders.AppViewBuilder().build());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (PreviousGameInfoActivity.mDeck != null) {
+            prevGameBtn.setVisibility(View.VISIBLE);
+        } else {
+            prevGameBtn.setVisibility(View.GONE);
+        }
+    }
+
+    private void initPrevGameBtn() {
+        prevGameBtn = findViewById(R.id.prev_game);
+        prevGameBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StatisticUtils.sendActionInfo(BUTTON_CATEGORY, "Prev game");
+                Intent intent = new Intent(MainActivity.this, PreviousGameInfoActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 

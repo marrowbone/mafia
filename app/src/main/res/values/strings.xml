@@ -13,6 +13,7 @@
     <string name="role_maniac">Maniac</string>
     <string name="role_wervoolf">Wervoolf</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="prev_game">Previous game</string>
     <string name="play">Take cards</string>
     <string name="rоles">Cards info</string>
     <string name="create_deck">Choose your deck</string>
