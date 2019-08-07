@@ -6,9 +6,11 @@
     android:layout_height="match_parent"
     tools:context="com.morrowbone.mafiacards.app.activity.ShowUserCartActivity$PlaceholderFragment">
 
-    <include layout="@layout/view_card_backside" />
-
-    <include layout="@layout/view_card_front_side" />
+    <com.morrowbone.mafiacards.app.views.CardView
+        android:id="@+id/card"
+        android:layout_width="@dimen/card_field_width"
+        android:layout_height="@dimen/card_field_height"
+        android:layout_centerInParent="true" />
 
     <TextView
         android:id="@+id/help_text"

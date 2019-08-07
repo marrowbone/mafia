@@ -2,15 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view_backside"
-    android:layout_width="@dimen/card_field_width"
-    android:layout_height="@dimen/card_field_height"
-    android:layout_centerInParent="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/gray_alfa">
 
     <ImageView
         android:id="@+id/cart_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
