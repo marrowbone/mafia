@@ -6,76 +6,9 @@
     android:layout_height="match_parent"
     tools:context="com.morrowbone.mafiacards.app.activity.ShowUserCartActivity$PlaceholderFragment">
 
-    <RelativeLayout
-        android:id="@+id/card_view_backside"
-        android:layout_width="@dimen/card_field_width"
-        android:layout_height="@dimen/card_field_height"
-        android:layout_centerInParent="true"
-        android:background="@color/gray_alfa">
+    <include layout="@layout/view_card_backside" />
 
-        <ImageView
-            android:id="@+id/cart_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="vertical">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/player_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:fontFamily="@font/stylo_family"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:textColor="@color/card_text_color"
-                android:textSize="@dimen/very_very_big_text" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/player_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:fontFamily="@font/stylo_family"
-                android:gravity="center_horizontal"
-                android:text="@string/player"
-                android:textColor="@color/card_text_color"
-                android:textSize="@dimen/very_big_text" />
-        </LinearLayout>
-
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/card_view_front"
-        android:layout_width="@dimen/card_field_width"
-        android:layout_height="@dimen/card_field_height"
-        android:layout_centerInParent="true"
-        android:background="@color/gray_alfa">
-
-        <ImageView
-            android:id="@+id/card_frontside_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="15dp"
-            android:src="@drawable/test_sherif" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/role"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fontFamily="@font/stylo_family"
-            android:layout_alignParentBottom="true"
-            android:singleLine="true"
-            android:ellipsize="end"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/card_text_color"
-            android:textSize="@dimen/very_big_text" />
-    </RelativeLayout>
+    <include layout="@layout/view_card_front_side" />
 
     <TextView
         android:id="@+id/help_text"
