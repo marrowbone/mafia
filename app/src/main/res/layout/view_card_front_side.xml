@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_margin="15dp"
+        android:adjustViewBounds="true"
         android:src="@drawable/test_sherif" />
 
     <androidx.appcompat.widget.AppCompatTextView
