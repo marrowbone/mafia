@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:fadeScrollbars="false"
         android:listSelector="@android:color/transparent"
-        android:padding="10dp"
+        android:padding="6dp"
         android:scrollbarStyle="outsideOverlay"
         android:scrollbars="vertical" />
 
