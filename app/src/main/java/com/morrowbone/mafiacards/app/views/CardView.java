@@ -51,12 +51,12 @@ public class CardView extends FrameLayout {
 
     public void show(CardSide state) {
         if (state == CardSide.BACKSIDE) {
-            mCartFrontView.setVisibility(View.GONE);
+            mCartFrontView.setVisibility(View.INVISIBLE);
             mCartBackSideView.setVisibility(View.VISIBLE);
             mState = CardSide.BACKSIDE;
         } else {
             mCartFrontView.setVisibility(View.VISIBLE);
-            mCartBackSideView.setVisibility(View.GONE);
+            mCartBackSideView.setVisibility(View.INVISIBLE);
             mState = CardSide.FRONT;
         }
     }
@@ -83,7 +83,7 @@ public class CardView extends FrameLayout {
         visToInvis.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator anim) {
-                visibleView.setVisibility(View.GONE);
+                visibleView.setVisibility(View.INVISIBLE);
                 invisToVis.start();
                 invisibleView.setVisibility(View.VISIBLE);
             }
