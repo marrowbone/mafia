@@ -17,13 +17,15 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/role"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/very_big_text"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:ellipsize="end"
-        android:singleLine="true"
+        android:gravity="center_horizontal|bottom"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
         android:textColor="@color/card_text_color"
-        android:textSize="@dimen/very_big_text"
+        app:autoSizeMaxTextSize="@dimen/very_big_text"
+        app:autoSizeTextType="uniform"
         app:fontFamily="@font/stylo_family" />
 </RelativeLayout>
