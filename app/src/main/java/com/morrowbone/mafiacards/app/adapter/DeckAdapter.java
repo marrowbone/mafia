@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.morrowbone.mafiacards.app.R;
+import com.morrowbone.mafiacards.app.model.Card;
 import com.morrowbone.mafiacards.app.model.Deck;
 import com.morrowbone.mafiacards.app.views.CardView;
 
@@ -28,7 +29,11 @@ public class DeckAdapter extends RecyclerView.Adapter<DeckAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.cardView.setPlayerNum(position + 1);
+        Card card = mDeck.getCard(position);
+        CardView cardView = holder.cardView;
+        cardView.setPlayerNum(position + 1);
+        cardView.setCardImageResource(card.getCartFrontSideImageId());
+        cardView.setRoleNameResId(card.getRoleNameStringId());
     }
 
     @Override
@@ -46,6 +51,13 @@ public class DeckAdapter extends RecyclerView.Adapter<DeckAdapter.ViewHolder> {
                 @Override
                 public void onClick(View view) {
                     cardView.flipit();
+                }
+            });
+            cardView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    cardView.flipit();
+                    return true;
                 }
             });
         }
