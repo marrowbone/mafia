@@ -1,5 +1,8 @@
 package com.morrowbone.mafiacards.app.views;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -12,9 +15,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.morrowbone.mafiacards.app.R;
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.AnimatorListenerAdapter;
-import com.nineoldandroids.animation.ObjectAnimator;
 
 public class CardView extends FrameLayout {
     private CardSide mState;

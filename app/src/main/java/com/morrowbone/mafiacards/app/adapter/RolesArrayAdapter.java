@@ -14,27 +14,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.morrowbone.mafiacards.app.R;
+import com.morrowbone.mafiacards.app.data.AbstractCard;
 import com.morrowbone.mafiacards.app.model.Card;
 import com.morrowbone.mafiacards.app.utils.Constants;
 
 import java.util.List;
 
-public class RolesArrayAdapter extends ArrayAdapter<Card> {
+public class RolesArrayAdapter extends ArrayAdapter<AbstractCard> {
 
     private static final Integer layout_id = R.layout.view_role;
     private LayoutInflater mInflater;
-    private Context mContext;
 
-    public RolesArrayAdapter(Context context, List<Card> values) {
+    public RolesArrayAdapter(Context context, List<AbstractCard> values) {
         super(context, layout_id, values);
         mInflater = (LayoutInflater) getContext().getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
-        mContext = context;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final Card item = getItem(position);
+        final AbstractCard item = getItem(position);
         final Holder holder;
 
         if (convertView == null) {
@@ -54,9 +53,9 @@ public class RolesArrayAdapter extends ArrayAdapter<Card> {
             holder = (Holder) convertView.getTag();
         }
 
-        holder.title.setText(item.getRoleNameStringId());
-        holder.description.setText(item.getCardDescriptionStringId());
-        holder.image.setImageResource(item.getCartFrontSideImageId());
+        holder.title.setText(item.getTitle());
+        holder.description.setText(item.getDescription());
+        holder.image.setImageResource(item.getImageResId());
 
         return convertView;
     }

@@ -1,20 +1,21 @@
 package com.morrowbone.mafiacards.app.activity;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
-import androidx.fragment.app.FragmentActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.morrowbone.mafiacards.app.R;
 import com.morrowbone.mafiacards.app.adapter.RolesArrayAdapter;
-import com.morrowbone.mafiacards.app.model.Card;
-import com.morrowbone.mafiacards.app.utils.Constants;
+import com.morrowbone.mafiacards.app.data.AbstractCard;
+import com.morrowbone.mafiacards.app.data.CardRepository;
+import com.morrowbone.mafiacards.app.utils.InjectorUtils;
 
 import java.util.List;
 
 public class RulesActivity extends FragmentActivity {
-    private ArrayAdapter mAdapter;
-    private List<Card> mRolesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,21 +26,20 @@ public class RulesActivity extends FragmentActivity {
     }
 
     private void init() {
-        mRolesList = Constants.getRoles();
+        AsyncTask<Void, Void, List<AbstractCard>> asyncTask = new AsyncTask<Void, Void, List<AbstractCard>>() {
+            @Override
+            protected List<AbstractCard> doInBackground(Void... voids) {
+                CardRepository cardRepository = InjectorUtils.INSTANCE.getCardRepository(RulesActivity.this);
+                return cardRepository.getCards();
+            }
 
-
-        mAdapter = new RolesArrayAdapter(this, mRolesList);
-
-        ListView listView = (ListView) findViewById(R.id.game_type_listview);
-        listView.setAdapter(mAdapter);
-//        listView.setOnItemClickListener(this);
+            @Override
+            protected void onPostExecute(List<AbstractCard> abstractCards) {
+                RolesArrayAdapter adapter = new RolesArrayAdapter(RulesActivity.this, abstractCards);
+                ListView listView = (ListView) findViewById(R.id.game_type_listview);
+                listView.setAdapter(adapter);
+            }
+        };
+        asyncTask.execute();
     }
-
-//    @Override
-//    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//        Integer selectedGameId = i;
-//        Intent intent = new Intent(this, ShowUserCartActivity.class);
-//        intent.putExtra(Constants.EXTRA_CART_COUNT, selectedGameId);
-//        startActivity(intent);
-//    }
 }
