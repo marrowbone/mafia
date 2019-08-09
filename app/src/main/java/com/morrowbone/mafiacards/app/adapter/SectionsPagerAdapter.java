@@ -4,27 +4,22 @@ package com.morrowbone.mafiacards.app.adapter;
  * Created by morrow on 03.06.2014.
  */
 
-import com.nineoldandroids.animation.*;
-
 import android.content.Context;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.Interpolator;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.morrowbone.mafiacards.app.R;
 import com.morrowbone.mafiacards.app.activity.ShowUserCartActivity;
 import com.morrowbone.mafiacards.app.model.Deck;
-import com.morrowbone.mafiacards.app.utils.Constants;
+import com.morrowbone.mafiacards.app.views.CardView;
+import com.morrowbone.mafiacards.app.views.CardView.CardSide;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -72,13 +67,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
-        CardSide mState;
+        private CardView mCardView;
         private TextView mHelpText;
-        private View mCartFrontView;
-        private View mCartBackSideView;
-        private volatile Interpolator accelerator = new AccelerateInterpolator();
-        private volatile Interpolator decelerator = new DecelerateInterpolator();
-        private View mRootView;
 
         public PlaceholderFragment() {
         }
@@ -98,48 +88,27 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            mRootView = inflater.inflate(R.layout.fragment_show_user_cart, container, false);
-            mCartFrontView = mRootView.findViewById(R.id.card_view_front);
-            mCartBackSideView = mRootView.findViewById(R.id.card_view_backside);
-            show(CardSide.BACKSIDE);
+            View rootView = inflater.inflate(R.layout.fragment_show_user_cart, container, false);
+            mCardView = rootView.findViewById(R.id.card);
+            mCardView.show(CardSide.BACKSIDE);
 
             Integer sectionNum = getArguments().getInt(ARG_SECTION_NUMBER);
             Integer playerNum = sectionNum + 1;
-
             int cartNameStringId = mDeck.getCard(sectionNum).getRoleNameStringId();
-            String title = getActivity().getResources().getString(cartNameStringId);
+            int imageId = mDeck.getCard(sectionNum).getCartFrontSideImageId();
 
-            ImageView frontsideImage = (ImageView) mRootView.findViewById(R.id.card_frontside_image);
-            frontsideImage.setImageResource(mDeck.getCard(sectionNum).getCartFrontSideImageId());
+            mCardView.setCardImageResource(imageId);
+            mCardView.setRoleNameResId(cartNameStringId);
+            mCardView.setPlayerNum(playerNum);
 
-            TextView titleTextView = (TextView) mRootView.findViewById(R.id.role);
-            titleTextView.setText(title);
 
-            TextView playerNumber = (TextView) mRootView.findViewById(R.id.player_number);
-            playerNumber.setText(playerNum.toString());
-
-            TextView playerText = (TextView) mRootView.findViewById(R.id.player_text);
-
-            mHelpText = (TextView) mRootView.findViewById(R.id.help_text);
+            mHelpText = rootView.findViewById(R.id.help_text);
             hideHelpField();
 
-            mRootView.setOnClickListener(this);
-            mRootView.setOnLongClickListener(this);
+            rootView.setOnClickListener(this);
+            rootView.setOnLongClickListener(this);
 
-            return mRootView;
-        }
-
-        private void show(CardSide state) {
-            if (state == CardSide.BACKSIDE) {
-                mCartFrontView.setVisibility(View.GONE);
-                mCartBackSideView.setVisibility(View.VISIBLE);
-                mState = CardSide.BACKSIDE;
-            } else {
-                mCartFrontView.setVisibility(View.VISIBLE);
-                mCartBackSideView.setVisibility(View.GONE);
-                mState = CardSide.FRONT;
-            }
-
+            return rootView;
         }
 
         @Override
@@ -147,9 +116,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             int id = view.getId();
             switch (id) {
                 case R.id.root:
-                    if (mState == CardSide.FRONT) {
+                    if (mCardView.getState() == CardSide.FRONT) {
                         hideHelpField();
-                        flipit();
+                        mCardView.flipit();
                         showNextPage();
                     } else {
                         showHelpField();
@@ -160,53 +129,13 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         @Override
         public boolean onLongClick(View view) {
-            if (mState == CardSide.BACKSIDE) {
+            if (mCardView.getState() == CardSide.BACKSIDE) {
                 hideHelpField();
-                flipit();
+                mCardView.flipit();
             } else {
                 return false;
             }
             return true;
-        }
-
-        private void flipit() {
-            final View visibleView;
-            final View invisibleView;
-            if (mState == CardSide.BACKSIDE) {
-                visibleView = mCartBackSideView;
-                invisibleView = mCartFrontView;
-                mState = CardSide.FRONT;
-            } else {
-                invisibleView = mCartBackSideView;
-                visibleView = mCartFrontView;
-                mState = CardSide.BACKSIDE;
-            }
-            ObjectAnimator visToInvis = ObjectAnimator.ofFloat(visibleView, "rotationY", 0f, 90f);
-            visToInvis.setDuration(500);
-            visToInvis.setInterpolator(accelerator);
-            final ObjectAnimator invisToVis = ObjectAnimator.ofFloat(invisibleView, "rotationY",
-                    -90f, 0f);
-            invisToVis.setDuration(500);
-            invisToVis.setInterpolator(decelerator);
-            invisToVis.addListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    if (mState == CardSide.BACKSIDE) {
-                        mHelpText.setText(R.string.message_tap_to_see_card);
-                    } else {
-                        mHelpText.setText(R.string.message_tap_to_hide_card);
-                    }
-                }
-            });
-            visToInvis.addListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator anim) {
-                    visibleView.setVisibility(View.GONE);
-                    invisToVis.start();
-                    invisibleView.setVisibility(View.VISIBLE);
-                }
-            });
-            visToInvis.start();
         }
 
         private void showHelpField() {
@@ -220,10 +149,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         public void showNextPage() {
             ShowUserCartActivity parent = (ShowUserCartActivity) getActivity();
             parent.showNextPage();
-        }
-
-        private enum CardSide {
-            BACKSIDE, FRONT;
         }
     }
 }
