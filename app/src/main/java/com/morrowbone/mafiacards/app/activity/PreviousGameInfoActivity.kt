@@ -15,7 +15,7 @@ class PreviousGameInfoActivity : FragmentActivity() {
         setContentView(R.layout.activity_previous_game_info)
 
         recyclerView.layoutManager = GridLayoutManager(this, 3)
-        val deckAdapter = DeckAdapter(mDeck)
+        val deckAdapter = DeckAdapter(mDeck!!)
         recyclerView.adapter = deckAdapter
     }
 
