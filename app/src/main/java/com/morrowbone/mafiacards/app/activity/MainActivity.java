@@ -58,7 +58,7 @@ public class MainActivity extends FragmentActivity implements StatisticConstants
     @Override
     protected void onResume() {
         super.onResume();
-        if (PreviousGameInfoActivity.mDeck != null) {
+        if (PreviousGameInfoActivity.Companion.getMDeck() != null) {
             prevGameBtn.setVisibility(View.VISIBLE);
         } else {
             prevGameBtn.setVisibility(View.GONE);
