@@ -18,7 +18,7 @@ import com.morrowbone.mafiacards.app.model.roles.Immortal;
 import com.morrowbone.mafiacards.app.model.roles.Mafia;
 import com.morrowbone.mafiacards.app.model.roles.Maniac;
 import com.morrowbone.mafiacards.app.model.roles.Wervoolf;
-import com.morrowbone.mafiacards.app.utils.Constants;
+import com.morrowbone.mafiacards.app.utils.ConstantsKt;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -80,7 +80,7 @@ public class SystemDatabaseHelper extends SQLiteOpenHelper {
                     SQLiteDatabase.OPEN_READONLY);
             correctVersion = checkDB.getVersion() == DB_VERSION;
         } catch (SQLiteException e) {
-            Log.w(Constants.DEBUG_TAG, e.getMessage());
+            Log.w(ConstantsKt.DEBUG_TAG, e.getMessage());
         } finally {
             if (checkDB != null)
                 checkDB.close();
@@ -118,7 +118,7 @@ public class SystemDatabaseHelper extends SQLiteOpenHelper {
             }
         } catch (IOException ex) {
             // Что-то пошло не так
-            Log.e(Constants.DEBUG_TAG, ex.getMessage());
+            Log.e(ConstantsKt.DEBUG_TAG, ex.getMessage());
             throw new Exception(
                     "Fail to copy initial db from assets", ex);
         } finally {

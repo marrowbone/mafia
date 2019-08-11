@@ -19,7 +19,8 @@ import com.morrowbone.mafiacards.app.R;
 import com.morrowbone.mafiacards.app.application.MafiaApp;
 import com.morrowbone.mafiacards.app.constants.StatisticConstants;
 import com.morrowbone.mafiacards.app.database.SystemDatabaseHelper;
-import com.morrowbone.mafiacards.app.utils.Constants;
+import com.morrowbone.mafiacards.app.utils.CardsUtils;
+import com.morrowbone.mafiacards.app.utils.ConstantsKt;
 import com.morrowbone.mafiacards.app.utils.StatisticUtils;
 
 public class MainActivity extends FragmentActivity implements StatisticConstants {
@@ -184,7 +185,7 @@ public class MainActivity extends FragmentActivity implements StatisticConstants
                             } else {
                                 StatisticUtils.sendActionInfo(BUTTON_CATEGORY, "Play in dialog");
                                 Intent intent = new Intent(MainActivity.this, ShowUserCartActivity.class);
-                                intent.putExtra(Constants.EXTRA_CART_COUNT, cartCount);
+                                intent.putExtra(ConstantsKt.EXTRA_CART_COUNT, cartCount);
                                 startActivity(intent);
                             }
 

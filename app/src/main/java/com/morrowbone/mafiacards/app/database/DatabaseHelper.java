@@ -17,7 +17,6 @@ import com.morrowbone.mafiacards.app.model.roles.Immortal;
 import com.morrowbone.mafiacards.app.model.roles.Mafia;
 import com.morrowbone.mafiacards.app.model.roles.Maniac;
 import com.morrowbone.mafiacards.app.model.roles.Wervoolf;
-import com.morrowbone.mafiacards.app.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;

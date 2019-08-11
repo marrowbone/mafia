@@ -31,7 +31,7 @@ import com.morrowbone.mafiacards.app.adapter.SectionsPagerAdapter;
 import com.morrowbone.mafiacards.app.constants.StatisticConstants;
 import com.morrowbone.mafiacards.app.database.SystemDatabaseHelper;
 import com.morrowbone.mafiacards.app.model.Deck;
-import com.morrowbone.mafiacards.app.utils.Constants;
+import com.morrowbone.mafiacards.app.utils.ConstantsKt;
 import com.morrowbone.mafiacards.app.utils.StatisticUtils;
 import com.morrowbone.mafiacards.app.utils.Utils;
 import com.morrowbone.mafiacards.app.views.NonSwipeableViewPager;
@@ -85,13 +85,13 @@ public class ShowUserCartActivity extends FragmentActivity implements StatisticC
         setContentView(R.layout.activity_show_user_cart);
 
 
-        if (getIntent().hasExtra(Constants.EXTRA_CART_COUNT)) {
+        if (getIntent().hasExtra(ConstantsKt.EXTRA_CART_COUNT)) {
             try {
                 SystemDatabaseHelper.Initialize(this);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Integer cardCount = getIntent().getIntExtra(Constants.EXTRA_CART_COUNT, 0);
+            Integer cardCount = getIntent().getIntExtra(ConstantsKt.EXTRA_CART_COUNT, 0);
             mDeck = getDeck(cardCount);
             mDeck.shuffle();
         }
@@ -181,9 +181,9 @@ public class ShowUserCartActivity extends FragmentActivity implements StatisticC
     }
 
     private Boolean isEnableShowGooglePlayReviewIs() {
-        Integer gamesFinished = Utils.getPlayedGameCount(this);
-        Integer period = Utils.getRateAfterCount(this);
-        if (gamesFinished % period == 0 && Utils.isEnableRateApp(this) && gamesFinished > 0) {
+        Integer gamesFinished = Utils.INSTANCE.getPlayedGameCount(this);
+        Integer period = Utils.INSTANCE.getRateAfterCount(this);
+        if (gamesFinished % period == 0 && Utils.INSTANCE.isEnableRateApp(this) && gamesFinished > 0) {
             return true;
         } else {
             return false;
@@ -210,20 +210,20 @@ public class ShowUserCartActivity extends FragmentActivity implements StatisticC
                 } catch (android.content.ActivityNotFoundException anfe) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + appPackageName)));
                 }
-                Utils.setIsEnableRateAppToFalse(ShowUserCartActivity.this);
+                Utils.INSTANCE.setIsEnableRateAppToFalse(ShowUserCartActivity.this);
             }
         });
         builder.setNeutralButton(R.string.later_review, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Utils.incrementRateAfter(ShowUserCartActivity.this);
+                Utils.INSTANCE.incrementRateAfter(ShowUserCartActivity.this);
             }
         });
 
         builder.setNegativeButton(R.string.never_review, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Utils.setIsEnableRateAppToFalse(ShowUserCartActivity.this);
+                Utils.INSTANCE.setIsEnableRateAppToFalse(ShowUserCartActivity.this);
                 mAdsView.setVisibility(View.VISIBLE);
             }
         });
@@ -244,7 +244,7 @@ public class ShowUserCartActivity extends FragmentActivity implements StatisticC
                 if (isEnableShowingAds()) {
                     displayInterstitial();
                 }
-                Utils.incrementPlayedGameCount(ShowUserCartActivity.this);
+                Utils.INSTANCE.incrementPlayedGameCount(ShowUserCartActivity.this);
                 finish();
             }
         });

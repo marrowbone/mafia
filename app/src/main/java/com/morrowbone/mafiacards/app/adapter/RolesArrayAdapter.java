@@ -15,8 +15,6 @@ import android.widget.TextView;
 
 import com.morrowbone.mafiacards.app.R;
 import com.morrowbone.mafiacards.app.data.AbstractCard;
-import com.morrowbone.mafiacards.app.model.Card;
-import com.morrowbone.mafiacards.app.utils.Constants;
 
 import java.util.List;
 
