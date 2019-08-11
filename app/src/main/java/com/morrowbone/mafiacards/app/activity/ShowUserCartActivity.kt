@@ -90,7 +90,7 @@ class ShowUserCartActivity : FragmentActivity(), StatisticConstants {
             mDeck = getDeck(cardCount)
             mDeck!!.shuffle()
         }
-        mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager, this, mDeck)
+        mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager, this, mDeck!!)
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = findViewById<View>(R.id.pager) as NonSwipeableViewPager
