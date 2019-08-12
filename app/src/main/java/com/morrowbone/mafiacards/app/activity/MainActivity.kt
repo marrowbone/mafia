@@ -1,7 +1,6 @@
 package com.morrowbone.mafiacards.app.activity
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
@@ -13,15 +12,10 @@ import android.widget.EditText
 import android.widget.SeekBar
 import android.widget.TextView
 
-import com.google.android.gms.analytics.HitBuilders
-import com.google.android.gms.analytics.Tracker
 import com.morrowbone.mafiacards.app.R
-import com.morrowbone.mafiacards.app.application.MafiaApp
 import com.morrowbone.mafiacards.app.constants.StatisticConstants
 import com.morrowbone.mafiacards.app.database.SystemDatabaseHelper
-import com.morrowbone.mafiacards.app.utils.CardsUtils
 import com.morrowbone.mafiacards.app.utils.*
-import com.morrowbone.mafiacards.app.utils.StatisticUtils
 
 class MainActivity : FragmentActivity(), StatisticConstants {
 
@@ -41,17 +35,6 @@ class MainActivity : FragmentActivity(), StatisticConstants {
         initCreatorBtn()
 
         initRulesBtn()
-
-        // Get tracker.
-        val t = (application as MafiaApp).getTracker(
-                MafiaApp.TrackerName.APP_TRACKER)
-
-        // Set screen name.
-        // Where path is a String representing the screen name.
-        t.setScreenName("Main Screen")
-
-        // Send a screen view.
-        t.send(HitBuilders.AppViewBuilder().build())
     }
 
     override fun onResume() {
@@ -66,7 +49,6 @@ class MainActivity : FragmentActivity(), StatisticConstants {
     private fun initPrevGameBtn() {
         prevGameBtn = findViewById(R.id.prev_game)
         prevGameBtn!!.setOnClickListener {
-            StatisticUtils.sendActionInfo(StatisticConstants.BUTTON_CATEGORY, "Prev game")
             val intent = Intent(this@MainActivity, PreviousGameInfoActivity::class.java)
             startActivity(intent)
         }
@@ -76,7 +58,6 @@ class MainActivity : FragmentActivity(), StatisticConstants {
     private fun initRulesBtn() {
         val rulesBtn = findViewById<View>(R.id.rules_btn) as Button
         rulesBtn.setOnClickListener {
-            StatisticUtils.sendActionInfo(StatisticConstants.BUTTON_CATEGORY, "Start roles")
             val intent = Intent(this@MainActivity, RulesActivity::class.java)
             startActivity(intent)
         }
@@ -86,7 +67,6 @@ class MainActivity : FragmentActivity(), StatisticConstants {
     private fun initCreatorBtn() {
         val creatorBtn = findViewById<View>(R.id.creator_btn) as Button
         creatorBtn.setOnClickListener {
-            StatisticUtils.sendActionInfo(StatisticConstants.BUTTON_CATEGORY, "Start creator")
             val intent = Intent(this@MainActivity, CreatorActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
             startActivity(intent)
@@ -96,7 +76,6 @@ class MainActivity : FragmentActivity(), StatisticConstants {
     private fun initPlayBtn() {
         val playBtn = findViewById<View>(R.id.play_btn) as Button
         playBtn.setOnClickListener {
-            StatisticUtils.sendActionInfo(StatisticConstants.BUTTON_CATEGORY, "Play in main")
             try {
                 SystemDatabaseHelper.Initialize(this@MainActivity)
             } catch (e: Exception) {
@@ -161,7 +140,6 @@ class MainActivity : FragmentActivity(), StatisticConstants {
                     if (cartCount < min) {
                         showMessage(R.string.error, R.string.wrong_player_count)
                     } else {
-                        StatisticUtils.sendActionInfo(StatisticConstants.BUTTON_CATEGORY, "Play in dialog")
                         val intent = Intent(this@MainActivity, ShowUserCartActivity::class.java)
                         intent.putExtra(EXTRA_CART_COUNT, cartCount)
                         startActivity(intent)

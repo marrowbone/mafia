@@ -27,7 +27,6 @@ import com.morrowbone.mafiacards.app.database.SystemDatabaseHelper
 import com.morrowbone.mafiacards.app.fragments.AdsFragment
 import com.morrowbone.mafiacards.app.model.Deck
 import com.morrowbone.mafiacards.app.utils.EXTRA_CART_COUNT
-import com.morrowbone.mafiacards.app.utils.StatisticUtils
 import com.morrowbone.mafiacards.app.utils.Utils
 import com.morrowbone.mafiacards.app.views.NonSwipeableViewPager
 import java.lang.reflect.Field
@@ -203,7 +202,6 @@ class ShowUserCartActivity : FragmentActivity(), StatisticConstants {
         builder.setMessage(R.string.final_dialog_message)
         builder.setCancelable(false)
         builder.setPositiveButton(R.string.final_dialog_go_to_main_menu) { arg0, arg1 ->
-            StatisticUtils.sendActionInfo(StatisticConstants.BUTTON_CATEGORY, "Game over", mDeck!!.size())
             if (isEnableShowingAds) {
                 displayInterstitial()
             }

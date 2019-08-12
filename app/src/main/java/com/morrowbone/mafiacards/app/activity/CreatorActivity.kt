@@ -2,24 +2,16 @@ package com.morrowbone.mafiacards.app.activity
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.DialogInterface
-import android.content.Intent
-import android.graphics.Typeface
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ListView
 import android.widget.TextView
 
-import com.google.android.gms.analytics.HitBuilders
-import com.google.android.gms.analytics.Tracker
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.adapter.CreateDeckArrayAdapter
-import com.morrowbone.mafiacards.app.application.MafiaApp
 import com.morrowbone.mafiacards.app.constants.StatisticConstants
-import com.morrowbone.mafiacards.app.database.DatabaseHelper
 import com.morrowbone.mafiacards.app.model.Card
 import com.morrowbone.mafiacards.app.model.Deck
 import com.morrowbone.mafiacards.app.model.roles.Civilian
@@ -30,7 +22,6 @@ import com.morrowbone.mafiacards.app.model.roles.Immortal
 import com.morrowbone.mafiacards.app.model.roles.Mafia
 import com.morrowbone.mafiacards.app.model.roles.Maniac
 import com.morrowbone.mafiacards.app.utils.CardsUtils
-import com.morrowbone.mafiacards.app.utils.StatisticUtils
 
 class CreatorActivity : Activity(), View.OnClickListener, StatisticConstants {
     private var mSaveButton: Button? = null
@@ -62,7 +53,6 @@ class CreatorActivity : Activity(), View.OnClickListener, StatisticConstants {
     override fun onClick(v: View) {
         if (mCardCount > 0) {
             val deck = convertToDeck(mRolesList!!)
-            StatisticUtils.sendActionInfo(StatisticConstants.BUTTON_CATEGORY, "Play in creator")
             val intent = ShowUserCartActivity.getIntent(this, deck)
             startActivity(intent)
         } else {
