@@ -33,7 +33,7 @@ public class SystemDatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "mydatabase.sqlite";
     private static final String DB_ASSETS_PATH = "db/" + DB_NAME;
     private static final String DB_FOLDER = "/data/data/"
-            + MafiaApp.getInstance().getPackageName() + "/databases/";
+            + MafiaApp.Companion.getInstance().getPackageName() + "/databases/";
     private static final String DB_PATH = DB_FOLDER + DB_NAME;
     private static final int DB_VERSION = 4;
     private static final int DB_FILES_COPY_BUFFER_SIZE = 8192;
@@ -97,7 +97,7 @@ public class SystemDatabaseHelper extends SQLiteOpenHelper {
      */
     private static void copyInialDBfromAssets() throws Exception {
 
-        Context appContext = MafiaApp.getInstance().getApplicationContext();
+        Context appContext = MafiaApp.Companion.getInstance().getApplicationContext();
         appContext.getPackageName();
         InputStream inStream = null;
         OutputStream outStream = null;

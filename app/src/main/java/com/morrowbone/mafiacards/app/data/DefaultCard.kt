@@ -13,8 +13,8 @@ data class DefaultCard(
         val pictureResId: Int
 ) : AbstractCard {
     override fun getId(): String = cardId
-    override fun getTitle(): String = MafiaApp.getInstance().getString(nameResId)
-    override fun getDescription(): String = MafiaApp.getInstance().getString(descriptionResId)
+    override fun getTitle(): String = MafiaApp.instance!!.getString(nameResId)
+    override fun getDescription(): String = MafiaApp.instance!!.getString(descriptionResId)
     override fun getImageResId(): Int = pictureResId
 
     companion object {

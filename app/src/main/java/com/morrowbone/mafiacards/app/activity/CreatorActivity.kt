@@ -11,7 +11,6 @@ import android.widget.TextView
 
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.adapter.CreateDeckArrayAdapter
-import com.morrowbone.mafiacards.app.constants.StatisticConstants
 import com.morrowbone.mafiacards.app.model.Card
 import com.morrowbone.mafiacards.app.model.Deck
 import com.morrowbone.mafiacards.app.model.roles.Civilian
@@ -23,7 +22,7 @@ import com.morrowbone.mafiacards.app.model.roles.Mafia
 import com.morrowbone.mafiacards.app.model.roles.Maniac
 import com.morrowbone.mafiacards.app.utils.CardsUtils
 
-class CreatorActivity : Activity(), View.OnClickListener, StatisticConstants {
+class CreatorActivity : Activity(), View.OnClickListener {
     private var mSaveButton: Button? = null
     private var mCardCountTextView: TextView? = null
     private var mListView: ListView? = null

@@ -22,7 +22,7 @@ class RulesActivity : FragmentActivity() {
         setContentView(R.layout.activity_rules)
 
         viewModel.cards.observe(this, Observer {
-            val adapter = RolesArrayAdapter(MafiaApp.getInstance(), it)
+            val adapter = RolesArrayAdapter(MafiaApp.instance!!, it)
             game_type_listview.adapter = adapter
         })
     }

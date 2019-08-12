@@ -13,11 +13,10 @@ import android.widget.SeekBar
 import android.widget.TextView
 
 import com.morrowbone.mafiacards.app.R
-import com.morrowbone.mafiacards.app.constants.StatisticConstants
 import com.morrowbone.mafiacards.app.database.SystemDatabaseHelper
 import com.morrowbone.mafiacards.app.utils.*
 
-class MainActivity : FragmentActivity(), StatisticConstants {
+class MainActivity : FragmentActivity() {
 
     private var prevGameBtn: Button? = null
 

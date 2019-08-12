@@ -22,7 +22,6 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.adapter.SectionsPagerAdapter
-import com.morrowbone.mafiacards.app.constants.StatisticConstants
 import com.morrowbone.mafiacards.app.database.SystemDatabaseHelper
 import com.morrowbone.mafiacards.app.fragments.AdsFragment
 import com.morrowbone.mafiacards.app.model.Deck
@@ -32,7 +31,7 @@ import com.morrowbone.mafiacards.app.views.NonSwipeableViewPager
 import java.lang.reflect.Field
 
 
-class ShowUserCartActivity : FragmentActivity(), StatisticConstants {
+class ShowUserCartActivity : FragmentActivity() {
     /**
      * The [PagerAdapter] that will provide
      * fragments for each of the sections. We use a
