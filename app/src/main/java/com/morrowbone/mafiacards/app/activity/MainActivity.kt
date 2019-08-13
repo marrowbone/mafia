@@ -130,7 +130,7 @@ class MainActivity : FragmentActivity() {
             val builder = AlertDialog.Builder(this@MainActivity)
             builder.setTitle(R.string.dialog_number_of_player)
             builder.setView(dialogContent).setCancelable(true)
-            builder.setPositiveButton(R.string.dialog_number_of_player_positive_btn) { arg0, arg1 ->
+            builder.setPositiveButton(R.string.dialog_number_of_player_positive_btn) { _, _ ->
                 if (editText.text.toString() != "") {
                     val cartCount = Integer.valueOf(editText.text.toString())
                     if (cartCount < min) {
@@ -160,7 +160,7 @@ class MainActivity : FragmentActivity() {
     private fun showMessage(titleResId: Int, messageResId: Int) {
         val builder = AlertDialog.Builder(this@MainActivity)
         builder.setTitle(titleResId).setMessage(messageResId).setCancelable(false)
-        builder.setPositiveButton(R.string.positive_button_text) { arg0, arg1 -> }
+        builder.setPositiveButton(R.string.positive_button_text) { _, _ -> }
 
         builder.show()
     }
