@@ -11,13 +11,15 @@ import android.widget.EditText
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.morrowbone.mafiacards.app.R
+import com.morrowbone.mafiacards.app.data.DefaultDeck
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
+import com.morrowbone.mafiacards.app.viewmodels.DefaultDeckViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 
 class MainActivity : FragmentActivity() {
 
@@ -130,23 +132,22 @@ class MainActivity : FragmentActivity() {
             builder.setView(dialogContent).setCancelable(true)
             builder.setPositiveButton(R.string.dialog_number_of_player_positive_btn) { arg0, arg1 ->
                 if (editText.text.toString() != "") {
-
                     val cartCount = Integer.valueOf(editText.text.toString())
                     if (cartCount < min) {
                         showMessage(R.string.error, R.string.wrong_player_count)
                     } else {
-                        GlobalScope.launch(Main) {
-                            val task = async(IO) {
-                                println("InjectorUtils.getDeckRepository")
-                                val deckRepository = InjectorUtils.getDeckRepository(this@MainActivity);
-                                deckRepository.getDefaultDeck(cartCount)
+                        val deckViewModelFactory = InjectorUtils.provideDefaultDeckViewModelFactory(this, cartCount)
+                        val deckViewModel = ViewModelProvider(this, deckViewModelFactory).get(DefaultDeckViewModel::class.java)
+                        deckViewModel.deck.observe(this, object : Observer<DefaultDeck> {
+                            override fun onChanged(deck: DefaultDeck?) {
+                                if (deck == null) {
+                                    return
+                                }
+                                val intent = ShowUserCartActivity.getIntent(this@MainActivity, deck.deck)
+                                startActivity(intent)
+                                deckViewModel.deck.removeObserver(this)
                             }
-                            println("before task.await()")
-                            val deck = task.await()
-                            println("after task.await()")
-                            val intent = ShowUserCartActivity.getIntent(this@MainActivity, deck.deck)
-                            startActivity(intent)
-                        }
+                        })
                     }
 
                 }

@@ -1,17 +1,12 @@
 package com.morrowbone.mafiacards.app.data
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import androidx.lifecycle.LiveData
 
 class DeckRepository private constructor(
         private val deckDao: DeckDao,
         private val defaultDeckDao: DefaultDeckDao) {
 
-    suspend fun getDefaultDeck(cardCount: Int): DefaultDeck {
-        return withContext(Dispatchers.IO) {
-            defaultDeckDao.getDefaultDeck(cardCount)
-        }
-    }
+    fun getDefaultDeck(cardCount: Int): LiveData<DefaultDeck> = defaultDeckDao.getDefaultDeck(cardCount)
 
     companion object {
         @Volatile
