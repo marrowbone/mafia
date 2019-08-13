@@ -125,14 +125,6 @@ class ShowUserCartActivity : FragmentActivity() {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
     fun showNextPage() {
         val childCount = mSectionsPagerAdapter.count
         val currItem = mViewPager!!.currentItem
