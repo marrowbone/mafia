@@ -140,11 +140,12 @@ class MainActivity : FragmentActivity() {
                         val deckViewModelFactory = InjectorUtils.provideDefaultDeckViewModelFactory(this, cartCount)
                         val deckViewModel = ViewModelProvider(this, deckViewModelFactory).get(DefaultDeckViewModel::class.java)
                         deckViewModel.deck.observe(this, object : Observer<DefaultDeck> {
-                            override fun onChanged(deck: DefaultDeck?) {
-                                if (deck == null) {
+                            override fun onChanged(defaultDeck: DefaultDeck?) {
+                                if (defaultDeck == null) {
                                     return
                                 }
-                                val intent = ShowUserCartActivity.getIntent(this@MainActivity, deck.deck)
+                                val deck = defaultDeck.deck.apply { shuffle() }
+                                val intent = ShowUserCartActivity.getIntent(this@MainActivity, deck)
                                 startActivity(intent)
                                 deckViewModel.deck.removeObserver(this)
                             }

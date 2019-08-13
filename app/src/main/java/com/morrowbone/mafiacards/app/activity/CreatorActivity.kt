@@ -51,7 +51,7 @@ class CreatorActivity : FragmentActivity(), View.OnClickListener {
 
     override fun onClick(v: View) {
         if (cardCount > 0) {
-            val intent = ShowUserCartActivity.getIntent(this, mArrayAdapter.deck)
+            val intent = ShowUserCartActivity.getIntent(this, mArrayAdapter.deck.shuffle())
             startActivity(intent)
         } else {
             showErrorDialog(R.string.error_add_some_cards)
