@@ -58,7 +58,7 @@ class ShowUserCartActivity : FragmentActivity() {
     private val isEnableShowingAds: Boolean
         get() = true
 
-    private fun checkInternetConection(): Boolean {
+    private fun checkInternetConnection(): Boolean {
         val conMgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val i = conMgr.activeNetworkInfo ?: return false
         if (!i.isConnected)
@@ -120,7 +120,7 @@ class ShowUserCartActivity : FragmentActivity() {
         // Begin loading your interstitial.
 
 
-        if (isEnableShowGooglePlayReviewIs && checkInternetConection()) {
+        if (isEnableShowGooglePlayReviewIs && checkInternetConnection()) {
             showGooglePlayReviewDialog()
         }
     }
