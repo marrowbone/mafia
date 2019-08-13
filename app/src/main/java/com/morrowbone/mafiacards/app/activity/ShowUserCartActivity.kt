@@ -52,11 +52,7 @@ class ShowUserCartActivity : FragmentActivity() {
         get() {
             val gamesFinished = Utils.getPlayedGameCount(this)
             val period = Utils.getRateAfterCount(this)
-            return if (gamesFinished!! % period!! == 0 && Utils.isEnableRateApp(this)!! && gamesFinished > 0) {
-                true
-            } else {
-                false
-            }
+            return gamesFinished!! % period!! == 0 && Utils.isEnableRateApp(this)!! && gamesFinished > 0
         }
 
     private val isEnableShowingAds: Boolean
