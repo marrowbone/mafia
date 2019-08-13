@@ -13,5 +13,7 @@ data class Deck(
     @ColumnInfo(name = "id")
     var deckId: Long = 0
 
+    var cardOrder: MutableList<String> = mutableListOf()
+
     fun getCards(): List<AbstractCard> = ArrayList<AbstractCard>(defaultCards).apply { addAll(userCards) }
 }

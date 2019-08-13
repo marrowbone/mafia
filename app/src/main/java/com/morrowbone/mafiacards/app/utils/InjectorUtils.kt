@@ -17,7 +17,7 @@ object InjectorUtils {
         return CardRepository.getInstance(appDatabase.cardDao(), appDatabase.defaultCardDao())
     }
 
-    private fun getDeckRepository(context: Context): DeckRepository {
+    fun getDeckRepository(context: Context): DeckRepository {
         val appDatabase = AppDatabase.getInstance(context.applicationContext)
         return DeckRepository.getInstance(appDatabase.deckDao(), appDatabase.defaultDeckDao())
     }

@@ -8,6 +8,11 @@ class DeckRepository private constructor(
 
     fun getDefaultDeck(cardCount: Int): LiveData<DefaultDeck> = defaultDeckDao.getDefaultDeck(cardCount)
 
+    fun insertLastUsedDeck(deck: Deck) {
+        deck.deckId = LAST_USED_DECK_ID
+        deckDao.insert(deck)
+    }
+
     companion object {
         @Volatile
         private var instance: DeckRepository? = null
@@ -16,5 +21,7 @@ class DeckRepository private constructor(
                 instance ?: synchronized(this) {
                     instance ?: DeckRepository(deckDao, defaultDeckDao).also { instance = it }
                 }
+
+        val LAST_USED_DECK_ID = Int.MAX_VALUE.toLong()
     }
 }

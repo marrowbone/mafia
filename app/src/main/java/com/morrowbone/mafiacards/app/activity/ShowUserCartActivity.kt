@@ -22,10 +22,15 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.adapter.SectionsPagerAdapter
+import com.morrowbone.mafiacards.app.data.AppDatabase
 import com.morrowbone.mafiacards.app.data.Deck
 import com.morrowbone.mafiacards.app.fragments.AdsFragment
+import com.morrowbone.mafiacards.app.utils.InjectorUtils
 import com.morrowbone.mafiacards.app.utils.Utils
 import com.morrowbone.mafiacards.app.views.NonSwipeableViewPager
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.lang.reflect.Field
 
 
@@ -165,6 +170,9 @@ class ShowUserCartActivity : FragmentActivity() {
     }
 
     private fun showLastCardDialog() {
+        GlobalScope.launch(IO) {
+            InjectorUtils.getDeckRepository(this@ShowUserCartActivity).insertLastUsedDeck(mDeck!!)
+        }
         val builder = AlertDialog.Builder(this)
         builder.setTitle(R.string.final_dialog_title)
         builder.setMessage(R.string.final_dialog_message)

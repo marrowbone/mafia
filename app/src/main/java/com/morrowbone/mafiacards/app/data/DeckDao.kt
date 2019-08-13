@@ -13,6 +13,6 @@ interface DeckDao {
     @Query("SELECT * FROM decks WHERE id = :deckId")
     fun getDeck(deckId: Long): Deck
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(deck: Deck)
 }
