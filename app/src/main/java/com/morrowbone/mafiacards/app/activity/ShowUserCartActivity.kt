@@ -134,12 +134,18 @@ class ShowUserCartActivity : FragmentActivity() {
         val childCount = mSectionsPagerAdapter.count
         val currItem = mViewPager!!.currentItem
         if (currItem == childCount - 1) {
-            PreviousGameInfoActivity.mDeck = null
+            saveLastUsedDeck()
             showLastCardDialog()
         } else {
             scroller!!.setFixedDuration(1000)
             mViewPager!!.setCurrentItem(currItem + 1, true)
             scroller!!.setFixedDuration(null)
+        }
+    }
+
+    private fun saveLastUsedDeck() {
+        GlobalScope.launch(IO) {
+            InjectorUtils.getDeckRepository(this@ShowUserCartActivity).insertLastUsedDeck(mDeck!!)
         }
     }
 
@@ -170,9 +176,6 @@ class ShowUserCartActivity : FragmentActivity() {
     }
 
     private fun showLastCardDialog() {
-        GlobalScope.launch(IO) {
-            InjectorUtils.getDeckRepository(this@ShowUserCartActivity).insertLastUsedDeck(mDeck!!)
-        }
         val builder = AlertDialog.Builder(this)
         builder.setTitle(R.string.final_dialog_title)
         builder.setMessage(R.string.final_dialog_message)
