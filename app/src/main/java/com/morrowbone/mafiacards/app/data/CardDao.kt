@@ -12,7 +12,7 @@ interface CardDao {
     fun getCards(): LiveData<List<Card>>
 
     @Query("SELECT * FROM cards WHERE id = :cardId")
-    fun getCard(cardId: Int): Card
+    fun getCard(cardId: String): Card
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     fun insertAll(cards: List<Card>)

@@ -6,12 +6,12 @@ import androidx.room.PrimaryKey
 import com.morrowbone.mafiacards.app.R
 
 @Entity(tableName = "cards")
-data class Card(val name: String, val info: String) : AbstractCard {
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    var cardId: Long = 0
-
-    override fun getId() = cardId.toString()
+data class Card(
+        @PrimaryKey
+        @ColumnInfo(name = "id")
+        val cardId: String,
+        val name: String, val info: String) : AbstractCard {
+    override fun getId() = cardId
     override fun getTitle() = name
     override fun getDescription() = info
     override fun getImageResId() = R.drawable.civilian_cr
