@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.SeekBar
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,17 +18,23 @@ import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.data.DefaultDeck
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
 import com.morrowbone.mafiacards.app.viewmodels.DefaultDeckViewModel
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.async
+import com.morrowbone.mafiacards.app.viewmodels.LastUsedDeckViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : FragmentActivity() {
 
-    private var prevGameBtn: Button? = null
+    private val lastUsedDeckViewModel: LastUsedDeckViewModel by lazy {
+        val viewModelFactory = InjectorUtils.provideLastUsedDeckViewModelFactory(this)
+        ViewModelProvider(this, viewModelFactory).get(LastUsedDeckViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        lastUsedDeckViewModel.deck.observe(this, Observer {
+            prev_game.isVisible = it != null
+        })
 
         val title = findViewById<View>(R.id.title) as TextView
         title.text = "Mafia"
@@ -43,16 +50,10 @@ class MainActivity : FragmentActivity() {
 
     override fun onResume() {
         super.onResume()
-        if (PreviousGameInfoActivity.mDeck != null) {
-            prevGameBtn!!.visibility = View.VISIBLE
-        } else {
-            prevGameBtn!!.visibility = View.GONE
-        }
     }
 
     private fun initPrevGameBtn() {
-        prevGameBtn = findViewById(R.id.prev_game)
-        prevGameBtn!!.setOnClickListener {
+        prev_game.setOnClickListener {
             val intent = Intent(this@MainActivity, PreviousGameInfoActivity::class.java)
             startActivity(intent)
         }

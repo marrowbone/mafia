@@ -1,5 +1,6 @@
 package com.morrowbone.mafiacards.app.data
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -11,7 +12,7 @@ interface DeckDao {
     fun getDecks(): List<Deck>
 
     @Query("SELECT * FROM decks WHERE id = :deckId")
-    fun getDeck(deckId: Long): Deck
+    fun getDeck(deckId: Long): LiveData<Deck>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(deck: Deck)

@@ -8,6 +8,8 @@ class DeckRepository private constructor(
 
     fun getDefaultDeck(cardCount: Int): LiveData<DefaultDeck> = defaultDeckDao.getDefaultDeck(cardCount)
 
+    fun getLastUsedDeck(): LiveData<Deck> = deckDao.getDeck(LAST_USED_DECK_ID)
+
     fun insertLastUsedDeck(deck: Deck) {
         deck.deckId = LAST_USED_DECK_ID
         deckDao.insert(deck)
