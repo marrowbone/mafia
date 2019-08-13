@@ -13,11 +13,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.activity.CreatorActivity
-import com.morrowbone.mafiacards.app.model.Card
+import com.morrowbone.mafiacards.app.data.AbstractCard
+import com.morrowbone.mafiacards.app.data.Card
+import com.morrowbone.mafiacards.app.data.Deck
+import com.morrowbone.mafiacards.app.data.DefaultCard
 
-class CreateDeckArrayAdapter(context: Context, values: List<Card>) : ArrayAdapter<Card>(context, layout_id, values) {
+class CreateDeckArrayAdapter(context: Context, values: List<AbstractCard>) : ArrayAdapter<AbstractCard>(context, layout_id, values) {
     private val mInflater: LayoutInflater
     private val mContext: CreatorActivity
+    private val defaultCards = mutableListOf<DefaultCard>()
+    private val userCards = mutableListOf<Card>()
+    val deck = Deck(defaultCards, userCards)
 
     init {
         mInflater = getContext().getSystemService(
@@ -27,7 +33,8 @@ class CreateDeckArrayAdapter(context: Context, values: List<Card>) : ArrayAdapte
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         var convertView = convertView
-        val item = getItem(position)
+        val item = getItem(position)!!
+        val itemId = item.getId()
         val holder: Holder
 
         if (convertView == null) {
@@ -47,35 +54,50 @@ class CreateDeckArrayAdapter(context: Context, values: List<Card>) : ArrayAdapte
             holder = convertView.tag as Holder
         }
 
-        holder.title!!.setText(item!!.roleNameStringId)
-        holder.image!!.setImageResource(item.cartFrontSideImageId!!)
+        holder.title!!.text = item.getTitle()
+        holder.image!!.setImageResource(item.getImageResId())
 
-        val curCount = arrayOf(item.countInDeck)
+        var curCount = deck.getCards().count { it.getId() == itemId }
 
-        holder.cardCount!!.text = curCount[0].toString()
+        holder.cardCount!!.text = curCount.toString()
         holder.decrement!!.setOnClickListener {
-            if (curCount[0] > 0) {
-                curCount[0]--
-                holder.cardCount!!.text = curCount[0].toString()
-                item.countInDeck = curCount[0]
-
+            if (curCount > 0) {
+                curCount--
+                holder.cardCount!!.text = curCount.toString()
                 mCardCount--
                 mContext.setCardCount(mCardCount)
+                removeCard(item)
             }
         }
 
         holder.increment!!.setOnClickListener {
-            if (curCount[0] < 100) {
-                curCount[0]++
-                item.countInDeck = curCount[0]
-                holder.cardCount!!.text = curCount[0].toString()
+            if (curCount < 100) {
+                curCount++
+                holder.cardCount!!.text = curCount.toString()
 
                 mCardCount++
                 mContext.setCardCount(mCardCount)
+                addCard(item)
             }
         }
 
         return convertView
+    }
+
+    private fun addCard(card: AbstractCard) {
+        if (card is DefaultCard) {
+            defaultCards.add(card)
+        } else if (card is Card) {
+            userCards.add(card)
+        }
+    }
+
+    private fun removeCard(card: AbstractCard) {
+        if (card is DefaultCard) {
+            defaultCards.remove(card)
+        } else if (card is Card) {
+            userCards.remove(card)
+        }
     }
 
     /**
@@ -90,7 +112,6 @@ class CreateDeckArrayAdapter(context: Context, values: List<Card>) : ArrayAdapte
     }
 
     companion object {
-
         private val layout_id = R.layout.view_creator_cart
         private var mCardCount: Int = 0
     }

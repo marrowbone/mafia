@@ -1,58 +1,57 @@
 package com.morrowbone.mafiacards.app.activity
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
-
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.adapter.CreateDeckArrayAdapter
-import com.morrowbone.mafiacards.app.model.Card
-import com.morrowbone.mafiacards.app.model.Deck
-import com.morrowbone.mafiacards.app.model.roles.Civilian
-import com.morrowbone.mafiacards.app.model.roles.Detective
-import com.morrowbone.mafiacards.app.model.roles.Doctor
-import com.morrowbone.mafiacards.app.model.roles.DonMafia
-import com.morrowbone.mafiacards.app.model.roles.Immortal
-import com.morrowbone.mafiacards.app.model.roles.Mafia
-import com.morrowbone.mafiacards.app.model.roles.Maniac
-import com.morrowbone.mafiacards.app.utils.CardsUtils
+import com.morrowbone.mafiacards.app.utils.InjectorUtils
+import com.morrowbone.mafiacards.app.viewmodels.CardListViewModel
 
-class CreatorActivity : Activity(), View.OnClickListener {
+class CreatorActivity : FragmentActivity(), View.OnClickListener {
     private var mSaveButton: Button? = null
     private var mCardCountTextView: TextView? = null
     private var mListView: ListView? = null
-    private var mArrayAdapter: ArrayAdapter<*>? = null
+    private lateinit var mArrayAdapter: CreateDeckArrayAdapter
+    private var cardCount = 0
+    private val viewModel: CardListViewModel by lazy {
+        val factory = InjectorUtils.provideCardListViewModelFactory(this)
+        ViewModelProvider(this, factory).get(CardListViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_creator)
 
-        mRolesList = CardsUtils.getRoles()
-        mArrayAdapter = CreateDeckArrayAdapter(this, mRolesList!!)
+        viewModel.cards.observe(this, Observer {
+            mArrayAdapter = CreateDeckArrayAdapter(this, it)
+            mListView!!.adapter = mArrayAdapter
+        })
+
         mListView = findViewById<View>(R.id.listview) as ListView
-        mListView!!.adapter = mArrayAdapter
+
 
         mCardCountTextView = findViewById<View>(R.id.card_count_textview) as TextView
-        mCardCountTextView!!.text = mCardCount.toString()
+        mCardCountTextView!!.text = cardCount.toString()
 
         mSaveButton = findViewById<View>(R.id.save_btn) as Button
         mSaveButton!!.setOnClickListener(this)
     }
 
     fun setCardCount(cardCount: Int) {
-        mCardCount = cardCount
+        this.cardCount = cardCount
         mCardCountTextView!!.text = cardCount.toString()
     }
 
     override fun onClick(v: View) {
-        if (mCardCount > 0) {
-            val deck = convertToDeck(mRolesList!!)
-            val intent = ShowUserCartActivity.getIntent(this, deck)
+        if (cardCount > 0) {
+            val intent = ShowUserCartActivity.getIntent(this, mArrayAdapter.deck)
             startActivity(intent)
         } else {
             showErrorDialog(R.string.error_add_some_cards)
@@ -66,54 +65,5 @@ class CreatorActivity : Activity(), View.OnClickListener {
         builder.setCancelable(false)
         builder.setPositiveButton(R.string.positive_button_text) { _, _ -> }
         builder.show()
-    }
-
-    companion object {
-        private var mCardCount = 0
-        private var mRolesList: List<Card>? = null
-
-        private fun convertToDeck(cards: List<Card>): Deck {
-            val deck = Deck()
-            for (card in cards) {
-                val cardCount: Int?
-                if (card.javaClass == Civilian::class.java) {
-                    cardCount = card.countInDeck
-                    for (i in 0 until cardCount) {
-                        deck.addCard(Civilian())
-                    }
-                } else if (card.javaClass == Mafia::class.java) {
-                    cardCount = card.countInDeck
-                    for (i in 0 until cardCount) {
-                        deck.addCard(Mafia())
-                    }
-                } else if (card.javaClass == Detective::class.java) {
-                    cardCount = card.countInDeck
-                    for (i in 0 until cardCount) {
-                        deck.addCard(Detective())
-                    }
-                } else if (card.javaClass == Doctor::class.java) {
-                    cardCount = card.countInDeck
-                    for (i in 0 until cardCount) {
-                        deck.addCard(Doctor())
-                    }
-                } else if (card.javaClass == DonMafia::class.java) {
-                    cardCount = card.countInDeck
-                    for (i in 0 until cardCount) {
-                        deck.addCard(DonMafia())
-                    }
-                } else if (card.javaClass == Immortal::class.java) {
-                    cardCount = card.countInDeck
-                    for (i in 0 until cardCount) {
-                        deck.addCard(Immortal())
-                    }
-                } else if (card.javaClass == Maniac::class.java) {
-                    cardCount = card.countInDeck
-                    for (i in 0 until cardCount) {
-                        deck.addCard(Maniac())
-                    }
-                }
-            }
-            return deck
-        }
     }
 }

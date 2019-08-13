@@ -93,9 +93,9 @@ class CardView : FrameLayout {
         frontSideImage.setImageResource(imageId)
     }
 
-    fun setRoleNameResId(cartNameStringId: Int) {
+    fun setRoleName(text: String) {
         val titleTextView = findViewById<TextView>(R.id.role)
-        titleTextView.setText(cartNameStringId)
+        titleTextView.text = text
     }
 
     fun setPlayerNum(playerNum: Int?) {

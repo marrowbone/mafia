@@ -22,10 +22,8 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.adapter.SectionsPagerAdapter
-import com.morrowbone.mafiacards.app.database.SystemDatabaseHelper
+import com.morrowbone.mafiacards.app.data.Deck
 import com.morrowbone.mafiacards.app.fragments.AdsFragment
-import com.morrowbone.mafiacards.app.model.Deck
-import com.morrowbone.mafiacards.app.utils.EXTRA_CART_COUNT
 import com.morrowbone.mafiacards.app.utils.Utils
 import com.morrowbone.mafiacards.app.views.NonSwipeableViewPager
 import java.lang.reflect.Field
@@ -76,18 +74,6 @@ class ShowUserCartActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_user_cart)
 
-
-        if (intent.hasExtra(EXTRA_CART_COUNT)) {
-            try {
-                SystemDatabaseHelper.Initialize(this)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-
-            val cardCount = intent.getIntExtra(EXTRA_CART_COUNT, 0)
-            mDeck = getDeck(cardCount)
-            mDeck!!.shuffle()
-        }
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager, this, mDeck!!)
 
         // Set up the ViewPager with the sections adapter.
@@ -107,7 +93,7 @@ class ShowUserCartActivity : FragmentActivity() {
         }
 
         mCardCountTextView = findViewById<View>(R.id.card_count_textview) as TextView
-        mCardCountTextView!!.text = mDeck!!.size().toString()
+        mCardCountTextView!!.text = mDeck!!.getCards().size.toString()
         mAdsView = findViewById(R.id.layout_for_fragment)
 
         val adsFragment = AdsFragment.newInstance()
@@ -151,16 +137,11 @@ class ShowUserCartActivity : FragmentActivity() {
         super.onDestroy()
     }
 
-    private fun getDeck(cardCount: Int): Deck {
-        val databaseHelper = SystemDatabaseHelper(this)
-        return databaseHelper.getDeck(cardCount)
-    }
-
     fun showNextPage() {
         val childCount = mSectionsPagerAdapter.count
         val currItem = mViewPager!!.currentItem
         if (currItem == childCount - 1) {
-            PreviousGameInfoActivity.mDeck = mDeck
+            PreviousGameInfoActivity.mDeck = null
             showLastCardDialog()
         } else {
             scroller!!.setFixedDuration(1000)
@@ -253,7 +234,6 @@ class ShowUserCartActivity : FragmentActivity() {
 
         fun getIntent(context: Context, deck: Deck): Intent {
             mDeck = deck
-            mDeck!!.shuffle()
             return Intent(context, ShowUserCartActivity::class.java)
         }
     }

@@ -3,7 +3,6 @@ package com.morrowbone.mafiacards.app.activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.FragmentActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -11,10 +10,14 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.SeekBar
 import android.widget.TextView
-
+import androidx.fragment.app.FragmentActivity
 import com.morrowbone.mafiacards.app.R
-import com.morrowbone.mafiacards.app.database.SystemDatabaseHelper
-import com.morrowbone.mafiacards.app.utils.*
+import com.morrowbone.mafiacards.app.utils.InjectorUtils
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 class MainActivity : FragmentActivity() {
 
@@ -75,15 +78,8 @@ class MainActivity : FragmentActivity() {
     private fun initPlayBtn() {
         val playBtn = findViewById<View>(R.id.play_btn) as Button
         playBtn.setOnClickListener {
-            try {
-                SystemDatabaseHelper.Initialize(this@MainActivity)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-
-            val databaseHelper = SystemDatabaseHelper(this@MainActivity)
-            val max = databaseHelper.maxNumberOfPlayer!!
-            val min = databaseHelper.minNumberOfPlayer!!
+            val max = 13
+            val min = 3
 
             val dialogContent = layoutInflater.inflate(R.layout.dialog_num_of_player, null)
             val editText = dialogContent.findViewById<View>(R.id.input_field) as EditText
@@ -139,9 +135,18 @@ class MainActivity : FragmentActivity() {
                     if (cartCount < min) {
                         showMessage(R.string.error, R.string.wrong_player_count)
                     } else {
-                        val intent = Intent(this@MainActivity, ShowUserCartActivity::class.java)
-                        intent.putExtra(EXTRA_CART_COUNT, cartCount)
-                        startActivity(intent)
+                        GlobalScope.launch(Main) {
+                            val task = async(IO) {
+                                println("InjectorUtils.getDeckRepository")
+                                val deckRepository = InjectorUtils.getDeckRepository(this@MainActivity);
+                                deckRepository.getDefaultDeck(cartCount)
+                            }
+                            println("before task.await()")
+                            val deck = task.await()
+                            println("after task.await()")
+                            val intent = ShowUserCartActivity.getIntent(this@MainActivity, deck.deck)
+                            startActivity(intent)
+                        }
                     }
 
                 }

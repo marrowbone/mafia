@@ -15,14 +15,14 @@ class Converters {
     @TypeConverter
     fun defaultCardsToString(defaultCards: List<DefaultCard>): String {
         val gson = Gson()
-        val type = object : TypeToken<List<Card>>() {}.type
+        val type = object : TypeToken<List<DefaultCard>>() {}.type
         return gson.toJson(defaultCards, type)
     }
 
     @TypeConverter
     fun stringToCards(cardsString: String): List<Card> {
         val gson = Gson()
-        val type = object : TypeToken<List<DefaultCard>>() {}.type
+        val type = object : TypeToken<List<Card>>() {}.type
         return gson.fromJson(cardsString, type)
     }
 

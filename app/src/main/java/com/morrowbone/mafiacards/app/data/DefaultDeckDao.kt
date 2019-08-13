@@ -15,5 +15,5 @@ interface DefaultDeckDao {
     fun getDefaultDeck(playerNumber: Int): DefaultDeck
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(cards: List<DefaultCard>)
+    fun insertAll(cards: List<DefaultDeck>)
 }

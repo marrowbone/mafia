@@ -17,7 +17,8 @@ import androidx.fragment.app.FragmentPagerAdapter
 
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.activity.ShowUserCartActivity
-import com.morrowbone.mafiacards.app.model.Deck
+import com.morrowbone.mafiacards.app.data.AbstractCard
+import com.morrowbone.mafiacards.app.data.Deck
 import com.morrowbone.mafiacards.app.views.CardView
 import com.morrowbone.mafiacards.app.views.CardView.CardSide
 
@@ -25,10 +26,10 @@ import com.morrowbone.mafiacards.app.views.CardView.CardSide
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-class SectionsPagerAdapter(fm: FragmentManager, private val mContext: Context, deck: Deck) : FragmentPagerAdapter(fm) {
+class SectionsPagerAdapter(fm: FragmentManager, private val mContext: Context, val deck: Deck) : FragmentPagerAdapter(fm) {
 
     init {
-        mDeck = deck
+        cards = deck.getCards()
     }
 
 
@@ -39,13 +40,12 @@ class SectionsPagerAdapter(fm: FragmentManager, private val mContext: Context, d
     }
 
     override fun getCount(): Int {
-        return mDeck!!.size()
+        return cards!!.size
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        val cartNameStringId = mDeck!!.getCard(position).roleNameStringId
-
-        return mContext.resources.getString(cartNameStringId)
+        val card = cards!!.get(position)
+        return card.getTitle()
     }
 
 
@@ -61,16 +61,13 @@ class SectionsPagerAdapter(fm: FragmentManager, private val mContext: Context, d
             val rootView = inflater.inflate(R.layout.fragment_show_user_cart, container, false)
             mCardView = rootView.findViewById(R.id.card)
             mCardView!!.show(CardSide.BACKSIDE)
-
             val sectionNum = arguments!!.getInt(ARG_SECTION_NUMBER)
+            val card = cards!!.get(sectionNum)
             val playerNum = sectionNum + 1
-            val cartNameStringId = mDeck!!.getCard(sectionNum).roleNameStringId
-            val imageId = mDeck!!.getCard(sectionNum).cartFrontSideImageId!!
 
-            mCardView!!.setCardImageResource(imageId)
-            mCardView!!.setRoleNameResId(cartNameStringId)
+            mCardView!!.setCardImageResource(card.getImageResId())
+            mCardView!!.setRoleName(card.getTitle())
             mCardView!!.setPlayerNum(playerNum)
-
 
             mHelpText = rootView.findViewById(R.id.help_text)
             hideHelpField()
@@ -139,7 +136,6 @@ class SectionsPagerAdapter(fm: FragmentManager, private val mContext: Context, d
     }
 
     companion object {
-
-        private var mDeck: Deck? = null
+        private var cards: List<AbstractCard>? = null
     }
 }

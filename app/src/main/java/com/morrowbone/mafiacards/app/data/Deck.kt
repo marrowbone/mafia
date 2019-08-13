@@ -7,9 +7,11 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "decks")
 data class Deck(
         @ColumnInfo() val defaultCards: List<DefaultCard>,
-        val userCards: List<Card>
+        val userCards: List<Card> = mutableListOf()
 ) {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var deckId: Long = 0
+
+    fun getCards(): List<AbstractCard> = ArrayList<AbstractCard>(defaultCards).apply { addAll(userCards) }
 }

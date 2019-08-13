@@ -6,8 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 import com.morrowbone.mafiacards.app.R
-import com.morrowbone.mafiacards.app.model.Card
-import com.morrowbone.mafiacards.app.model.Deck
+import com.morrowbone.mafiacards.app.data.Deck
 import com.morrowbone.mafiacards.app.views.CardView
 
 class DeckAdapter(private val mDeck: Deck) : RecyclerView.Adapter<DeckAdapter.ViewHolder>() {
@@ -19,15 +18,15 @@ class DeckAdapter(private val mDeck: Deck) : RecyclerView.Adapter<DeckAdapter.Vi
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val card = mDeck.getCard(position)
+        val card = mDeck.getCards().get(position)
         val cardView = holder.cardView
         cardView.setPlayerNum(position + 1)
-        cardView.setCardImageResource(card.cartFrontSideImageId!!)
-        cardView.setRoleNameResId(card.roleNameStringId)
+        cardView.setCardImageResource(card.getImageResId())
+        cardView.setRoleName(card.getTitle())
     }
 
     override fun getItemCount(): Int {
-        return mDeck.size()
+        return mDeck.getCards().size
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.adapter.DeckAdapter
-import com.morrowbone.mafiacards.app.model.Deck
+import com.morrowbone.mafiacards.app.data.Deck
 import kotlinx.android.synthetic.main.activity_previous_game_info.*
 
 class PreviousGameInfoActivity : FragmentActivity() {
