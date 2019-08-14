@@ -7,6 +7,8 @@ buildscript {
     ext.work_version = "2.1.0"
     ext.lifecycle_version = "2.2.0-alpha03"
     ext.fragment_version = '1.2.0-alpha02'
+    ext.constraint_layout_version = '2.0.0-beta2'
+    ext.navigation_version = '2.1.0-rc01'
     repositories {
         google()
         jcenter()
@@ -14,6 +16,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
     }
 }
 

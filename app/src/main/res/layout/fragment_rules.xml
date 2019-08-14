@@ -1,14 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.morrowbone.mafiacards.app.activity.RulesActivity">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/main_background" />
+    android:layout_height="match_parent">
 
     <ListView
         android:id="@+id/game_type_listview"
@@ -19,5 +11,4 @@
         android:padding="10dp"
         android:scrollbarStyle="outsideOverlay"
         android:scrollbars="vertical" />
-
 </RelativeLayout>
