@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="role_civilian_info">Regular Citizens have no special powers, and as we mentioned before their strength lies in their numbers.</string>
+    <string name="role_civilian_info">Regular Citizens have no special powers, their strength lies in their numbers.</string>
     <string name="role_mafia_info">Mafia – plays against Citizens. Has information about other Mafia members, participates in all discussions</string>
     <string name="role_detective_info">Each night The Detective is given an opportunity to investigate another player (the Detective silently indicates whom they would like to investigate, usually by pointing). The moderator indicates by nodding or shaking his/her head whether or not that player is a Mafioso.</string>
     <string name="role_immortal_info">Belongs to Citizen’s team. Invincible during night. The key point for the game is to convince that you belong to Citizen team and do not let to kill yourself during the day phase. By provoking Mafia to kill him/herself during night, defense citizen’s life.</string>
