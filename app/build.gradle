@@ -12,6 +12,7 @@ android {
         multiDexEnabled true
         versionCode 9
         versionName "1.5"
+        setProperty("archivesBaseName", "mafia-app-$versionName")
     }
     buildTypes {
         release {
