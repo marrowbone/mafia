@@ -7,29 +7,32 @@
     android:background="@color/gray_alfa">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/player_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/very_very_big_text"
+            android:gravity="center_horizontal|bottom"
             android:textColor="@color/card_text_color"
-            android:textSize="@dimen/very_very_big_text"
+            app:autoSizeMaxTextSize="@dimen/very_very_big_text"
+            app:autoSizeTextType="uniform"
             app:fontFamily="@font/stylo_family" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/player_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/very_big_text"
             android:gravity="center_horizontal"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:text="@string/player"
             android:textColor="@color/card_text_color"
-            android:textSize="@dimen/very_big_text"
+            app:autoSizeMaxTextSize="@dimen/very_big_text"
+            app:autoSizeTextType="uniform"
             app:fontFamily="@font/stylo_family" />
     </LinearLayout>
 </RelativeLayout>
