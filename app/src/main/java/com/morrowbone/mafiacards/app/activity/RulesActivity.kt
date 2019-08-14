@@ -9,7 +9,7 @@ import com.morrowbone.mafiacards.app.adapter.RolesArrayAdapter
 import com.morrowbone.mafiacards.app.application.MafiaApp
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
 import com.morrowbone.mafiacards.app.viewmodels.CardListViewModel
-import kotlinx.android.synthetic.main.activity_rules.*
+import kotlinx.android.synthetic.main.fragment_rules.*
 
 class RulesActivity : FragmentActivity() {
     private val viewModel: CardListViewModel by lazy {
@@ -19,7 +19,7 @@ class RulesActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_rules)
+        setContentView(R.layout.fragment_rules)
 
         viewModel.cards.observe(this, Observer {
             val adapter = RolesArrayAdapter(MafiaApp.instance!!, it)
