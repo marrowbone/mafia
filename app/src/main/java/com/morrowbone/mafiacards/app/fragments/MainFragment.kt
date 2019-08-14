@@ -18,7 +18,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.activity.CreatorActivity
-import com.morrowbone.mafiacards.app.activity.PreviousGameInfoActivity
 import com.morrowbone.mafiacards.app.activity.ShowUserCartActivity
 import com.morrowbone.mafiacards.app.data.DefaultDeck
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
@@ -48,8 +47,7 @@ class MainFragment : Fragment() {
 
     private fun initPrevGameBtn() {
         prev_game.setOnClickListener {
-            val intent = Intent(context, PreviousGameInfoActivity::class.java)
-            startActivity(intent)
+            findNavController().navigate(R.id.action_mainFragment_to_prevGameFragment)
         }
     }
 

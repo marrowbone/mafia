@@ -18,5 +18,13 @@
         <action
             android:id="@+id/action_mainFragment_to_rulesFragment"
             app:destination="@id/rulesFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_prevGameFragment"
+            app:destination="@id/prevGameFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/prevGameFragment"
+        android:name="com.morrowbone.mafiacards.app.fragments.PrevGameFragment"
+        android:label="PrevGameFragment"
+        tools:layout="@layout/fragment_prev_game" />
 </navigation>
