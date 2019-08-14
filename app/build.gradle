@@ -11,7 +11,7 @@ android {
         targetSdkVersion 29
         multiDexEnabled true
         versionCode 9
-        versionName "1.4"
+        versionName "1.5"
     }
     buildTypes {
         release {
