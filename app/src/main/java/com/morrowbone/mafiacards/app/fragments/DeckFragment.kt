@@ -1,0 +1,59 @@
+package com.morrowbone.mafiacards.app.fragments
+
+import android.app.AlertDialog
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import com.morrowbone.mafiacards.app.R
+import com.morrowbone.mafiacards.app.activity.ShowUserCartActivity
+import com.morrowbone.mafiacards.app.adapter.CreateDeckArrayAdapter
+import com.morrowbone.mafiacards.app.utils.InjectorUtils
+import com.morrowbone.mafiacards.app.viewmodels.CardListViewModel
+import kotlinx.android.synthetic.main.fragment_deck.*
+
+class DeckFragment : Fragment() {
+    private lateinit var arrayAdapter: CreateDeckArrayAdapter
+    private val viewModel: CardListViewModel by viewModels {
+        InjectorUtils.provideCardListViewModelFactory(requireContext())
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_deck, null)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.cards.observe(this, Observer {
+            arrayAdapter = CreateDeckArrayAdapter(requireContext(), it) { cardCount ->
+                card_count_textview.text = cardCount.toString()
+            }
+            listview.adapter = arrayAdapter
+        })
+
+        card_count_textview!!.text = 0.toString()
+        save_btn.setOnClickListener {
+            onTakeCardsClick()
+        }
+    }
+
+    private fun onTakeCardsClick() {
+        val cardCount = arrayAdapter.deck.getCards().size
+        if (cardCount > 0) {
+            val intent = ShowUserCartActivity.getIntent(requireContext(), arrayAdapter.deck.shuffle())
+            startActivity(intent)
+        } else {
+            showErrorDialog(R.string.error_add_some_cards)
+        }
+    }
+
+    private fun showErrorDialog(title: Int) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(title)
+        builder.setCancelable(false)
+        builder.setPositiveButton(R.string.positive_button_text) { _, _ -> }
+        builder.show()
+    }
+}

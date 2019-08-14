@@ -17,7 +17,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.morrowbone.mafiacards.app.R
-import com.morrowbone.mafiacards.app.activity.CreatorActivity
 import com.morrowbone.mafiacards.app.activity.ShowUserCartActivity
 import com.morrowbone.mafiacards.app.data.DefaultDeck
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
@@ -59,9 +58,7 @@ class MainFragment : Fragment() {
 
     private fun initCreatorBtn() {
         creator_btn.setOnClickListener {
-            val intent = Intent(context, CreatorActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
-            startActivity(intent)
+            findNavController().navigate(R.id.action_mainFragment_to_deckFragment)
         }
     }
 
