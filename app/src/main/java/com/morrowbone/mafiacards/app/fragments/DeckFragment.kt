@@ -8,12 +8,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.morrowbone.mafiacards.app.R
-import com.morrowbone.mafiacards.app.activity.ShowUserCartActivity
 import com.morrowbone.mafiacards.app.adapter.CreateDeckArrayAdapter
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
 import com.morrowbone.mafiacards.app.viewmodels.CardListViewModel
 import kotlinx.android.synthetic.main.fragment_deck.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class DeckFragment : Fragment() {
     private lateinit var arrayAdapter: CreateDeckArrayAdapter
@@ -42,8 +46,15 @@ class DeckFragment : Fragment() {
     private fun onTakeCardsClick() {
         val cardCount = arrayAdapter.deck.getCards().size
         if (cardCount > 0) {
-            val intent = ShowUserCartActivity.getIntent(requireContext(), arrayAdapter.deck.shuffle())
-            startActivity(intent)
+            val deck = arrayAdapter.deck.shuffle()
+            GlobalScope.launch(Dispatchers.IO) {
+                val deckRepository = InjectorUtils.getDeckRepository(requireContext())
+                val deckId = deckRepository.insertDeck(deck)
+                withContext(Dispatchers.Main) {
+                    val direction = DeckFragmentDirections.actionDeckFragmentToTakeCardsFragment(deckId)
+                    findNavController().navigate(direction)
+                }
+            }
         } else {
             showErrorDialog(R.string.error_add_some_cards)
         }

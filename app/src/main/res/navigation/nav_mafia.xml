@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_mainFragment_to_deckFragment"
             app:destination="@id/deckFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_takeCardsFragment"
+            app:destination="@id/takeCardsFragment" />
     </fragment>
     <fragment
         android:id="@+id/prevGameFragment"
@@ -34,5 +37,18 @@
         android:id="@+id/deckFragment"
         android:name="com.morrowbone.mafiacards.app.fragments.DeckFragment"
         android:label="DeckFragment"
-        tools:layout="@layout/fragment_deck" />
+        tools:layout="@layout/fragment_deck">
+        <action
+            android:id="@+id/action_deckFragment_to_takeCardsFragment"
+            app:destination="@id/takeCardsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/takeCardsFragment"
+        android:name="com.morrowbone.mafiacards.app.fragments.TakeCardsFragment"
+        android:label="TakeCardsFragment"
+        tools:layout="@layout/fragment_take_cards">
+        <argument
+            android:name="deckId"
+            app:argType="long" />
+    </fragment>
 </navigation>

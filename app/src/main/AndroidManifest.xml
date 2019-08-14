@@ -12,10 +12,6 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.ShowUserCartActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activity.MainActivity"
             android:label="@string/role_mafia"
             android:screenOrientation="portrait">

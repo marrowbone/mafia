@@ -1,10 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.morrowbone.mafiacards.app.activity.ShowUserCartActivity$PlaceholderFragment">
+    android:layout_height="match_parent">
 
     <com.morrowbone.mafiacards.app.views.CardView
         android:id="@+id/card"
@@ -22,5 +19,4 @@
         android:textColor="@color/hint_text_color"
         android:textSize="@dimen/big_text"
         android:textStyle="italic" />
-
 </RelativeLayout>

@@ -1,7 +1,6 @@
 package com.morrowbone.mafiacards.app.fragments
 
 import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -17,12 +16,16 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.morrowbone.mafiacards.app.R
-import com.morrowbone.mafiacards.app.activity.ShowUserCartActivity
+import com.morrowbone.mafiacards.app.data.DeckRepository
 import com.morrowbone.mafiacards.app.data.DefaultDeck
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
 import com.morrowbone.mafiacards.app.viewmodels.DefaultDeckViewModel
 import com.morrowbone.mafiacards.app.viewmodels.LastUsedDeckViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainFragment : Fragment() {
     private val lastUsedDeckViewModel: LastUsedDeckViewModel by viewModels {
@@ -124,8 +127,14 @@ class MainFragment : Fragment() {
                                     return
                                 }
                                 val deck = defaultDeck.deck.apply { shuffle() }
-                                val intent = ShowUserCartActivity.getIntent(requireContext(), deck)
-                                startActivity(intent)
+                                GlobalScope.launch(Dispatchers.IO) {
+                                    val repository = InjectorUtils.getDeckRepository(requireContext())
+                                    repository.insertDeck(deck)
+                                    withContext(Dispatchers.Main) {
+                                        val direction = MainFragmentDirections.actionMainFragmentToTakeCardsFragment(DeckRepository.LAST_USED_DECK_ID)
+                                        findNavController().navigate(direction)
+                                    }
+                                }
                                 deckViewModel.deck.removeObserver(this)
                             }
                         })

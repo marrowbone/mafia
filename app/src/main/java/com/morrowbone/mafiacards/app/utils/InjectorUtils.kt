@@ -5,6 +5,7 @@ import com.morrowbone.mafiacards.app.data.AppDatabase
 import com.morrowbone.mafiacards.app.data.CardRepository
 import com.morrowbone.mafiacards.app.data.DeckRepository
 import com.morrowbone.mafiacards.app.viewmodels.CardListViewModelFactory
+import com.morrowbone.mafiacards.app.viewmodels.DeckViewModelFactory
 import com.morrowbone.mafiacards.app.viewmodels.DefaultDeckViewModelFactory
 import com.morrowbone.mafiacards.app.viewmodels.LastUsedDeckViewModelFactory
 
@@ -36,5 +37,10 @@ object InjectorUtils {
     fun provideLastUsedDeckViewModelFactory(context: Context): LastUsedDeckViewModelFactory {
         val repository = getDeckRepository(context)
         return LastUsedDeckViewModelFactory(repository)
+    }
+
+    fun provideDeckViewModelFactory(context: Context, id: Long): DeckViewModelFactory {
+        val repository = getDeckRepository(context)
+        return DeckViewModelFactory(repository, id)
     }
 }

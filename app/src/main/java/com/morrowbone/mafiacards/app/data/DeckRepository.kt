@@ -8,11 +8,20 @@ class DeckRepository private constructor(
 
     fun getDefaultDeck(cardCount: Int): LiveData<DefaultDeck> = defaultDeckDao.getDefaultDeck(cardCount)
 
-    fun getLastUsedDeck(): LiveData<Deck> = deckDao.getDeck(LAST_USED_DECK_ID)
+    fun getDeck(id: Long): LiveData<Deck> = deckDao.getDeck(id)
+
+    fun getLastUsedDeck(): LiveData<Deck> = getDeck(LAST_USED_DECK_ID)
 
     fun insertLastUsedDeck(deck: Deck) {
         deck.deckId = LAST_USED_DECK_ID
         deckDao.insert(deck)
+    }
+
+    fun insertDeck(deck: Deck): Long {
+        val id = deck.hashCode().toLong()
+        deck.deckId = id
+        deckDao.insert(deck)
+        return id
     }
 
     companion object {
