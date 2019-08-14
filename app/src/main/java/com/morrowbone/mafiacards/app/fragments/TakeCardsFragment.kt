@@ -1,4 +1,4 @@
-package com.morrowbone.mafiacards.app.activity
+package com.morrowbone.mafiacards.app.fragments
 
 import android.annotation.TargetApi
 import android.app.AlertDialog
@@ -8,33 +8,37 @@ import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.Interpolator
 import android.widget.Scroller
-import android.widget.TextView
-import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.adapter.SectionsPagerAdapter
-import com.morrowbone.mafiacards.app.data.AppDatabase
 import com.morrowbone.mafiacards.app.data.Deck
-import com.morrowbone.mafiacards.app.fragments.AdsFragment
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
 import com.morrowbone.mafiacards.app.utils.Utils
-import com.morrowbone.mafiacards.app.views.NonSwipeableViewPager
-import kotlinx.coroutines.Dispatchers.IO
+import com.morrowbone.mafiacards.app.viewmodels.DeckViewModel
+import kotlinx.android.synthetic.main.fragment_take_cards.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.lang.reflect.Field
 
+class TakeCardsFragment : Fragment() {
 
-class ShowUserCartActivity : FragmentActivity() {
     /**
      * The [PagerAdapter] that will provide
      * fragments for each of the sections. We use a
@@ -43,66 +47,58 @@ class ShowUserCartActivity : FragmentActivity() {
      * may be best to switch to a
      * [FragmentStatePagerAdapter].
      */
-    internal lateinit var mSectionsPagerAdapter: SectionsPagerAdapter
-    /**
-     * The [ViewPager] that will host the section contents.
-     */
-    private var mViewPager: NonSwipeableViewPager? = null
+    private lateinit var mSectionsPagerAdapter: SectionsPagerAdapter
     private var scroller: FixedSpeedScroller? = null
-    private var mCardCountTextView: TextView? = null
     private var interstitial: InterstitialAd? = null
-    private var mAdsView: View? = null
+    private lateinit var deck: Deck
 
     private val isEnableShowGooglePlayReviewIs: Boolean
         get() {
-            val gamesFinished = Utils.getPlayedGameCount(this)
-            val period = Utils.getRateAfterCount(this)
-            return gamesFinished!! % period!! == 0 && Utils.isEnableRateApp(this)!! && gamesFinished > 0
+            val gamesFinished = Utils.getPlayedGameCount(requireContext())
+            val period = Utils.getRateAfterCount(requireContext())
+            return gamesFinished!! % period!! == 0 && Utils.isEnableRateApp(requireContext())!! && gamesFinished > 0
         }
 
     private val isEnableShowingAds: Boolean
         get() = true
 
+    private val args: TakeCardsFragmentArgs by navArgs()
+    private val deckViewModel : DeckViewModel by viewModels {
+        InjectorUtils.provideDeckViewModelFactory(requireContext(), args.deckId)
+    }
+
     private fun checkInternetConnection(): Boolean {
-        val conMgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val conMgr = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val i = conMgr.activeNetworkInfo ?: return false
         if (!i.isConnected)
             return false
         return if (!i.isAvailable) false else true
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_show_user_cart)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_take_cards, null)
+    }
 
-        mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager, this, mDeck!!)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        deckViewModel.deck.observe(this, Observer { deck: Deck? ->
+            if (deck == null) {
+                return@Observer
+            }
 
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = findViewById<View>(R.id.pager) as NonSwipeableViewPager
-        mViewPager!!.adapter = mSectionsPagerAdapter
+            mSectionsPagerAdapter = SectionsPagerAdapter(requireFragmentManager(), deck)
+            pager.adapter = mSectionsPagerAdapter
+            card_count_textview.text = deck.getCards().size.toString()
+            this.deck = deck
+        })
 
-        try {
-            val mScroller: Field
-            mScroller = ViewPager::class.java.getDeclaredField("mScroller")
-            mScroller.isAccessible = true
-            val sInterpolator = DecelerateInterpolator()
-            scroller = FixedSpeedScroller(mViewPager!!.context, sInterpolator)
-            mScroller.set(mViewPager, scroller)
-        } catch (e: NoSuchFieldException) {
-        } catch (e: IllegalArgumentException) {
-        } catch (e: IllegalAccessException) {
-        }
+        fixViewPager()
 
-        mCardCountTextView = findViewById<View>(R.id.card_count_textview) as TextView
-        mCardCountTextView!!.text = mDeck!!.getCards().size.toString()
-        mAdsView = findViewById(R.id.layout_for_fragment)
+        loadAd()
+    }
 
-        val adsFragment = AdsFragment.newInstance()
-        supportFragmentManager.beginTransaction().add(R.id.layout_for_fragment, adsFragment).commit()
-
-
+    private fun loadAd() {
         // Create the interstitial.
-        interstitial = InterstitialAd(this)
+        interstitial = InterstitialAd(requireContext())
         interstitial!!.adUnitId = "ca-app-pub-7668409826365482/6093438917"
 
         // Create ad request.
@@ -110,7 +106,19 @@ class ShowUserCartActivity : FragmentActivity() {
         if (isEnableShowingAds) {
             interstitial!!.loadAd(adRequest)
         }
+    }
 
+    private fun fixViewPager() {
+        try {
+            val scrollerField: Field = ViewPager::class.java.getDeclaredField("mScroller")
+            scrollerField.isAccessible = true
+            val sInterpolator = DecelerateInterpolator()
+            scroller = FixedSpeedScroller(pager.context, sInterpolator)
+            scrollerField.set(pager, scroller)
+        } catch (e: NoSuchFieldException) {
+        } catch (e: IllegalArgumentException) {
+        } catch (e: IllegalAccessException) {
+        }
     }
 
     // Invoke displayInterstitial() when you are ready to display an interstitial.
@@ -122,61 +130,62 @@ class ShowUserCartActivity : FragmentActivity() {
 
     override fun onResume() {
         super.onResume()
-        // Begin loading your interstitial.
-
-
         if (isEnableShowGooglePlayReviewIs && checkInternetConnection()) {
             showGooglePlayReviewDialog()
         }
+        SectionsPagerAdapter.cardShowListeners.add(this::showNextPage)
     }
 
-    fun showNextPage() {
+    override fun onPause() {
+        super.onPause()
+        SectionsPagerAdapter.cardShowListeners.remove(this::showNextPage)
+    }
+
+    private fun showNextPage() {
         val childCount = mSectionsPagerAdapter.count
-        val currItem = mViewPager!!.currentItem
+        val currItem = pager.currentItem
         if (currItem == childCount - 1) {
             saveLastUsedDeck()
             showLastCardDialog()
         } else {
             scroller!!.setFixedDuration(1000)
-            mViewPager!!.setCurrentItem(currItem + 1, true)
+            pager.setCurrentItem(currItem + 1, true)
             scroller!!.setFixedDuration(null)
         }
     }
 
     private fun saveLastUsedDeck() {
-        GlobalScope.launch(IO) {
-            InjectorUtils.getDeckRepository(this@ShowUserCartActivity).insertLastUsedDeck(mDeck!!)
+        GlobalScope.launch(Dispatchers.IO) {
+            InjectorUtils.getDeckRepository(requireContext()).insertLastUsedDeck(deck)
         }
     }
 
     private fun showGooglePlayReviewDialog() {
-        mAdsView!!.visibility = View.INVISIBLE
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(requireActivity())
         builder.setTitle(R.string.are_you_like_app)
         builder.setMessage(R.string.review_app)
         builder.setCancelable(false)
         builder.setPositiveButton(R.string.review_now) { arg0, arg1 ->
-            val appPackageName = packageName // getPackageName() from Context or Activity object
+            val appPackageName = requireContext().packageName
             try {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName")))
             } catch (anfe: android.content.ActivityNotFoundException) {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=$appPackageName")))
             }
 
-            Utils.setIsEnableRateAppToFalse(this@ShowUserCartActivity)
+            Utils.setIsEnableRateAppToFalse(requireContext())
         }
-        builder.setNeutralButton(R.string.later_review) { dialog, which -> Utils.incrementRateAfter(this@ShowUserCartActivity) }
+        builder.setNeutralButton(R.string.later_review) { dialog, which -> Utils.incrementRateAfter(requireContext()) }
 
         builder.setNegativeButton(R.string.never_review) { dialog, which ->
-            Utils.setIsEnableRateAppToFalse(this@ShowUserCartActivity)
-            mAdsView!!.visibility = View.VISIBLE
+            Utils.setIsEnableRateAppToFalse(requireContext())
         }
 
         builder.show()
     }
 
     private fun showLastCardDialog() {
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(requireActivity())
         builder.setTitle(R.string.final_dialog_title)
         builder.setMessage(R.string.final_dialog_message)
         builder.setCancelable(false)
@@ -184,8 +193,8 @@ class ShowUserCartActivity : FragmentActivity() {
             if (isEnableShowingAds) {
                 displayInterstitial()
             }
-            Utils.incrementPlayedGameCount(this@ShowUserCartActivity)
-            finish()
+            Utils.incrementPlayedGameCount(requireContext())
+            findNavController().navigate(R.id.mainFragment)
         }
 
         builder.show()
@@ -224,16 +233,6 @@ class ShowUserCartActivity : FragmentActivity() {
 
         fun setFixedDuration(duration: Int?) {
             mDuration = duration
-        }
-    }
-
-    companion object {
-
-        private var mDeck: Deck? = null
-
-        fun getIntent(context: Context, deck: Deck): Intent {
-            mDeck = deck
-            return Intent(context, ShowUserCartActivity::class.java)
         }
     }
 }

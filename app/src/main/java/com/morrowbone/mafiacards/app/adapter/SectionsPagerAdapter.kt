@@ -4,7 +4,6 @@ package com.morrowbone.mafiacards.app.adapter
  * Created by morrow on 03.06.2014.
  */
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,9 +13,10 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager.widget.PagerAdapter
 
 import com.morrowbone.mafiacards.app.R
-import com.morrowbone.mafiacards.app.activity.ShowUserCartActivity
 import com.morrowbone.mafiacards.app.data.AbstractCard
 import com.morrowbone.mafiacards.app.data.Deck
 import com.morrowbone.mafiacards.app.views.CardView
@@ -26,7 +26,7 @@ import com.morrowbone.mafiacards.app.views.CardView.CardSide
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-class SectionsPagerAdapter(fm: FragmentManager, private val mContext: Context, val deck: Deck) : FragmentPagerAdapter(fm) {
+class SectionsPagerAdapter(fm: FragmentManager, val deck: Deck) : FragmentStatePagerAdapter(fm) {
 
     init {
         cards = deck.getCards()
@@ -48,6 +48,9 @@ class SectionsPagerAdapter(fm: FragmentManager, private val mContext: Context, v
         return card.getTitle()
     }
 
+    override fun getItemPosition(`object`: Any): Int {
+        return PagerAdapter.POSITION_NONE
+    }
 
     /**
      * A placeholder fragment containing a simple view.
@@ -109,9 +112,10 @@ class SectionsPagerAdapter(fm: FragmentManager, private val mContext: Context, v
             mHelpText!!.visibility = View.GONE
         }
 
-        fun showNextPage() {
-            val parent = activity as ShowUserCartActivity?
-            parent!!.showNextPage()
+        private fun showNextPage() {
+            cardShowListeners.forEach {
+                it.invoke()
+            }
         }
 
         companion object {
@@ -137,5 +141,7 @@ class SectionsPagerAdapter(fm: FragmentManager, private val mContext: Context, v
 
     companion object {
         private var cards: List<AbstractCard>? = null
+
+        val cardShowListeners: MutableList<() -> Unit> = mutableListOf()
     }
 }

@@ -12,24 +12,15 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.morrowbone.mafiacards.app.R
-import com.morrowbone.mafiacards.app.activity.CreatorActivity
 import com.morrowbone.mafiacards.app.data.AbstractCard
 import com.morrowbone.mafiacards.app.data.Card
 import com.morrowbone.mafiacards.app.data.Deck
 import com.morrowbone.mafiacards.app.data.DefaultCard
 
-class CreateDeckArrayAdapter(context: Context, values: List<AbstractCard>) : ArrayAdapter<AbstractCard>(context, layout_id, values) {
-    private val mInflater: LayoutInflater
-    private val mContext: CreatorActivity
+class CreateDeckArrayAdapter(context: Context, values: List<AbstractCard>, private val onCardCountChanged: (Int) -> Unit) : ArrayAdapter<AbstractCard>(context, layout_id, values) {
     private val defaultCards = mutableListOf<DefaultCard>()
     private val userCards = mutableListOf<Card>()
     val deck = Deck(defaultCards, userCards)
-
-    init {
-        mInflater = getContext().getSystemService(
-                Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        mContext = context as CreatorActivity
-    }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         var convertView = convertView
@@ -38,7 +29,7 @@ class CreateDeckArrayAdapter(context: Context, values: List<AbstractCard>) : Arr
         val holder: Holder
 
         if (convertView == null) {
-            convertView = mInflater.inflate(layout_id, parent, false)
+            convertView = LayoutInflater.from(parent.context).inflate(layout_id, parent, false)
 
             holder = Holder()
             holder.title = convertView!!
@@ -65,7 +56,7 @@ class CreateDeckArrayAdapter(context: Context, values: List<AbstractCard>) : Arr
                 curCount--
                 holder.cardCount!!.text = curCount.toString()
                 mCardCount--
-                mContext.setCardCount(mCardCount)
+                onCardCountChanged.invoke(mCardCount)
                 removeCard(item)
             }
         }
@@ -76,7 +67,7 @@ class CreateDeckArrayAdapter(context: Context, values: List<AbstractCard>) : Arr
                 holder.cardCount!!.text = curCount.toString()
 
                 mCardCount++
-                mContext.setCardCount(mCardCount)
+                onCardCountChanged.invoke(mCardCount)
                 addCard(item)
             }
         }
