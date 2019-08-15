@@ -17,16 +17,32 @@
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_rulesFragment"
-            app:destination="@id/rulesFragment" />
+            app:destination="@id/rulesFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainFragment_to_prevGameFragment"
-            app:destination="@id/prevGameFragment" />
+            app:destination="@id/prevGameFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainFragment_to_deckFragment"
-            app:destination="@id/deckFragment" />
+            app:destination="@id/deckFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainFragment_to_takeCardsFragment"
-            app:destination="@id/takeCardsFragment" />
+            app:destination="@id/takeCardsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/prevGameFragment"
@@ -40,7 +56,11 @@
         tools:layout="@layout/fragment_deck">
         <action
             android:id="@+id/action_deckFragment_to_takeCardsFragment"
-            app:destination="@id/takeCardsFragment" />
+            app:destination="@id/takeCardsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/takeCardsFragment"
