@@ -131,7 +131,7 @@ class MainFragment : Fragment() {
                                     val repository = InjectorUtils.getDeckRepository(requireContext())
                                     repository.insertDeck(deck)
                                     withContext(Dispatchers.Main) {
-                                        val direction = MainFragmentDirections.actionMainFragmentToTakeCardsFragment(DeckRepository.LAST_USED_DECK_ID)
+                                        val direction = MainFragmentDirections.actionMainFragmentToTakeCardsFragment(deck.deckId)
                                         findNavController().navigate(direction)
                                     }
                                 }
