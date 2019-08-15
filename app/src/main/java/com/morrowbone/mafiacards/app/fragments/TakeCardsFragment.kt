@@ -194,7 +194,7 @@ class TakeCardsFragment : Fragment() {
                 displayInterstitial()
             }
             Utils.incrementPlayedGameCount(requireContext())
-            findNavController().navigate(R.id.mainFragment)
+            findNavController().popBackStack(R.id.mainFragment, false)
         }
 
         builder.show()
