@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#e1e1e1</color>
     <color name="colorPrimaryDark">#212121</color>
-    <color name="colorAccent">#616161</color>
+    <color name="colorAccent">#DA0F0F</color>
 
     <color name="main_screen_btn_text_color">@android:color/white</color>
     <color name="red">#e90301</color>
