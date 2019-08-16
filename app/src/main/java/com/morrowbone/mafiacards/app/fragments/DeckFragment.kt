@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.adapter.CreateDeckArrayAdapter
+import com.morrowbone.mafiacards.app.data.CardRepository
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
 import com.morrowbone.mafiacards.app.viewmodels.CardListViewModel
 import kotlinx.android.synthetic.main.fragment_deck.*
@@ -40,6 +41,10 @@ class DeckFragment : Fragment() {
         card_count_textview!!.text = 0.toString()
         save_btn.setOnClickListener {
             onTakeCardsClick()
+        }
+
+        addCardButton.setOnClickListener {
+            AddCardDialogFragment().show(fragmentManager!!, "add_card_dialog")
         }
     }
 

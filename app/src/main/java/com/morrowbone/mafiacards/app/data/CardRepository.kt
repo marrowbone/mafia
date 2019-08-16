@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.withContext
 
 class CardRepository private constructor(
         private val cardDao: CardDao,
@@ -26,6 +28,12 @@ class CardRepository private constructor(
             mergedLiveData.value = getAllCards()
         })
         return mergedLiveData
+    }
+
+    suspend fun createCard(card: Card) {
+        withContext(IO) {
+            cardDao.insert(card)
+        }
     }
 
     companion object {

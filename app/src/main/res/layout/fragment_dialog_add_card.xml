@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_card_dialog_title"
+        android:textSize="@dimen/big_text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_card_dialog_role_name"
+        android:textSize="@dimen/normal_text" />
+
+    <EditText
+        android:id="@+id/cardTitleEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/role_civilian"
+        android:maxLength="20"
+        android:maxLines="1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_card_dialog_description"
+        android:textSize="@dimen/normal_text" />
+
+    <EditText
+        android:id="@+id/cardDescriptionEditText"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:fadeScrollbars="false"
+        android:gravity="top"
+        android:hint="@string/role_civilian_info"
+        android:scrollbars="vertical" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right">
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@android:string/cancel" />
+
+        <Button
+            android:id="@+id/okButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+</LinearLayout>

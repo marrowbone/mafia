@@ -14,5 +14,5 @@ data class Card(
     override fun getId() = cardId
     override fun getTitle() = name
     override fun getDescription() = info
-    override fun getImageResId() = R.drawable.civilian_cr
+    override fun getImageResId() = R.drawable.user_role_cr
 }

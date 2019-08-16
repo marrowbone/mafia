@@ -38,5 +38,9 @@
     <string name="review_now">Оценить</string>
     <string name="later_review">Спросить позже</string>
     <string name="never_review">Нет</string>
+    <string name="add_card_dialog_role_name">Название карты:</string>
+    <string name="add_card_dialog_description">Описание карты:</string>
+    <string name="add_card_dialog_title">Новая карта</string>
+    <string name="create">Создать</string>
 
 </resources>

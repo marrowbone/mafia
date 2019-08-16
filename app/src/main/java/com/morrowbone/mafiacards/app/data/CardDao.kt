@@ -14,6 +14,9 @@ interface CardDao {
     @Query("SELECT * FROM cards WHERE id = :cardId")
     fun getCard(cardId: String): Card
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(card: Card)
+
     @Insert(onConflict = OnConflictStrategy.ABORT)
     fun insertAll(cards: List<Card>)
 }

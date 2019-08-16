@@ -20,7 +20,8 @@ data class Deck(
             ArrayList<AbstractCard>(defaultCards).apply { addAll(userCards) }
         } else {
             cardOrder.map { cardId ->
-                defaultCards.find { defaultCard -> cardId == defaultCard.getId() }!!
+                fun predicate(card: AbstractCard): Boolean = card.getId() == cardId
+                defaultCards.find(::predicate) ?: userCards.find(::predicate)!!
             }
         }
     }

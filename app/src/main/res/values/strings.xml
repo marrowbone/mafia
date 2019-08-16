@@ -36,5 +36,8 @@
     <string name="review_now">Rate Now</string>
     <string name="later_review">Ask me later</string>
     <string name="never_review">Don\'t Rate</string>
-
+    <string name="add_card_dialog_role_name">Card title:</string>
+    <string name="add_card_dialog_description">Card description:</string>
+    <string name="add_card_dialog_title">Create new card</string>
+    <string name="create">Create</string>
 </resources>

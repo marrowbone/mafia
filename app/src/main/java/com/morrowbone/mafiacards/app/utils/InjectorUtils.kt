@@ -14,7 +14,7 @@ import com.morrowbone.mafiacards.app.viewmodels.LastUsedDeckViewModelFactory
  */
 object InjectorUtils {
 
-    private fun getCardRepository(context: Context): CardRepository {
+    fun getCardRepository(context: Context): CardRepository {
         val appDatabase = AppDatabase.getInstance(context.applicationContext)
         return CardRepository.getInstance(appDatabase.cardDao(), appDatabase.defaultCardDao())
     }
