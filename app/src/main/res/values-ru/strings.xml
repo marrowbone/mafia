@@ -42,5 +42,6 @@
     <string name="add_card_dialog_description">Описание карты:</string>
     <string name="add_card_dialog_title">Новая карта</string>
     <string name="create">Создать</string>
+    <string name="no_description">Информация отсутствует</string>
 
 </resources>

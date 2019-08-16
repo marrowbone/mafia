@@ -47,7 +47,11 @@ class RolesArrayAdapter(context: Context, values: List<AbstractCard>) : ArrayAda
         }
 
         holder.title!!.text = item!!.getTitle()
-        holder.description!!.text = item.getDescription()
+        var description = item.getDescription();
+        if (description.isBlank()) {
+            description = context.getString(R.string.no_description)
+        }
+        holder.description!!.text = description
         holder.image!!.setImageResource(item.getImageResId())
 
         return convertView
