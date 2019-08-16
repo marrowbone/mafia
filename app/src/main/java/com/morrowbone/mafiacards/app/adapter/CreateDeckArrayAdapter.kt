@@ -33,7 +33,7 @@ class CreateDeckArrayAdapter(context: Context, values: List<AbstractCard>, priva
 
             holder = Holder()
             holder.title = convertView!!
-                    .findViewById<View>(R.id.game_title) as TextView
+                    .findViewById<View>(R.id.card_title) as TextView
 
             holder.image = convertView.findViewById<View>(R.id.game_type_image) as ImageView
 

@@ -5,7 +5,6 @@ package com.morrowbone.mafiacards.app.adapter
  */
 
 import android.content.Context
-import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,7 +33,7 @@ class RolesArrayAdapter(context: Context, values: List<AbstractCard>) : ArrayAda
 
             holder = Holder()
             holder.title = convertView!!
-                    .findViewById<View>(R.id.game_title) as TextView
+                    .findViewById<View>(R.id.card_title) as TextView
 
             holder.description = convertView
                     .findViewById<View>(R.id.game_description) as TextView

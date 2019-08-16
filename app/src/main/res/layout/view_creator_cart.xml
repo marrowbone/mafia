@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:layout_below="@+id/game_title"
+            android:layout_below="@+id/card_title"
             android:layout_toRightOf="@+id/game_type_image">
 
             <ImageView
@@ -48,7 +48,7 @@
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/game_title"
+            android:id="@+id/card_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fontFamily="@font/stylo_family"

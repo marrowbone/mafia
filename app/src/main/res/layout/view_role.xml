@@ -12,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/game_title"
+            android:id="@+id/card_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fontFamily="@font/stylo_family"
