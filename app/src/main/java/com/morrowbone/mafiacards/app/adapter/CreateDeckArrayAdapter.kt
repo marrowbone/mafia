@@ -103,7 +103,7 @@ class CreateDeckArrayAdapter(context: Context, values: List<AbstractCard>, priva
     }
 
     companion object {
-        private val layout_id = R.layout.view_creator_cart
+        private val layout_id = R.layout.view_creator_card
         private var mCardCount: Int = 0
     }
 }
