@@ -1,3 +1,8 @@
 language: android
-jdk: oraclejdk8
 dist: trusty
+jdk: oraclejdk8
+
+android:
+  components:
+    - build-tools-29.0.2
+    - android-29
