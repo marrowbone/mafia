@@ -1,4 +1,5 @@
 # Mafia Party Game. Cards
+[![Travis CI](https://travis-ci.org/marrowbone/mafia.svg?branch=master)](https://travis-ci.org/marrowbone/mafia)
 
 ![Mafia Party Game. Cards](app/src/main/res/drawable-xhdpi/don_launcher_xh.png)
 
