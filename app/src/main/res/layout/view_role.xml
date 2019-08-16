@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -15,11 +16,11 @@
             android:id="@+id/card_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fontFamily="@font/stylo_family"
-            android:text="@string/test_mafia_title"
             android:textColor="@android:color/white"
             android:textSize="@dimen/big_text"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:fontFamily="@font/stylo_family"
+            tools:text="@string/role_civilian" />
     </RelativeLayout>
 
 
@@ -40,10 +41,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/game_type_image"
-            app:fontFamily="@font/stylo_family"
-            android:text="@string/app_name"
             android:textColor="@color/card_text_color"
             android:textSize="@dimen/normal_text"
-            android:textStyle="italic" />
+            android:textStyle="italic"
+            app:fontFamily="@font/stylo_family"
+            tools:text="@string/role_civilian_info" />
     </RelativeLayout>
 </LinearLayout>
