@@ -82,8 +82,8 @@ class TakeCardsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         GlobalScope.launch(IO) {
             deck = deckViewModel.getUserDeck(args.deckId)
-            mSectionsPagerAdapter = SectionsPagerAdapter(requireFragmentManager(), deck)
             withContext(Main) {
+                mSectionsPagerAdapter = SectionsPagerAdapter(requireFragmentManager(), deck)
                 pager.adapter = mSectionsPagerAdapter
                 card_count_textview.text = deck.getCards().size.toString()
             }
