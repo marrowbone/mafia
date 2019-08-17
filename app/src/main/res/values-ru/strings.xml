@@ -43,5 +43,9 @@
     <string name="add_card_dialog_title">Новая карта</string>
     <string name="create">Создать</string>
     <string name="no_description">Информация отсутствует</string>
-
+    <string name="delete">Удалить</string>
+    <string name="delete_dialog_title">Удаление карты</string>
+    <string name="delete_dialog_message">Вы уверены, что хотите удалить карту \"%s\"</string>
+    <string name="save">Сохранить</string>
+    <string name="change_card">Изменить карту</string>
 </resources>

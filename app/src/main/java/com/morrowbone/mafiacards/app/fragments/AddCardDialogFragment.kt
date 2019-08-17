@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.core.view.isInvisible
-import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
@@ -14,27 +13,37 @@ import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.data.Card
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
 import com.morrowbone.mafiacards.app.viewmodels.CardListViewModel
-import kotlinx.android.synthetic.main.fragment_dialog_add_card.*
+import kotlinx.android.synthetic.main.fragment_dialog_card.*
 import java.util.*
 
-class AddCardDialogFragment : DialogFragment() {
-    private val viewModel: CardListViewModel by viewModels {
+open class AddCardDialogFragment : DialogFragment() {
+    protected val viewModel: CardListViewModel by viewModels {
         InjectorUtils.provideCardListViewModelFactory(requireContext())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_dialog_add_card, null)
+        return inflater.inflate(R.layout.fragment_dialog_card, null)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         cardTitleEditText.addTextChangedListener {
-            okButton.isInvisible = it?.isBlank() ?: true
+            okButton.isInvisible = !isNeedShowOkButton()
         }
         okButton.setOnClickListener {
             createCard()
             dismiss()
         }
         cancelButton.setOnClickListener { dismiss() }
+    }
+
+    protected fun isNeedShowOkButton(): Boolean {
+        val titleString: String = cardTitleEditText.text!!.toString()
+        val descriptionString: String = cardDescriptionEditText.text!!.toString()
+        return isNeedShowOkButton(titleString, descriptionString)
+    }
+
+    protected open fun isNeedShowOkButton(titleString: String, descriptionString: String): Boolean {
+        return titleString.isNotBlank()
     }
 
     private fun createCard() {

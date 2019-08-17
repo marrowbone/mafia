@@ -32,9 +32,14 @@ class DeckFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.cards.observe(this, Observer {
-            arrayAdapter = CreateDeckArrayAdapter(requireContext(), it) { cardCount ->
+            fun onCardCountChanged(cardCount: Int) {
                 card_count_textview.text = cardCount.toString()
             }
+            arrayAdapter = CreateDeckArrayAdapter(
+                    requireContext(),
+                    it,
+                    ::onCardCountChanged,
+                    this@DeckFragment::showEditDialog)
             listview.adapter = arrayAdapter
         })
 
@@ -46,6 +51,10 @@ class DeckFragment : Fragment() {
         addCardButton.setOnClickListener {
             AddCardDialogFragment().show(fragmentManager!!, "add_card_dialog")
         }
+    }
+
+    private fun showEditDialog(cardId: String) {
+        EditCardDialogFragment.newInstance(cardId).show(fragmentManager!!, "edit_card")
     }
 
     private fun onTakeCardsClick() {

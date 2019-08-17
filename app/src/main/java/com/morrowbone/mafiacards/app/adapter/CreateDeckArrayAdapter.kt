@@ -11,13 +11,20 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.view.isVisible
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.data.AbstractCard
 import com.morrowbone.mafiacards.app.data.Card
 import com.morrowbone.mafiacards.app.data.Deck
 import com.morrowbone.mafiacards.app.data.DefaultCard
 
-class CreateDeckArrayAdapter(context: Context, values: List<AbstractCard>, private val onCardCountChanged: (Int) -> Unit) : ArrayAdapter<AbstractCard>(context, layout_id, values) {
+class CreateDeckArrayAdapter(
+        context: Context,
+        values: List<AbstractCard>,
+        private val onCardCountChanged: (Int) -> Unit,
+        private val editCardCallback: (cardId: String) -> Unit
+) : ArrayAdapter<AbstractCard>(context, layout_id, values) {
     private val defaultCards = mutableListOf<DefaultCard>()
     private val userCards = mutableListOf<Card>()
     val deck = Deck(defaultCards, userCards)
@@ -40,6 +47,8 @@ class CreateDeckArrayAdapter(context: Context, values: List<AbstractCard>, priva
             holder.decrement = convertView.findViewById(R.id.decrement)
             holder.increment = convertView.findViewById(R.id.increment)
             holder.cardCount = convertView.findViewById<View>(R.id.card_count) as TextView
+            holder.editIcon = convertView.findViewById(R.id.editIcon)
+            holder.titleLayout = convertView.findViewById(R.id.card_title_layout)
             convertView.tag = holder
         } else {
             holder = convertView.tag as Holder
@@ -72,7 +81,23 @@ class CreateDeckArrayAdapter(context: Context, values: List<AbstractCard>, priva
             }
         }
 
+        val isUserCard = item is Card
+        holder.editIcon!!.isVisible = isUserCard
+        if (isUserCard) {
+            holder.titleLayout!!.setOnClickListener {
+                onEditClick(itemId)
+            }
+            holder.image!!.setOnClickListener { onEditClick(itemId) }
+        } else {
+            holder.titleLayout!!.setOnClickListener(null)
+            holder.image!!.setOnClickListener(null)
+        }
+
         return convertView
+    }
+
+    private fun onEditClick(cardId: String) {
+        editCardCallback.invoke(cardId)
     }
 
     private fun addCard(card: AbstractCard) {
@@ -100,6 +125,8 @@ class CreateDeckArrayAdapter(context: Context, values: List<AbstractCard>, priva
         var increment: View? = null
         var decrement: View? = null
         var cardCount: TextView? = null
+        var editIcon: View? = null
+        var titleLayout: ViewGroup? = null
     }
 
     companion object {

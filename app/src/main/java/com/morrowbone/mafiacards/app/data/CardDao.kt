@@ -1,10 +1,7 @@
 package com.morrowbone.mafiacards.app.data
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface CardDao {
@@ -12,11 +9,14 @@ interface CardDao {
     fun getCards(): LiveData<List<Card>>
 
     @Query("SELECT * FROM cards WHERE id = :cardId")
-    fun getCard(cardId: String): Card
+    fun getCard(cardId: String): LiveData<Card>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(card: Card)
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     fun insertAll(cards: List<Card>)
+
+    @Delete
+    fun delete(card: Card)
 }

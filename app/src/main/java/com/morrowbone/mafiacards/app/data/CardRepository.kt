@@ -15,7 +15,6 @@ class CardRepository private constructor(
         val defaultCards = mutableListOf<DefaultCard>()
         val userCards = mutableListOf<Card>()
         fun getAllCards() = ArrayList<AbstractCard>(defaultCards).apply { addAll(userCards) }
-
         val mergedLiveData = MediatorLiveData<List<AbstractCard>>()
         mergedLiveData.addSource(defaultCardDao.getCards(), Observer {
             defaultCards.clear()
@@ -30,9 +29,23 @@ class CardRepository private constructor(
         return mergedLiveData
     }
 
+    fun getUserCards(): LiveData<List<Card>> {
+        return cardDao.getCards()
+    }
+
+    fun getUserCard(cardId: String): LiveData<Card> {
+        return cardDao.getCard(cardId)
+    }
+
     suspend fun createCard(card: Card) {
         withContext(IO) {
             cardDao.insert(card)
+        }
+    }
+
+    suspend fun deleteCard(card: Card) {
+        withContext(IO){
+            cardDao.delete(card)
         }
     }
 

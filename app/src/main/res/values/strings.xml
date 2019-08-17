@@ -41,4 +41,10 @@
     <string name="add_card_dialog_title">Create new card</string>
     <string name="create">Create</string>
     <string name="no_description">No info</string>
+    <string name="delete">Delete</string>
+    <string name="delete_dialog_title">Card deletion</string>
+    <string name="delete_dialog_message">Are you sure you want to delete card \"%s\"</string>
+    <string name="save">Save</string>
+    <string name="change_card">Change card</string>
+
 </resources>

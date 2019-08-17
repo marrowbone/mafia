@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:layout_below="@+id/card_title"
+            android:layout_below="@+id/card_title_layout"
             android:layout_toRightOf="@+id/game_type_image">
 
             <ImageView
@@ -48,18 +48,33 @@
                 android:src="@drawable/arrow_increment" />
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/card_title"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/card_title_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/game_type_image"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/big_text"
-            android:textStyle="bold"
-            app:fontFamily="@font/stylo_family"
-            tools:text="@string/role_civilian" />
+            android:orientation="horizontal">
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/card_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/big_text"
+                android:textStyle="bold"
+                app:fontFamily="@font/stylo_family"
+                tools:text="@string/role_civilian" />
+
+            <ImageView
+                android:id="@+id/editIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_edit_black_24dp"
+                android:tint="@color/card_text_color" />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/game_type_image"

@@ -8,12 +8,26 @@ import com.morrowbone.mafiacards.app.data.Card
 import com.morrowbone.mafiacards.app.data.CardRepository
 import kotlinx.coroutines.launch
 
-class CardListViewModel internal constructor(val cardRepository: CardRepository) : ViewModel() {
+class CardListViewModel internal constructor(private val cardRepository: CardRepository) : ViewModel() {
     val cards: LiveData<List<AbstractCard>> = cardRepository.getCards()
+
+    fun getUserCard(cardId: String): LiveData<Card> {
+        return cardRepository.getUserCard(cardId)
+    }
 
     fun addCard(card: Card) {
         viewModelScope.launch {
             cardRepository.createCard(card)
+        }
+    }
+
+    fun saveChanged(card: Card) {
+        addCard(card)
+    }
+
+    fun deleteCard(card: Card) {
+        viewModelScope.launch {
+            cardRepository.deleteCard(card)
         }
     }
 }
