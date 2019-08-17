@@ -69,6 +69,6 @@
         tools:layout="@layout/fragment_take_cards">
         <argument
             android:name="deckId"
-            app:argType="long" />
+            app:argType="integer" />
     </fragment>
 </navigation>

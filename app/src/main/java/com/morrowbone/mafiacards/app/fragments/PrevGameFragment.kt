@@ -6,17 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.adapter.DeckAdapter
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
-import com.morrowbone.mafiacards.app.viewmodels.LastUsedDeckViewModel
+import com.morrowbone.mafiacards.app.utils.Utils
+import com.morrowbone.mafiacards.app.viewmodels.DeckViewModel
 import kotlinx.android.synthetic.main.fragment_prev_game.*
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class PrevGameFragment : Fragment() {
-    private val lastUsedDeckViewModel: LastUsedDeckViewModel by viewModels {
-        InjectorUtils.provideLastUsedDeckViewModelFactory(requireContext())
+    private val deckViewModel: DeckViewModel by viewModels {
+        InjectorUtils.provideDeckViewModelFactory(requireContext())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -24,10 +29,14 @@ class PrevGameFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        lastUsedDeckViewModel.deck.observe(this, Observer {
-            val deckAdapter = DeckAdapter(it)
-            recyclerView.adapter = deckAdapter
-        })
+        GlobalScope.launch(IO) {
+            val deck = deckViewModel.getUserDeck(Utils.getLastUsedDeckId())
+            val deckAdapter = DeckAdapter(deck)
+            withContext(Main) {
+                recyclerView.adapter = deckAdapter
+            }
+
+        }
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
     }
 }

@@ -14,10 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
 import com.morrowbone.mafiacards.app.R
-import com.morrowbone.mafiacards.app.data.AbstractCard
-import com.morrowbone.mafiacards.app.data.Card
-import com.morrowbone.mafiacards.app.data.Deck
-import com.morrowbone.mafiacards.app.data.DefaultCard
+import com.morrowbone.mafiacards.app.data.*
 
 class CreateDeckArrayAdapter(
         context: Context,
@@ -27,7 +24,7 @@ class CreateDeckArrayAdapter(
 ) : ArrayAdapter<AbstractCard>(context, layout_id, values) {
     private val defaultCards = mutableListOf<DefaultCard>()
     private val userCards = mutableListOf<Card>()
-    val deck = Deck(defaultCards, userCards)
+    val deck = Deck(DeckRepository.USER_DECK, CardsSet(defaultCards, userCards))
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         var convertView = convertView

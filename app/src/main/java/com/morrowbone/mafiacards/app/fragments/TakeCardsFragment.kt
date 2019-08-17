@@ -32,9 +32,9 @@ import com.morrowbone.mafiacards.app.utils.InjectorUtils
 import com.morrowbone.mafiacards.app.utils.Utils
 import com.morrowbone.mafiacards.app.viewmodels.DeckViewModel
 import kotlinx.android.synthetic.main.fragment_take_cards.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import java.lang.reflect.Field
 
 class TakeCardsFragment : Fragment() {
@@ -64,7 +64,7 @@ class TakeCardsFragment : Fragment() {
 
     private val args: TakeCardsFragmentArgs by navArgs()
     private val deckViewModel : DeckViewModel by viewModels {
-        InjectorUtils.provideDeckViewModelFactory(requireContext(), args.deckId)
+        InjectorUtils.provideDeckViewModelFactory(requireContext())
     }
 
     private fun checkInternetConnection(): Boolean {
@@ -80,16 +80,14 @@ class TakeCardsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        deckViewModel.deck.observe(this, Observer { deck: Deck? ->
-            if (deck == null) {
-                return@Observer
-            }
-
+        GlobalScope.launch(IO) {
+            deck = deckViewModel.getUserDeck(args.deckId)
             mSectionsPagerAdapter = SectionsPagerAdapter(requireFragmentManager(), deck)
-            pager.adapter = mSectionsPagerAdapter
-            card_count_textview.text = deck.getCards().size.toString()
-            this.deck = deck
-        })
+            withContext(Main) {
+                pager.adapter = mSectionsPagerAdapter
+                card_count_textview.text = deck.getCards().size.toString()
+            }
+        }
 
         fixViewPager()
 
@@ -155,9 +153,7 @@ class TakeCardsFragment : Fragment() {
     }
 
     private fun saveLastUsedDeck() {
-        GlobalScope.launch(Dispatchers.IO) {
-            InjectorUtils.getDeckRepository(requireContext()).insertLastUsedDeck(deck)
-        }
+        Utils.setLastUsedDeckId(deck.deckId)
     }
 
     private fun showGooglePlayReviewDialog() {

@@ -11,9 +11,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.adapter.CreateDeckArrayAdapter
-import com.morrowbone.mafiacards.app.data.CardRepository
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
 import com.morrowbone.mafiacards.app.viewmodels.CardListViewModel
+import com.morrowbone.mafiacards.app.viewmodels.DeckViewModel
 import kotlinx.android.synthetic.main.fragment_deck.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -22,16 +22,20 @@ import kotlinx.coroutines.withContext
 
 class DeckFragment : Fragment() {
     private lateinit var arrayAdapter: CreateDeckArrayAdapter
-    private val viewModel: CardListViewModel by viewModels {
+    private val cardViewModel: CardListViewModel by viewModels {
         InjectorUtils.provideCardListViewModelFactory(requireContext())
     }
+    private val deckViewModel: DeckViewModel by viewModels {
+        InjectorUtils.provideDeckViewModelFactory(requireContext())
+    }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_deck, null)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.cards.observe(this, Observer {
+        cardViewModel.cards.observe(this, Observer {
             fun onCardCountChanged(cardCount: Int) {
                 card_count_textview.text = cardCount.toString()
             }
@@ -62,10 +66,9 @@ class DeckFragment : Fragment() {
         if (cardCount > 0) {
             val deck = arrayAdapter.deck.shuffle()
             GlobalScope.launch(Dispatchers.IO) {
-                val deckRepository = InjectorUtils.getDeckRepository(requireContext())
-                val deckId = deckRepository.insertDeck(deck)
+                deckViewModel.saveDeck(deck)
                 withContext(Dispatchers.Main) {
-                    val direction = DeckFragmentDirections.actionDeckFragmentToTakeCardsFragment(deckId)
+                    val direction = DeckFragmentDirections.actionDeckFragmentToTakeCardsFragment(deck.deckId)
                     findNavController().navigate(direction)
                 }
             }

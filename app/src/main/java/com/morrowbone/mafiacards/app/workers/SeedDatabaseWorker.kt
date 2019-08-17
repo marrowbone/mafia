@@ -4,10 +4,7 @@ import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.morrowbone.mafiacards.app.R
-import com.morrowbone.mafiacards.app.data.AppDatabase
-import com.morrowbone.mafiacards.app.data.Deck
-import com.morrowbone.mafiacards.app.data.DefaultCard
-import com.morrowbone.mafiacards.app.data.DefaultDeck
+import com.morrowbone.mafiacards.app.data.*
 import kotlinx.coroutines.coroutineScope
 
 class SeedDatabaseWorker(
@@ -22,10 +19,6 @@ class SeedDatabaseWorker(
         val defaultDecks = getDefaultDecks(defaultCards)
         val database = AppDatabase.getInstance(applicationContext)
         database.defaultCardDao().insertAll(defaultCards)
-        val deckDao = database.deckDao()
-        for (defaultDeck in defaultDecks) {
-            deckDao.insert(defaultDeck.deck)
-        }
         database.defaultDeckDao().insertAll(defaultDecks)
         Result.success()
     }
@@ -41,17 +34,17 @@ class SeedDatabaseWorker(
         val maniac = defaultCards.findById(DefaultCard.MANIAC)!!
 
         val defaultDecks = mutableListOf(
-                DefaultDeck(Deck(mutableListOf(civilian, civilian, mafia))),
-                DefaultDeck(Deck(mutableListOf(civilian, civilian, civilian, mafia))),
-                DefaultDeck(Deck(mutableListOf(civilian, civilian, civilian, civilian, mafia))),
-                DefaultDeck(Deck(mutableListOf(civilian, civilian, civilian, civilian, detective, don))),
-                DefaultDeck(Deck(mutableListOf(civilian, civilian, civilian, civilian, mafia, detective, don))),
-                DefaultDeck(Deck(mutableListOf(civilian, civilian, civilian, civilian, civilian, mafia, detective, don))),
-                DefaultDeck(Deck(mutableListOf(civilian, civilian, civilian, civilian, civilian, mafia, detective, mafia, don))),
-                DefaultDeck(Deck(mutableListOf(civilian, civilian, civilian, civilian, civilian, civilian, mafia, mafia, detective, don))),
-                DefaultDeck(Deck(mutableListOf(civilian, civilian, civilian, civilian, civilian, mafia, mafia, detective, doctor, maniac, don))),
-                DefaultDeck(Deck(mutableListOf(civilian, civilian, civilian, civilian, civilian, mafia, mafia, detective, immortal, doctor, maniac, don))),
-                DefaultDeck(Deck(mutableListOf(civilian, civilian, civilian, civilian, civilian, civilian, mafia, mafia, detective, immortal, doctor, maniac, don))))
+                DefaultDeck(CardsSet(mutableListOf(civilian, civilian, mafia))),
+                DefaultDeck(CardsSet(mutableListOf(civilian, civilian, civilian, mafia))),
+                DefaultDeck(CardsSet(mutableListOf(civilian, civilian, civilian, civilian, mafia))),
+                DefaultDeck(CardsSet(mutableListOf(civilian, civilian, civilian, civilian, detective, don))),
+                DefaultDeck(CardsSet(mutableListOf(civilian, civilian, civilian, civilian, mafia, detective, don))),
+                DefaultDeck(CardsSet(mutableListOf(civilian, civilian, civilian, civilian, civilian, mafia, detective, don))),
+                DefaultDeck(CardsSet(mutableListOf(civilian, civilian, civilian, civilian, civilian, mafia, detective, mafia, don))),
+                DefaultDeck(CardsSet(mutableListOf(civilian, civilian, civilian, civilian, civilian, civilian, mafia, mafia, detective, don))),
+                DefaultDeck(CardsSet(mutableListOf(civilian, civilian, civilian, civilian, civilian, mafia, mafia, detective, doctor, maniac, don))),
+                DefaultDeck(CardsSet(mutableListOf(civilian, civilian, civilian, civilian, civilian, mafia, mafia, detective, immortal, doctor, maniac, don))),
+                DefaultDeck(CardsSet(mutableListOf(civilian, civilian, civilian, civilian, civilian, civilian, mafia, mafia, detective, immortal, doctor, maniac, don))))
         addAll(defaultDecks)
     }
 

@@ -13,23 +13,24 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.morrowbone.mafiacards.app.R
+import com.morrowbone.mafiacards.app.data.Deck
 import com.morrowbone.mafiacards.app.data.DeckRepository
 import com.morrowbone.mafiacards.app.data.DefaultDeck
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
-import com.morrowbone.mafiacards.app.viewmodels.DefaultDeckViewModel
-import com.morrowbone.mafiacards.app.viewmodels.LastUsedDeckViewModel
+import com.morrowbone.mafiacards.app.utils.Utils
+import com.morrowbone.mafiacards.app.viewmodels.DeckViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MainFragment : Fragment() {
-    private val lastUsedDeckViewModel: LastUsedDeckViewModel by viewModels {
-        InjectorUtils.provideLastUsedDeckViewModelFactory(requireContext())
+    private val deckViewModel: DeckViewModel by viewModels {
+        InjectorUtils.provideDeckViewModelFactory(requireContext())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -37,9 +38,7 @@ class MainFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        lastUsedDeckViewModel.deck.observe(this, Observer {
-            prev_game.isVisible = it != null
-        })
+        prev_game.isVisible = Utils.hasLastUsedDeck()
 
         initPrevGameBtn()
         initPlayBtn()
@@ -119,25 +118,15 @@ class MainFragment : Fragment() {
                     if (cartCount < min) {
                         showMessage(R.string.error, R.string.wrong_player_count)
                     } else {
-                        val deckViewModelFactory = InjectorUtils.provideDefaultDeckViewModelFactory(requireContext(), cartCount)
-                        val deckViewModel = ViewModelProvider(this, deckViewModelFactory).get(DefaultDeckViewModel::class.java)
-                        deckViewModel.deck.observe(this, object : Observer<DefaultDeck> {
-                            override fun onChanged(defaultDeck: DefaultDeck?) {
-                                if (defaultDeck == null) {
-                                    return
-                                }
-                                val deck = defaultDeck.deck.apply { shuffle() }
-                                GlobalScope.launch(Dispatchers.IO) {
-                                    val repository = InjectorUtils.getDeckRepository(requireContext())
-                                    repository.insertDeck(deck)
-                                    withContext(Dispatchers.Main) {
-                                        val direction = MainFragmentDirections.actionMainFragmentToTakeCardsFragment(deck.deckId)
-                                        findNavController().navigate(direction)
-                                    }
-                                }
-                                deckViewModel.deck.removeObserver(this)
+                        GlobalScope.launch(IO) {
+                            val defaultDeck = deckViewModel.getDefaultDeck(cartCount)
+                            val deck = Deck(DeckRepository.DEFAULT_DECK, defaultDeck.cardsSet).shuffle()
+                            deckViewModel.saveDeck(deck)
+                            withContext(Dispatchers.Main) {
+                                val direction = MainFragmentDirections.actionMainFragmentToTakeCardsFragment(deck.deckId)
+                                findNavController().navigate(direction)
                             }
-                        })
+                        }
                     }
 
                 }

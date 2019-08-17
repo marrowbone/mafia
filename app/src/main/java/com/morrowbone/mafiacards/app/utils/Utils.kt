@@ -2,8 +2,7 @@ package com.morrowbone.mafiacards.app.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-
-import com.morrowbone.mafiacards.app.utils.sharedPreferencesName
+import com.morrowbone.mafiacards.app.application.MafiaApp
 
 /**
  * Created by morrow on 30.08.2014.
@@ -66,4 +65,17 @@ object Utils {
 
         prefs.edit().putBoolean(CardsUtils.Pref.neverRate, true).apply()
     }
+
+    fun setLastUsedDeckId(id: Int) {
+        val prefs = getPreferences()
+        prefs.edit().putInt(CardsUtils.Pref.lastUsedBoardId, id).apply()
+    }
+
+    fun getLastUsedDeckId(): Int {
+        return getPreferences().getInt(CardsUtils.Pref.lastUsedBoardId, -1)
+    }
+
+    fun hasLastUsedDeck() = getLastUsedDeckId() != -1
+
+    private fun getPreferences(): SharedPreferences = MafiaApp.instance!!.getSharedPreferences(sharedPreferencesName, Context.MODE_PRIVATE)
 }

@@ -5,10 +5,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.morrowbone.mafiacards.app.data.DeckRepository
 
 class DeckViewModelFactory(
-        private val repository: DeckRepository,
-        private val id: Long
+        private val repository: DeckRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T = DeckViewModel(repository, id) as T
+    override fun <T : ViewModel> create(modelClass: Class<T>): T = DeckViewModel(repository) as T
 }

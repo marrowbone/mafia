@@ -5,5 +5,6 @@ object CardsUtils {
         val games = "games"
         val rateAfter = "rate_after"
         val neverRate = "never_rate"
+        val lastUsedBoardId = "last_used_board_id"
     }
 }

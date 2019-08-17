@@ -5,7 +5,7 @@ import androidx.room.*
 @Entity(tableName = "default_decks")
 data class DefaultDeck(
         @Embedded
-        val deck: Deck,
+        val cardsSet: CardsSet,
 
-        @PrimaryKey @ColumnInfo(name = "player_count") val playerCount: Int = deck.defaultCards.size
+        @PrimaryKey @ColumnInfo(name = "player_count") val playerCount: Int = cardsSet.defaultCards.size
 )
