@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.view.isVisible
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.data.*
@@ -22,6 +21,7 @@ class CreateDeckArrayAdapter(
         private val onCardCountChanged: (Int) -> Unit,
         private val editCardCallback: (cardId: String) -> Unit
 ) : ArrayAdapter<AbstractCard>(context, layout_id, values) {
+    private var cardCount: Int = 0
     private val defaultCards = mutableListOf<DefaultCard>()
     private val userCards = mutableListOf<Card>()
     val deck = Deck(DeckRepository.USER_DECK, CardsSet(defaultCards, userCards))
@@ -61,8 +61,8 @@ class CreateDeckArrayAdapter(
             if (curCount > 0) {
                 curCount--
                 holder.cardCount!!.text = curCount.toString()
-                mCardCount--
-                onCardCountChanged.invoke(mCardCount)
+                cardCount--
+                onCardCountChanged.invoke(cardCount)
                 removeCard(item)
             }
         }
@@ -72,8 +72,8 @@ class CreateDeckArrayAdapter(
                 curCount++
                 holder.cardCount!!.text = curCount.toString()
 
-                mCardCount++
-                onCardCountChanged.invoke(mCardCount)
+                cardCount++
+                onCardCountChanged.invoke(cardCount)
                 addCard(item)
             }
         }
@@ -123,6 +123,8 @@ class CreateDeckArrayAdapter(
 
         defaultCards.addAll(deck.cardsSet.defaultCards)
         userCards.addAll(deck.cardsSet.userCards)
+        cardCount = deck.getCards().size
+        onCardCountChanged.invoke(cardCount)
         notifyDataSetChanged()
     }
 
@@ -141,6 +143,5 @@ class CreateDeckArrayAdapter(
 
     companion object {
         private val layout_id = R.layout.view_creator_card
-        private var mCardCount: Int = 0
     }
 }
