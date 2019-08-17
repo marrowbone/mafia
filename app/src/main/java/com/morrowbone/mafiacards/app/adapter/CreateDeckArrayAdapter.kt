@@ -113,6 +113,19 @@ class CreateDeckArrayAdapter(
         }
     }
 
+    fun updateDeck(deck: Deck?) {
+        if (deck == null) {
+            return
+        }
+
+        defaultCards.clear()
+        userCards.clear()
+
+        defaultCards.addAll(deck.cardsSet.defaultCards)
+        userCards.addAll(deck.cardsSet.userCards)
+        notifyDataSetChanged()
+    }
+
     /**
      * View holder for the views we need access to
      */

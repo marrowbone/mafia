@@ -20,6 +20,8 @@ class SeedDatabaseWorker(
         val database = AppDatabase.getInstance(applicationContext)
         database.defaultCardDao().insertAll(defaultCards)
         database.defaultDeckDao().insertAll(defaultDecks)
+        val emptyUserDeckDraft = Deck(DeckRepository.USER_DECK_DRAFT, CardsSet(mutableListOf()))
+        database.deckDao().insert(emptyUserDeckDraft)
         Result.success()
     }
 

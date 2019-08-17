@@ -11,11 +11,14 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.adapter.CreateDeckArrayAdapter
+import com.morrowbone.mafiacards.app.data.DeckRepository
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
 import com.morrowbone.mafiacards.app.viewmodels.CardListViewModel
 import com.morrowbone.mafiacards.app.viewmodels.DeckViewModel
 import kotlinx.android.synthetic.main.fragment_deck.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -45,6 +48,13 @@ class DeckFragment : Fragment() {
                     ::onCardCountChanged,
                     this@DeckFragment::showEditDialog)
             listview.adapter = arrayAdapter
+
+            GlobalScope.launch(IO) {
+                val draftUserDeck = deckViewModel.getUserDeck(DeckRepository.USER_DECK_DRAFT)
+                withContext(Main) {
+                    arrayAdapter.updateDeck(draftUserDeck)
+                }
+            }
         })
 
         card_count_textview!!.text = 0.toString()
@@ -55,6 +65,14 @@ class DeckFragment : Fragment() {
         addCardButton.setOnClickListener {
             AddCardDialogFragment().show(fragmentManager!!, "add_card_dialog")
         }
+    }
+
+    override fun onPause() {
+        GlobalScope.launch(IO) {
+            val userDeckDraft = arrayAdapter.deck.copy(deckId = DeckRepository.USER_DECK_DRAFT)
+            deckViewModel.saveDeck(userDeckDraft)
+        }
+        super.onPause()
     }
 
     private fun showEditDialog(cardId: String) {

@@ -10,7 +10,7 @@ class DeckRepository private constructor(
 
     fun getDefaultDeck(cardCount: Int): DefaultDeck = defaultDeckDao.getDefaultDeck(cardCount)
 
-    fun getDeck(id: Int): Deck = deckDao.getDeck(id)
+    fun getDeck(id: Int) = deckDao.getDeck(id)
 
     fun insertDeck(deck: Deck) {
         deckDao.insert(deck)
@@ -27,5 +27,7 @@ class DeckRepository private constructor(
 
         const val USER_DECK = 1
         const val DEFAULT_DECK = 2
+        const val USER_DECK_DRAFT = 3
+
     }
 }
