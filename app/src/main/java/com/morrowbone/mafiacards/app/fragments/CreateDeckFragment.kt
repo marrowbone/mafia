@@ -23,7 +23,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class DeckFragment : Fragment() {
+class CreateDeckFragment : Fragment() {
     private lateinit var arrayAdapter: CreateDeckArrayAdapter
     private val cardViewModel: CardListViewModel by viewModels {
         InjectorUtils.provideCardListViewModelFactory(requireContext())
@@ -46,7 +46,7 @@ class DeckFragment : Fragment() {
                     requireContext(),
                     it,
                     ::onCardCountChanged,
-                    this@DeckFragment::showEditDialog)
+                    this@CreateDeckFragment::showEditDialog)
             listview.adapter = arrayAdapter
 
             GlobalScope.launch(IO) {
@@ -86,7 +86,7 @@ class DeckFragment : Fragment() {
             GlobalScope.launch(Dispatchers.IO) {
                 deckViewModel.saveDeck(deck)
                 withContext(Dispatchers.Main) {
-                    val direction = DeckFragmentDirections.actionDeckFragmentToTakeCardsFragment(deck.deckId)
+                    val direction = CreateDeckFragmentDirections.actionDeckFragmentToTakeCardsFragment(deck.deckId)
                     findNavController().navigate(direction)
                 }
             }

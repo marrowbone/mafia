@@ -51,7 +51,7 @@
         tools:layout="@layout/fragment_prev_game" />
     <fragment
         android:id="@+id/deckFragment"
-        android:name="com.morrowbone.mafiacards.app.fragments.DeckFragment"
+        android:name="com.morrowbone.mafiacards.app.fragments.CreateDeckFragment"
         android:label="DeckFragment"
         tools:layout="@layout/fragment_deck">
         <action
