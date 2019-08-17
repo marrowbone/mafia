@@ -30,7 +30,7 @@
         android:background="@color/gray_alfa_2">
 
         <ImageView
-            android:id="@+id/game_type_image"
+            android:id="@+id/card_image"
             android:layout_width="100dp"
             android:layout_height="150dp"
             android:src="@drawable/don_launcher_xh" />
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/game_type_image"
+            android:layout_toRightOf="@+id/card_image"
             android:textColor="@color/card_text_color"
             android:textSize="@dimen/normal_text"
             android:textStyle="italic"

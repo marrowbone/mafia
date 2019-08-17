@@ -9,14 +9,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.morrowbone.mafiacards.app.R
-import com.morrowbone.mafiacards.app.adapter.CreateDeckArrayAdapter
+import com.morrowbone.mafiacards.app.adapter.CreateDeckAdapter
 import com.morrowbone.mafiacards.app.data.DeckRepository
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
 import com.morrowbone.mafiacards.app.viewmodels.CardListViewModel
 import com.morrowbone.mafiacards.app.viewmodels.DeckViewModel
 import kotlinx.android.synthetic.main.fragment_deck.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.GlobalScope
@@ -24,13 +24,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class CreateDeckFragment : Fragment() {
-    private lateinit var arrayAdapter: CreateDeckArrayAdapter
     private val cardViewModel: CardListViewModel by viewModels {
         InjectorUtils.provideCardListViewModelFactory(requireContext())
     }
     private val deckViewModel: DeckViewModel by viewModels {
         InjectorUtils.provideDeckViewModelFactory(requireContext())
     }
+    private lateinit var adapter: CreateDeckAdapter
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -38,23 +38,12 @@ class CreateDeckFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        cardViewModel.cards.observe(this, Observer {
-            fun onCardCountChanged(cardCount: Int) {
-                card_count_textview.text = cardCount.toString()
-            }
-            arrayAdapter = CreateDeckArrayAdapter(
-                    requireContext(),
-                    it,
-                    ::onCardCountChanged,
-                    this@CreateDeckFragment::showEditDialog)
-            listview.adapter = arrayAdapter
+        adapter = CreateDeckAdapter(this::onCardCountChanged, this::showEditDialog)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = adapter
 
-            GlobalScope.launch(IO) {
-                val draftUserDeck = deckViewModel.getUserDeck(DeckRepository.USER_DECK_DRAFT)
-                withContext(Main) {
-                    arrayAdapter.updateDeck(draftUserDeck)
-                }
-            }
+        cardViewModel.cards.observe(this, Observer {
+            adapter.updateCards(it)
         })
 
         card_count_textview!!.text = 0.toString()
@@ -68,9 +57,23 @@ class CreateDeckFragment : Fragment() {
     }
 
     override fun onPause() {
-        val userDeckDraft = arrayAdapter.deck.copy(deckId = DeckRepository.USER_DECK_DRAFT)
+        val userDeckDraft = adapter.deck.copy(deckId = DeckRepository.USER_DECK_DRAFT)
         deckViewModel.saveDeck(userDeckDraft)
         super.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        GlobalScope.launch(IO) {
+            val draftUserDeck = deckViewModel.getUserDeck(DeckRepository.USER_DECK_DRAFT)
+            withContext(Main) {
+                adapter.updateDeck(draftUserDeck)
+            }
+        }
+    }
+
+    private fun onCardCountChanged(cardCount: Int) {
+        card_count_textview.text = cardCount.toString()
     }
 
     private fun showEditDialog(cardId: String) {
@@ -78,9 +81,9 @@ class CreateDeckFragment : Fragment() {
     }
 
     private fun onTakeCardsClick() {
-        val cardCount = arrayAdapter.deck.getCards().size
+        val cardCount = adapter.deck.getCards().size
         if (cardCount > 0) {
-            val deck = arrayAdapter.deck.shuffle()
+            val deck = adapter.deck.shuffle()
             deckViewModel.saveDeck(deck)
             val direction = CreateDeckFragmentDirections.actionDeckFragmentToTakeCardsFragment(deck.deckId)
             findNavController().navigate(direction)

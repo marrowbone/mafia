@@ -38,7 +38,7 @@ class RolesArrayAdapter(context: Context, values: List<AbstractCard>) : ArrayAda
             holder.description = convertView
                     .findViewById<View>(R.id.game_description) as TextView
 
-            holder.image = convertView.findViewById<View>(R.id.game_type_image) as ImageView
+            holder.image = convertView.findViewById<View>(R.id.card_image) as ImageView
 
             convertView.tag = holder
         } else {
