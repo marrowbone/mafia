@@ -68,10 +68,8 @@ class CreateDeckFragment : Fragment() {
     }
 
     override fun onPause() {
-        GlobalScope.launch(IO) {
-            val userDeckDraft = arrayAdapter.deck.copy(deckId = DeckRepository.USER_DECK_DRAFT)
-            deckViewModel.saveDeck(userDeckDraft)
-        }
+        val userDeckDraft = arrayAdapter.deck.copy(deckId = DeckRepository.USER_DECK_DRAFT)
+        deckViewModel.saveDeck(userDeckDraft)
         super.onPause()
     }
 
@@ -83,13 +81,9 @@ class CreateDeckFragment : Fragment() {
         val cardCount = arrayAdapter.deck.getCards().size
         if (cardCount > 0) {
             val deck = arrayAdapter.deck.shuffle()
-            GlobalScope.launch(Dispatchers.IO) {
-                deckViewModel.saveDeck(deck)
-                withContext(Dispatchers.Main) {
-                    val direction = CreateDeckFragmentDirections.actionDeckFragmentToTakeCardsFragment(deck.deckId)
-                    findNavController().navigate(direction)
-                }
-            }
+            deckViewModel.saveDeck(deck)
+            val direction = CreateDeckFragmentDirections.actionDeckFragmentToTakeCardsFragment(deck.deckId)
+            findNavController().navigate(direction)
         } else {
             showErrorDialog(R.string.error_add_some_cards)
         }

@@ -1,6 +1,7 @@
 package com.morrowbone.mafiacards.app.data
 
-import androidx.lifecycle.LiveData
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.withContext
 
 class DeckRepository private constructor(
         private val deckDao: DeckDao,
@@ -12,8 +13,10 @@ class DeckRepository private constructor(
 
     fun getDeck(id: Int) = deckDao.getDeck(id)
 
-    fun insertDeck(deck: Deck) {
-        deckDao.insert(deck)
+    suspend fun insertDeck(deck: Deck) {
+        withContext(IO) {
+            deckDao.insert(deck)
+        }
     }
 
     companion object {
