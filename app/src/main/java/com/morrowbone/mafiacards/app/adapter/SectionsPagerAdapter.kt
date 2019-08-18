@@ -77,11 +77,17 @@ class SectionsPagerAdapter(fm: FragmentManager, val deck: Deck) : FragmentStateP
             rootView.setOnClickListener(this)
             rootView.setOnLongClickListener(this)
 
-            cardViewMode.getCard(cardId, isDefaultCard).observe(this, Observer { abstractCard ->
-                mCardView!!.setCardImageResource(abstractCard.getImageResId())
-                mCardView!!.setRoleName(abstractCard.getTitle())
+            val cardLiveData = cardViewMode.getCard(cardId, isDefaultCard)
+            cardLiveData.observe(this, object : Observer<AbstractCard> {
+                override fun onChanged(abstractCard: AbstractCard?) {
+                    if (abstractCard == null) {
+                        return
+                    }
+                    cardLiveData.removeObserver(this)
+                    mCardView!!.setCardImageResource(abstractCard.getImageResId())
+                    mCardView!!.setRoleName(abstractCard.getTitle())
+                }
             })
-
             return rootView
         }
 
