@@ -76,6 +76,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
+            android:contentDescription="@string/add_card_dialog_title"
             android:src="@drawable/ic_add_black_24dp"
             android:tint="@color/card_text_color" />
     </RelativeLayout>
