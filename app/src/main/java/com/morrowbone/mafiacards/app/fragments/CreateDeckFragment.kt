@@ -1,6 +1,7 @@
 package com.morrowbone.mafiacards.app.fragments
 
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -54,6 +55,21 @@ class CreateDeckFragment : Fragment() {
         addCardButton.setOnClickListener {
             AddCardDialogFragment().show(fragmentManager!!, "add_card_dialog")
         }
+        clearDeckButton.setOnClickListener {
+            showConfirmClearDialog();
+        }
+    }
+
+    private fun showConfirmClearDialog() {
+        val alertDialog = AlertDialog.Builder(requireContext())
+                .setTitle(R.string.clear_deck)
+                .setMessage(R.string.clear_deck_dialog_message)
+                .setPositiveButton(R.string.clear) { _, _ ->
+                    adapter.clearDeck()
+                }
+                .setNegativeButton(android.R.string.cancel) { _, _ -> {} }
+                .create()
+        alertDialog.show()
     }
 
     override fun onPause() {

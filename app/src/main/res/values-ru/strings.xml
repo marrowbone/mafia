@@ -48,4 +48,7 @@
     <string name="delete_dialog_message">Вы уверены, что хотите удалить карту \"%s\"</string>
     <string name="save">Сохранить</string>
     <string name="change_card">Изменить карту</string>
+    <string name="clear_deck">Очистить доску</string>
+    <string name="clear_deck_dialog_message">Вы уверены, что хотите очистить доску?</string>
+    <string name="clear">Очистить</string>
 </resources>

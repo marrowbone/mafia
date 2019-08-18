@@ -124,6 +124,13 @@ class CreateDeckAdapter(
         }
     }
 
+    fun clearDeck() {
+        defaultCards.clear()
+        userCards.clear()
+        onDeckChanged()
+        notifyDataSetChanged()
+    }
+
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val decrement: ImageView = itemView.decrement
