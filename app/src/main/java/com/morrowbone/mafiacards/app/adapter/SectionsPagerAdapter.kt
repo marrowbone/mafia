@@ -9,16 +9,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.*
+import androidx.lifecycle.Observer
 
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.PagerAdapter
 
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.data.AbstractCard
 import com.morrowbone.mafiacards.app.data.Deck
+import com.morrowbone.mafiacards.app.data.DefaultCard
+import com.morrowbone.mafiacards.app.utils.InjectorUtils
+import com.morrowbone.mafiacards.app.viewmodels.CardListViewModel
 import com.morrowbone.mafiacards.app.views.CardView
 import com.morrowbone.mafiacards.app.views.CardView.CardSide
 
@@ -28,23 +29,20 @@ import com.morrowbone.mafiacards.app.views.CardView.CardSide
  */
 class SectionsPagerAdapter(fm: FragmentManager, val deck: Deck) : FragmentStatePagerAdapter(fm) {
 
-    init {
-        cards = deck.getCards()
-    }
-
+    private var cards: List<AbstractCard> = deck.getCards()
 
     override fun getItem(position: Int): Fragment {
-        // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
-        return PlaceholderFragment.newInstance(position)
+        val card = cards[position]
+        val isDefaultCard = card is DefaultCard
+        return PlaceholderFragment.newInstance(position, card.getId(), isDefaultCard)
     }
 
     override fun getCount(): Int {
-        return cards!!.size
+        return cards.size
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        val card = cards!!.get(position)
+        val card = cards[position]
         return card.getTitle()
     }
 
@@ -59,24 +57,30 @@ class SectionsPagerAdapter(fm: FragmentManager, val deck: Deck) : FragmentStateP
         private var mCardView: CardView? = null
         private var mHelpText: TextView? = null
 
+        private val cardViewMode: CardListViewModel by viewModels {
+            InjectorUtils.provideCardListViewModelFactory(requireContext())
+        }
+
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                                   savedInstanceState: Bundle?): View? {
             val rootView = inflater.inflate(R.layout.fragment_show_user_cart, container, false)
             mCardView = rootView.findViewById(R.id.card)
             mCardView!!.show(CardSide.BACKSIDE)
             val sectionNum = arguments!!.getInt(ARG_SECTION_NUMBER)
-            val card = cards!!.get(sectionNum)
+            val cardId = arguments!!.getString(ARG_CARD_ID)!!
+            val isDefaultCard = arguments!!.getBoolean(ARG_IS_DEFAILT_CARD)
             val playerNum = sectionNum + 1
-
-            mCardView!!.setCardImageResource(card.getImageResId())
-            mCardView!!.setRoleName(card.getTitle())
             mCardView!!.setPlayerNum(playerNum)
-
             mHelpText = rootView.findViewById(R.id.help_text)
             hideHelpField()
 
             rootView.setOnClickListener(this)
             rootView.setOnLongClickListener(this)
+
+            cardViewMode.getCard(cardId, isDefaultCard).observe(this, Observer { abstractCard ->
+                mCardView!!.setCardImageResource(abstractCard.getImageResId())
+                mCardView!!.setRoleName(abstractCard.getTitle())
+            })
 
             return rootView
         }
@@ -124,15 +128,19 @@ class SectionsPagerAdapter(fm: FragmentManager, val deck: Deck) : FragmentStateP
              * fragment.
              */
             private val ARG_SECTION_NUMBER = "section_number"
+            private val ARG_CARD_ID = "card_id"
+            private val ARG_IS_DEFAILT_CARD = "is_default_card"
 
             /**
              * Returns a new instance of this fragment for the given section
              * number.
              */
-            fun newInstance(sectionNumber: Int): PlaceholderFragment {
+            fun newInstance(sectionNumber: Int, cardId: String, isDefaultCard: Boolean): PlaceholderFragment {
                 val fragment = PlaceholderFragment()
                 val args = Bundle()
                 args.putInt(ARG_SECTION_NUMBER, sectionNumber)
+                args.putString(ARG_CARD_ID, cardId)
+                args.putBoolean(ARG_IS_DEFAILT_CARD, isDefaultCard)
                 fragment.arguments = args
                 return fragment
             }
@@ -140,8 +148,6 @@ class SectionsPagerAdapter(fm: FragmentManager, val deck: Deck) : FragmentStateP
     }
 
     companion object {
-        private var cards: List<AbstractCard>? = null
-
         val cardShowListeners: MutableList<() -> Unit> = mutableListOf()
     }
 }

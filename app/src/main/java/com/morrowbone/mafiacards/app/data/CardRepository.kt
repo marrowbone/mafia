@@ -49,6 +49,10 @@ class CardRepository private constructor(
         }
     }
 
+    fun getDefaultCard(cardId: String): LiveData<DefaultCard> {
+        return defaultCardDao.getCard(cardId)
+    }
+
     companion object {
         @Volatile
         private var instance: CardRepository? = null

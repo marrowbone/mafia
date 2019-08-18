@@ -12,7 +12,7 @@ interface DefaultCardDao {
     fun getCards(): LiveData<List<DefaultCard>>
 
     @Query("SELECT * FROM default_cards WHERE id = :cardId")
-    fun getCard(cardId: String): DefaultCard
+    fun getCard(cardId: String): LiveData<DefaultCard>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(cards: List<DefaultCard>)
