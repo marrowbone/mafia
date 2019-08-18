@@ -24,7 +24,6 @@ abstract class AppDatabase : RoomDatabase() {
         private var instance: AppDatabase? = null
 
         fun getInstance(context: Context): AppDatabase {
-            println("getInstance")
             return instance ?: synchronized(this) {
                 instance ?: buildDatabase(context).also { instance = it }
             }
@@ -35,7 +34,6 @@ abstract class AppDatabase : RoomDatabase() {
                     .allowMainThreadQueries()
                     .addCallback(object : RoomDatabase.Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
-                            println("buildDatabase, onCreate")
                             super.onCreate(db)
                             val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>().build()
                             WorkManager.getInstance(context).enqueue(request)
