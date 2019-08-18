@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -47,7 +48,7 @@ class CreateDeckFragment : Fragment() {
             adapter.updateCards(it)
         })
 
-        card_count_textview!!.text = 0.toString()
+        onCardCountChanged(0)
         save_btn.setOnClickListener {
             onTakeCardsClick()
         }
@@ -90,6 +91,7 @@ class CreateDeckFragment : Fragment() {
 
     private fun onCardCountChanged(cardCount: Int) {
         card_count_textview.text = cardCount.toString()
+        clearDeckButton.isVisible = cardCount > 0
     }
 
     private fun showEditDialog(cardId: String) {
