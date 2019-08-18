@@ -45,6 +45,6 @@
     <string name="delete_dialog_title">Card deletion</string>
     <string name="delete_dialog_message">Are you sure you want to delete card \"%s\"</string>
     <string name="save">Save</string>
-    <string name="change_card">Change card</string>
+    <string name="change_card">Change a card</string>
 
 </resources>
