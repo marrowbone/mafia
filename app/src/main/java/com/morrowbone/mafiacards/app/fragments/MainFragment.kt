@@ -118,15 +118,11 @@ class MainFragment : Fragment() {
                     if (cartCount < min) {
                         showMessage(R.string.error, R.string.wrong_player_count)
                     } else {
-                        GlobalScope.launch(IO) {
-                            val defaultDeck = deckViewModel.getDefaultDeck(cartCount)
-                            val deck = Deck(DeckRepository.DEFAULT_DECK, defaultDeck.cardsSet).shuffle()
-                            deckViewModel.saveDeck(deck)
-                            withContext(Dispatchers.Main) {
-                                val direction = MainFragmentDirections.actionMainFragmentToTakeCardsFragment(deck.deckId)
-                                findNavController().navigate(direction)
-                            }
-                        }
+                        val defaultDeck = deckViewModel.getDefaultDeck(cartCount)
+                        val deck = Deck(DeckRepository.DEFAULT_DECK, defaultDeck.cardsSet).shuffle()
+                        deckViewModel.saveDeck(deck)
+                        val direction = MainFragmentDirections.actionMainFragmentToTakeCardsFragment(deck.deckId)
+                        findNavController().navigate(direction)
                     }
 
                 }

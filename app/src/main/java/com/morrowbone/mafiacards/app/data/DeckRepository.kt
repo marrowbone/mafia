@@ -1,8 +1,5 @@
 package com.morrowbone.mafiacards.app.data
 
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.withContext
-
 class DeckRepository private constructor(
         private val deckDao: DeckDao,
         private val defaultDeckDao: DefaultDeckDao) {
@@ -13,10 +10,8 @@ class DeckRepository private constructor(
 
     fun getDeck(id: Int) = deckDao.getDeck(id)
 
-    suspend fun insertDeck(deck: Deck) {
-        withContext(IO) {
-            deckDao.insert(deck)
-        }
+    fun insertDeck(deck: Deck) {
+        deckDao.insert(deck)
     }
 
     companion object {

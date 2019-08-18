@@ -12,9 +12,7 @@ class DeckViewModel internal constructor(private val deckRepository: DeckReposit
     fun getUserDecks() = deckRepository.getUserCards()
 
     fun saveDeck(deck: Deck) {
-        viewModelScope.launch {
-            deckRepository.insertDeck(deck)
-        }
+        deckRepository.insertDeck(deck)
     }
 
     fun getDefaultDeck(deckId: Int) = deckRepository.getDefaultDeck(deckId)
