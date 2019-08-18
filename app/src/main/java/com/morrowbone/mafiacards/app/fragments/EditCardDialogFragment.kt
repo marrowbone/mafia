@@ -26,7 +26,7 @@ class EditCardDialogFragment : AddCardDialogFragment() {
         }
     }
 
-    private lateinit var card: Card
+    private var card: Card? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         okButton.setText(R.string.save)
@@ -38,8 +38,8 @@ class EditCardDialogFragment : AddCardDialogFragment() {
         val cardId = requireArguments().getString(CARD_ID)!!
         viewModel.getUserCard(cardId).observe(this, Observer {
             card = it
-            cardTitleEditText.setText(card.getTitle())
-            cardDescriptionEditText.setText(card.getDescription())
+            cardTitleEditText.setText(card!!.getTitle())
+            cardDescriptionEditText.setText(card!!.getDescription())
         })
         okButton.setOnClickListener {
             saveChanges()
@@ -54,16 +54,16 @@ class EditCardDialogFragment : AddCardDialogFragment() {
     private fun saveChanges() {
         val cardTitle = cardTitleEditText.text.toString()
         val cardDescription = cardDescriptionEditText.text.toString()
-        val changedCard = card.copy(name = cardTitle, info = cardDescription)
+        val changedCard = card!!.copy(name = cardTitle, info = cardDescription)
         viewModel.saveChanged(changedCard)
     }
 
     private fun showConfirmDeleteDialog() {
         val confirmDeleteDialog = AlertDialog.Builder(requireContext())
                 .setTitle(R.string.delete_dialog_title)
-                .setMessage(getString(R.string.delete_dialog_message, card.name))
+                .setMessage(getString(R.string.delete_dialog_message, card!!.name))
                 .setPositiveButton(R.string.delete) { _, _ ->
-                    viewModel.deleteCard(card)
+                    viewModel.deleteCard(card!!)
                     dismiss()
                 }.setNegativeButton(android.R.string.cancel, object : DialogInterface.OnClickListener {
                     override fun onClick(p0: DialogInterface?, p1: Int) {
@@ -74,8 +74,11 @@ class EditCardDialogFragment : AddCardDialogFragment() {
     }
 
     override fun isNeedShowOkButton(titleString: String, descriptionString: String): Boolean {
-        val titleChanged = titleString != card.getTitle()
-        val descriptionChanged = descriptionString != card.getDescription()
+        if (card == null) {
+            return false
+        }
+        val titleChanged = titleString != card!!.getTitle()
+        val descriptionChanged = descriptionString != card!!.getDescription()
         val cardChanged = titleChanged || descriptionChanged
         return super.isNeedShowOkButton(titleString, descriptionString) && cardChanged
     }
