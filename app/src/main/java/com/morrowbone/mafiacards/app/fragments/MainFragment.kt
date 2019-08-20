@@ -1,6 +1,5 @@
 package com.morrowbone.mafiacards.app.fragments
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,26 +8,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.SeekBar
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.findNavController
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.data.Deck
 import com.morrowbone.mafiacards.app.data.DeckRepository
-import com.morrowbone.mafiacards.app.data.DefaultDeck
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
 import com.morrowbone.mafiacards.app.utils.Utils
 import com.morrowbone.mafiacards.app.viewmodels.DeckViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), NavController.OnDestinationChangedListener {
+
     private val deckViewModel: DeckViewModel by viewModels {
         InjectorUtils.provideDeckViewModelFactory(requireContext())
     }
@@ -39,11 +35,37 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         prev_game.isVisible = Utils.hasLastUsedDeck()
+    }
 
+    override fun onResume() {
+        super.onResume()
+        initClickListeners()
+        findNavController().addOnDestinationChangedListener(this)
+    }
+
+    private fun initClickListeners() {
         initPrevGameBtn()
         initPlayBtn()
         initCreatorBtn()
         initRulesBtn()
+    }
+
+    override fun onPause() {
+        findNavController().removeOnDestinationChangedListener(this)
+        super.onPause()
+    }
+
+    override fun onDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
+        if (controller.graph.startDestination != destination.id) {
+            clearClickListeners()
+        }
+    }
+
+    private fun clearClickListeners() {
+        play_btn.setOnClickListener(null)
+        creator_btn.setOnClickListener(null)
+        rules_btn.setOnClickListener(null)
+        prev_game.setOnClickListener(null)
     }
 
     private fun initPrevGameBtn() {
@@ -66,6 +88,7 @@ class MainFragment : Fragment() {
 
     private fun initPlayBtn() {
         play_btn.setOnClickListener {
+            clearClickListeners()
             val max = 13
             val min = 3
 
@@ -109,7 +132,7 @@ class MainFragment : Fragment() {
                     }
                 }
             })
-            val builder = AlertDialog.Builder(activity)
+            val builder = AlertDialog.Builder(activity!!)
             builder.setTitle(R.string.dialog_number_of_player)
             builder.setView(dialogContent).setCancelable(true)
             builder.setPositiveButton(R.string.dialog_number_of_player_positive_btn) { _, _ ->
@@ -128,12 +151,15 @@ class MainFragment : Fragment() {
                 }
             }
 
+            builder.setOnDismissListener {
+                initClickListeners()
+            }
             builder.show()
         }
     }
 
     private fun showMessage(titleResId: Int, messageResId: Int) {
-        val builder = AlertDialog.Builder(activity)
+        val builder = AlertDialog.Builder(activity!!)
         builder.setTitle(titleResId).setMessage(messageResId).setCancelable(false)
         builder.setPositiveButton(R.string.positive_button_text) { _, _ -> }
         builder.show()
