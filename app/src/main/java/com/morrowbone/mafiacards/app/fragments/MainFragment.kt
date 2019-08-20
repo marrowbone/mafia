@@ -150,7 +150,7 @@ class MainFragment : Fragment(), NavController.OnDestinationChangedListener {
 
                 }
             }
-
+            builder.setNegativeButton(android.R.string.cancel) { _, _ -> }
             builder.setOnDismissListener {
                 initClickListeners()
             }
