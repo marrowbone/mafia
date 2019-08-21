@@ -42,8 +42,8 @@
     <string name="delete_dialog_message">Are you sure you want to delete card \"%s\"</string>
     <string name="save">Save</string>
     <string name="change_card">Change a card</string>
-    <string name="clear_deck">Clear the deck</string>
-    <string name="clear_deck_dialog_message">Are you sure you want to clear the deck?</string>
-    <string name="clear">Clear</string>
+    <string name="clear_deck">Discard the deck</string>
+    <string name="clear_deck_dialog_message">Are you sure you want to discard the deck?</string>
+    <string name="clear">Discard</string>
 
 </resources>
