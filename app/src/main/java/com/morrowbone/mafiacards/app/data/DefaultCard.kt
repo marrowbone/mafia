@@ -32,7 +32,7 @@ data class DefaultCard(
             MAFIA -> R.string.role_mafia_info
             DETECTIVE -> R.string.role_detective_info
             DON_MAFIA -> R.string.role_don_info
-            DOCTOR -> R.string.role_don_info
+            DOCTOR -> R.string.role_doctor_info
             IMMORTAL -> R.string.role_immortal_info
             MANIAC -> R.string.role_maniac_info
             else -> R.string.role_civilian_info
