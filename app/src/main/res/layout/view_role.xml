@@ -19,7 +19,6 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/big_text"
             android:textStyle="bold"
-            app:fontFamily="@font/stylo_family"
             tools:text="@string/role_civilian" />
     </RelativeLayout>
 
@@ -43,8 +42,6 @@
             android:layout_toRightOf="@+id/card_image"
             android:textColor="@color/card_text_color"
             android:textSize="@dimen/normal_text"
-            android:textStyle="italic"
-            app:fontFamily="@font/stylo_family"
             tools:text="@string/role_civilian_info" />
     </RelativeLayout>
 </LinearLayout>

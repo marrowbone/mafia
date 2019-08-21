@@ -17,6 +17,5 @@
         android:gravity="center_horizontal"
         android:text="@string/message_tap_to_see_card"
         android:textColor="@color/hint_text_color"
-        android:textSize="@dimen/big_text"
-        android:textStyle="italic" />
+        android:textSize="@dimen/big_text" />
 </RelativeLayout>

@@ -18,9 +18,9 @@
             android:layout_height="@dimen/very_very_big_text"
             android:gravity="center_horizontal|bottom"
             android:textColor="@color/card_text_color"
+            android:textStyle="bold"
             app:autoSizeMaxTextSize="@dimen/very_very_big_text"
-            app:autoSizeTextType="uniform"
-            app:fontFamily="@font/stylo_family" />
+            app:autoSizeTextType="uniform" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/player_text"
@@ -32,7 +32,6 @@
             android:text="@string/player"
             android:textColor="@color/card_text_color"
             app:autoSizeMaxTextSize="@dimen/very_big_text"
-            app:autoSizeTextType="uniform"
-            app:fontFamily="@font/stylo_family" />
+            app:autoSizeTextType="uniform" />
     </LinearLayout>
 </RelativeLayout>

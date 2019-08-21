@@ -18,7 +18,6 @@
         android:id="@+id/save_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:fontFamily="@font/stylo_family"
         android:layout_alignParentBottom="true"
         android:paddingTop="10dp"
         android:text="@string/play"
@@ -43,8 +42,7 @@
                 android:gravity="center"
                 android:text="@string/in_you_deck"
                 android:textColor="@color/card_count_color"
-                android:textSize="@dimen/normal_text"
-                app:fontFamily="@font/stylo_family" />
+                android:textSize="@dimen/normal_text" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/card_count_textview"
@@ -55,8 +53,7 @@
                 android:paddingRight="10dp"
                 android:text="10"
                 android:textColor="@color/card_count_color"
-                android:textSize="@dimen/big_text"
-                app:fontFamily="@font/stylo_family" />
+                android:textSize="@dimen/big_text" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text_below_card_count"
@@ -65,8 +62,7 @@
                 android:gravity="center"
                 android:text="@string/cards"
                 android:textColor="@color/card_count_color"
-                android:textSize="@dimen/normal_text"
-                app:fontFamily="@font/stylo_family" />
+                android:textSize="@dimen/normal_text" />
         </LinearLayout>
 
         <ImageButton

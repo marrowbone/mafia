@@ -25,7 +25,7 @@
         android:paddingLeft="2dp"
         android:paddingRight="2dp"
         android:textColor="@color/card_text_color"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="@dimen/very_big_text"
-        app:autoSizeTextType="uniform"
-        app:fontFamily="@font/stylo_family" />
+        app:autoSizeTextType="uniform" />
 </RelativeLayout>
