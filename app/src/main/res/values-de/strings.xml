@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mafia. Karten für Partyspiel mit Freunden. Werwolf</string>
+    <string name="role_civilian">Bürger</string>
+    <string name="role_mafia">Mafia</string>
+    <string name="role_detective">Kommissar</string>
+    <string name="role_immortal">Unsterblich</string>
+    <string name="role_doctor">Arzt</string>
+    <string name="role_don">Don</string>
+    <string name="role_maniac">Maniac</string>
+    <string name="role_wervoolf">Werwolf</string>
+    <string name="prev_game">Vorheriges Spiel</string>
+    <string name="play">Karten nehmen</string>
+    <string name="rоles">Liste der Karten</string>
+    <string name="create_deck">Wähle dein Deck</string>
+    <string name="dialog_number_of_player">Geben Sie die Anzahl der Spieler ein</string>
+    <string name="dialog_number_of_player_positive_btn">Vorwärts!</string>
+    <string name="message_tap_to_see_card">Lang drücken, um Ihre Karte zu sehen</string>
+    <string name="player">Spieler</string>
+    <string name="final_dialog_title">Alle Spieler haben ihre Karten gesehen</string>
+    <string name="final_dialog_message">P.S. Wenn jemand seine Karte vergisst, gibt es das \"Vorherige Spiel\" im Hauptmenü. Hab ein schönes Spiel!</string>
+    <string name="final_dialog_go_to_main_menu">Zum Hauptmenü</string>
+    <string name="positive_button_text">OK</string>
+    <string name="error">Error</string>
+    <string name="wrong_player_count">Sie haben eine falsche Anzahl von Spielern eingegeben</string>
+    <string name="in_you_deck">In deinem Deck</string>
+    <string name="cards">Karten</string>
+    <string name="error_add_some_cards">Füge ein paar Karten hinzu</string>
+    <string name="are_you_like_app">Gefällt dir das Mafia?</string>
+    <string name="review_app">5-Sterne-Bewertung von Ihnen helfen mir, kostenlose Updates bereitzustellen</string>
+    <string name="review_now">Jetzt bewerten</string>
+    <string name="later_review">Frag mich später</string>
+    <string name="never_review">Bewerte nicht</string>
+    <string name="add_card_dialog_role_name">Kartentitel:</string>
+    <string name="add_card_dialog_description">Kartenbeschreibung:</string>
+    <string name="add_card_dialog_title">Neue Karte erstellen</string>
+    <string name="create">Erstellen</string>
+    <string name="no_description">Keine Information</string>
+    <string name="delete">Löschen</string>
+    <string name="delete_dialog_title">Kartenlöschung</string>
+    <string name="delete_dialog_message">Möchten Sie die Karte \"%s\" wirklich löschen?</string>
+    <string name="save">Speichern</string>
+    <string name="change_card">Karte ändern</string>
+    <string name="clear_deck">Verwerfen Sie das Deck</string>
+    <string name="clear_deck_dialog_message">Möchten Sie das Deck wirklich verwerfen?</string>
+    <string name="clear">Verwerfen</string>
+</resources>
