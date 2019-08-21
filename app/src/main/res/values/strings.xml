@@ -24,7 +24,7 @@
     <string name="positive_button_text">OK</string>
     <string name="error">Error</string>
     <string name="wrong_player_count">You entered an incorrect number of players</string>
-    <string name="in_you_deck">In you deck</string>
+    <string name="in_you_deck">In your deck</string>
     <string name="cards">cards</string>
     <string name="error_add_some_cards">Add some cards</string>
     <string name="are_you_like_app">Enjoying mafia?</string>
