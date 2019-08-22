@@ -127,8 +127,15 @@ class MainFragment : Fragment(), NavController.OnDestinationChangedListener {
                 override fun afterTextChanged(editable: Editable) {
                     val value = editText.text.toString()
                     if (value != "") {
-                        val progress = Integer.valueOf(editText.text.toString()) - min
-                        seekBar.progress = progress
+                        var progress = Integer.valueOf(editText.text.toString()) - min
+                        if (progress < 0) {
+                            progress = 0
+                        } else if (progress > max - min) {
+                            progress = max - min
+                        }
+                        if (seekBar.progress != progress) {
+                            seekBar.progress = progress
+                        }
                     }
                 }
             })
