@@ -1,11 +1,12 @@
 package com.morrowbone.mafiacards.app.fragments
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.HtmlCompat
+import androidx.core.text.HtmlCompat.FROM_HTML_MODE_COMPACT
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -90,7 +91,9 @@ class CreateDeckFragment : Fragment() {
     }
 
     private fun onCardCountChanged(cardCount: Int) {
-        card_count_textview.text = cardCount.toString()
+        val text = String.format(requireContext().getString(R.string.cards_in_deck_deck_constructor), cardCount)
+        val finalText = HtmlCompat.fromHtml(text, FROM_HTML_MODE_COMPACT)
+        cards_in_deck.text = finalText
         clearDeckButton.isVisible = cardCount > 0
     }
 

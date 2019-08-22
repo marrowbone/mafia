@@ -23,8 +23,8 @@
     <string name="positive_button_text">حسنا</string>
     <string name="error">خطأ</string>
     <string name="wrong_player_count">لقد أدخلت عددًا غير صحيح من اللاعبين</string>
-    <string name="in_you_deck">سطح السفينة لديها</string>
-    <string name="cards">بطاقات</string>
+    <string name="cards_in_deck_take_cards">سطح السفينة لديه&lt;br/>&lt;big>&lt;big>&lt;big>%d&lt;/big>&lt;/big>&lt;/big>&lt;br/>بطاقات</string>
+    <string name="cards_in_deck_deck_constructor"> سطح السفينة لديه&lt;big>&lt;big>%d&lt;/big>&lt;/big> بطاقات</string>
     <string name="error_add_some_cards">أضف بعض البطاقات</string>
     <string name="are_you_like_app">تتمتع المافيا؟</string>
     <string name="review_app">تصنيف 5 نجوم منك يساعدني على تقديم تحديثات مجانية</string>

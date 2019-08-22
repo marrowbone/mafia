@@ -14,11 +14,11 @@ import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.Interpolator
 import android.widget.Scroller
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager.widget.PagerAdapter
@@ -32,9 +32,11 @@ import com.morrowbone.mafiacards.app.utils.InjectorUtils
 import com.morrowbone.mafiacards.app.utils.Utils
 import com.morrowbone.mafiacards.app.viewmodels.DeckViewModel
 import kotlinx.android.synthetic.main.fragment_take_cards.*
-import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.lang.reflect.Field
 
 class TakeCardsFragment : Fragment() {
@@ -85,7 +87,10 @@ class TakeCardsFragment : Fragment() {
             withContext(Main) {
                 mSectionsPagerAdapter = SectionsPagerAdapter(requireFragmentManager(), deck)
                 pager.adapter = mSectionsPagerAdapter
-                card_count_textview.text = deck.getCards().size.toString()
+                val cardCount = deck.getCards().size
+                val text = String.format(requireContext().getString(R.string.cards_in_deck_take_cards), cardCount)
+                val finalText = HtmlCompat.fromHtml(text, HtmlCompat.FROM_HTML_MODE_COMPACT)
+                cards_in_deck.text = finalText
             }
         }
 

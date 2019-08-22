@@ -23,8 +23,8 @@
     <string name="positive_button_text">OK</string>
     <string name="error">Error</string>
     <string name="wrong_player_count">Sie haben eine falsche Anzahl von Spielern eingegeben</string>
-    <string name="in_you_deck">In deinem Deck</string>
-    <string name="cards">Karten</string>
+    <string name="cards_in_deck_take_cards">In deinem Deck&lt;br/>&lt;big>&lt;big>&lt;big>%d&lt;/big>&lt;/big>&lt;/big>&lt;br/>Karten</string>
+    <string name="cards_in_deck_deck_constructor">In deinem Deck &lt;big>&lt;big>%d&lt;/big>&lt;/big> Karten</string>
     <string name="error_add_some_cards">Füge ein paar Karten hinzu</string>
     <string name="are_you_like_app">Gefällt dir das Mafia?</string>
     <string name="review_app">5-Sterne-Bewertung von Ihnen helfen mir, kostenlose Updates bereitzustellen</string>

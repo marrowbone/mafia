@@ -24,8 +24,8 @@
     <string name="positive_button_text">OK</string>
     <string name="error">Error</string>
     <string name="wrong_player_count">You entered an incorrect number of players</string>
-    <string name="in_you_deck">In your deck</string>
-    <string name="cards">cards</string>
+    <string name="cards_in_deck_take_cards">Deck has&lt;br/>&lt;big>&lt;big>&lt;big>%d&lt;/big>&lt;/big>&lt;/big>&lt;br/>cards</string>
+    <string name="cards_in_deck_deck_constructor">Deck has &lt;big>&lt;big>%d&lt;/big>&lt;/big> cards</string>
     <string name="error_add_some_cards">Add some cards</string>
     <string name="are_you_like_app">Enjoying mafia?</string>
     <string name="review_app">5-Star rating from you helps me to provide free updates</string>
@@ -45,5 +45,4 @@
     <string name="clear_deck">Discard the deck</string>
     <string name="clear_deck_dialog_message">Are you sure you want to discard the deck?</string>
     <string name="clear">Discard</string>
-
 </resources>

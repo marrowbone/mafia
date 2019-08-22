@@ -24,8 +24,8 @@
     <string name="final_dialog_go_to_main_menu">В главное меню</string>
     <string name="positive_button_text">Хорошо</string>
 
-    <string name="in_you_deck">Карт в колоде:</string>
-    <string name="cards"></string>
+    <string name="cards_in_deck_take_cards">Карт в колоде:&lt;br>&lt;big>&lt;big>&lt;big>%d&lt;/big>&lt;/big>&lt;/big></string>
+    <string name="cards_in_deck_deck_constructor">Карт в колоде: &lt;big>&lt;big>%d&lt;/big>&lt;/big></string>
     <string name="error">Ошибка</string>
     <string name="wrong_player_count">Вы ввели неверное количество игроков</string>
     <string name="error_add_some_cards">Добавьте карт в колоду</string>

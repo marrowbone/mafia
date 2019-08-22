@@ -35,31 +35,11 @@
             android:padding="7dp">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/text_above_card_count"
+                android:id="@+id/cards_in_deck"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/in_you_deck"
-                android:textColor="@color/card_count_color"
-                android:textSize="@dimen/normal_text" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/card_count_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="10"
-                android:textColor="@color/card_count_color"
-                android:textSize="@dimen/big_text" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/text_below_card_count"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/cards"
+                android:text="@string/cards_in_deck_take_cards"
                 android:textColor="@color/card_count_color"
                 android:textSize="@dimen/normal_text" />
         </LinearLayout>
