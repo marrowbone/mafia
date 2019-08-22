@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">المافيا. بطاقات لعبة الحزب مع الأصدقاء. مستذئب</string>
+    <string name="role_civilian">مواطن</string>
+    <string name="role_mafia">مافيا</string>
+    <string name="role_detective">المحقق</string>
+    <string name="role_immortal">خالد</string>
+    <string name="role_doctor">طبيب</string>
+    <string name="role_don">دون</string>
+    <string name="role_maniac">معتوه</string>
+    <string name="role_wervoolf">مستذئب</string>
+    <string name="prev_game">اللعبة السابقة</string>
+    <string name="play">خذ البطاقات</string>
+    <string name="rоles">معلومات البطاقات</string>
+    <string name="create_deck">اختيار سطح السفينة الخاص بك</string>
+    <string name="dialog_number_of_player">أدخل عدد اللاعبين</string>
+    <string name="dialog_number_of_player_positive_btn">اذهب!</string>
+    <string name="message_tap_to_see_card">الضغط لفترة طويلة لرؤية بطاقتك</string>
+    <string name="player">لاعب</string>
+    <string name="final_dialog_title">لقد رأى جميع اللاعبين أوراقهم</string>
+    <string name="final_dialog_message">ملاحظة إذا نسي شخص ما بطاقته ، فهناك "اللعبة السابقة" في القائمة الرئيسية. هل لديك لعبة جميلة!</string>
+    <string name="final_dialog_go_to_main_menu">إلى القائمة الرئيسية</string>
+    <string name="positive_button_text">حسنا</string>
+    <string name="error">خطأ</string>
+    <string name="wrong_player_count">لقد أدخلت عددًا غير صحيح من اللاعبين</string>
+    <string name="in_you_deck">في سطح السفينة الخاص بك</string>
+    <string name="cards">بطاقات</string>
+    <string name="error_add_some_cards">أضف بعض البطاقات</string>
+    <string name="are_you_like_app">تتمتع المافيا؟</string>
+    <string name="review_app">تصنيف 5 نجوم منك يساعدني على تقديم تحديثات مجانية</string>
+    <string name="review_now">قيم الآن</string>
+    <string name="later_review">اسالني لاحقا</string>
+    <string name="never_review">لا تقيم</string>
+    <string name="add_card_dialog_role_name">عنوان البطاقة:</string>
+    <string name="add_card_dialog_description">وصف البطاقة:</string>
+    <string name="add_card_dialog_title">إنشاء بطاقة جديدة</string>
+    <string name="create">خلق</string>
+    <string name="no_description">لا توجد معلومات</string>
+    <string name="delete">حذف</string>
+    <string name="delete_dialog_title">حذف البطاقة</string>
+    <string name="delete_dialog_message">هل تريد بالتأكيد حذف البطاقة \"٪s\"</string>
+    <string name="save">حفظ</string>
+    <string name="change_card">تغيير البطاقة</string>
+    <string name="clear_deck">تجاهل سطح السفينة</string>
+    <string name="clear_deck_dialog_message">هل أنت متأكد من أنك تريد التخلص من سطح السفينة؟</string>
+    <string name="clear">تجاهل</string>
+</resources>
