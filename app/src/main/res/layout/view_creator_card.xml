@@ -13,40 +13,12 @@
         android:layout_height="wrap_content"
         android:background="@color/gray_alfa_2">
 
-        <LinearLayout
+        <include
+            layout="@layout/view_counter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/card_title_layout"
-            android:layout_toEndOf="@+id/card_image"
-            android:layoutDirection="ltr"
-            android:gravity="center_vertical">
-
-        <ImageView
-                android:id="@+id/decrement"
-                android:padding="5dp"
-                android:layout_width="80sp"
-                android:layout_height="80sp"
-                android:src="@drawable/arrow_decrement" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/card_count"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:text="0"
-                android:maxLines="1"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/big_text"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/increment"
-                android:padding="5dp"
-                android:layout_width="80sp"
-                android:layout_height="80sp"
-                android:src="@drawable/arrow_increment" />
-        </LinearLayout>
+            android:layout_toEndOf="@+id/card_image" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/card_title_layout"

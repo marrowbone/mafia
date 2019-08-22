@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.data.*
+import kotlinx.android.synthetic.main.view_counter.view.*
 import kotlinx.android.synthetic.main.view_creator_card.view.*
 
 class CreateDeckAdapter(
