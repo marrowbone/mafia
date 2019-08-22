@@ -13,7 +13,6 @@
         android:layout_above="@+id/save_btn"
         android:listSelector="@android:color/transparent" />
 
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/save_btn"
         android:layout_width="match_parent"
@@ -70,7 +69,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/addCardButton"
+            android:layout_toStartOf="@id/addCardButton"
             android:contentDescription="@string/clear_deck"
             android:src="@drawable/ic_refresh_black_24dp"
             android:tint="@color/card_text_color" />
@@ -79,9 +78,9 @@
             android:id="@+id/addCardButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             android:contentDescription="@string/add_card_dialog_title"
             android:src="@drawable/ic_add_black_24dp"
             android:tint="@color/card_text_color" />

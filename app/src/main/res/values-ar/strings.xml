@@ -23,7 +23,7 @@
     <string name="positive_button_text">حسنا</string>
     <string name="error">خطأ</string>
     <string name="wrong_player_count">لقد أدخلت عددًا غير صحيح من اللاعبين</string>
-    <string name="in_you_deck">في سطح السفينة الخاص بك</string>
+    <string name="in_you_deck">سطح السفينة لديها</string>
     <string name="cards">بطاقات</string>
     <string name="error_add_some_cards">أضف بعض البطاقات</string>
     <string name="are_you_like_app">تتمتع المافيا؟</string>
