@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:background="@color/gray_alfa_2">
 
-        <include
-            layout="@layout/view_counter"
+        <com.morrowbone.mafiacards.app.views.CounterView
+            android:id="@+id/counterView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/card_title_layout"
