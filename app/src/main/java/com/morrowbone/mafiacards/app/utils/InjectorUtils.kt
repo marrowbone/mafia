@@ -6,6 +6,7 @@ import com.morrowbone.mafiacards.app.data.CardRepository
 import com.morrowbone.mafiacards.app.data.DeckRepository
 import com.morrowbone.mafiacards.app.viewmodels.CardListViewModelFactory
 import com.morrowbone.mafiacards.app.viewmodels.DeckViewModelFactory
+import com.morrowbone.mafiacards.app.viewmodels.DefaultDecksViewModelFactory
 
 /**
  * Static methods used to inject classes needed for various Activities and Fragments.
@@ -30,5 +31,10 @@ object InjectorUtils {
     fun provideDeckViewModelFactory(context: Context): DeckViewModelFactory {
         val repository = getDeckRepository(context)
         return DeckViewModelFactory(repository)
+    }
+
+    fun provideDefaultDecksViewModelFactory(context: Context): DefaultDecksViewModelFactory {
+        val repository = getDeckRepository(context)
+        return DefaultDecksViewModelFactory(repository)
     }
 }

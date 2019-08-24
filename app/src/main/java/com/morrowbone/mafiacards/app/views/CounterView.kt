@@ -20,6 +20,9 @@ class CounterView @JvmOverloads constructor(context: Context, attrs: AttributeSe
     var onIncrementListener: OnIncrement? = null
     var onDecrementListener: OnDecrement? = null
 
+    var minValue = 0
+    var maxValue = 100
+
     init {
         val inflater = LayoutInflater.from(context)
         inflater.inflate(R.layout.view_counter, this)
@@ -44,8 +47,8 @@ class CounterView @JvmOverloads constructor(context: Context, attrs: AttributeSe
     }
 
     private fun updateUI() {
-        decrement.isInvisible = cardCount <= 0
-        increment.isInvisible = cardCount >= 100
+        decrement.isInvisible = cardCount <= minValue
+        increment.isInvisible = cardCount >= maxValue
         card_count.text = cardCount.toString()
     }
 }

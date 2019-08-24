@@ -20,8 +20,8 @@
             android:text="@string/dialog_number_of_player"
             android:textSize="@dimen/normal_text" />
 
-        <include
-            layout="@layout/view_counter"
+        <com.morrowbone.mafiacards.app.views.CounterView
+            android:id="@+id/counterView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal" />
