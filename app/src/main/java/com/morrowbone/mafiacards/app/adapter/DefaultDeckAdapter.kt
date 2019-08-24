@@ -24,7 +24,7 @@ class DefaultDeckAdapter(private var cards: List<DefaultCard>) : RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val card = cardsSet.valueAt(position)!!
+        val card = cardsSet.get(position)
         val cardCount = cards.count {
             it == card
         }
@@ -35,7 +35,18 @@ class DefaultDeckAdapter(private var cards: List<DefaultCard>) : RecyclerView.Ad
         cardView.setCardImageResource(card.getImageResId())
     }
 
-    private fun prepareCardsSet(): ArraySet<DefaultCard> = ArraySet(cards)
+    private fun prepareCardsSet(): List<DefaultCard> = ArraySet(cards).sortedBy {
+        return@sortedBy when (it.cardId) {
+            DefaultCard.CIVILIAN -> 1
+            DefaultCard.MAFIA -> 2
+            DefaultCard.DETECTIVE -> 3
+            DefaultCard.DON_MAFIA -> 4
+            DefaultCard.DOCTOR -> 5
+            DefaultCard.MANIAC -> 6
+            DefaultCard.IMMORTAL -> 7
+            else -> Int.MAX_VALUE
+        }
+    }
 
     fun updateCards(newCards: List<DefaultCard>) {
         cards = newCards
