@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.adapter.DefaultDeckAdapter
+import com.morrowbone.mafiacards.app.data.Deck
 import com.morrowbone.mafiacards.app.data.DeckRepository
 import com.morrowbone.mafiacards.app.data.DefaultDeck
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
@@ -27,14 +29,21 @@ class DefaultDecksFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        decksViewModel.decks.observe(this, Observer {
-            val maxCount = it.size + DeckRepository.MISSED_DEFAULT_DECK
+        decksViewModel.decks.observe(this, Observer { decks ->
+            val maxCount = decks.size + DeckRepository.MISSED_DEFAULT_DECK
             val lastPlayerCount = 6
             counterView.minValue = DeckRepository.MISSED_DEFAULT_DECK + 1
             counterView.maxValue = maxCount
             counterView.cardCount = lastPlayerCount
-            val deck = it[lastPlayerCount]
+            val deck = decks[lastPlayerCount]
             updateAdapter(deck)
+            save_btn.setOnClickListener {
+                val selectedDeck = getSelectedDeck()
+                val shuffledDeck = Deck(DeckRepository.DEFAULT_DECK, selectedDeck.cardsSet).shuffle()
+                decksViewModel.saveDeck(shuffledDeck)
+                val direction = DefaultDecksFragmentDirections.actionDefaultDecksFragmentToTakeCardsFragment(shuffledDeck.deckId)
+                findNavController().navigate(direction)
+            }
         })
 
         val layoutManager = GridLayoutManager(requireContext(), 3)
@@ -43,7 +52,7 @@ class DefaultDecksFragment : Fragment() {
         recyclerView.layoutManager = layoutManager
 
         counterView.onCountChangedListener = {
-            val newDeck = decksViewModel.decks.value!![it - counterView.minValue]
+            val newDeck = getSelectedDeck()
             updateAdapter(newDeck)
         }
     }
@@ -51,4 +60,6 @@ class DefaultDecksFragment : Fragment() {
     private fun updateAdapter(deck: DefaultDeck) {
         adapter.updateCards(deck.cardsSet.defaultCards)
     }
+
+    private fun getSelectedDeck() = decksViewModel.decks.value!![counterView.cardCount - counterView.minValue]
 }

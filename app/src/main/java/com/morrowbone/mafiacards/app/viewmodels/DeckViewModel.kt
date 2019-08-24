@@ -6,7 +6,7 @@ import com.morrowbone.mafiacards.app.data.Deck
 import com.morrowbone.mafiacards.app.data.DeckRepository
 import kotlinx.coroutines.launch
 
-class DeckViewModel internal constructor(private val deckRepository: DeckRepository) : ViewModel() {
+open class DeckViewModel internal constructor(protected val deckRepository: DeckRepository) : ViewModel() {
     fun getUserDeck(deckId: Int) = deckRepository.getDeck(deckId)
 
     fun getUserDecks() = deckRepository.getUserCards()
