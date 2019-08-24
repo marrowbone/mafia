@@ -6,6 +6,7 @@ import androidx.work.WorkerParameters
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.data.*
 import kotlinx.coroutines.coroutineScope
+import kotlin.random.Random
 
 class SeedDatabaseWorker(
         context: Context,
@@ -48,6 +49,19 @@ class SeedDatabaseWorker(
                 DefaultDeck(CardsSet(mutableListOf(civilian, civilian, civilian, civilian, civilian, mafia, mafia, detective, immortal, doctor, maniac, don))),
                 DefaultDeck(CardsSet(mutableListOf(civilian, civilian, civilian, civilian, civilian, civilian, mafia, mafia, detective, immortal, doctor, maniac, don))))
         addAll(defaultDecks)
+
+        val defaultDecksSize = defaultDecks.size
+        for (i in defaultDecksSize..25) {
+            val prevDeck = get(i - 1)
+            val nextDefaultCards = ArrayList(prevDeck.cardsSet.defaultCards).apply {
+                if (i % 2 == 0) {
+                    add(mafia)
+                } else {
+                    add(civilian)
+                }
+            }
+            add(DefaultDeck(CardsSet(nextDefaultCards)))
+        }
     }
 
     private fun getDefaultCards(): List<DefaultCard> = mutableListOf<DefaultCard>().apply {

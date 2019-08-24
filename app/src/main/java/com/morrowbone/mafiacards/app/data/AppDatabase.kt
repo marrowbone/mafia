@@ -5,13 +5,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
+import com.morrowbone.mafiacards.app.application.MafiaApp
 import com.morrowbone.mafiacards.app.utils.DATABASE_NAME
 import com.morrowbone.mafiacards.app.workers.SeedDatabaseWorker
 
-@Database(entities = [Card::class, DefaultCard::class, Deck::class, DefaultDeck::class], version = 1, exportSchema = false)
+@Database(entities = [Card::class, DefaultCard::class, Deck::class, DefaultDeck::class], version = 2, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun cardDao(): CardDao
@@ -29,17 +31,30 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
+        private val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("DELETE FROM `default_decks`")
+                database.execSQL("DELETE FROM `default_cards`")
+                fillDataBase()
+            }
+        }
+
         private fun buildDatabase(context: Context): AppDatabase {
             return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
+                    .addMigrations(MIGRATION_1_2)
                     .allowMainThreadQueries()
                     .addCallback(object : RoomDatabase.Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
-                            val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>().build()
-                            WorkManager.getInstance(context).enqueue(request)
+                            fillDataBase()
                         }
                     })
                     .build()
+        }
+
+        private fun fillDataBase(){
+            val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>().build()
+            WorkManager.getInstance(MafiaApp.instance!!.applicationContext).enqueue(request)
         }
     }
 }
