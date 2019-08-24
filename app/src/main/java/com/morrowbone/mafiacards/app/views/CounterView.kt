@@ -28,6 +28,9 @@ class CounterView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         inflater.inflate(R.layout.view_counter, this)
 
         increment.setOnClickListener {
+            if (cardCount == maxValue) {
+                return@setOnClickListener
+            }
             cardCount++
             onIncrementListener?.invoke()
             onChanged()
@@ -35,6 +38,9 @@ class CounterView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         }
 
         decrement.setOnClickListener {
+            if (cardCount == minValue) {
+                return@setOnClickListener
+            }
             cardCount--
             onChanged()
             onDecrementListener?.invoke()
