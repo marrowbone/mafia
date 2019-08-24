@@ -10,7 +10,7 @@ import androidx.room.Query
 interface DefaultDeckDao {
 
     @Query("SELECT * FROM default_decks")
-    fun getDefaultDecks(): List<DefaultDeck>
+    fun getDefaultDecks(): LiveData<List<DefaultDeck>>
 
     @Query("SELECT * FROM default_decks WHERE player_count =:playerNumber")
     fun getDefaultDeck(playerNumber: Int): DefaultDeck

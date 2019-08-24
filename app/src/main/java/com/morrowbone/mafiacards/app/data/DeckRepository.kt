@@ -1,5 +1,7 @@
 package com.morrowbone.mafiacards.app.data
 
+import androidx.lifecycle.LiveData
+
 class DeckRepository private constructor(
         private val deckDao: DeckDao,
         private val defaultDeckDao: DefaultDeckDao) {
@@ -7,6 +9,8 @@ class DeckRepository private constructor(
     fun getUserCards() = deckDao.getDecks()
 
     fun getDefaultDeck(cardCount: Int): DefaultDeck = defaultDeckDao.getDefaultDeck(cardCount)
+
+    fun getDefaultDecks(): LiveData<List<DefaultDeck>> = defaultDeckDao.getDefaultDecks()
 
     fun getDeck(id: Int) = deckDao.getDeck(id)
 
@@ -27,5 +31,6 @@ class DeckRepository private constructor(
         const val DEFAULT_DECK = 2
         const val USER_DECK_DRAFT = 3
 
+        const val MISSED_DEFAULT_DECK = 2
     }
 }

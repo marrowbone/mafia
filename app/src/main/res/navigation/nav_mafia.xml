@@ -37,8 +37,8 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_mainFragment_to_takeCardsFragment"
-            app:destination="@id/takeCardsFragment"
+            android:id="@+id/action_mainFragment_to_defaultDecksFragment"
+            app:destination="@id/defaultDecksFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -70,5 +70,18 @@
         <argument
             android:name="deckId"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/defaultDecksFragment"
+        android:name="com.morrowbone.mafiacards.app.fragments.DefaultDecksFragment"
+        android:label="DefaultDecksFragment"
+        tools:layout="@layout/fragment_default_decks">
+        <action
+            android:id="@+id/action_defaultDecksFragment_to_takeCardsFragment"
+            app:destination="@id/takeCardsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 </navigation>

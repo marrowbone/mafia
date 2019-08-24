@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.data.*
+import com.morrowbone.mafiacards.app.views.CounterView
 import kotlinx.android.synthetic.main.view_creator_card.view.*
 
 class CreateDeckAdapter(
@@ -35,29 +35,18 @@ class CreateDeckAdapter(
         holder.setImageResource(item.getImageResId())
 
         var curCount = deck.getCards().count { it.getId() == itemId }
-
-        holder.setCardCount(curCount)
-        fun updateArrows(cardCount: Int) {
-            holder.decrement.isInvisible = cardCount <= 0
-            holder.increment.isInvisible = cardCount >= 100
+        val counterView = holder.counterView
+        counterView.onCountChangedListener = {
+            curCount = it
         }
-        updateArrows(curCount)
-
-        holder.decrement.setOnClickListener {
-            curCount--
-            holder.setCardCount(curCount)
+        counterView.cardCount = curCount
+        counterView.onDecrementListener = {
             removeCard(item)
             onDeckChanged()
-            updateArrows(curCount)
         }
-
-        holder.increment.isInvisible = curCount == 100
-        holder.increment.setOnClickListener {
-            curCount++
-            holder.setCardCount(curCount)
+        counterView.onIncrementListener = {
             addCard(item)
             onDeckChanged()
-            updateArrows(curCount)
         }
 
         val isUserCard = item is Card
@@ -133,8 +122,7 @@ class CreateDeckAdapter(
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val decrement: ImageView = itemView.decrement
-        val increment: ImageView = itemView.increment
+        val counterView: CounterView = itemView.counterView
         val editIcon: ImageView = itemView.editIcon
         val titleLayout: ViewGroup = itemView.card_title_layout
         val image: ImageView = itemView.card_image
@@ -145,10 +133,6 @@ class CreateDeckAdapter(
 
         fun setImageResource(imageResId: Int) {
             itemView.card_image.setImageResource(imageResId)
-        }
-
-        fun setCardCount(curCount: Int) {
-            itemView.card_count.text = curCount.toString()
         }
     }
 }
