@@ -10,6 +10,8 @@ class DeckRepository private constructor(
 
     fun getDeck(id: Int) = deckDao.getDeck(id)
 
+    fun getDefaultDeck(id: Int) = defaultDeckDao.getDefaultDeck(id)
+
     fun insertDeck(deck: Deck) {
         deckDao.insert(deck)
     }
@@ -28,5 +30,6 @@ class DeckRepository private constructor(
         const val USER_DECK_DRAFT = 3
 
         const val MISSED_DEFAULT_DECK = 2
+        const val DEFAULT_DECKS_COUNT = 25
     }
 }

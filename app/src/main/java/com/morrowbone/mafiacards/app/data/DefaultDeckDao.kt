@@ -13,7 +13,7 @@ interface DefaultDeckDao {
     fun getDefaultDecks(): LiveData<List<DefaultDeck>>
 
     @Query("SELECT * FROM default_decks WHERE player_count =:playerNumber")
-    fun getDefaultDeck(playerNumber: Int): DefaultDeck
+    fun getDefaultDeck(playerNumber: Int): LiveData<DefaultDeck>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(cards: List<DefaultDeck>)

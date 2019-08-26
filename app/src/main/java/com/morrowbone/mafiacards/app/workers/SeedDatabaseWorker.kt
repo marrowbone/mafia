@@ -5,6 +5,7 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.data.*
+import com.morrowbone.mafiacards.app.data.DeckRepository.Companion.DEFAULT_DECKS_COUNT
 import kotlinx.coroutines.coroutineScope
 import kotlin.random.Random
 
@@ -51,7 +52,7 @@ class SeedDatabaseWorker(
         addAll(defaultDecks)
 
         val defaultDecksSize = defaultDecks.size
-        for (i in defaultDecksSize..25) {
+        for (i in defaultDecksSize..DEFAULT_DECKS_COUNT) {
             val prevDeck = get(i - 1)
             val nextDefaultCards = ArrayList(prevDeck.cardsSet.defaultCards).apply {
                 if (i % 2 == 0) {

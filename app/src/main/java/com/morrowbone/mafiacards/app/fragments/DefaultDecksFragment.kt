@@ -29,37 +29,32 @@ class DefaultDecksFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        decksViewModel.decks.observe(this, Observer { decks ->
-            val maxCount = decks.size + DeckRepository.MISSED_DEFAULT_DECK
-            val lastPlayerCount = 6
-            counterView.minValue = DeckRepository.MISSED_DEFAULT_DECK + 1
-            counterView.maxValue = maxCount
-            counterView.cardCount = lastPlayerCount
-            val deck = decks[lastPlayerCount]
+        decksViewModel.deck.observe(this, Observer { deck ->
             updateAdapter(deck)
             save_btn.setOnClickListener {
-                val selectedDeck = getSelectedDeck()
-                val shuffledDeck = Deck(DeckRepository.DEFAULT_DECK, selectedDeck.cardsSet).shuffle()
+                val shuffledDeck = Deck(DeckRepository.DEFAULT_DECK, deck.cardsSet).shuffle()
                 decksViewModel.saveDeck(shuffledDeck)
                 val direction = DefaultDecksFragmentDirections.actionDefaultDecksFragmentToTakeCardsFragment(shuffledDeck.deckId)
                 findNavController().navigate(direction)
             }
         })
+        val lastPlayerCount = 6
+        decksViewModel.updateDeck(lastPlayerCount)
 
         val layoutManager = GridLayoutManager(requireContext(), 3)
         adapter = DefaultDeckAdapter(mutableListOf())
         recyclerView.adapter = adapter
         recyclerView.layoutManager = layoutManager
 
+        counterView.minValue = DeckRepository.MISSED_DEFAULT_DECK + 1
+        counterView.maxValue = DeckRepository.DEFAULT_DECKS_COUNT + counterView.minValue
+        counterView.cardCount = lastPlayerCount
         counterView.onCountChangedListener = {
-            val newDeck = getSelectedDeck()
-            updateAdapter(newDeck)
+            decksViewModel.updateDeck(it)
         }
     }
 
     private fun updateAdapter(deck: DefaultDeck) {
         adapter.updateCards(deck.cardsSet.defaultCards)
     }
-
-    private fun getSelectedDeck() = decksViewModel.decks.value!![counterView.cardCount - counterView.minValue]
 }
