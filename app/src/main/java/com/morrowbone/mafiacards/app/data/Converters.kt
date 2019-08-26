@@ -5,45 +5,43 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 class Converters {
+    companion object {
+        val gson = Gson()
+        val stringToDefaultCardType = object : TypeToken<List<DefaultCard>>() {}.type
+        val defaultCardToStringType = object : TypeToken<List<DefaultCard>>() {}.type
+        val stringToCards = object : TypeToken<List<Card>>() {}.type
+        val cardsToString = object : TypeToken<List<Card>>() {}.type
+        val stringToListOfString = object : TypeToken<List<String>>() {}.type
+        val listOfStringToString = object : TypeToken<List<String>>() {}.type
+    }
+
     @TypeConverter
     fun stringToDefaultCards(cardsString: String): List<DefaultCard> {
-        val gson = Gson()
-        val type = object : TypeToken<List<DefaultCard>>() {}.type
-        return gson.fromJson(cardsString, type)
+        return gson.fromJson(cardsString, stringToDefaultCardType)
     }
 
     @TypeConverter
     fun defaultCardsToString(defaultCards: List<DefaultCard>): String {
-        val gson = Gson()
-        val type = object : TypeToken<List<DefaultCard>>() {}.type
-        return gson.toJson(defaultCards, type)
+        return gson.toJson(defaultCards, defaultCardToStringType)
     }
 
     @TypeConverter
     fun stringToCards(cardsString: String): List<Card> {
-        val gson = Gson()
-        val type = object : TypeToken<List<Card>>() {}.type
-        return gson.fromJson(cardsString, type)
+        return gson.fromJson(cardsString, stringToCards)
     }
 
     @TypeConverter
     fun cardsToString(cards: List<Card>): String {
-        val gson = Gson()
-        val type = object : TypeToken<List<Card>>() {}.type
-        return gson.toJson(cards, type)
+        return gson.toJson(cards, cardsToString)
     }
 
     @TypeConverter
     fun stringToListOfString(string: String): List<String> {
-        val gson = Gson()
-        val type = object : TypeToken<List<String>>() {}.type
-        return gson.fromJson(string, type)
+        return gson.fromJson(string, stringToListOfString)
     }
 
     @TypeConverter
     fun listOfStringToString(list: List<String>): String {
-        val gson = Gson()
-        val type = object : TypeToken<List<String>>() {}.type
-        return gson.toJson(list, type)
+        return gson.toJson(list, listOfStringToString)
     }
 }
