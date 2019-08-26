@@ -24,11 +24,7 @@ import com.morrowbone.mafiacards.app.viewmodels.DeckViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment(), NavController.OnDestinationChangedListener {
-
-    private val deckViewModel: DeckViewModel by viewModels {
-        InjectorUtils.provideDeckViewModelFactory(requireContext())
-    }
-
+    
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_main, null)
     }
