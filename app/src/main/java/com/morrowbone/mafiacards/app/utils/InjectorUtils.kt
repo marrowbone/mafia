@@ -28,9 +28,9 @@ object InjectorUtils {
         return CardListViewModelFactory(repository)
     }
 
-    fun provideDeckViewModelFactory(context: Context): DeckViewModelFactory {
+    fun provideDeckViewModelFactory(context: Context, deckId: Int): DeckViewModelFactory {
         val repository = getDeckRepository(context)
-        return DeckViewModelFactory(repository)
+        return DeckViewModelFactory(repository, deckId)
     }
 
     fun provideDefaultDecksViewModelFactory(context: Context): DefaultDecksViewModelFactory {

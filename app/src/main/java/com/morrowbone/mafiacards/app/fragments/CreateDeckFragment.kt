@@ -31,7 +31,7 @@ class CreateDeckFragment : Fragment() {
         InjectorUtils.provideCardListViewModelFactory(requireContext())
     }
     private val deckViewModel: DeckViewModel by viewModels {
-        InjectorUtils.provideDeckViewModelFactory(requireContext())
+        InjectorUtils.provideDeckViewModelFactory(requireContext(), DeckRepository.USER_DECK_DRAFT)
     }
     private lateinit var adapter: CreateDeckAdapter
 
@@ -60,6 +60,10 @@ class CreateDeckFragment : Fragment() {
         clearDeckButton.setOnClickListener {
             showConfirmClearDialog();
         }
+
+        deckViewModel.deck.observe(this, Observer {
+            adapter.updateDeck(it)
+        })
     }
 
     private fun showConfirmClearDialog() {
@@ -78,16 +82,6 @@ class CreateDeckFragment : Fragment() {
         val userDeckDraft = adapter.deck.copy(deckId = DeckRepository.USER_DECK_DRAFT)
         deckViewModel.saveDeck(userDeckDraft)
         super.onPause()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        GlobalScope.launch(IO) {
-            val draftUserDeck = deckViewModel.getUserDeck(DeckRepository.USER_DECK_DRAFT)
-            withContext(Main) {
-                adapter.updateDeck(draftUserDeck)
-            }
-        }
     }
 
     private fun onCardCountChanged(cardCount: Int) {

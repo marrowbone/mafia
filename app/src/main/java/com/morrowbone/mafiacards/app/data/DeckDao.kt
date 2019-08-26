@@ -12,7 +12,7 @@ interface DeckDao {
     fun getDecks(): List<Deck>
 
     @Query("SELECT * FROM decks WHERE id = :deckId")
-    fun getDeck(deckId: Int): Deck
+    fun getDeck(deckId: Int): LiveData<Deck>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(deck: Deck)

@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager.widget.PagerAdapter
@@ -52,7 +53,6 @@ class TakeCardsFragment : Fragment() {
     private lateinit var mSectionsPagerAdapter: SectionsPagerAdapter
     private var scroller: FixedSpeedScroller? = null
     private var interstitial: InterstitialAd? = null
-    private lateinit var deck: Deck
 
     private val isEnableShowGooglePlayReviewIs: Boolean
         get() {
@@ -66,7 +66,7 @@ class TakeCardsFragment : Fragment() {
 
     private val args: TakeCardsFragmentArgs by navArgs()
     private val deckViewModel : DeckViewModel by viewModels {
-        InjectorUtils.provideDeckViewModelFactory(requireContext())
+        InjectorUtils.provideDeckViewModelFactory(requireContext(), args.deckId)
     }
 
     private fun checkInternetConnection(): Boolean {
@@ -82,17 +82,17 @@ class TakeCardsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        GlobalScope.launch(IO) {
-            deck = deckViewModel.getUserDeck(args.deckId)
-            withContext(Main) {
-                mSectionsPagerAdapter = SectionsPagerAdapter(requireFragmentManager(), deck)
-                pager.adapter = mSectionsPagerAdapter
-                val cardCount = deck.getCards().size
-                val text = String.format(requireContext().getString(R.string.cards_in_deck_take_cards), cardCount)
-                val finalText = HtmlCompat.fromHtml(text, HtmlCompat.FROM_HTML_MODE_COMPACT)
-                cards_in_deck.text = finalText
+        deckViewModel.deck.observe(this, Observer { deck ->
+            if (deck == null) {
+                return@Observer
             }
-        }
+            mSectionsPagerAdapter = SectionsPagerAdapter(requireFragmentManager(), deck)
+            pager.adapter = mSectionsPagerAdapter
+            val cardCount = deck.getCards().size
+            val text = String.format(requireContext().getString(R.string.cards_in_deck_take_cards), cardCount)
+            val finalText = HtmlCompat.fromHtml(text, HtmlCompat.FROM_HTML_MODE_COMPACT)
+            cards_in_deck.text = finalText
+        })
 
         fixViewPager()
 
@@ -158,7 +158,7 @@ class TakeCardsFragment : Fragment() {
     }
 
     private fun saveLastUsedDeck() {
-        Utils.setLastUsedDeckId(deck.deckId)
+        Utils.setLastUsedDeckId(args.deckId)
     }
 
     private fun showGooglePlayReviewDialog() {

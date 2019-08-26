@@ -6,10 +6,6 @@ class DeckRepository private constructor(
         private val deckDao: DeckDao,
         private val defaultDeckDao: DefaultDeckDao) {
 
-    fun getUserCards() = deckDao.getDecks()
-
-    fun getDefaultDeck(cardCount: Int): DefaultDeck = defaultDeckDao.getDefaultDeck(cardCount)
-
     fun getDefaultDecks(): LiveData<List<DefaultDeck>> = defaultDeckDao.getDefaultDecks()
 
     fun getDeck(id: Int) = deckDao.getDeck(id)

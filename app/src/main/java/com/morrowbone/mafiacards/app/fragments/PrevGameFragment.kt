@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.adapter.DeckAdapter
@@ -21,7 +22,7 @@ import kotlinx.coroutines.withContext
 
 class PrevGameFragment : Fragment() {
     private val deckViewModel: DeckViewModel by viewModels {
-        InjectorUtils.provideDeckViewModelFactory(requireContext())
+        InjectorUtils.provideDeckViewModelFactory(requireContext(), Utils.getLastUsedDeckId())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -29,14 +30,13 @@ class PrevGameFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        GlobalScope.launch(IO) {
-            val deck = deckViewModel.getUserDeck(Utils.getLastUsedDeckId())
-            val deckAdapter = DeckAdapter(deck)
-            withContext(Main) {
-                recyclerView.adapter = deckAdapter
+        deckViewModel.deck.observe(this, Observer {
+            if (it == null) {
+                return@Observer
             }
-
-        }
+            val deckAdapter = DeckAdapter(it)
+            recyclerView.adapter = deckAdapter
+        })
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
     }
 }
