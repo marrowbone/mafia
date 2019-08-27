@@ -31,6 +31,9 @@ class DefaultDecksFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         decksViewModel.deck.observe(this, Observer { deck ->
+            if (deck == null) {
+                return@Observer
+            }
             updateAdapter(deck)
             save_btn.setOnClickListener {
                 val shuffledDeck = Deck(DeckRepository.DEFAULT_DECK, deck.cardsSet).shuffle()
