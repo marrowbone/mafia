@@ -1,0 +1,10 @@
+<resources>
+    <string name="role_civilian_info">Cidadãos regulares não têm poderes especiais, sua força reside em seus números.</string>
+    <string name="role_mafia_info">Mafia - joga contra os cidadãos. Tem informações sobre outros membros da Máfia, participa de todas as discussões</string>
+    <string name="role_detective_info">Todas as noites, o Detetive tem a oportunidade de investigar outro jogador (o Detetive indica silenciosamente quem eles gostariam de investigar, geralmente apontando). O moderador indica, balançando a cabeça ou balançando a cabeça, se esse jogador é ou não um mafioso.</string>
+    <string name="role_immortal_info">Pertence à equipe do Citizen. Invencível durante a noite. O ponto principal do jogo é convencer que você pertence à equipe Citizen e não se mata durante a fase do dia. Ao provocar a máfia a se matar durante a noite, a vida do cidadão de defesa.</string>
+    <string name="role_doctor_info">Um Médico é um papel que tem como alvo um jogador no Night para proteger aquele jogador de uma única morte feita durante aquela Noite. Eles não são informados se sua proteção foi bem-sucedida. A proteção de um único kill significa que se vários jogadores tentarem matar alguém, eles não serão salvos pela proteção de um Doctor.</string>
+    <string name="role_don_info">Como líder da equipe Máfia, o Don ordena as vítimas nas primeiras 3 noites, mostrando os números dos jogadores, que devem ser mortos durante a noite zero (chamamos de "zero", porque ninguém morre naquela noite no início do jogo ) Todas as noites, após as filmagens da Máfia, o Don tem a oportunidade de encontrar o xerife (o Don silenciosamente indica, mostrando o número do jogador que ele gostaria de investigar e recebe a resposta do moderador). Mesmo que o Don tenha conseguido encontrar o xerife, observe que ele não pode matá-lo de uma só vez: Don apenas conhece o jogador mais perigoso da equipe vermelha.</string>
+    <string name="role_maniac_info">Não pertence a nenhuma equipe. Mata qualquer jogador à noite. Maniac vence quando ele permanece o último jogador vivo.</string>
+    <string name="role_wervoolf_info">Wervoolf</string>
+</resources>
