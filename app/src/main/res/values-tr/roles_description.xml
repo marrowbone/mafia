@@ -7,4 +7,5 @@
     <string name="role_don_info">Mafya ekibinin lideri olarak Don, ilk 3 geceye, sıfır gece boyunca öldürülmesi gereken oyuncu sayısını göstererek, onlara “sıfır” diyoruz, çünkü oyunun başında o gece hiç kimse ölmüyor. ). Her gece, Mafya’nın çekiminden sonra Don’a Şerif’i bulma fırsatı verilir (Don, sessizce araştırmak istediği oyuncunun sayısını gösterir ve moderatörden cevap alır). Don Şerif\'i bulmakta başarılı olmuş olsa bile, bir kerede onu öldüremeyeceğini unutmayın: Don, kırmızı takımdaki en tehlikeli oyuncu hakkında bilgi alır.</string>
     <string name="role_maniac_info">Hiçbir takıma ait değil. Geceleri herhangi bir oyuncuyu öldürür. Maniac, hayatta kalan son oyuncu olduğunda kazanır.</string>
     <string name="role_wervoolf_info">Wervoolf</string>
+    <string name="role_putana_info">Metresi bir sivil takımı için oynar. Sevgilinin görevi, Siviller ekibine her gece kilitlerinden yardım etmektir.</string>
 </resources>

@@ -20,6 +20,7 @@ data class DefaultCard(
             DOCTOR -> R.string.role_doctor
             IMMORTAL -> R.string.role_immortal
             MANIAC -> R.string.role_maniac
+            PROSTITUTE -> R.string.putana
             else -> R.string.role_civilian
         }
 
@@ -35,6 +36,7 @@ data class DefaultCard(
             DOCTOR -> R.string.role_doctor_info
             IMMORTAL -> R.string.role_immortal_info
             MANIAC -> R.string.role_maniac_info
+            PROSTITUTE -> R.string.role_putana_info
             else -> R.string.role_civilian_info
         }
         return MafiaApp.instance!!.getString(descriptionResId)
@@ -48,6 +50,7 @@ data class DefaultCard(
         DOCTOR -> R.drawable.doctor_cr
         IMMORTAL -> R.drawable.immortal_cr
         MANIAC -> R.drawable.manic_cr
+        PROSTITUTE -> R.drawable.ic_putana
         else -> R.drawable.civilian_cr
     }
 
@@ -59,5 +62,6 @@ data class DefaultCard(
         const val DOCTOR = "doctor"
         const val IMMORTAL = "immortal"
         const val MANIAC = "maniac"
+        const val PROSTITUTE = "putana"
     }
 }

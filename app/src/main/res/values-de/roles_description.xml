@@ -9,4 +9,5 @@
 Don sucht den Kommissar</string>
     <string name="role_maniac_info">spielt für sich selbst, tötet jeglicher Spieler in der Nacht. Maniac gewinnt, wenn er der letzte noch lebende Spieler ist</string>
     <string name="role_wervoolf_info">Werwolf</string>
+    <string name="role_putana_info">Geliebte spielt für ein Team von Zivilisten. Die Aufgabe des Liebhabers ist es, dem Team von Zivilisten durch nächtliche Schleusen zu helfen.</string>
 </resources>

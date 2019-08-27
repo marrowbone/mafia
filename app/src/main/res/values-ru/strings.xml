@@ -47,4 +47,5 @@
     <string name="clear_deck">Очистить доску</string>
     <string name="clear_deck_dialog_message">Вы уверены, что хотите очистить доску?</string>
     <string name="clear">Очистить</string>
+    <string name="putana">Путана</string>
 </resources>

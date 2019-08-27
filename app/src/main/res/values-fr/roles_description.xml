@@ -7,4 +7,5 @@
     <string name="role_don_info">En tant que chef de l\'équipe de la mafia, le Don ordonne aux victimes les 3 premières nuits en indiquant le nombre de joueurs, qui doivent être tués pendant la nuit zéro (nous l\'appelons "zéro", car personne ne meurt pendant cette nuit au début de la partie. ). Chaque soir, après le tournage de la mafia, le Don a la possibilité de retrouver le shérif (le Don indique en silence en indiquant le numéro du joueur sur lequel il souhaite enquêter et reçoit la réponse du modérateur). Même si Don réussissait à trouver le shérif, notez qu\'il / elle ne peut pas le tuer à la fois: Don ne fait que CONNAÎTRE LE joueur le plus dangereux de l\'équipe rouge.</string>
     <string name="role_maniac_info">N\'appartient à aucune équipe. Tue n\'importe quel joueur la nuit. Maniac gagne quand il reste le dernier joueur en vie.</string>
     <string name="role_wervoolf_info">Wervoolf</string>
+    <string name="role_putana_info">Maîtresse joue pour une équipe de civils. La tâche de l’amant est d’aider l’équipe de civils à travers les serrures nocturnes.</string>
 </resources>

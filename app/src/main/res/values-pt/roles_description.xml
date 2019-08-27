@@ -7,4 +7,5 @@
     <string name="role_don_info">Como líder da equipe Máfia, o Don ordena as vítimas nas primeiras 3 noites, mostrando os números dos jogadores, que devem ser mortos durante a noite zero (chamamos de "zero", porque ninguém morre naquela noite no início do jogo ) Todas as noites, após as filmagens da Máfia, o Don tem a oportunidade de encontrar o xerife (o Don silenciosamente indica, mostrando o número do jogador que ele gostaria de investigar e recebe a resposta do moderador). Mesmo que o Don tenha conseguido encontrar o xerife, observe que ele não pode matá-lo de uma só vez: Don apenas conhece o jogador mais perigoso da equipe vermelha.</string>
     <string name="role_maniac_info">Não pertence a nenhuma equipe. Mata qualquer jogador à noite. Maniac vence quando ele permanece o último jogador vivo.</string>
     <string name="role_wervoolf_info">Wervoolf</string>
+    <string name="role_putana_info">Mistress joga para uma equipe de civis. A tarefa do amante é ajudar o time de civis através de bloqueios noturnos.</string>
 </resources>

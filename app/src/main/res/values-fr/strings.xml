@@ -43,4 +43,5 @@
     <string name="clear_deck">Jeter le pont</string>
     <string name="clear_deck_dialog_message">Êtes-vous sûr de vouloir jeter le jeu?</string>
     <string name="clear">Jeter</string>
+    <string name="putana">Amante</string>
 </resources>
