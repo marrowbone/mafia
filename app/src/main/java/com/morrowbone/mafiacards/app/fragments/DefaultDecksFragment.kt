@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.adapter.DefaultDeckAdapter
 import com.morrowbone.mafiacards.app.data.Deck
@@ -45,6 +46,7 @@ class DefaultDecksFragment : Fragment() {
         adapter = DefaultDeckAdapter(mutableListOf())
         recyclerView.adapter = adapter
         recyclerView.layoutManager = layoutManager
+        recyclerView.setRecycledViewPool(recyclerPool)
 
         counterView.minValue = DeckRepository.MISSED_DEFAULT_DECK + 1
         counterView.maxValue = DeckRepository.DEFAULT_DECKS_COUNT + counterView.minValue
@@ -56,5 +58,9 @@ class DefaultDecksFragment : Fragment() {
 
     private fun updateAdapter(deck: DefaultDeck) {
         adapter.updateCards(deck.cardsSet.defaultCards)
+    }
+
+    companion object {
+        val recyclerPool = RecyclerView.RecycledViewPool().apply { setMaxRecycledViews(0, 10) }
     }
 }
