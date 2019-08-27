@@ -8,7 +8,9 @@ import com.morrowbone.mafiacards.app.application.MafiaApp
 
 @Entity(tableName = "default_cards")
 data class DefaultCard(
-        @PrimaryKey @ColumnInfo(name = "id") val cardId: String
+        @PrimaryKey @ColumnInfo(name = "id") val cardId: String,
+        @RoleType
+        override val roleType: Int
 ) : AbstractCard {
     override fun getId(): String = cardId
     override fun getTitle(): String {

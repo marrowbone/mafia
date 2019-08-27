@@ -86,6 +86,7 @@ class SectionsPagerAdapter(fm: FragmentManager, val deck: Deck) : FragmentStateP
                     cardLiveData.removeObserver(this)
                     mCardView!!.setCardImageResource(abstractCard.getImageResId())
                     mCardView!!.setRoleName(abstractCard.getTitle())
+                    mCardView!!.setRoleType(abstractCard.roleType)
                 }
             })
             return rootView

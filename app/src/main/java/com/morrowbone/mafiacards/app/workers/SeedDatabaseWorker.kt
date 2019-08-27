@@ -66,12 +66,13 @@ class SeedDatabaseWorker(
     }
 
     private fun getDefaultCards(): List<DefaultCard> = mutableListOf<DefaultCard>().apply {
-        add(DefaultCard(DefaultCard.CIVILIAN))
-        add(DefaultCard(DefaultCard.MAFIA))
-        add(DefaultCard(DefaultCard.DETECTIVE))
-        add(DefaultCard(DefaultCard.DON_MAFIA))
-        add(DefaultCard(DefaultCard.DOCTOR))
-        add(DefaultCard(DefaultCard.IMMORTAL))
-        add(DefaultCard(DefaultCard.MANIAC))
+        add(DefaultCard(DefaultCard.CIVILIAN, CIVILIAN))
+        add(DefaultCard(DefaultCard.MAFIA, MAFIA))
+        add(DefaultCard(DefaultCard.DETECTIVE, CIVILIAN))
+        add(DefaultCard(DefaultCard.DON_MAFIA, MAFIA))
+        add(DefaultCard(DefaultCard.DOCTOR, CIVILIAN))
+        add(DefaultCard(DefaultCard.IMMORTAL, CIVILIAN))
+        add(DefaultCard(DefaultCard.MANIAC, NEUTRAL))
+        add(DefaultCard(DefaultCard.PROSTITUTE, CIVILIAN))
     }
 }

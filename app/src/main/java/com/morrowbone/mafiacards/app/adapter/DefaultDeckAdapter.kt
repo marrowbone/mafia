@@ -33,6 +33,7 @@ class DefaultDeckAdapter(private var cards: List<DefaultCard>) : ListAdapter<Pai
         cardView.show(CardView.CardSide.FRONT)
         cardView.setRoleName(card.getTitle())
         cardView.setCardImageResource(card.getImageResId())
+        cardView.setRoleType(card.roleType)
     }
 
     private fun prepareCardsList(): List<Pair<DefaultCard, Int>> {

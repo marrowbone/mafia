@@ -9,12 +9,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
-import android.view.animation.Interpolator
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 
 import com.morrowbone.mafiacards.app.R
+import com.morrowbone.mafiacards.app.data.CIVILIAN
+import com.morrowbone.mafiacards.app.data.MAFIA
+import com.morrowbone.mafiacards.app.data.NEUTRAL
+import com.morrowbone.mafiacards.app.data.RoleType
+import kotlinx.android.synthetic.main.view_card_front_side.view.*
 
 class CardView : FrameLayout {
     var state: CardSide? = null
@@ -103,7 +107,20 @@ class CardView : FrameLayout {
         playerNumber.text = playerNum!!.toString()
     }
 
+    fun setRoleType(@RoleType roleType: Int) {
+        card_view_front.setBackgroundResource(getRoleBackgroundColorResId(roleType))
+    }
+
     enum class CardSide {
         BACKSIDE, FRONT
+    }
+
+    companion object {
+        fun getRoleBackgroundColorResId(@RoleType roleType: Int) = when (roleType) {
+            CIVILIAN -> R.color.civilian_background
+            MAFIA -> R.color.mafia_background
+            NEUTRAL -> R.color.neutral_background
+            else -> R.color.neutral_background
+        }
     }
 }

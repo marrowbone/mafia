@@ -23,6 +23,7 @@ class DeckAdapter(private val mDeck: Deck) : RecyclerView.Adapter<DeckAdapter.Vi
         cardView.setPlayerNum(position + 1)
         cardView.setCardImageResource(card.getImageResId())
         cardView.setRoleName(card.getTitle())
+        cardView.setRoleType(card.roleType)
     }
 
     override fun getItemCount(): Int {

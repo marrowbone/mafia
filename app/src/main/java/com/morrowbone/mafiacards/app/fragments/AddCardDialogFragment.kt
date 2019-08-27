@@ -11,6 +11,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.data.Card
+import com.morrowbone.mafiacards.app.data.NEUTRAL
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
 import com.morrowbone.mafiacards.app.viewmodels.CardListViewModel
 import kotlinx.android.synthetic.main.fragment_dialog_card.*
@@ -50,7 +51,7 @@ open class AddCardDialogFragment : DialogFragment() {
         val cardId = UUID.randomUUID().toString()
         val cardTitle = cardTitleEditText.text.toString()
         val cardDescription = cardDescriptionEditText.text.toString()
-        val card = Card(cardId, cardTitle, cardDescription)
+        val card = Card(cardId, cardTitle, cardDescription, NEUTRAL)
         viewModel.addCard(card)
     }
 

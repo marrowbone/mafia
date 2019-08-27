@@ -16,4 +16,8 @@
     <color name="card_text_color">@android:color/white</color>
     <color name="hint_background_color">#DD000000</color>
     <color name="hint_text_color">@android:color/white</color>
+
+    <color name="civilian_background">#80007727</color>
+    <color name="mafia_background">#80C80000</color>
+    <color name="neutral_background">#80646464</color>
 </resources>

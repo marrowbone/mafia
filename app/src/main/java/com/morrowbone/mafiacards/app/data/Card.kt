@@ -10,7 +10,11 @@ data class Card(
         @PrimaryKey
         @ColumnInfo(name = "id")
         val cardId: String,
-        val name: String, val info: String) : AbstractCard {
+        val name: String,
+        val info: String,
+        @RoleType
+        override val roleType: Int) : AbstractCard {
+
     override fun getId() = cardId
     override fun getTitle() = name
     override fun getDescription() = info
