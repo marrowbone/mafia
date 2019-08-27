@@ -8,12 +8,6 @@ class MafiaApp : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        forceDatabaseInitialisation()
-    }
-
-    private fun forceDatabaseInitialisation() {
-        val database = AppDatabase.getInstance(applicationContext)
-        database.deckDao().getDecks()
     }
 
     companion object {

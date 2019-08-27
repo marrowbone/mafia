@@ -9,7 +9,7 @@ import androidx.room.Query
 @Dao
 interface DeckDao {
     @Query("SELECT * FROM decks")
-    fun getDecks(): List<Deck>
+    fun getDecks(): LiveData<List<Deck>>
 
     @Query("SELECT * FROM decks WHERE id = :deckId")
     fun getDeck(deckId: Int): LiveData<Deck>
