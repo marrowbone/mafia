@@ -12,8 +12,11 @@ import androidx.work.WorkManager
 import com.morrowbone.mafiacards.app.application.MafiaApp
 import com.morrowbone.mafiacards.app.utils.DATABASE_NAME
 import com.morrowbone.mafiacards.app.workers.SeedDatabaseWorker
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
-@Database(entities = [Card::class, DefaultCard::class, Deck::class, DefaultDeck::class], version = 2, exportSchema = false)
+@Database(entities = [Card::class, DefaultCard::class, Deck::class, DefaultDeck::class], version = 3, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun cardDao(): CardDao
@@ -39,9 +42,17 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
+        private val MIGRATION_2_3 = object : Migration(2, 3) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                GlobalScope.launch(IO) {
+                    getInstance(MafiaApp.instance!!).defaultCardDao().insert(DefaultCard(DefaultCard.PROSTITUTE))
+                }
+            }
+        }
+
         private fun buildDatabase(context: Context): AppDatabase {
             return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
-                    .addMigrations(MIGRATION_1_2)
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                     .addCallback(object : RoomDatabase.Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)

@@ -16,4 +16,7 @@ interface DefaultCardDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(cards: List<DefaultCard>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(cards: DefaultCard)
 }
