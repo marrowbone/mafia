@@ -1,0 +1,10 @@
+<resources>
+    <string name="role_civilian_info">Düzenli Vatandaşların özel güçleri yoktur, güçleri sayılarındadır.</string>
+    <string name="role_mafia_info">Mafya - Vatandaşlara karşı oynuyor. Diğer Mafya üyeleri hakkında bilgi sahibi olur, tüm tartışmalara katılır</string>
+    <string name="role_detective_info">Her gece Dedektife başka bir oyuncuyu araştırma fırsatı verilir (Dedektif, sessizce kimi araştırmak istediklerini, genellikle işaret ederek). Moderatör, oyuncunun bir Mafioso olup olmadığını başını sallayarak veya başını sallayarak gösterir.</string>
+    <string name="role_immortal_info">Citizen’in ekibine ait. Gece boyunca yenilmez. Oyunun kilit noktası, sizi Citizen ekibine ait olduğunuza ve gün boyunca kendinizi öldürmenize izin vermediğinize ikna etmektir. Mafya\'yı gece boyunca kendisini öldürmesi için teşvik ederek savunma vatandaşının hayatı.</string>
+    <string name="role_doctor_info">Doktor, bu oyuncuyu o Gece yapılan tek bir ölümden korumak için Geceleri bir oyuncuyu hedef alan bir roldür. Korumalarının başarılı olup olmadığı söylenmedi. Tek bir ölümden korunma, eğer birden fazla oyuncu birisini öldürmeye çalışırsa, bir Doktorun koruması tarafından kurtarılmayacakları anlamına gelir.</string>
+    <string name="role_don_info">Mafya ekibinin lideri olarak Don, ilk 3 geceye, sıfır gece boyunca öldürülmesi gereken oyuncu sayısını göstererek, onlara “sıfır” diyoruz, çünkü oyunun başında o gece hiç kimse ölmüyor. ). Her gece, Mafya’nın çekiminden sonra Don’a Şerif’i bulma fırsatı verilir (Don, sessizce araştırmak istediği oyuncunun sayısını gösterir ve moderatörden cevap alır). Don Şerif\'i bulmakta başarılı olmuş olsa bile, bir kerede onu öldüremeyeceğini unutmayın: Don, kırmızı takımdaki en tehlikeli oyuncu hakkında bilgi alır.</string>
+    <string name="role_maniac_info">Hiçbir takıma ait değil. Geceleri herhangi bir oyuncuyu öldürür. Maniac, hayatta kalan son oyuncu olduğunda kazanır.</string>
+    <string name="role_wervoolf_info">Wervoolf</string>
+</resources>
