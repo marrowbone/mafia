@@ -17,6 +17,7 @@ import com.morrowbone.mafiacards.app.data.DeckRepository
 import com.morrowbone.mafiacards.app.data.DefaultDeck
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
 import com.morrowbone.mafiacards.app.viewmodels.DefaultDecksViewModel
+import com.pixplicity.easyprefs.library.Prefs
 import kotlinx.android.synthetic.main.fragment_default_decks.*
 
 class DefaultDecksFragment : Fragment() {
@@ -38,11 +39,12 @@ class DefaultDecksFragment : Fragment() {
             save_btn.setOnClickListener {
                 val shuffledDeck = Deck(DeckRepository.DEFAULT_DECK, deck.cardsSet).shuffle()
                 decksViewModel.saveDeck(shuffledDeck)
+                Prefs.putInt(LAST_PLAYER_COUNT, counterView.cardCount)
                 val direction = DefaultDecksFragmentDirections.actionDefaultDecksFragmentToTakeCardsFragment(shuffledDeck.deckId)
                 findNavController().navigate(direction)
             }
         })
-        val lastPlayerCount = 6
+        val lastPlayerCount = Prefs.getInt(LAST_PLAYER_COUNT, 6)
         decksViewModel.updateDeck(lastPlayerCount)
 
         val layoutManager = GridLayoutManager(requireContext(), 3)
@@ -64,6 +66,8 @@ class DefaultDecksFragment : Fragment() {
     }
 
     companion object {
+        private const val LAST_PLAYER_COUNT = "last_player_count"
+
         val recyclerPool = RecyclerView.RecycledViewPool().apply { setMaxRecycledViews(0, 10) }
     }
 }
