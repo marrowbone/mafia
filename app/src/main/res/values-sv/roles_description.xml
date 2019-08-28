@@ -1,0 +1,11 @@
+<resources>
+    <string name="role_civilian_info">Vanliga medborgare har inga speciella befogenheter, deras styrka ligger i deras antal.</string>
+    <string name="role_mafia_info">Mafia - spelar mot Citizens. Har information om andra Mafia-medlemmar, deltar i alla diskussioner</string>
+    <string name="role_detective_info">Varje natt ges detektiven en möjlighet att undersöka en annan spelare (detektiven anger tyst vem de vill undersöka, vanligtvis genom att peka). Moderatoren indikerar genom att nicka eller skaka på huvudet om den spelaren är en Mafioso eller inte.</string>
+    <string name="role_immortal_info">Tillhör Citizen\'s team. Oövervinnlig under natten. Nyckelpunkten för spelet är att övertyga att du tillhör Citizen-teamet och inte låta döda dig själv under dagfasen. Genom att provokera Mafia att döda sig själv under natten, kan försvarets medborgares liv.</string>
+    <string name="role_doctor_info">En läkare är en roll som riktar sig till en spelare på natten för att skydda spelaren från ett enda död som gjorts under den natten. De får inte veta om deras skydd var framgångsrikt. Skydd mot ett enda död innebär att om flera spelare försöker döda någon, kommer de inte att räddas av en läkares skydd.</string>
+    <string name="role_don_info">Som ledare för Mafia-teamet beordrar Don offren de första 3 nätter genom att visa antal spelare, som borde dödas under nollnatt (vi kallar det ”noll”, för ingen dör under den natten i början av spelet ). Varje natt, efter Mafias skjutning, ges Don en möjlighet att hitta sheriffen (Don visar tyst genom att visa antalet spelare som han / hon vill undersöka och får svaret från moderatoren). Även om Don lyckades hitta sheriffen, notera att han / hon inte kan döda honom på en gång: Don får bara kunskap om den farligaste spelaren i det röda laget.</string>
+    <string name="role_maniac_info">Tillhör inte något lag. Dödar alla spelare på natten. Maniac vinner när han förblir den sista spelaren vid liv.</string>
+    <string name="role_wervoolf_info">Wervoolf</string>
+    <string name="role_putana_info">Mistress spelar för ett lag med civila. Älskarens uppgift är att hjälpa teamet med civila genom nattliga lås.</string>
+</resources>
