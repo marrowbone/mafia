@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="role_civilian_info">شهروندان عادی قدرت خاصی ندارند ، قدرت آنها در تعداد آنها نهفته است.</string>
+    <string name="role_mafia_info">مافیا - علیه شهروندان بازی می کند. اطلاعاتی در مورد سایر اعضای مافیا دارد ، در همه بحث ها شرکت می کند</string>
+    <string name="role_detective_info">هر شب به کارآگاه فرصت داده می شود که در مورد بازیکن دیگری تحقیق کند که آیا آن بازیکن مافیایی است یا خیر.</string>
+    <string name="role_immortal_info">متعلق به تیم Citizen است. مرگ در طول شب.</string>
+    <string name="role_doctor_info">یک پزشک نقشی است که شبانه بازیکن را هدف قرار می دهد تا از آن بازیکن در برابر یک قتل تنها در آن شب محافظت کند.</string>
+    <string name="role_don_info">دون مافیا مافیای اصلی است. دان می تواند در مورد بازیکن دیگری تحقیق کند که آیا این بازیکن کارآگاه است یا خیر.</string>
+    <string name="role_maniac_info">متعلق به هیچ تیمی نیست. هر بازیکن را شب می کشد. دیوانه وار هنگامی که آخرین بازیکن زنده بماند برنده می شود.</string>
+    <string name="role_wervoolf_info">وروولف</string>
+    <string name="role_putana_info">روسپی برای تیمی از افراد غیرنظامی بازی می کند. هر شب او یک بازیکن را انتخاب می کند که شب را با او سپری کند.</string>
+</resources>
