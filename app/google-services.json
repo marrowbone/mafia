@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "1096600424933",
+    "firebase_url": "https://mafia-cdc63.firebaseio.com",
+    "project_id": "mafia-cdc63",
+    "storage_bucket": "mafia-cdc63.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096600424933:android:edd715b4728f0416",
+        "android_client_info": {
+          "package_name": "com.morrowbone.mafiacards.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1096600424933-g0k3iipv85ouenlt573k6ndofb2j9kls.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.morrowbone.mafiacards.app",
+            "certificate_hash": "64f650acbacdd7ffe39b6c343f3ade5b55605829"
+          }
+        },
+        {
+          "client_id": "1096600424933-151lsfg07rj6pvth9afs8e2qmu39nucd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQb-fpn8WezYNSSwSrXvPHDnfyEL4R0_E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1096600424933-151lsfg07rj6pvth9afs8e2qmu39nucd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-7668409826365482~2765626519"
+    }
+  ],
+  "configuration_version": "1"
+}
