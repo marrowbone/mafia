@@ -4,10 +4,10 @@
     <string name="role_mafia">Mafya</string>
     <string name="role_detective">Dedektif</string>
     <string name="role_immortal">Ölümsüz</string>
-    <string name="role_doctor">doktor</string>
+    <string name="role_doctor">Doktor</string>
     <string name="role_don">Don</string>
     <string name="role_maniac">Manyak</string>
-    <string name="role_wervoolf">kurt adam</string>
+    <string name="role_wervoolf">Kurt adam</string>
     <string name="prev_game">Önceki oyun</string>
     <string name="play">Kart almak</string>
     <string name="rоles">Kart bilgisi</string>
@@ -43,5 +43,5 @@
     <string name="clear_deck">Desteyi atın</string>
     <string name="clear_deck_dialog_message">Desteyi atmak istediğinden emin misin?</string>
     <string name="clear">ıskarta</string>
-    <string name="putana">metres</string>
+    <string name="putana">Fahişe</string>
 </resources>
