@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="role_civilian_info">Reguläre Bürger haben keine besonderen Befugnisse, ihre Stärke liegt in ihrer Anzahl.</string>
     <string name="role_mafia_info">Mafia - spielt gegen Bürger. Hat Informationen über andere Mafia-Mitglieder, nimmt an allen Diskussionen teil</string>
-    <string name="role_detective_info">Er spielt auf Seiten der Bürger. Seine besondere Fähigkeit besteht darin, jede Nacht einzeln aufwachen zu können und einen Mitspieler zu überprüfen, woraufhin ihn der Spielleiter mit Handzeichen informiert, ob dieser Spieler Mafioso ist oder nicht. Ob Spezialfiguren auf Seiten der Mafia als schuldig erkannt werden, wird je nach Spielrunde unterschiedlich gehandhabt. Gibt es mehrere Detektive, einigen diese sich wie die Mafiosi auf ein Überprüfungsziel. In einer anderen Variante erfährt der Detektiv unmittelbar nach Spielbeginn die Identität sämtlicher Mafiosi.</string>
-    <string name="role_immortal_info">Gehört zum Citizen-Team. In der Nacht unbesiegbar. Der entscheidende Punkt für das Spiel ist es, sich von der Zugehörigkeit zum Citizen-Team zu überzeugen und sich in der Tagesphase nicht umbringen zu lassen. Indem sie die Mafia provoziert, sich nachts umzubringen, wird das Leben des Verteidigungsbürgers</string>
-    <string name="role_doctor_info">Der Arzt spielt auf Seiten der Bürger. Er kann sich nachts für einen Spieler entscheiden, den er retten will. Wählt sich die Mafia diesen als Mordopfer aus, geschieht ihm nichts. Manchmal werden Sonderregeln eingeführt, etwa, dass der Arzt nicht sich selbst oder nicht zweimal hintereinander denselben Spieler schützen darf, damit er nicht zu stark ist.</string>
-    <string name="role_don_info">Don hat in der Nacht die Gelegenheit, Spieler zu überprüfen.
-Don sucht den Kommissar</string>
-    <string name="role_maniac_info">spielt für sich selbst, tötet jeglicher Spieler in der Nacht. Maniac gewinnt, wenn er der letzte noch lebende Spieler ist</string>
-    <string name="role_wervoolf_info">Werwolf</string>
-    <string name="role_putana_info">Geliebte spielt für ein Team von Zivilisten. Die Aufgabe des Liebhabers ist es, dem Team von Zivilisten durch nächtliche Schleusen zu helfen.</string>
+    <string name="role_detective_info">Jede Nacht erhält der Detektiv die Gelegenheit, einen anderen Spieler zu untersuchen, ob dieser Spieler ein Mafioso ist oder nicht.</string>
+    <string name="role_immortal_info">Gehört zum Citizen-Team. In der Nacht unsterblich.</string>
+    <string name="role_doctor_info">Ein Arzt ist eine Rolle, die einen Spieler nachts angreift, um diesen Spieler vor einem einzigen Abschuss während dieser Nacht zu schützen.</string>
+    <string name="role_don_info">Don Mafia ist der Hauptmafioso. Don kann einem anderen Spieler nachgehen, ob dieser Spieler ein Detektiv ist oder nicht.</string>
+    <string name="role_maniac_info">Gehört keiner Mannschaft an. Tötet jeden Spieler nachts. Maniac gewinnt, wenn er der letzte noch lebende Spieler ist.</string>
+    <string name="role_wervoolf_info">Wervoolf</string>
+    <string name="role_putana_info">Prostituierte spielt für ein Team von Zivilisten. Jede Nacht wählt sie einen Spieler aus, mit dem sie die Nacht verbringen wird.</string>
 </resources>
