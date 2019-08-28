@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="role_civilian_info">Düzenli Vatandaşların özel güçleri yoktur, güçleri sayılarındadır.</string>
     <string name="role_mafia_info">Mafya - Vatandaşlara karşı oynuyor. Diğer Mafya üyeleri hakkında bilgi sahibi olur, tüm tartışmalara katılır</string>

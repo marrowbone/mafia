@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="role_civilian_info">Vanliga medborgare har inga speciella befogenheter, deras styrka ligger i deras antal.</string>
     <string name="role_mafia_info">Mafia - spelar mot Citizens. Har information om andra Mafia-medlemmar, deltar i alla diskussioner</string>

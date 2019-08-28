@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Мафия. Карты для игры с друзьями вживую</string>
     <string name="role_civilian">Мирный</string>
     <string name="role_mafia">Мафия</string>

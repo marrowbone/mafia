@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="role_civilian_info">일반 시민은 특별한 힘이 없으며, 그 힘은 숫자에 있습니다.</string>
     <string name="role_mafia_info">마피아 – 시민과 대결합니다. 다른 마피아 회원에 대한 정보가 있으며 모든 토론에 참여</string>
