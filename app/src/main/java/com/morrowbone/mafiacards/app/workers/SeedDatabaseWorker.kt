@@ -73,5 +73,6 @@ class SeedDatabaseWorker(
         add(DefaultCard(DefaultCard.DOCTOR))
         add(DefaultCard(DefaultCard.IMMORTAL))
         add(DefaultCard(DefaultCard.MANIAC))
+        add(DefaultCard(DefaultCard.PROSTITUTE))
     }
 }
