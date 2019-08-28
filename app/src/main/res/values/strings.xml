@@ -7,7 +7,7 @@
     <string name="role_detective">Detective</string>
     <string name="role_immortal">Immortal</string>
     <string name="role_doctor">Doctor</string>
-    <string name="role_don">Don</string>
+    <string name="role_don">Don Mafia</string>
     <string name="role_maniac">Maniac</string>
     <string name="role_wervoolf">Werewolf</string>
     <string name="prev_game">Previous game</string>
@@ -45,5 +45,5 @@
     <string name="clear_deck">Discard the deck</string>
     <string name="clear_deck_dialog_message">Are you sure you want to discard the deck?</string>
     <string name="clear">Discard</string>
-    <string name="putana">Mistress</string>
+    <string name="putana">Prostitute</string>
 </resources>

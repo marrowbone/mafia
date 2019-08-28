@@ -2,11 +2,11 @@
 <resources>
     <string name="role_civilian_info">Regular Citizens have no special powers, their strength lies in their numbers.</string>
     <string name="role_mafia_info">Mafia – plays against Citizens. Has information about other Mafia members, participates in all discussions</string>
-    <string name="role_detective_info">Each night The Detective is given an opportunity to investigate another player (the Detective silently indicates whom they would like to investigate, usually by pointing). The moderator indicates by nodding or shaking his/her head whether or not that player is a Mafioso.</string>
-    <string name="role_immortal_info">Belongs to Citizen’s team. Invincible during night. The key point for the game is to convince that you belong to Citizen team and do not let to kill yourself during the day phase. By provoking Mafia to kill him/herself during night, defense citizen’s life.</string>
-    <string name="role_doctor_info">A Doctor is a role that targets a player at Night to protect that player from a single kill made during that Night. They are not told if their protection was successful. Protection from a single kill means that if multiple players try to kill someone, they will not be saved by one Doctor\'s protection.</string>
-    <string name="role_don_info">As a leader of Mafia team the Don orders the victims for the first 3 nights by showing numbers of the players, which should be killed during zero night (we call it “zero”, because nobody dies during that night at the beginning of the game). Each night, after the Mafia’s shoot, the Don is given an opportunity to find the Sheriff (the Don silently indicates by showing the number of the player who he/she would like to investigate and receives the answer from the moderator). Even if the Don was successful in finding the Sheriff, note that he/she cannot kill him at once: Don just gets KNOWLEDGE about the most dangerous player within the red team.</string>
+    <string name="role_detective_info">Each night The Detective is given an opportunity to investigate another player whether or not that player is a Mafioso.</string>
+    <string name="role_immortal_info">Belongs to Citizen’s team. Deathless during night.</string>
+    <string name="role_doctor_info">A Doctor is a role that targets a player at night to protect that player from a single kill made during that night.</string>
+    <string name="role_don_info">Don Mafia is the main mafioso. Don can investigate another player whether or not that player is a Detective.</string>
     <string name="role_maniac_info">Does not belong to any team. Kills any player at night. Maniac wins when he remains the last player alive.</string>
     <string name="role_wervoolf_info">Wervoolf</string>
-    <string name="role_putana_info">Mistress plays for a team of civilians. The lover\'s task is to help the team of Civilians through nightly locks.</string>
+    <string name="role_putana_info">Prostitute plays for a team of civilians. Every night, she chooses one player with whom she will spend the night.</string>
 </resources>
