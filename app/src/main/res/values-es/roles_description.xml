@@ -1,0 +1,11 @@
+<resources>
+    <string name="role_civilian_info">Los ciudadanos regulares no tienen poderes especiales, su fuerza radica en su número.</string>
+    <string name="role_mafia_info">Mafia - juega contra los ciudadanos. Tiene información sobre otros miembros de la mafia, participa en todas las discusiones</string>
+    <string name="role_detective_info">Cada noche, el Detective tiene la oportunidad de investigar a otro jugador si ese jugador es o no un mafioso.</string>
+    <string name="role_immortal_info">Pertenece al equipo de Citizen. Inmortal durante la noche.</string>
+    <string name="role_doctor_info">Un Doctor es un rol que tiene como objetivo a un jugador en la noche para proteger a ese jugador de un solo asesinato realizado durante esa noche.</string>
+    <string name="role_don_info">Don Mafia es el principal mafioso. Don puede investigar a otro jugador si ese jugador es o no un detective.</string>
+    <string name="role_maniac_info">No pertenece a ningún equipo. Mata a cualquier jugador de noche. Maniac gana cuando sigue siendo el último jugador vivo.</string>
+    <string name="role_wervoolf_info">Wervoolf</string>
+    <string name="role_putana_info">La prostituta juega para un equipo de civiles. Todas las noches, elige un jugador con el que pasará la noche.</string>
+</resources>
