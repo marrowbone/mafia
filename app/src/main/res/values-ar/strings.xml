@@ -38,7 +38,7 @@
     <string name="no_description">لا توجد معلومات</string>
     <string name="delete">حذف</string>
     <string name="delete_dialog_title">حذف البطاقة</string>
-    <string name="delete_dialog_message">هل تريد بالتأكيد حذف البطاقة \"٪s\"</string>
+    <string name="delete_dialog_message">هل تريد بالتأكيد حذف البطاقة %s</string>
     <string name="save">حفظ</string>
     <string name="change_card">تغيير البطاقة</string>
     <string name="clear_deck">تجاهل سطح السفينة</string>
