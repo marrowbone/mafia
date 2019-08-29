@@ -17,7 +17,7 @@ android {
         targetSdkVersion 29
         multiDexEnabled true
         versionCode 11
-        versionName "2.0.4"
+        versionName "2.0.5-SNAPSHOT"
         setProperty("archivesBaseName", "mafia-app-$versionName")
     }
     buildTypes {
