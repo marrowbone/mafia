@@ -40,7 +40,9 @@ public class AdsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_ads, container, false);
 
         mAdView = (AdView) rootView.findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("F2396443186DBAFB82DD7E5EEDC5991C")
+                .build();
         mAdView.loadAd(adRequest);
         return rootView;
     }
