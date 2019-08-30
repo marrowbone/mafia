@@ -45,4 +45,5 @@
     <string name="clear_deck_dialog_message">Desteyi atmak istediğinden emin misin?</string>
     <string name="clear">ıskarta</string>
     <string name="putana">Fahişe</string>
+    <string name="edit">Düzenle</string>
 </resources>

@@ -45,4 +45,5 @@
     <string name="clear_deck_dialog_message">갑판을 버리시겠습니까?</string>
     <string name="clear">포기</string>
     <string name="putana">매춘부</string>
+    <string name="edit">편집</string>
 </resources>

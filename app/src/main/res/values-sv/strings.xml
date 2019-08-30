@@ -45,4 +45,5 @@
     <string name="clear_deck_dialog_message">Är du säker på att du vill kasta däcket?</string>
     <string name="clear">Kassera</string>
     <string name="putana">Prostituerad</string>
+    <string name="edit">Redigera</string>
 </resources>

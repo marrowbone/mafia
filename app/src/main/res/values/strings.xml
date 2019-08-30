@@ -46,4 +46,5 @@
     <string name="clear_deck_dialog_message">Are you sure you want to discard the deck?</string>
     <string name="clear">Discard</string>
     <string name="putana">Prostitute</string>
+    <string name="edit">Edit</string>
 </resources>

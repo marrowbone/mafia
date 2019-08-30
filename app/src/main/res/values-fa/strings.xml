@@ -45,4 +45,5 @@
     <string name="clear_deck_dialog_message">آیا مطمئن هستید که می خواهید عرشه را دور بیندازید؟</string>
     <string name="clear">دور انداختن</string>
     <string name="putana">روسپی</string>
+    <string name="edit">ویرایش کنید</string>
 </resources>
