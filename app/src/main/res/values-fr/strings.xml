@@ -11,7 +11,6 @@
     <string name="role_wervoolf">Loup-garou</string>
     <string name="prev_game">Jeu précédent</string>
     <string name="play">Prendre des cartes</string>
-    <string name="rоles">Cartes d\'information</string>
     <string name="create_deck">Choisissez votre deck</string>
     <string name="dialog_number_of_player">Entrez le nombre de joueurs</string>
     <string name="dialog_number_of_player_positive_btn">ALLER!</string>

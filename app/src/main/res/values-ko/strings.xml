@@ -11,7 +11,6 @@
     <string name="role_wervoolf">늑대 인간</string>
     <string name="prev_game">이전 게임</string>
     <string name="play">카드를</string>
-    <string name="rоles">카드 정보</string>
     <string name="create_deck">갑판을 선택하십시오</string>
     <string name="dialog_number_of_player">플레이어 수를 입력하십시오</string>
     <string name="dialog_number_of_player_positive_btn">가기!</string>

@@ -43,7 +43,6 @@ class MainFragment : Fragment(), NavController.OnDestinationChangedListener {
         initPrevGameBtn()
         initPlayBtn()
         initCreatorBtn()
-        initRulesBtn()
     }
 
     override fun onPause() {
@@ -60,19 +59,12 @@ class MainFragment : Fragment(), NavController.OnDestinationChangedListener {
     private fun clearClickListeners() {
         play_btn.setOnClickListener(null)
         creator_btn.setOnClickListener(null)
-        rules_btn.setOnClickListener(null)
         prev_game.setOnClickListener(null)
     }
 
     private fun initPrevGameBtn() {
         prev_game.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_prevGameFragment)
-        }
-    }
-
-    private fun initRulesBtn() {
-        rules_btn.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_rulesFragment)
         }
     }
 
@@ -86,12 +78,5 @@ class MainFragment : Fragment(), NavController.OnDestinationChangedListener {
         play_btn.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_defaultDecksFragment)
         }
-    }
-
-    private fun showMessage(titleResId: Int, messageResId: Int) {
-        val builder = AlertDialog.Builder(activity!!)
-        builder.setTitle(titleResId).setMessage(messageResId).setCancelable(false)
-        builder.setPositiveButton(R.string.positive_button_text) { _, _ -> }
-        builder.show()
     }
 }

@@ -12,7 +12,6 @@
     <string name="role_wervoolf">Werewolf</string>
     <string name="prev_game">Previous game</string>
     <string name="play">Take cards</string>
-    <string name="rоles">Cards info</string>
     <string name="create_deck">Choose your deck</string>
     <string name="dialog_number_of_player">Enter the number of players</string>
     <string name="dialog_number_of_player_positive_btn">GO!</string>

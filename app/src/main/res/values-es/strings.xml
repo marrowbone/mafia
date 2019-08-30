@@ -11,7 +11,6 @@
     <string name="role_wervoolf">Hombre-lobo</string>
     <string name="prev_game">Juego anterior</string>
     <string name="play">Tomar cartas</string>
-    <string name="rоles">Información de tarjetas</string>
     <string name="create_deck">Elige tu mazo</string>
     <string name="dialog_number_of_player">Ingrese el número de jugadores</string>
     <string name="dialog_number_of_player_positive_btn">¡IR!</string>

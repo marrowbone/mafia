@@ -6,22 +6,10 @@
     app:startDestination="@id/mainFragment">
 
     <fragment
-        android:id="@+id/rulesFragment"
-        android:name="com.morrowbone.mafiacards.app.fragments.RulesFragment"
-        android:label="RulesFragment"
-        tools:layout="@layout/fragment_rules" />
-    <fragment
         android:id="@+id/mainFragment"
         android:name="com.morrowbone.mafiacards.app.fragments.MainFragment"
         android:label="MainFragment"
         tools:layout="@layout/fragment_main">
-        <action
-            android:id="@+id/action_mainFragment_to_rulesFragment"
-            app:destination="@id/rulesFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainFragment_to_prevGameFragment"
             app:destination="@id/prevGameFragment"
