@@ -2,39 +2,33 @@ package com.morrowbone.mafiacards.app.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.withContext
+import java.lang.RuntimeException
 
 class CardRepository private constructor(
-        private val cardDao: CardDao,
-        private val defaultCardDao: DefaultCardDao) {
+        private val cardDao: CardDao) {
 
     fun getCards(): LiveData<List<AbstractCard>> {
-        val defaultCards = mutableListOf<DefaultCard>()
-        val userCards = mutableListOf<Card>()
-        fun getAllCards() = ArrayList<AbstractCard>(defaultCards).apply { addAll(userCards) }
+        val cards = mutableListOf<AbstractCard>()
         val mergedLiveData = MediatorLiveData<List<AbstractCard>>()
-        mergedLiveData.addSource(defaultCardDao.getCards(), Observer {
-            defaultCards.clear()
-            defaultCards.addAll(it)
-            mergedLiveData.value = getAllCards()
-        })
         mergedLiveData.addSource(cardDao.getCards(), Observer {
-            userCards.clear()
-            userCards.addAll(it)
-            mergedLiveData.value = getAllCards()
+            cards.clear()
+            cards.addAll(DefaultDeckDao.getCards())
+            cards.addAll(it)
+            mergedLiveData.value = cards
         })
         return mergedLiveData
     }
 
-    fun getUserCards(): LiveData<List<Card>> {
-        return cardDao.getCards()
-    }
-
     fun getUserCard(cardId: String): LiveData<Card> {
         return cardDao.getCard(cardId)
+    }
+
+    fun getUserCardNow(cardId: String): Card? {
+        return cardDao.getCardNow(cardId)
     }
 
     suspend fun createCard(card: Card) {
@@ -49,17 +43,13 @@ class CardRepository private constructor(
         }
     }
 
-    fun getDefaultCard(cardId: String): LiveData<DefaultCard> {
-        return defaultCardDao.getCard(cardId)
-    }
-
     companion object {
         @Volatile
         private var instance: CardRepository? = null
 
-        fun getInstance(cardDao: CardDao, defaultCardDao: DefaultCardDao) =
+        fun getInstance(cardDao: CardDao) =
                 instance ?: synchronized(this) {
-                    instance ?: CardRepository(cardDao, defaultCardDao).also { instance = it }
+                    instance ?: CardRepository(cardDao).also { instance = it }
                 }
     }
 }

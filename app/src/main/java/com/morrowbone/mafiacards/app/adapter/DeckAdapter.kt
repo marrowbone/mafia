@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 import com.morrowbone.mafiacards.app.R
+import com.morrowbone.mafiacards.app.data.AbstractCard
 import com.morrowbone.mafiacards.app.data.Deck
 import com.morrowbone.mafiacards.app.views.CardView
 
-class DeckAdapter(private val mDeck: Deck) : RecyclerView.Adapter<DeckAdapter.ViewHolder>() {
-
+class DeckAdapter(private val cards: List<AbstractCard>) : RecyclerView.Adapter<DeckAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view = layoutInflater.inflate(R.layout.view_deck_card, null)
@@ -18,7 +18,7 @@ class DeckAdapter(private val mDeck: Deck) : RecyclerView.Adapter<DeckAdapter.Vi
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val card = mDeck.getCards().get(position)
+        val card = cards.get(position)
         val cardView = holder.cardView
         cardView.setPlayerNum(position + 1)
         cardView.setCardImageResource(card.getImageResId())
@@ -26,7 +26,7 @@ class DeckAdapter(private val mDeck: Deck) : RecyclerView.Adapter<DeckAdapter.Vi
     }
 
     override fun getItemCount(): Int {
-        return mDeck.getCards().size
+        return cards.size
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

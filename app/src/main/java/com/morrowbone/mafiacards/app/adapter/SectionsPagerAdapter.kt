@@ -11,12 +11,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.*
 import androidx.lifecycle.Observer
-
 import androidx.viewpager.widget.PagerAdapter
-
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.data.AbstractCard
-import com.morrowbone.mafiacards.app.data.Deck
 import com.morrowbone.mafiacards.app.data.DefaultCard
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
 import com.morrowbone.mafiacards.app.viewmodels.CardListViewModel
@@ -27,9 +24,7 @@ import com.morrowbone.mafiacards.app.views.CardView.CardSide
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-class SectionsPagerAdapter(fm: FragmentManager, val deck: Deck) : FragmentStatePagerAdapter(fm) {
-
-    private var cards: List<AbstractCard> = deck.getCards()
+class SectionsPagerAdapter(fm: FragmentManager, val cards: List<AbstractCard>) : FragmentStatePagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         val card = cards[position]

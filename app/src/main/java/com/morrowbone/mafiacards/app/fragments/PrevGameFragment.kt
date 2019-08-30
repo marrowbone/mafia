@@ -14,11 +14,6 @@ import com.morrowbone.mafiacards.app.utils.InjectorUtils
 import com.morrowbone.mafiacards.app.utils.Utils
 import com.morrowbone.mafiacards.app.viewmodels.DeckViewModel
 import kotlinx.android.synthetic.main.fragment_prev_game.*
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class PrevGameFragment : Fragment() {
     private val deckViewModel: DeckViewModel by viewModels {
@@ -30,10 +25,7 @@ class PrevGameFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        deckViewModel.deck.observe(this, Observer {
-            if (it == null) {
-                return@Observer
-            }
+        deckViewModel.cards.observe(this, Observer {
             val deckAdapter = DeckAdapter(it)
             recyclerView.adapter = deckAdapter
         })

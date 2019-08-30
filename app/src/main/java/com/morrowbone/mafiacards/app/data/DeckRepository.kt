@@ -1,18 +1,12 @@
 package com.morrowbone.mafiacards.app.data
 
-import androidx.lifecycle.LiveData
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
 
 class DeckRepository private constructor(
-        private val deckDao: DeckDao,
-        private val defaultDeckDao: DefaultDeckDao) {
-
-    fun getDefaultDecks(): LiveData<List<DefaultDeck>> = defaultDeckDao.getDefaultDecks()
+        private val deckDao: DeckDao) {
 
     fun getDeck(id: Int) = deckDao.getDeck(id)
-
-    fun getDefaultDeck(id: Int) = defaultDeckDao.getDefaultDeck(id)
 
     suspend fun insertDeck(deck: Deck) {
         withContext(IO) {
@@ -24,9 +18,9 @@ class DeckRepository private constructor(
         @Volatile
         private var instance: DeckRepository? = null
 
-        fun getInstance(deckDao: DeckDao, defaultDeckDao: DefaultDeckDao) =
+        fun getInstance(deckDao: DeckDao) =
                 instance ?: synchronized(this) {
-                    instance ?: DeckRepository(deckDao, defaultDeckDao).also { instance = it }
+                    instance ?: DeckRepository(deckDao).also { instance = it }
                 }
 
         const val USER_DECK = 1
