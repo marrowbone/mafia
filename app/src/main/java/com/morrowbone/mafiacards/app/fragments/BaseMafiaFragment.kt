@@ -7,7 +7,7 @@ import com.morrowbone.mafiacards.app.data.AbstractCard
 import com.morrowbone.mafiacards.app.data.Card
 
 abstract class BaseMafiaFragment : Fragment() {
-    protected fun showCardInfoDialog(card: AbstractCard) {
+    protected fun showCardInfoDialog(card: AbstractCard, allowEdit: Boolean = true, isCancelable: Boolean = true, okCallback: (() -> Unit)? = null) {
         var description = card.getDescription()
         if (description.isBlank()) {
             description = getString(R.string.no_description)
@@ -15,8 +15,11 @@ abstract class BaseMafiaFragment : Fragment() {
         val builder = AlertDialog.Builder(requireContext())
                 .setTitle(card.getTitle())
                 .setMessage(description)
-                .setPositiveButton(android.R.string.ok, null)
-        if (card is Card) {
+                .setPositiveButton(android.R.string.ok) { _, _ ->
+                    okCallback?.invoke()
+                }
+                .setCancelable(isCancelable)
+        if (card is Card && allowEdit) {
             builder.setNeutralButton(R.string.edit) { _, _ ->
                 EditCardDialogFragment.newInstance(card.getId()).show(fragmentManager!!, "edit_card")
             }

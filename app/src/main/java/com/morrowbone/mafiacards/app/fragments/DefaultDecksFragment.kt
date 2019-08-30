@@ -31,7 +31,9 @@ class DefaultDecksFragment : BaseMafiaFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val lastPlayerCount = Prefs.getInt(LAST_PLAYER_COUNT, 6)
         val layoutManager = GridLayoutManager(requireContext(), 3)
-        adapter = DefaultDeckAdapter(mutableListOf(), this::showCardInfoDialog)
+        adapter = DefaultDeckAdapter(mutableListOf()) {
+            showCardInfoDialog(it)
+        }
         recyclerView.adapter = adapter
         recyclerView.layoutManager = layoutManager
         recyclerView.setRecycledViewPool(recyclerPool)
