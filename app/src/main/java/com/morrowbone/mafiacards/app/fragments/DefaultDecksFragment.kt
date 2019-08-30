@@ -18,7 +18,7 @@ import com.morrowbone.mafiacards.app.viewmodels.BaseDeckViewModel
 import com.pixplicity.easyprefs.library.Prefs
 import kotlinx.android.synthetic.main.fragment_default_decks.*
 
-class DefaultDecksFragment : Fragment() {
+class DefaultDecksFragment : BaseMafiaFragment() {
     private lateinit var adapter: DefaultDeckAdapter
     private val decksViewModel by viewModels<BaseDeckViewModel> {
         InjectorUtils.provideBaseViewModelFactory(requireContext())
@@ -31,7 +31,9 @@ class DefaultDecksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val lastPlayerCount = Prefs.getInt(LAST_PLAYER_COUNT, 6)
         val layoutManager = GridLayoutManager(requireContext(), 3)
-        adapter = DefaultDeckAdapter(mutableListOf())
+        adapter = DefaultDeckAdapter(mutableListOf()) {
+            showCardInfoDialog(it)
+        }
         recyclerView.adapter = adapter
         recyclerView.layoutManager = layoutManager
         recyclerView.setRecycledViewPool(recyclerPool)

@@ -15,10 +15,12 @@ import androidx.viewpager.widget.PagerAdapter
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.data.AbstractCard
 import com.morrowbone.mafiacards.app.data.DefaultCard
+import com.morrowbone.mafiacards.app.fragments.BaseMafiaFragment
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
 import com.morrowbone.mafiacards.app.viewmodels.CardListViewModel
 import com.morrowbone.mafiacards.app.views.CardView
 import com.morrowbone.mafiacards.app.views.CardView.CardSide
+import kotlinx.android.synthetic.main.fragment_show_user_cart.view.*
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -48,9 +50,10 @@ class SectionsPagerAdapter(fm: FragmentManager, val cards: List<AbstractCard>) :
     /**
      * A placeholder fragment containing a simple view.
      */
-    class PlaceholderFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
+    class PlaceholderFragment : BaseMafiaFragment(), View.OnClickListener, View.OnLongClickListener {
         private var mCardView: CardView? = null
         private var mHelpText: TextView? = null
+        private lateinit var card: AbstractCard
 
         private val cardViewMode: CardListViewModel by viewModels {
             InjectorUtils.provideCardListViewModelFactory(requireContext())
@@ -70,7 +73,9 @@ class SectionsPagerAdapter(fm: FragmentManager, val cards: List<AbstractCard>) :
             hideHelpField()
 
             rootView.setOnClickListener(this)
+            rootView.card.setOnClickListener(this)
             rootView.setOnLongClickListener(this)
+            rootView.card.setOnLongClickListener(this)
 
             val cardLiveData = cardViewMode.getCard(cardId, isDefaultCard)
             cardLiveData.observe(this, object : Observer<AbstractCard> {
@@ -81,6 +86,7 @@ class SectionsPagerAdapter(fm: FragmentManager, val cards: List<AbstractCard>) :
                     cardLiveData.removeObserver(this)
                     mCardView!!.setCardImageResource(abstractCard.getImageResId())
                     mCardView!!.setRoleName(abstractCard.getTitle())
+                    card = abstractCard
                 }
             })
             return rootView
@@ -88,14 +94,15 @@ class SectionsPagerAdapter(fm: FragmentManager, val cards: List<AbstractCard>) :
 
         override fun onClick(view: View) {
             val id = view.id
-            when (id) {
-                R.id.root -> if (mCardView!!.state == CardSide.FRONT) {
-                    hideHelpField()
+            val isCardFrom = mCardView!!.state == CardSide.FRONT
+            if (id == R.id.card && isCardFrom) {
+                hideHelpField()
+                showCardInfoDialog(card, allowEdit = false, isCancelable = false) {
                     mCardView!!.flipit()
                     showNextPage()
-                } else {
-                    showHelpField()
                 }
+            } else if (!isCardFrom) {
+                showHelpField()
             }
         }
 

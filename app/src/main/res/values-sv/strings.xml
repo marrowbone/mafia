@@ -11,7 +11,6 @@
     <string name="role_wervoolf">Varulv</string>
     <string name="prev_game">Föregående spel</string>
     <string name="play">Ta kort</string>
-    <string name="rоles">Kortinformation</string>
     <string name="create_deck">Välj ditt däck</string>
     <string name="dialog_number_of_player">Ange antalet spelare</string>
     <string name="dialog_number_of_player_positive_btn">GÅ!</string>
@@ -45,4 +44,5 @@
     <string name="clear_deck_dialog_message">Är du säker på att du vill kasta däcket?</string>
     <string name="clear">Kassera</string>
     <string name="putana">Prostituerad</string>
+    <string name="edit">Redigera</string>
 </resources>
