@@ -43,15 +43,13 @@ abstract class AppDatabase : RoomDatabase() {
 
         private val MIGRATION_3_4 = object : Migration(3, 4) {
             override fun migrate(database: SupportSQLiteDatabase) {
-                GlobalScope.launch(IO) {
-                    val userDeckTable = "decks"
-                    database.execSQL("DROP TABLE 'default_decks'")
-                    database.execSQL("DROP TABLE 'default_cards'")
-                    database.execSQL("DROP TABLE $userDeckTable")
-                    database.execSQL("CREATE TABLE $userDeckTable (`id` INTEGER, `cardIds` TEXT NOT NULL DEFAULT ``, " +
-                            "PRIMARY KEY(`id`))")
-                    Utils.setLastUsedDeckId(-1)
-                }
+                val userDeckTable = "decks"
+                database.execSQL("DROP TABLE 'default_decks'")
+                database.execSQL("DROP TABLE 'default_cards'")
+                database.execSQL("DROP TABLE '$userDeckTable'")
+                database.execSQL("CREATE TABLE '$userDeckTable' (`id` INTEGER NOT NULL, `cardIds` TEXT NOT NULL DEFAULT ``, " +
+                        "PRIMARY KEY(`id`))")
+                Utils.setLastUsedDeckId(-1)
             }
         }
 
