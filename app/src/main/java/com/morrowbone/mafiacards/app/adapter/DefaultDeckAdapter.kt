@@ -8,11 +8,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.morrowbone.mafiacards.app.R
+import com.morrowbone.mafiacards.app.data.AbstractCard
 import com.morrowbone.mafiacards.app.data.DefaultCard
 import com.morrowbone.mafiacards.app.views.CardView
+import kotlinx.android.synthetic.main.view_card_front_side.view.*
 import kotlinx.android.synthetic.main.view_default_decks_list_item.view.*
 
-class DefaultDeckAdapter(var cards: List<DefaultCard>) : ListAdapter<Pair<DefaultCard, Int>, DefaultDeckAdapter.ViewHolder>(DefaultCardDiffCallback()) {
+class DefaultDeckAdapter(var cards: List<DefaultCard>, val cardClickCallback: (card: AbstractCard) -> Unit)
+    : ListAdapter<Pair<DefaultCard, Int>, DefaultDeckAdapter.ViewHolder>(DefaultCardDiffCallback()) {
 
     init {
         submitList(prepareCardsList())
@@ -33,6 +36,9 @@ class DefaultDeckAdapter(var cards: List<DefaultCard>) : ListAdapter<Pair<Defaul
         cardView.show(CardView.CardSide.FRONT)
         cardView.setRoleName(card.getTitle())
         cardView.setCardImageResource(card.getImageResId())
+        cardView.card_view_front.setOnClickListener {
+            cardClickCallback.invoke(card)
+        }
     }
 
     private fun prepareCardsList(): List<Pair<DefaultCard, Int>> {
