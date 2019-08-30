@@ -4,7 +4,7 @@ object DefaultDeckDao {
     private val defaultCards: MutableList<DefaultCard> = mutableListOf()
     private val defaultCombination: MutableList<DefaultDeck> = mutableListOf()
 
-    init {
+    fun init() {
         defaultCards.addAll(createDefaultCards())
         defaultCombination.addAll(createDefaultCombinations())
     }
