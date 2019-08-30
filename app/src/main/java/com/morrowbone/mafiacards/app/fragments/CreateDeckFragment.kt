@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.adapter.CreateDeckAdapter
@@ -37,7 +38,7 @@ class CreateDeckFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         adapter = CreateDeckAdapter(this::onCardCountChanged, this::showEditDialog)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
         recyclerView.adapter = adapter
 
         cardViewModel.cards.observe(this, Observer {

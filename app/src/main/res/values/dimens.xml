@@ -2,6 +2,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
 
     <dimen name="normal_text">20sp</dimen>
+    <dimen name="median_text">28sp</dimen>
     <dimen name="big_text">36sp</dimen>
     <dimen name="very_big_text">48sp</dimen>
     <dimen name="very_very_big_text">80sp</dimen>
