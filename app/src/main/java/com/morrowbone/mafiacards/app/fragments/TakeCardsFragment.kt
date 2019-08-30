@@ -103,7 +103,9 @@ class TakeCardsFragment : Fragment() {
         interstitial!!.adUnitId = "ca-app-pub-7668409826365482/6093438917"
 
         // Create ad request.
-        val adRequest = AdRequest.Builder().build()
+        val adRequest = AdRequest.Builder()
+                .addTestDevice("F2396443186DBAFB82DD7E5EEDC5991C")
+                .build()
         if (isEnableShowingAds) {
             interstitial!!.loadAd(adRequest)
         }
