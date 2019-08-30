@@ -6,6 +6,7 @@ import com.morrowbone.mafiacards.app.data.CardRepository
 import com.morrowbone.mafiacards.app.data.DeckRepository
 import com.morrowbone.mafiacards.app.viewmodels.BaseDecksViewModelFactory
 import com.morrowbone.mafiacards.app.viewmodels.CardListViewModelFactory
+import com.morrowbone.mafiacards.app.viewmodels.CardViewModelFactory
 import com.morrowbone.mafiacards.app.viewmodels.DeckViewModelFactory
 
 /**
@@ -37,5 +38,10 @@ object InjectorUtils {
     fun provideBaseViewModelFactory(context: Context): BaseDecksViewModelFactory {
         val deckRepository = getDeckRepository(context)
         return BaseDecksViewModelFactory(deckRepository, getCardRepository(context))
+    }
+
+    fun provideCardViewModelFactory(context: Context): CardViewModelFactory {
+        val cardRepository = getCardRepository(context)
+        return CardViewModelFactory((cardRepository))
     }
 }
