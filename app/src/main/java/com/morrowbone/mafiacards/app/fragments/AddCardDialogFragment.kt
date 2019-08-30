@@ -13,12 +13,13 @@ import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.data.Card
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
 import com.morrowbone.mafiacards.app.viewmodels.CardListViewModel
+import com.morrowbone.mafiacards.app.viewmodels.CardViewModel
 import kotlinx.android.synthetic.main.fragment_dialog_card.*
 import java.util.*
 
 open class AddCardDialogFragment : DialogFragment() {
-    protected val viewModel: CardListViewModel by viewModels {
-        InjectorUtils.provideCardListViewModelFactory(requireContext())
+    protected val viewModel: CardViewModel by viewModels {
+        InjectorUtils.provideCardViewModelFactory(requireContext())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

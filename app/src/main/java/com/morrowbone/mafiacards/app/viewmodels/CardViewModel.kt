@@ -7,7 +7,7 @@ import com.morrowbone.mafiacards.app.data.AbstractCard
 import com.morrowbone.mafiacards.app.data.CardRepository
 import com.morrowbone.mafiacards.app.data.DefaultDeckDao
 
-class CardViewModel internal constructor(private val cardRepository: CardRepository) : ViewModel() {
+class CardViewModel internal constructor(cardRepository: CardRepository) : BaseCardViewModel(cardRepository) {
     private val cardIdLiveData: MutableLiveData<String> = MutableLiveData()
     val card: LiveData<AbstractCard> = Transformations.switchMap(cardIdLiveData, Function { cardId ->
         val mediatorLiveData = MediatorLiveData<AbstractCard>()
