@@ -4,6 +4,7 @@ package com.morrowbone.mafiacards.app.adapter
  * Created by morrow on 03.06.2014.
  */
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ import com.morrowbone.mafiacards.app.data.DefaultCard
 import com.morrowbone.mafiacards.app.fragments.BaseMafiaFragment
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
 import com.morrowbone.mafiacards.app.viewmodels.CardListViewModel
+import com.morrowbone.mafiacards.app.viewmodels.CardViewModel
 import com.morrowbone.mafiacards.app.views.CardView
 import com.morrowbone.mafiacards.app.views.CardView.CardSide
 import kotlinx.android.synthetic.main.fragment_show_user_cart.view.*
@@ -30,8 +32,7 @@ class SectionsPagerAdapter(fm: FragmentManager, val cards: List<AbstractCard>) :
 
     override fun getItem(position: Int): Fragment {
         val card = cards[position]
-        val isDefaultCard = card is DefaultCard
-        return PlaceholderFragment.newInstance(position, card.getId(), isDefaultCard)
+        return PlaceholderFragment.newInstance(position, card.getId())
     }
 
     override fun getCount(): Int {
@@ -55,8 +56,14 @@ class SectionsPagerAdapter(fm: FragmentManager, val cards: List<AbstractCard>) :
         private var mHelpText: TextView? = null
         private lateinit var card: AbstractCard
 
-        private val cardViewMode: CardListViewModel by viewModels {
-            InjectorUtils.provideCardListViewModelFactory(requireContext())
+        private val cardViewMode: CardViewModel by viewModels {
+            InjectorUtils.provideCardViewModelFactory(requireContext())
+        }
+
+        override fun onAttach(context: Context) {
+            super.onAttach(context)
+            val cardId = arguments!!.getString(ARG_CARD_ID)!!
+            cardViewMode.setCardId(cardId)
         }
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -65,8 +72,6 @@ class SectionsPagerAdapter(fm: FragmentManager, val cards: List<AbstractCard>) :
             mCardView = rootView.findViewById(R.id.card)
             mCardView!!.show(CardSide.BACKSIDE)
             val sectionNum = arguments!!.getInt(ARG_SECTION_NUMBER)
-            val cardId = arguments!!.getString(ARG_CARD_ID)!!
-            val isDefaultCard = arguments!!.getBoolean(ARG_IS_DEFAILT_CARD)
             val playerNum = sectionNum + 1
             mCardView!!.setPlayerNum(playerNum)
             mHelpText = rootView.findViewById(R.id.help_text)
@@ -77,13 +82,11 @@ class SectionsPagerAdapter(fm: FragmentManager, val cards: List<AbstractCard>) :
             rootView.setOnLongClickListener(this)
             rootView.card.setOnLongClickListener(this)
 
-            val cardLiveData = cardViewMode.getCard(cardId, isDefaultCard)
-            cardLiveData.observe(this, object : Observer<AbstractCard> {
+            cardViewMode.card.observe(this, object : Observer<AbstractCard> {
                 override fun onChanged(abstractCard: AbstractCard?) {
                     if (abstractCard == null) {
                         return
                     }
-                    cardLiveData.removeObserver(this)
                     mCardView!!.setCardImageResource(abstractCard.getImageResId())
                     mCardView!!.setRoleName(abstractCard.getTitle())
                     card = abstractCard
@@ -137,18 +140,16 @@ class SectionsPagerAdapter(fm: FragmentManager, val cards: List<AbstractCard>) :
              */
             private val ARG_SECTION_NUMBER = "section_number"
             private val ARG_CARD_ID = "card_id"
-            private val ARG_IS_DEFAILT_CARD = "is_default_card"
 
             /**
              * Returns a new instance of this fragment for the given section
              * number.
              */
-            fun newInstance(sectionNumber: Int, cardId: String, isDefaultCard: Boolean): PlaceholderFragment {
+            fun newInstance(sectionNumber: Int, cardId: String): PlaceholderFragment {
                 val fragment = PlaceholderFragment()
                 val args = Bundle()
                 args.putInt(ARG_SECTION_NUMBER, sectionNumber)
                 args.putString(ARG_CARD_ID, cardId)
-                args.putBoolean(ARG_IS_DEFAILT_CARD, isDefaultCard)
                 fragment.arguments = args
                 return fragment
             }
