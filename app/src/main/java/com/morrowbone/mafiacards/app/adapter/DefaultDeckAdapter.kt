@@ -39,12 +39,13 @@ class DefaultDeckAdapter(var cards: List<DefaultCard>) : ListAdapter<Pair<Defaul
         val setOfCards = ArraySet(cards).sortedBy {
             return@sortedBy when (it.cardId) {
                 DefaultCard.CIVILIAN -> 1
-                DefaultCard.MAFIA -> 2
-                DefaultCard.DETECTIVE -> 3
-                DefaultCard.DON_MAFIA -> 4
+                DefaultCard.DETECTIVE -> 2
+                DefaultCard.DON_MAFIA -> 3
+                DefaultCard.MAFIA -> 4
                 DefaultCard.DOCTOR -> 5
                 DefaultCard.MANIAC -> 6
                 DefaultCard.IMMORTAL -> 7
+                DefaultCard.PROSTITUTE -> 8
                 else -> Int.MAX_VALUE
             }
         }

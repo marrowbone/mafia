@@ -18,29 +18,36 @@ object DefaultDeckDao {
         val doctor = defaultCards.findById(DefaultCard.DOCTOR)!!
         val immortal = defaultCards.findById(DefaultCard.IMMORTAL)!!
         val maniac = defaultCards.findById(DefaultCard.MANIAC)!!
+        val prostitute = defaultCards.findById(DefaultCard.PROSTITUTE)!!
 
         val defaultDecks = mutableListOf(
                 DefaultDeck(mutableListOf(civilian, civilian, mafia)),
                 DefaultDeck(mutableListOf(civilian, civilian, civilian, mafia)),
                 DefaultDeck(mutableListOf(civilian, civilian, civilian, civilian, mafia)),
                 DefaultDeck(mutableListOf(civilian, civilian, civilian, civilian, detective, don)),
-                DefaultDeck(mutableListOf(civilian, civilian, civilian, civilian, mafia, detective, don)),
-                DefaultDeck(mutableListOf(civilian, civilian, civilian, civilian, civilian, mafia, detective, don)),
-                DefaultDeck(mutableListOf(civilian, civilian, civilian, civilian, civilian, mafia, detective, mafia, don)),
-                DefaultDeck(mutableListOf(civilian, civilian, civilian, civilian, civilian, civilian, mafia, mafia, detective, don)),
-                DefaultDeck(mutableListOf(civilian, civilian, civilian, civilian, civilian, mafia, mafia, detective, doctor, maniac, don)),
-                DefaultDeck(mutableListOf(civilian, civilian, civilian, civilian, civilian, mafia, mafia, detective, immortal, doctor, maniac, don)),
-                DefaultDeck(mutableListOf(civilian, civilian, civilian, civilian, civilian, civilian, mafia, mafia, detective, immortal, doctor, maniac, don)))
+                DefaultDeck(mutableListOf(civilian, civilian, civilian, civilian, detective, don, mafia)),
+                DefaultDeck(mutableListOf(civilian, civilian, civilian, civilian, civilian, detective, don, mafia)),
+                DefaultDeck(mutableListOf(civilian, civilian, civilian, civilian, civilian, detective, don, mafia, mafia)),
+                DefaultDeck(mutableListOf(civilian, civilian, civilian, civilian, civilian, civilian, detective, don, mafia, mafia)),
+                DefaultDeck(mutableListOf(civilian, civilian, civilian, civilian, civilian, detective, don, mafia, mafia, doctor, maniac)),
+                DefaultDeck(mutableListOf(civilian, civilian, civilian, civilian, civilian, detective, don, mafia, mafia, doctor, maniac, immortal)),
+                DefaultDeck(mutableListOf(civilian, civilian, civilian, civilian, civilian, detective, don, mafia, mafia, mafia, doctor, maniac, immortal)))
         addAll(defaultDecks)
 
         val defaultDecksSize = defaultDecks.size
+        var containsProstitute = false
         for (i in defaultDecksSize..DeckRepository.DEFAULT_DECKS_COUNT) {
             val prevDeck = get(i - 1)
             val nextDefaultCards = ArrayList(prevDeck.cards).apply {
                 if (i % 2 == 0) {
                     add(mafia)
                 } else {
-                    add(civilian)
+                    if (containsProstitute) {
+                        add(civilian)
+                    } else {
+                        add(prostitute)
+                        containsProstitute = true
+                    }
                 }
             }
             add(DefaultDeck(nextDefaultCards))
@@ -49,13 +56,13 @@ object DefaultDeckDao {
 
     private fun createDefaultCards(): List<DefaultCard> = mutableListOf<DefaultCard>().apply {
         add(DefaultCard(DefaultCard.CIVILIAN))
-        add(DefaultCard(DefaultCard.MAFIA))
         add(DefaultCard(DefaultCard.DETECTIVE))
-        add(DefaultCard(DefaultCard.DON_MAFIA))
         add(DefaultCard(DefaultCard.DOCTOR))
         add(DefaultCard(DefaultCard.IMMORTAL))
-        add(DefaultCard(DefaultCard.MANIAC))
         add(DefaultCard(DefaultCard.PROSTITUTE))
+        add(DefaultCard(DefaultCard.MAFIA))
+        add(DefaultCard(DefaultCard.DON_MAFIA))
+        add(DefaultCard(DefaultCard.MANIAC))
     }
 
     fun getDefaultDeck(id: Int): DefaultDeck? {
