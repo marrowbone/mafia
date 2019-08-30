@@ -7,7 +7,11 @@ import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.morrowbone.mafiacards.app.R
-import com.morrowbone.mafiacards.app.data.*
+import com.morrowbone.mafiacards.app.data.AbstractCard
+import com.morrowbone.mafiacards.app.data.Card
+import com.morrowbone.mafiacards.app.data.Deck
+import com.morrowbone.mafiacards.app.data.DeckRepository
+import com.morrowbone.mafiacards.app.extensions.ids
 import com.morrowbone.mafiacards.app.views.CounterView
 import kotlinx.android.synthetic.main.view_creator_card.view.*
 
@@ -16,9 +20,7 @@ class CreateDeckAdapter(
         private val editCardCallback: (cardId: String) -> Unit,
         private val cards: MutableList<AbstractCard> = mutableListOf()
 ) : RecyclerView.Adapter<CreateDeckAdapter.ViewHolder>() {
-    private val defaultCards = mutableListOf<DefaultCard>()
-    private val userCards = mutableListOf<Card>()
-    val deck = Deck(DeckRepository.USER_DECK, CardsSet(defaultCards, userCards))
+    val deckCards: MutableList<AbstractCard> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -34,7 +36,7 @@ class CreateDeckAdapter(
         holder.setTitle(item.getTitle())
         holder.setImageResource(item.getImageResId())
 
-        var curCount = deck.getCards().count { it.getId() == itemId }
+        var curCount = deckCards.count { it.getId() == itemId }
         val counterView = holder.counterView
         counterView.onCountChangedListener = {
             curCount = it
@@ -65,25 +67,18 @@ class CreateDeckAdapter(
     fun updateCards(cards: List<AbstractCard>) {
         this.cards.clear()
         this.cards.addAll(cards)
-        val newUserCards = userCards.filter {
+        val newDeckCards = deckCards.filter {
             cards.contains(it)
         }
-        userCards.clear()
-        userCards.addAll(newUserCards)
+        deckCards.clear()
+        deckCards.addAll(newDeckCards)
         onDeckChanged()
         notifyDataSetChanged()
     }
 
-    fun updateDeck(deck: Deck?) {
-        if (deck == null) {
-            return
-        }
-
-        defaultCards.clear()
-        userCards.clear()
-
-        defaultCards.addAll(deck.cardsSet.defaultCards)
-        userCards.addAll(deck.cardsSet.userCards)
+    fun updateDeck(newCards: List<AbstractCard>) {
+        deckCards.clear()
+        deckCards.addAll(newCards)
         onDeckChanged()
         notifyDataSetChanged()
     }
@@ -93,31 +88,26 @@ class CreateDeckAdapter(
     }
 
     private fun onDeckChanged() {
-        val cardCount = deck.getCards().size
+        val cardCount = deckCards.size
         onCardCountChanged.invoke(cardCount)
     }
 
     private fun addCard(card: AbstractCard) {
-        if (card is DefaultCard) {
-            defaultCards.add(card)
-        } else if (card is Card) {
-            userCards.add(card)
-        }
+        deckCards.add(card)
     }
 
     private fun removeCard(card: AbstractCard) {
-        if (card is DefaultCard) {
-            defaultCards.remove(card)
-        } else if (card is Card) {
-            userCards.remove(card)
-        }
+        deckCards.remove(card)
     }
 
     fun clearDeck() {
-        defaultCards.clear()
-        userCards.clear()
+        deckCards.clear()
         onDeckChanged()
         notifyDataSetChanged()
+    }
+
+    fun prepareDeck(): Deck {
+        return Deck(DeckRepository.USER_DECK, deckCards.ids())
     }
 
 

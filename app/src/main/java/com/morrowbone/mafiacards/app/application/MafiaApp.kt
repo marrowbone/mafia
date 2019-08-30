@@ -3,7 +3,11 @@ package com.morrowbone.mafiacards.app.application
 import android.content.ContextWrapper
 import androidx.multidex.MultiDexApplication
 import com.morrowbone.mafiacards.app.data.AppDatabase
+import com.morrowbone.mafiacards.app.data.DefaultDeckDao
 import com.pixplicity.easyprefs.library.Prefs
+import kotlinx.coroutines.Dispatchers.Default
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MafiaApp : MultiDexApplication() {
 
@@ -16,12 +20,11 @@ class MafiaApp : MultiDexApplication() {
                 .setPrefsName(packageName)
                 .setUseDefaultSharedPreference(true)
                 .build()
-        forceDatabaseInitialisation()
-    }
-
-    private fun forceDatabaseInitialisation() {
-        val database = AppDatabase.getInstance(applicationContext)
-        database.deckDao().getDecks()
+        // I use this to force database updating
+        val dataBaseVersion = AppDatabase.getInstance(this).openHelper.readableDatabase.version
+        GlobalScope.launch(Default) {
+            DefaultDeckDao.init()
+        }
     }
 
     companion object {

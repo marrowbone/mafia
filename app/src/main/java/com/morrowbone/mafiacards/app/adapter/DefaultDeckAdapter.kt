@@ -12,7 +12,7 @@ import com.morrowbone.mafiacards.app.data.DefaultCard
 import com.morrowbone.mafiacards.app.views.CardView
 import kotlinx.android.synthetic.main.view_default_decks_list_item.view.*
 
-class DefaultDeckAdapter(private var cards: List<DefaultCard>) : ListAdapter<Pair<DefaultCard, Int>, DefaultDeckAdapter.ViewHolder>(DefaultCardDiffCallback()) {
+class DefaultDeckAdapter(var cards: List<DefaultCard>) : ListAdapter<Pair<DefaultCard, Int>, DefaultDeckAdapter.ViewHolder>(DefaultCardDiffCallback()) {
 
     init {
         submitList(prepareCardsList())

@@ -1,14 +1,10 @@
 package com.morrowbone.mafiacards.app.data
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.application.MafiaApp
 
-@Entity(tableName = "default_cards")
 data class DefaultCard(
-        @PrimaryKey @ColumnInfo(name = "id") val cardId: String
+        val cardId: String
 ) : AbstractCard {
     override fun getId(): String = cardId
     override fun getTitle(): String {

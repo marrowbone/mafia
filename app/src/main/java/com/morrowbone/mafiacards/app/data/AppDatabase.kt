@@ -7,22 +7,17 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
-import com.morrowbone.mafiacards.app.application.MafiaApp
 import com.morrowbone.mafiacards.app.utils.DATABASE_NAME
-import com.morrowbone.mafiacards.app.workers.SeedDatabaseWorker
+import com.morrowbone.mafiacards.app.utils.Utils
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-@Database(entities = [Card::class, DefaultCard::class, Deck::class, DefaultDeck::class], version = 3, exportSchema = false)
+@Database(entities = [Card::class, Deck::class], version = 4, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun cardDao(): CardDao
-    abstract fun defaultCardDao(): DefaultCardDao
     abstract fun deckDao(): DeckDao
-    abstract fun defaultDeckDao(): DefaultDeckDao
 
     companion object {
         @Volatile
@@ -36,35 +31,32 @@ abstract class AppDatabase : RoomDatabase() {
 
         private val MIGRATION_1_2 = object : Migration(1, 2) {
             override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("DELETE FROM `default_decks`")
-                database.execSQL("DELETE FROM `default_cards`")
-                fillDataBase()
+                // Do nothing
             }
         }
 
         private val MIGRATION_2_3 = object : Migration(2, 3) {
             override fun migrate(database: SupportSQLiteDatabase) {
-                GlobalScope.launch(IO) {
-                    getInstance(MafiaApp.instance!!).defaultCardDao().insert(DefaultCard(DefaultCard.PROSTITUTE))
-                }
+                // Do nothing
+            }
+        }
+
+        private val MIGRATION_3_4 = object : Migration(3, 4) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                val userDeckTable = "decks"
+                database.execSQL("DROP TABLE 'default_decks'")
+                database.execSQL("DROP TABLE 'default_cards'")
+                database.execSQL("DROP TABLE '$userDeckTable'")
+                database.execSQL("CREATE TABLE '$userDeckTable' (`id` INTEGER NOT NULL, `cardIds` TEXT NOT NULL DEFAULT ``, " +
+                        "PRIMARY KEY(`id`))")
+                Utils.setLastUsedDeckId(-1)
             }
         }
 
         private fun buildDatabase(context: Context): AppDatabase {
             return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
-                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
-                    .addCallback(object : RoomDatabase.Callback() {
-                        override fun onCreate(db: SupportSQLiteDatabase) {
-                            super.onCreate(db)
-                            fillDataBase()
-                        }
-                    })
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
                     .build()
-        }
-
-        private fun fillDataBase(){
-            val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>().build()
-            WorkManager.getInstance(MafiaApp.instance!!.applicationContext).enqueue(request)
         }
     }
 }

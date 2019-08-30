@@ -28,6 +28,7 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.adapter.SectionsPagerAdapter
+import com.morrowbone.mafiacards.app.application.MafiaApp
 import com.morrowbone.mafiacards.app.data.Deck
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
 import com.morrowbone.mafiacards.app.utils.Utils
@@ -82,13 +83,10 @@ class TakeCardsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        deckViewModel.deck.observe(this, Observer { deck ->
-            if (deck == null) {
-                return@Observer
-            }
-            mSectionsPagerAdapter = SectionsPagerAdapter(requireFragmentManager(), deck)
+        deckViewModel.cards.observe(this, Observer { cards ->
+            mSectionsPagerAdapter = SectionsPagerAdapter(requireFragmentManager(), cards)
             pager.adapter = mSectionsPagerAdapter
-            val cardCount = deck.getCards().size
+            val cardCount = cards.size
             val text = String.format(requireContext().getString(R.string.cards_in_deck_take_cards), cardCount)
             val finalText = HtmlCompat.fromHtml(text, HtmlCompat.FROM_HTML_MODE_COMPACT)
             cards_in_deck.text = finalText

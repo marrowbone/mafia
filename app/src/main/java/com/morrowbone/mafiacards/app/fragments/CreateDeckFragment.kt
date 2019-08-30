@@ -20,11 +20,6 @@ import com.morrowbone.mafiacards.app.utils.InjectorUtils
 import com.morrowbone.mafiacards.app.viewmodels.CardListViewModel
 import com.morrowbone.mafiacards.app.viewmodels.DeckViewModel
 import kotlinx.android.synthetic.main.fragment_deck.*
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class CreateDeckFragment : Fragment() {
     private val cardViewModel: CardListViewModel by viewModels {
@@ -61,7 +56,7 @@ class CreateDeckFragment : Fragment() {
             showConfirmClearDialog();
         }
 
-        deckViewModel.deck.observe(this, Observer {
+        deckViewModel.cards.observe(this, Observer {
             adapter.updateDeck(it)
         })
     }
@@ -79,7 +74,7 @@ class CreateDeckFragment : Fragment() {
     }
 
     override fun onPause() {
-        val userDeckDraft = adapter.deck.copy(deckId = DeckRepository.USER_DECK_DRAFT)
+        val userDeckDraft = adapter.prepareDeck().copy(deckId = DeckRepository.USER_DECK_DRAFT)
         deckViewModel.saveDeck(userDeckDraft)
         super.onPause()
     }
@@ -96,9 +91,10 @@ class CreateDeckFragment : Fragment() {
     }
 
     private fun onTakeCardsClick() {
-        val cardCount = adapter.deck.getCards().size
+        val deck = adapter.prepareDeck()
+        val cardCount = deck.cardIds.size
         if (cardCount > 0) {
-            val deck = adapter.deck.shuffle()
+            deck.shuffle()
             deckViewModel.saveDeck(deck)
             val direction = CreateDeckFragmentDirections.actionDeckFragmentToTakeCardsFragment(deck.deckId)
             findNavController().navigate(direction)

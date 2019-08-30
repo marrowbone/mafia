@@ -4,31 +4,19 @@ import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.*
+import kotlin.collections.ArrayList
 
 @Entity(tableName = "decks")
 data class Deck(
         @PrimaryKey
         @ColumnInfo(name = "id")
         val deckId: Int,
-        @Embedded
-        val cardsSet: CardsSet
+        val cardIds: MutableList<String> = mutableListOf()
 ) {
-    var cardOrder: MutableList<String> = mutableListOf()
-
-    fun getCards(): List<AbstractCard> {
-        return if (cardOrder.isEmpty()) {
-            ArrayList<AbstractCard>(cardsSet.defaultCards).apply { addAll(cardsSet.userCards) }
-        } else {
-            cardOrder.map { cardId ->
-                fun predicate(card: AbstractCard): Boolean = card.getId() == cardId
-                cardsSet.defaultCards.find(::predicate) ?: cardsSet.userCards.find(::predicate)!!
-            }
-        }
-    }
-
-    fun shuffle(): Deck {
-        cardOrder.clear()
-        cardOrder.addAll(getCards().shuffled().map { it.getId() })
-        return this
+    fun shuffle() {
+        val shuffled = cardIds.shuffled()
+        cardIds.clear()
+        cardIds.addAll(shuffled)
     }
 }
