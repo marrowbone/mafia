@@ -1,28 +1,27 @@
 package com.morrowbone.mafiacards.app.fragments
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.text.HtmlCompat
 import androidx.core.text.HtmlCompat.FROM_HTML_MODE_COMPACT
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.morrowbone.mafiacards.app.R
 import com.morrowbone.mafiacards.app.adapter.CreateDeckAdapter
+import com.morrowbone.mafiacards.app.data.AbstractCard
 import com.morrowbone.mafiacards.app.data.DeckRepository
 import com.morrowbone.mafiacards.app.utils.InjectorUtils
 import com.morrowbone.mafiacards.app.viewmodels.CardListViewModel
 import com.morrowbone.mafiacards.app.viewmodels.DeckViewModel
 import kotlinx.android.synthetic.main.fragment_deck.*
 
-class CreateDeckFragment : Fragment() {
+class CreateDeckFragment : BaseMafiaFragment() {
     private val cardViewModel: CardListViewModel by viewModels {
         InjectorUtils.provideCardListViewModelFactory(requireContext())
     }
@@ -37,7 +36,7 @@ class CreateDeckFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        adapter = CreateDeckAdapter(this::onCardCountChanged, this::showEditDialog)
+        adapter = CreateDeckAdapter(this::onCardCountChanged, this::onCardClick)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
         recyclerView.adapter = adapter
 
@@ -87,8 +86,8 @@ class CreateDeckFragment : Fragment() {
         clearDeckButton.isVisible = cardCount > 0
     }
 
-    private fun showEditDialog(cardId: String) {
-        EditCardDialogFragment.newInstance(cardId).show(fragmentManager!!, "edit_card")
+    private fun onCardClick(card: AbstractCard) {
+        showCardInfoDialog(card)
     }
 
     private fun onTakeCardsClick() {
